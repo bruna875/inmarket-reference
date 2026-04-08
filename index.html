@@ -8,7 +8,7 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;overflow:hidden}
-body{font-family:'DM Sans',system-ui,sans-serif;background:#F5F4F0;font-size:13px;-webkit-font-smoothing:antialiased;color:#1A1A18}
+body{font-family:'DM Sans',system-ui,sans-serif;background:#F5F4F0;font-size:13px;-webkit-font-smoothing:antialiased;color:#0D1E36}
 :root{
   --surface:#fff;--bg:#F5F4F0;--border:rgba(0,0,0,0.08);--border-md:rgba(0,0,0,0.12);
   --text:#0D1E36;--muted:#6B6B65;--faint:#A8A8A0;--subtle:#F4FCF0;
@@ -19,7 +19,6 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:#F5F4F0;font-size:13p
 .acard{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:2.25rem 2.5rem 2rem;width:350px;box-shadow:0 4px 28px rgba(0,0,0,0.07)}
 .alogo{display:flex;align-items:center;gap:10px;margin-bottom:2rem}
 .amark{width:34px;height:34px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center}
-
 .atitle{font-size:21px;font-weight:500;letter-spacing:-.5px;margin-bottom:5px}
 .asub{font-size:12px;color:var(--muted);margin-bottom:1.75rem}
 .flabel{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:5px}
@@ -142,7 +141,7 @@ tr:hover .link-btn,.link-btn.has-link{opacity:1;color:var(--accent)}
 .filter-reset:hover{color:var(--accent);border-color:var(--accent)}
 .qfilter{display:flex;gap:4px;margin-bottom:20px}
 .qfilter-btn{height:30px;padding:0 14px;border:1px solid var(--border-md);border-radius:7px;font-size:12px;font-weight:500;font-family:inherit;cursor:pointer;background:var(--surface);color:var(--muted);transition:all .15s}
-.qfilter-btn.act{border-color:var(--accent);background:#FEF0F5;color:var(--accent)}
+.qfilter-btn.act{border-color:var(--accent);background:#F4FCF0;color:var(--accent)}
 </style>
 </head>
 <body>
@@ -410,7 +409,7 @@ function buildQuarterlyProgressBars(){
       +(dlW>0?'<div style="flex:'+dlW+';background:#A93226"></div>':'')
       +(items.length===0?'<div style="flex:1;background:var(--bg)"></div>':'')
       +'</div><div style="font-size:10px;color:var(--faint);margin-top:4px">'+meta+'</div></div>'
-      +'<div style="padding:6px 14px 12px;border-top:1px solid var(--border);margin-top:8px"><div style="font-size:10px;color:var(--faint)">Avg ROI</div><div style="font-size:14px;font-weight:500;color:var(--accent)">'+roiPct+' <span style="font-size:11px;font-weight:400;color:var(--muted)">('+avLbl+')</span></div></div>'
+      +'<div style="padding:6px 14px 12px;border-top:1px solid var(--border);margin-top:8px"><div style="font-size:10px;color:var(--faint)">Avg ROI</div><div style="font-size:14px;font-weight:500;color:#66C220">'+roiPct+' <span style="font-size:11px;font-weight:400;color:var(--muted)">('+avLbl+')</span></div></div>'
       +'</div>';
   }).join("")+"</div>";
 }
@@ -418,7 +417,7 @@ function buildQuarterlyProgressBars(){
 /* ---- Scatter plot ---- */
 function buildScatterPlot(q){
   var subset=q==="all"?initiatives.filter(function(i){return i.quarter!=="Backlog";}):initiatives.filter(function(i){return i.quarter===q;});
-  var driverColors={"Revenue Generating":"#ED005E","Operational Efficiency":"#854F0B","Enhancements":"#888780","Strategic":"#185FA5","Tech":"#E24B4A"};
+  var driverColors={"Revenue Generating":"#66C220","Operational Efficiency":"#854F0B","Enhancements":"#888780","Strategic":"#185FA5","Tech":"#0D1E36"};
   var drivers=[];
   subset.forEach(function(i){if(drivers.indexOf(i.driver)===-1)drivers.push(i.driver);});
   drivers.sort();
@@ -431,7 +430,7 @@ function buildScatterPlot(q){
 
 function renderScatterChart(q){
   var subset=q==="all"?initiatives.filter(function(i){return i.quarter!=="Backlog";}):initiatives.filter(function(i){return i.quarter===q;});
-  var driverColors={"Revenue Generating":"#ED005E","Operational Efficiency":"#854F0B","Enhancements":"#888780","Strategic":"#185FA5","Tech":"#E24B4A"};
+  var driverColors={"Revenue Generating":"#66C220","Operational Efficiency":"#854F0B","Enhancements":"#888780","Strategic":"#185FA5","Tech":"#0D1E36"};
   var drivers=[];
   subset.forEach(function(i){if(drivers.indexOf(i.driver)===-1)drivers.push(i.driver);});
   drivers.sort();
@@ -464,7 +463,7 @@ function renderScatterChart(q){
 }
 
 /* ---- ROI tab content ---- */
-function roiMakeOverallCard(subset,label){var s=roiCalcGroup(subset),p=isNaN(s.roiAvg)?0:Math.round(s.roiAvg*100),c=p<0?"#E24B4A":"#ED005E";return '<div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:14px"><div style="font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.5px;color:var(--faint)">Overall ROI &mdash; '+label+'</div><div><div style="font-size:24px;font-weight:500;letter-spacing:-.5px">'+s.count+'</div><div style="font-size:11px;color:var(--muted);margin-top:2px">initiatives</div></div><div style="height:1px;background:var(--border)"></div><div><div style="font-size:20px;font-weight:500">'+roiFmtAV(s.av)+'</div><div style="font-size:11px;color:var(--muted);margin-top:2px">added value</div></div><div style="height:1px;background:var(--border)"></div><div><div style="font-size:20px;font-weight:500;color:'+c+'">'+p+'%</div><div style="font-size:11px;color:var(--muted);margin-top:2px">avg ROI</div></div></div>';}
+function roiMakeOverallCard(subset,label){var s=roiCalcGroup(subset),p=isNaN(s.roiAvg)?0:Math.round(s.roiAvg*100),c=p<0?"#E24B4A":"#66C220";return '<div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:14px"><div style="font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.5px;color:var(--faint)">Overall ROI &mdash; '+label+'</div><div><div style="font-size:24px;font-weight:500;letter-spacing:-.5px">'+s.count+'</div><div style="font-size:11px;color:var(--muted);margin-top:2px">initiatives</div></div><div style="height:1px;background:var(--border)"></div><div><div style="font-size:20px;font-weight:500">'+roiFmtAV(s.av)+'</div><div style="font-size:11px;color:var(--muted);margin-top:2px">added value</div></div><div style="height:1px;background:var(--border)"></div><div><div style="font-size:20px;font-weight:500;color:'+c+'">'+p+'%</div><div style="font-size:11px;color:var(--muted);margin-top:2px">avg ROI</div></div></div>';}
 function roiMakeBarCard(subset,title,label,key){var keys=[];subset.forEach(function(i){if(keys.indexOf(i[key])===-1)keys.push(i[key]);});keys.sort();var rows=keys.map(function(k,ki){var s=roiCalcGroup(subset.filter(function(i){return i[key]===k;})),p=isNaN(s.roiAvg)?0:Math.round(s.roiAvg*100),tc=p<0?"#E24B4A":"#3B6D11",isLast=ki===keys.length-1;return '<div style="display:grid;grid-template-columns:1fr auto auto;gap:8px;padding:10px 0;'+(isLast?"":" border-bottom:0.5px solid var(--border);")+'align-items:center"><div style="font-size:12px;color:var(--text)">'+k+'</div><div style="font-size:12px;font-weight:500;text-align:right;min-width:80px">'+roiFmtEU(s.av)+'</div><div style="font-size:12px;font-weight:500;color:'+tc+';text-align:right;min-width:48px">'+p+'%</div></div>';}).join("");var hdr='<div style="display:grid;grid-template-columns:1fr auto auto;gap:8px;padding:8px 0;border-bottom:0.5px solid var(--border)"><div></div><div style="font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.4px;color:var(--faint);text-align:right;min-width:80px">Added Value</div><div style="font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.4px;color:var(--faint);text-align:right;min-width:48px">Avg ROI</div></div>';return '<div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px"><div style="font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.5px;color:var(--faint);margin-bottom:14px">'+title+" &mdash; "+label+'</div>'+hdr+rows+'</div>';}
 function roiMakeTable(subset){var rows=subset.map(function(i){return "<tr><td>"+i.quarter+"</td><td>"+i.title+"</td><td>"+i.driver+"</td><td>"+i.team+"</td><td>"+i.theme+"</td><td>"+fmtDollar(i.addedValue)+"</td><td>"+roiHtml(i.roi)+"</td></tr>";}).join("");return '<div class="twrap"><div class="thead-row">Initiatives</div><table><thead><tr><th>Quarter</th><th>Initiative</th><th>Driver</th><th>Team</th><th>Theme</th><th>Added Value</th><th>ROI</th></tr></thead><tbody>'+rows+'</tbody></table></div>';}
 function roiRenderContent(q){var label=q==="all"?"All Year":q,subset=q==="all"?initiatives.filter(function(i){return i.quarter!=="Backlog";}):initiatives.filter(function(i){return i.quarter===q;});return '<div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:16px">'+roiMakeOverallCard(subset,label)+roiMakeBarCard(subset,"ROI by Driver",label,"driver")+roiMakeBarCard(subset,"ROI by Theme",label,"theme")+roiMakeBarCard(subset,"ROI by Team",label,"team")+"</div>"+roiMakeTable(subset);}
