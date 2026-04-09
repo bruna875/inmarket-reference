@@ -610,9 +610,14 @@ function login() {
     var name = e.split('@')[0];
     document.getElementById('av').textContent = name.slice(0, 2).toUpperCase();
     document.getElementById('un').textContent = name.charAt(0).toUpperCase() + name.slice(1);
-    loadSavedSignatures().then(function() {
+    Promise.all([
+      loadSavedSignatures(),
+      new Promise(function(resolve) {
+        loadData(resolve);
+      })
+    ]).then(function() {
       buildNav();
-      loadData(function() { document.getElementById('content').innerHTML = PAGES[activeId](); });
+      document.getElementById('content').innerHTML = PAGES[activeId]();
     });
   } else {
     document.getElementById('err').textContent = 'Invalid credentials. Try: poorhumans@inmarket.com / babbazzi2026';
