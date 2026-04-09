@@ -262,8 +262,8 @@ tr:hover .link-btn,.link-btn.has-link{opacity:1;color:var(--accent)}
   <div class="main">
     <div class="topbar">
       <span class="breadcrumb">Product &nbsp;/&nbsp; <b id="pgname">Product Roadmap</b></span>
+      <button class="ob-replay-btn" id="obReplayBtn" title="Replay the guided tour"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.5 5.5A6 6 0 1 0 14 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M14 2v4h-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Tour</button>
       <span class="tbadge" id="qbadge"></span>
-      <button class="ob-replay-btn" id="obReplayBtn" title="Replay the guided tour"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M2 8a6 6 0 1111.5-2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M14 2v4h-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Tour</button>
     </div>
     <div class="content" id="content"></div>
   </div>
@@ -762,11 +762,9 @@ function obRender() {
       + '<div class="ob-welcome-title">'+step.title+'</div>'
       + '<div class="ob-welcome-desc">'+step.desc+'</div>'
       + '<button class="ob-welcome-btn" id="ob-next">Start the tour</button>'
-      + '<button class="ob-welcome-skip" id="ob-skip">Skip for now</button>'
       + '</div></div>';
     document.body.appendChild(root);
     document.getElementById('ob-next').onclick = function() { _obStep++; obRender(); };
-    document.getElementById('ob-skip').onclick = obEnd;
     return;
   }
 
@@ -798,7 +796,6 @@ function obRender() {
     + '<div class="ob-dots">'+dots+'</div>'
     + '<div class="ob-btns">'
     + (_obStep > 1 ? '<button class="ob-btn-back" id="ob-back">Back</button>' : '')
-    + '<button class="ob-btn-skip" id="ob-skip">Skip</button>'
     + '<button class="ob-btn-next" id="ob-next">'+(isLast ? 'Done \u2713' : 'Next \u2192')+'</button>'
     + '</div></div></div>';
 
@@ -807,7 +804,6 @@ function obRender() {
   document.getElementById('ob-next').onclick = function() {
     if (isLast) { obEnd(); } else { _obStep++; obRender(); }
   };
-  document.getElementById('ob-skip').onclick = obEnd;
   var back = document.getElementById('ob-back');
   if (back) back.onclick = function() { _obStep--; obRender(); };
 }
