@@ -207,9 +207,25 @@ tr:hover .link-btn,.link-btn.has-link{opacity:1;color:var(--accent)}
   </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
-(function(){emailjs.init({publicKey:'uKxnVxIdCvTn9wl3j'});})();
+// ── EmailJS via fetch (no SDK needed) ─────────────────────────────────────────
+var SIG_SERVICE  = 'service_7ix3z7i';
+var SIG_TEMPLATE = 'template_mzc2pqe';
+var SIG_PUBLIC   = 'uKxnVxIdCvTn9wl3j';
+var SIG_NOTIFY   = 'bruna@saykudos.co';
+
+async function ejsSend(toEmail, code, name, page){
+  return fetch('https://api.emailjs.com/api/v1.0/email/send', {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      service_id: SIG_SERVICE,
+      template_id: SIG_TEMPLATE,
+      user_id: SIG_PUBLIC,
+      template_params: {to_email:toEmail, code:code, name:name, page:page}
+    })
+  });
+}
 var ico={
   roadmap:'<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="2" rx="1" fill="currentColor" opacity=".7"/><rect x="1" y="7" width="10" height="2" rx="1" fill="currentColor" opacity=".5"/><rect x="1" y="11" width="6" height="2" rx="1" fill="currentColor" opacity=".3"/><circle cx="13" cy="8" r="2.5" fill="currentColor"/></svg>',
   resources:'<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="5" height="5" rx="1.2" fill="currentColor" opacity=".6"/><rect x="9" y="2" width="5" height="5" rx="1.2" fill="currentColor" opacity=".4"/><rect x="2" y="9" width="5" height="5" rx="1.2" fill="currentColor" opacity=".4"/><rect x="9" y="9" width="5" height="5" rx="1.2" fill="currentColor" opacity=".6"/></svg>',
