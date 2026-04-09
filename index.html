@@ -243,7 +243,7 @@ tr:hover .link-btn,.link-btn.has-link{opacity:1;color:var(--accent)}
     <div class="ahint" style="background:#F4FCF0;border:1px solid rgba(102,194,32,.25);border-radius:8px;padding:10px 14px;margin-top:14px;text-align:left;color:var(--muted);font-size:11px;line-height:1.6">
       <div style="font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.5px;color:var(--accent);margin-bottom:5px">Demo credentials</div>
       <div><strong style="color:var(--text)">Email:</strong> condoadmin@inmarket.ai</div>
-      <div><strong style="color:var(--text)">Password:</strong> passiveaggressive</div>
+      <div><strong style="color:var(--text)">Password:</strong> HelixCapital</div>
     </div>
   </div>
 </div>
@@ -251,7 +251,29 @@ tr:hover .link-btn,.link-btn.has-link{opacity:1;color:var(--accent)}
   <div class="sbwrap">
     <div class="sb" id="sb">
       <div class="sbhead">
-        <div class="lmark"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 3.5L6.8 4.8L4 7L6.8 9.2L5.5 10.5L2 7Z" fill="white"/><path d="M7.2 7L10.7 3.5L12 4.8L9.2 7L12 9.2L10.7 10.5L7.2 7Z" fill="white" opacity=".45"/></svg></div>
+        <div class="lmark" style="background:none;overflow:hidden"><svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+<!-- water -->
+<rect x="0" y="15" width="26" height="11" rx="2" fill="#66C220" opacity=".25"/>
+<path d="M0 16 Q3.5 13.5 7 16 Q10.5 18.5 14 16 Q17.5 13.5 21 16 Q24.5 18.5 26 16.5 V26 H0 Z" fill="#B8D4F0" opacity=".45"/>
+<path d="M0 18 Q4 15.5 8 18 Q12 20.5 16 18 Q20 15.5 24 18 Q25.5 19 26 18.5 V26 H0 Z" fill="#89B5DA" opacity=".4"/>
+<!-- frog head poking out -->
+<ellipse cx="13" cy="16" rx="6" ry="4" fill="#9DC47A" opacity=".9"/>
+<ellipse cx="13" cy="15" rx="5" ry="3.2" fill="#8BAF6A"/>
+<!-- eyes bulging above water -->
+<circle cx="10" cy="12" r="2.8" fill="#6B8A50"/>
+<circle cx="16" cy="12" r="2.8" fill="#6B8A50"/>
+<circle cx="10" cy="12" r="1.7" fill="#fff" opacity=".9"/>
+<circle cx="16" cy="12" r="1.7" fill="#fff" opacity=".9"/>
+<circle cx="10.4" cy="12.2" r=".9" fill="#2A3A1A"/>
+<circle cx="16.4" cy="12.2" r=".9" fill="#2A3A1A"/>
+<!-- panic hand -->
+<path d="M20 10 Q21 7 22 8 Q23 9 22 11" stroke="#8BAF6A" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+<path d="M22 8 L23 6.5 M22 8.5 L24 7.5 M22 9.5 L24 9" stroke="#8BAF6A" stroke-width=".8" stroke-linecap="round"/>
+<!-- bubbles -->
+<circle cx="7" cy="20" r="1.2" fill="none" stroke="#fff" stroke-width=".6" opacity=".6"/>
+<circle cx="5" cy="18" r=".8" fill="none" stroke="#fff" stroke-width=".5" opacity=".5"/>
+<circle cx="19" cy="21" r="1" fill="none" stroke="#fff" stroke-width=".6" opacity=".5"/>
+</svg></div>
         <span class="lname">InMarket</span>
       </div>
       <nav class="sbnav" id="nav"></nav>
@@ -990,7 +1012,7 @@ function toggleSb(){collapsed=!collapsed;document.getElementById('sb').classList
 
 function login() {
   var e = document.getElementById('em').value.trim(), p = document.getElementById('pw').value;
-  if (e === 'condoadmin@inmarket.ai' && p === 'passiveaggressive') {
+  if (e === 'condoadmin@inmarket.ai' && p === 'HelixCapital') {
     document.getElementById('auth').classList.add('gone');
     setTimeout(function(){document.getElementById('auth').style.display='none';},300);
     document.getElementById('app').classList.add('show');
@@ -1006,7 +1028,7 @@ function login() {
       if (obShouldShow()) { setTimeout(obStart, 400); }
     });
   } else {
-    document.getElementById('err').textContent = 'Invalid credentials. Try: condoadmin@inmarket.ai / passiveaggressive';
+    document.getElementById('err').textContent = 'Invalid credentials. Try: condoadmin@inmarket.ai / HelixCapital';
   }
 }
 
