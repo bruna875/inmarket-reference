@@ -7,7 +7,7 @@ var NAV_CONFIG = [
     {id:'teamcapacity', label:'Team Capacity',      icon:'<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="5" cy="6" r="2.5" stroke="currentColor" stroke-width="1.4" opacity=".7"/><circle cx="11" cy="6" r="2.5" stroke="currentColor" stroke-width="1.4" opacity=".4"/><path d="M1 14c0-2.2 1.8-4 4-4s4 1.8 4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" opacity=".7"/><path d="M11 10c1.7.4 3 1.9 3 3.7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" opacity=".4"/></svg>'}
   ]},
   {section:'References from Very Good Peeps', items:REFERENCES.map(function(r){return{id:'ref_'+r.id,label:r.name,icon:r.icon};}).concat([{id:'wip',label:'Work in Progress',icon:ico.wip}])},
-  {section:'Resources', items:[{id:'resources',label:'Recognize the Patterns',icon:ico.resources},{id:'boilingfrog',label:'The Boiling Frog',icon:ico.frog}]}
+  {section:'Resources', items:[{id:'resources',label:'Recognize the Patterns',icon:ico.resources},{id:'boilingfrog',label:'The Boiling Frog',icon:ico.frog},{id:'faqdsar',label:'FAQ / DSAR Directory',icon:'<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.4"/><path d="M6.5 6.5c0-1 .7-1.5 1.5-1.5s1.5.5 1.5 1.5c0 .7-.5 1-1 1.3-.2.1-.5.3-.5.7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="8" cy="10.5" r=".6" fill="currentColor"/></svg>'}]}
 ];
 
 var initiatives=[],deliveryOpts=[
