@@ -241,7 +241,7 @@ function ejsSend(toEmail, code, name, page){
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({
       service_id:EJS_SVC, template_id:EJS_TPL, user_id:EJS_KEY,
-      template_params:{to_email:toEmail, code:code, name:name, page:page}
+      template_params:{email:toEmail, passcode:code, name:name, page:page}
     })
   });
 }
