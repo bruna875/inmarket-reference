@@ -144,7 +144,7 @@ tr:hover .link-btn,.link-btn.has-link{opacity:1;color:var(--accent)}
 .ref-right{display:flex;flex-direction:column;gap:16px}
 .ref-quote-box{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:22px 24px;position:relative}
 .ref-quote-mark{font-size:52px;line-height:1;color:var(--accent);opacity:.25;position:absolute;top:8px;left:14px;font-family:Georgia,serif;pointer-events:none;user-select:none}
-.ref-quote-text{font-size:12.5px;line-height:1.65;color:var(--text);padding-top:16px;font-style:normal}
+.ref-quote-text{font-size:13.5px;line-height:1.75;color:var(--text);padding-top:16px;font-style:normal}
 .ref-attribution{margin-top:14px;font-size:12px;font-weight:500;color:var(--muted)}
 .ref-attribution span{display:block;font-size:11px;color:var(--faint);font-weight:400}
 .ref-empty{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:32px 24px;color:var(--faint);font-size:13px}
@@ -168,7 +168,7 @@ tr:hover .link-btn,.link-btn.has-link{opacity:1;color:var(--accent)}
 .wiz-item.wiz-active .wiz-chevron{transform:rotate(180deg);color:var(--accent)}
 .wiz-body{display:none;padding:0 20px 20px}
 .wiz-item.wiz-active .wiz-body{display:block}
-.wiz-nav{display:flex;align-items:center;gap:8px;margin-top:18px}
+.wiz-nav{display:flex;align-items:center;justify-content:flex-end;gap:8px;margin-top:18px}
 .wiz-btn{height:34px;padding:0 16px;border-radius:8px;font-size:12px;font-weight:500;font-family:inherit;cursor:pointer;transition:opacity .15s}
 .wiz-btn-next{background:var(--accent);color:#fff;border:none}
 .wiz-btn-next:hover{opacity:.88}
@@ -527,6 +527,10 @@ function renderRoadmap() {
   var tableRows=initiatives.map(function(i,idx){return '<tr><td>'+i.quarter+'</td><td>'+titleCellHtml(idx)+'</td><td>'+i.driver+'</td><td>'+i.productOwner+'</td><td>'+i.techLead+'</td><td>'+i.theme+'</td><td>'+i.team+'</td><td>'+fmtDollar(i.addedValue)+'</td><td>'+roiHtml(i.roi)+'</td><td>'+dsHtml(idx)+'</td></tr>';}).join('');
   var kanban=quarters.map(function(q){var items=initiatives.filter(function(i){return i.quarter===q;});var cards=items.map(function(i){var idx=initiatives.indexOf(i),opt=deliveryOpts.filter(function(o){return o.val===i.deliveryStatus;})[0]||deliveryOpts[0],opts=deliveryOpts.map(function(o){return '<option value="'+o.val+'"'+(o.val===i.deliveryStatus?' selected':'')+'>'+o.label+'</option>';}).join('');return '<div class="kancard"><div><span class="kancard-title">'+i.title+'</span><div class="kancard-tags">'+i.theme+' \u00b7 '+i.team+'</div></div><div class="kancard-leads"><span class="kancard-lead-item"><span class="kancard-lead-label">PO</span> '+i.productOwner+'</span><span class="kancard-lead-item"><span class="kancard-lead-label">TL</span> '+i.techLead+'</span></div><div class="kancard-driver"><span class="kancard-lead-label">Driver</span> '+i.driver+'</div><div class="kancard-footer"><div class="ds-wrap" data-idx="'+idx+'"><span class="pill ds-pill '+opt.cls+'">'+opt.label+'</span><select class="ds-select" data-status-idx="'+idx+'">'+opts+'</select></div><span style="font-size:11px;font-weight:500">'+roiHtml(i.roi)+'</span></div></div>';}).join('');return '<div class="kancol"><div class="kancol-head"><span>'+q+'</span><span class="kancol-count">'+items.length+'</span></div><div class="kancol-body">'+(cards||'<div style="padding:8px;font-size:12px;color:var(--faint)">No initiatives</div>')+'</div></div>';}).join('');
   return '<div class="ptitle">Product Roadmap</div><div class="psub">Quarterly initiatives and progress status</div>'
+    +'<div style="display:inline-flex;align-items:center;gap:7px;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:7px 12px;margin-bottom:18px">'
+    +'<svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="#A8A8A0" stroke-width="1.4"/><path d="M5 8h6M8 5v6" stroke="#A8A8A0" stroke-width="1.4" stroke-linecap="round"/></svg>'
+    +'<a href="https://docs.google.com/spreadsheets/d/1g7c51-WX8UqFKJzKrnPzJ_fZSKsagnNj57Jir2v9quc/edit?usp=sharing" target="_blank" style="font-size:11px;color:var(--muted);text-decoration:none;font-weight:500" onmouseover="this.style.color=\'var(--accent)\'" onmouseout="this.style.color=\'var(--muted)\'">Data source &rarr;</a>'
+    +'</div>'
     +'<div class="tabnav"><button class="tabitem act" data-tab="table">Table View</button><button class="tabitem" data-tab="quarterly">Quarterly</button><button class="tabitem" data-tab="roi">By ROI</button></div>'
     +'<div id="rt-table" class="tabpanel act">'+buildQFilter('tbl','switchTableQuarter')
     +'<div class="cards">'+scInitiatives()+scGrouped('sc-driver','By Driver','driver')+scGrouped('sc-theme','By Theme','theme')+scGrouped('sc-team','By Team','team')+'</div>'
