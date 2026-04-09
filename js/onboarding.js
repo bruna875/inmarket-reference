@@ -146,6 +146,19 @@ function obRender() {
     return;
   }
 
+  // Ensure target page is active (e.g. Step 2 needs roadmap rendered)
+  if (step.target === '#ob-datasource' && activeId !== 'roadmap') {
+    setPage('roadmap', 'Product Roadmap');
+  }
+
+  // Scroll content to top so fixed-position targets are visible
+  if (step.target === '#ob-datasource') {
+    var contentEl = document.getElementById('content');
+    if (contentEl) contentEl.scrollTop = 0;
+    var mainEl = document.querySelector('.main');
+    if (mainEl) mainEl.scrollTop = 0;
+  }
+
   // Highlight step
   var rect = obGetRect(step.target);
   var hl = '';
@@ -188,4 +201,3 @@ function obRender() {
   var back = document.getElementById('ob-back');
   if (back) back.onclick = function() { _obStep--; obRender(); };
 }
-
