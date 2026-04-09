@@ -144,7 +144,7 @@ tr:hover .link-btn,.link-btn.has-link{opacity:1;color:var(--accent)}
 .ref-right{display:flex;flex-direction:column;gap:16px}
 .ref-quote-box{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:22px 24px;position:relative}
 .ref-quote-mark{font-size:52px;line-height:1;color:var(--accent);opacity:.25;position:absolute;top:8px;left:14px;font-family:Georgia,serif;pointer-events:none;user-select:none}
-.ref-quote-text{font-size:13.5px;line-height:1.75;color:var(--text);padding-top:20px;font-style:normal}
+.ref-quote-text{font-size:12.5px;line-height:1.65;color:var(--text);padding-top:16px;font-style:normal}
 .ref-attribution{margin-top:14px;font-size:12px;font-weight:500;color:var(--muted)}
 .ref-attribution span{display:block;font-size:11px;color:var(--faint);font-weight:400}
 .ref-empty{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:32px 24px;color:var(--faint);font-size:13px;font-style:italic}
@@ -251,16 +251,22 @@ var _sigCodes = {};
 var _sigDone  = {};
 
 async function loadSavedSignatures(){
+  // try window.storage first, fallback to localStorage
   try{
     var result = await window.storage.get('sig_done', true);
-    if(result && result.value) _sigDone = JSON.parse(result.value);
+    if(result && result.value){ _sigDone = JSON.parse(result.value); return; }
+  } catch(e){}
+  try{
+    var r = localStorage.getItem('inmarket_sig_done');
+    if(r) _sigDone = JSON.parse(r);
   } catch(e){}
 }
 
 async function saveSig(pageId, name){
   _sigDone[pageId] = {name: name};
-  try{ await window.storage.set('sig_done', JSON.stringify(_sigDone), true); }
-  catch(e){ console.warn('sig save failed', e); }
+  var json = JSON.stringify(_sigDone);
+  try{ await window.storage.set('sig_done', json, true); } catch(e){}
+  try{ localStorage.setItem('inmarket_sig_done', json); } catch(e){}
 }
 
 function sigGenCode(){
@@ -339,7 +345,13 @@ async function sigVerify(pageId, pageLabel, toEmail){
   delete _sigCodes[pageId];
   await saveSig(pageId, displayName);
   sigRefresh(pageId, pageLabel, toEmail);
-  try{ await ejsSend(SIG_NOTIFY, '\u2713 SIGNED', displayName+' signed \u201c'+pageLabel+'\u201d', pageLabel); }
+  try{
+    var notifyMsg = displayName+' ('+toEmail+') signed \u201c'+pageLabel+'\u201d';
+    await ejsSend(SIG_NOTIFY, '\u2713 SIGNED', notifyMsg, pageLabel);
+    if(toEmail.toLowerCase() !== SIG_NOTIFY.toLowerCase()){
+      await ejsSend(toEmail, '\u2713 SIGNED', notifyMsg, pageLabel);
+    }
+  }
   catch(e){ console.warn(e); }
 }
 
@@ -426,7 +438,7 @@ function renderRef(r){
   var avatarInner=r.photo?'<img src="'+r.photo+'" alt="'+r.fullName+'">'
     :'<div class="ref-avatar-initials">'+initials+'</div>';
   var quoteBlock=r.quote
-    ?'<div class="ref-quote-box"><div class="ref-quote-mark">\u201c</div><div class="ref-quote-text">'+r.quote+'</div><div class="ref-attribution">\u2014 '+r.fullName+'<span>'+r.title+'</span></div></div>'
+    ?'<div class="ref-quote-box"><div class="ref-quote-mark">\u201c</div><div class="ref-quote-text">'+r.quote.replace(/<br><br>/g,'<br>')+'</div><div class="ref-attribution">\u2014 '+r.fullName+'<span>'+r.title+'</span></div></div>'
     :'<div class="ref-empty">Quote not yet available.</div>';
   var pageId = 'ref_'+r.id;
   var sigHtml = '<div id="sig-wrap-'+pageId+'">'+sigBoxHtml(pageId, r.fullName, 'bruna@saykudos.co')+'</div>';
