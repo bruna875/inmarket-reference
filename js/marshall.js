@@ -4,26 +4,30 @@
 var MARSHALL_PHOTO = 'https://res.cloudinary.com/dhfrgr4qd/image/upload/v1775773451/marshall_kxcgxb.jpg';
 
 var MARSHALL_RESPONSES = [
-  "Look, I'm not going to explain this twice. Actually, I will, because you clearly need it. The answer is obvious if you think about it for more than five seconds.",
-  "I've seen this exact problem before at my previous company. We solved it in a weekend. I'm surprised your team hasn't figured it out yet.",
-  "Okay so let me break this down for you in simple terms, since apparently that's necessary. It's basic project management. You're welcome.",
-  "I actually wrote a LinkedIn post about this exact topic last week. 47 likes. You should read it before asking me questions you could Google.",
-  "That's a very entry-level question. No offense. But if you'd attended the same conferences I have, you'd already know the answer.",
-  "Let me stop you right there. I already know where you're going with this and you're wrong. Trust me, I've been in the industry long enough.",
-  "So essentially what you're asking is something I mastered years ago. It's really not that complicated if you have the right mindset. Which I do.",
-  "I don't want to be that guy, but... I'm going to be that guy. You're overthinking this. I solved a harder version of this before lunch last Tuesday.",
-  "With all due respect — and I mean very little — this is a solved problem. I could explain it but I don't think the nuance would land.",
-  "Interesting question. Not as interesting as you think it is, but interesting. I actually predicted this exact situation months ago. Nobody listened.",
-  "Have you tried approaching it the way I would? Probably not, which is why you're stuck. Let me tell you how a senior person would handle this.",
-  "I'm going to give you the answer, but I need you to understand that I'm not doing your job for you. I'm mentoring you. There's a difference.",
-  "This reminds me of a case study from Harvard Business Review. You probably haven't read it. Anyway, the short version is: I was right all along.",
-  "I'll be honest with you because nobody else will. This is a fundamentally flawed question. But don't worry, I'll answer it anyway because I'm generous.",
-  "I don't mean to mansplain — actually, yes I do. Someone has to. The real issue here is that you lack the strategic vision to see the bigger picture. Like I do.",
-  "Oh, this? I literally solved this in my head while you were still typing. It's intuitive for people who operate at a certain level.",
-  "Let me put on my consulting hat for a second. That'll be $450 an hour. Just kidding. But seriously, the answer is what I already told you last time.",
-  "You know what your problem is? You're thinking like an individual contributor. Think like a leader. Think like me. Problem solved.",
-  "I'm not saying I'm always right. I'm saying I haven't been proven wrong yet. And your question doesn't change that streak.",
-  "That's cute. You think that's a hard problem. When I was at [REDACTED], we dealt with issues ten times more complex before standup."
+  "Look, it's all about ROI. Everything is about ROI. If you can't quantify the ROI of what you're doing, are you even doing anything? That's Leadership 101.",
+  "I've seen this exact problem before. The ROI was negative. I fixed it. That's what leaders do. You're welcome.",
+  "Okay so let me break this down for you in simple terms. The UX is the problem. It's always the UX. Mike Don told me the same thing last week and he's never wrong.",
+  "Hold on — Todd is calling me I have to go. But quick answer: you need to think about this from a Leadership perspective, not an IC perspective. We'll circle back.",
+  "That's a very entry-level question. No offense. But as a Leader, I've already internalized the answer. It's about maximizing ROI while optimizing UX. Obviously.",
+  "Mike Don told me something very relevant to this at dinner last Thursday. I can't share the details — NDA — but trust me, the ROI implications are massive.",
+  "Let me stop you right there. I already know where you're going with this and the ROI doesn't justify it. I ran the numbers in my head. Leadership is about saying no.",
+  "So essentially what you're asking is a UX question disguised as a strategy question. I see through these things because that's what Leadership gives you — clarity.",
+  "Sorry, Todd is calling me I have to go, but real quick: the answer is ROI. It's always ROI. When in doubt, ROI. Mike Don agrees. Gotta run.",
+  "With all due respect, this is a solved problem. I solved it. The ROI was 340%. Mike Don said it was the best execution he'd ever seen. His words, not mine.",
+  "Interesting question. Not as interesting as you think it is. A true Leader would reframe this as a UX challenge with ROI implications. Which is what I just did for you.",
+  "I'm going to give you the answer, but I need you to understand something first: Leadership isn't about asking the right questions. It's about already knowing the answers. Like I do.",
+  "The UX on this is all wrong. I can tell just by looking at it. Mike Don told me he had the same instinct and he's been in UX for — actually I don't know how long. Long enough.",
+  "Oh hold on, Todd is calling me I have to go. But before I do: the ROI story here is clear. You need to 10x the Leadership alignment on UX. That's my final answer.",
+  "I don't mean to mansplain — actually, yes I do. Someone has to. The real issue is that your Leadership team hasn't thought about the ROI of good UX. Unlike me. I think about it daily.",
+  "Oh, this? I literally solved this in my head while you were still typing. It's intuitive for Leaders who understand ROI. Mike Don calls it 'the instinct'. I have it.",
+  "You know what your problem is? You're thinking like someone who doesn't understand ROI. Think like a Leader. Think like Mike Don. Think like me. Problem solved.",
+  "I'm not saying I'm always right about UX. I'm saying the ROI of listening to me has been historically positive. Ask Mike Don. Or Todd. Actually Todd is calling me I have to go.",
+  "That's cute. You think that's a hard problem. When Mike Don and I redesigned the entire UX at [REDACTED], we delivered 500% ROI. Before lunch. Leadership.",
+  "Quick answer because Todd is calling me I have to go: it's a Leadership gap. The ROI is there, the UX is there, but nobody is Leading. Except me. When I'm available. Which is now. Actually no, Todd is calling.",
+  "Mike Don told me — and I quote — 'Marshall, you're the only one who gets UX and ROI at the same time.' I didn't ask for the compliment. Leaders don't. It just happens.",
+  "See, this is exactly why Leadership matters. Without someone like me connecting the dots between UX and ROI, teams just wander. Mike Don saw it too. He called it 'the Marshall effect'.",
+  "Real quick before Todd calls me again: the ROI on this initiative is negative unless you fix the UX. I know because I've seen this pattern fourteen times. Fifteen now. Leadership.",
+  "I appreciate the question. I really do. But a Leader would already know the answer. The ROI speaks for itself. Mike Don would agree. Todd would too but he's always on the phone."
 ];
 
 var _marshallOpen = false;
@@ -100,7 +104,7 @@ function marshallToggle() {
   document.body.appendChild(el);
 
   if (_marshallMessages.length === 0) {
-    _marshallMessages.push({from: 'marshall', text: "Hey. Marshall here. Go ahead, ask me anything \u2014 but honestly, I probably already know what you\u2019re going to ask. And the answer."});
+    _marshallMessages.push({from: 'marshall', text: "Marshall here. Go ahead, ask me anything \u2014 Mike Don says I have a gift for making complex things simple. His words. Leadership."});
   }
   marshallRenderMessages();
 
