@@ -153,7 +153,35 @@ tr:hover .link-btn,.link-btn.has-link{opacity:1;color:var(--accent)}
 .wip-heading{font-size:18px;font-weight:500;letter-spacing:-.3px;margin-bottom:10px}
 .wip-body{font-size:13px;color:var(--muted);line-height:1.65}
 .res-card-desc{font-size:13px;color:var(--muted);line-height:1.65}
-/* wizard */
+/* ── Onboarding ── */
+.ob-overlay{position:fixed;inset:0;z-index:200;pointer-events:none}
+.ob-backdrop{position:fixed;inset:0;background:rgba(13,30,54,.55);z-index:201;transition:opacity .3s}
+.ob-highlight{position:fixed;z-index:202;border-radius:10px;box-shadow:0 0 0 4px var(--accent),0 0 0 9999px rgba(13,30,54,.55);pointer-events:none;transition:all .35s cubic-bezier(.4,0,.2,1)}
+.ob-card{position:fixed;z-index:203;background:var(--surface);border-radius:14px;padding:22px 24px;width:300px;box-shadow:0 8px 40px rgba(0,0,0,0.18);transition:all .35s cubic-bezier(.4,0,.2,1)}
+.ob-card-eyebrow{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.6px;color:var(--accent);margin-bottom:6px}
+.ob-card-title{font-size:16px;font-weight:500;letter-spacing:-.3px;margin-bottom:8px;color:var(--text)}
+.ob-card-desc{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:18px}
+.ob-card-nav{display:flex;align-items:center;justify-content:space-between}
+.ob-dots{display:flex;gap:5px}
+.ob-dot{width:6px;height:6px;border-radius:50%;background:var(--border-md);transition:background .2s}
+.ob-dot.act{background:var(--accent)}
+.ob-btns{display:flex;gap:8px}
+.ob-btn-skip{height:30px;padding:0 12px;background:none;border:none;font-size:12px;font-family:inherit;cursor:pointer;color:var(--faint)}
+.ob-btn-skip:hover{color:var(--muted)}
+.ob-btn-next{height:30px;padding:0 14px;background:var(--accent);color:#fff;border:none;border-radius:7px;font-size:12px;font-weight:500;font-family:inherit;cursor:pointer}
+.ob-btn-next:hover{opacity:.88}
+.ob-btn-back{height:30px;padding:0 12px;background:none;border:1px solid var(--border-md);border-radius:7px;font-size:12px;font-family:inherit;cursor:pointer;color:var(--muted)}
+.ob-btn-back:hover{border-color:var(--accent);color:var(--accent)}
+/* welcome step */
+.ob-welcome{position:fixed;inset:0;z-index:203;display:flex;align-items:center;justify-content:center}
+.ob-welcome-card{background:var(--surface);border-radius:16px;padding:40px 44px;width:440px;text-align:center;box-shadow:0 8px 48px rgba(0,0,0,0.16)}
+.ob-welcome-mark{width:48px;height:48px;background:var(--accent);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px}
+.ob-welcome-title{font-size:22px;font-weight:500;letter-spacing:-.5px;margin-bottom:10px}
+.ob-welcome-desc{font-size:14px;color:var(--muted);line-height:1.65;margin-bottom:28px}
+.ob-welcome-btn{width:100%;height:40px;background:var(--accent);color:#fff;border:none;border-radius:9px;font-size:13px;font-weight:500;font-family:inherit;cursor:pointer;margin-bottom:10px}
+.ob-welcome-btn:hover{opacity:.88}
+.ob-welcome-skip{font-size:12px;color:var(--faint);cursor:pointer;background:none;border:none;font-family:inherit}
+.ob-welcome-skip:hover{color:var(--muted)}
 .wiz-item{background:var(--surface);border:1px solid var(--border);border-radius:12px;margin-bottom:10px;overflow:hidden;transition:border-color .2s}
 .wiz-item.wiz-active{border-color:var(--accent)}
 .wiz-header{display:flex;align-items:center;gap:12px;padding:16px 20px;cursor:pointer;user-select:none}
@@ -463,9 +491,12 @@ var REFERENCES = [
 ];
 
 var NAV_CONFIG = [
-  {section:'Product',                         items:[{id:'roadmap',     label:'Product Roadmap',        icon:ico.roadmap}]},
+  {section:'Product', items:[
+    {id:'roadmap',      label:'Product Roadmap',   icon:ico.roadmap},
+    {id:'teamcapacity', label:'Team Capacity',      icon:'<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="5" cy="6" r="2.5" stroke="currentColor" stroke-width="1.4" opacity=".7"/><circle cx="11" cy="6" r="2.5" stroke="currentColor" stroke-width="1.4" opacity=".4"/><path d="M1 14c0-2.2 1.8-4 4-4s4 1.8 4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" opacity=".7"/><path d="M11 10c1.7.4 3 1.9 3 3.7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" opacity=".4"/></svg>'}
+  ]},
   {section:'References from Very Good Peeps', items:REFERENCES.map(function(r){return{id:'ref_'+r.id,label:r.name,icon:r.icon};}).concat([{id:'wip',label:'Work in Progress',icon:ico.wip}])},
-  {section:'Resources',                       items:[{id:'resources',   label:'Recognize the Patterns', icon:ico.resources},{id:'boilingfrog',label:'The Boiling Frog',icon:ico.frog}]}
+  {section:'Resources', items:[{id:'resources',label:'Recognize the Patterns',icon:ico.resources},{id:'boilingfrog',label:'The Boiling Frog',icon:ico.frog}]}
 ];
 
 var initiatives=[],deliveryOpts=[
@@ -580,7 +611,194 @@ function renderBoilingFrog() {
     + wizHtml('frog', _wizItemsFrog);
 }
 
-var PAGES = {roadmap:renderRoadmap, wip:renderWIP, resources:renderResources, boilingfrog:renderBoilingFrog};
+function renderTeamCapacity() {
+  return '<div class="ptitle">Team Capacity</div><div class="psub">Coming soon</div>'
+    + '<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:48px 32px;text-align:center;max-width:480px">'
+    + '<svg width="40" height="40" viewBox="0 0 16 16" fill="none" style="margin:0 auto 16px;display:block;opacity:.3"><circle cx="5" cy="6" r="2.5" stroke="#0D1E36" stroke-width="1.4"/><circle cx="11" cy="6" r="2.5" stroke="#0D1E36" stroke-width="1.4"/><path d="M1 14c0-2.2 1.8-4 4-4s4 1.8 4 4" stroke="#0D1E36" stroke-width="1.4" stroke-linecap="round"/><path d="M11 10c1.7.4 3 1.9 3 3.7" stroke="#0D1E36" stroke-width="1.4" stroke-linecap="round"/></svg>'
+    + '<div style="font-size:15px;font-weight:500;color:var(--text);margin-bottom:8px">Team Capacity</div>'
+    + '<div style="font-size:13px;color:var(--faint)">This section is under construction. Check back soon.</div>'
+    + '</div>';
+}
+
+// ── Onboarding ────────────────────────────────────────────────────────────────
+var OB_ENABLED = true; // set to false to disable
+var OB_STORAGE_KEY = 'inmarket_ob_done';
+
+var OB_STEPS = [
+  {
+    target: null, // welcome screen
+    eyebrow: 'Welcome',
+    title: 'Your InMarket Dashboard',
+    desc: 'A quick tour to help you find your way around. It will only take a minute.'
+  },
+  {
+    target: '[data-page="roadmap"]',
+    eyebrow: 'Step 1 of 6',
+    title: 'Product Roadmap',
+    desc: 'Track all quarterly initiatives, their delivery status, added value and ROI across Q1–Q4 and Backlog.',
+    position: 'right'
+  },
+  {
+    target: '#ob-datasource',
+    eyebrow: 'Step 2 of 6',
+    title: 'Data Source',
+    desc: 'The roadmap data is pulled live from a Google Sheet. Click here anytime to view or edit the source.',
+    position: 'bottom'
+  },
+  {
+    target: '[data-page="teamcapacity"]',
+    eyebrow: 'Step 3 of 6',
+    title: 'Team Capacity',
+    desc: 'Coming soon — a view of team allocation and capacity across initiatives.',
+    position: 'right'
+  },
+  {
+    target: '[data-page="ref_deniece_kennedy"]',
+    eyebrow: 'Step 4 of 6',
+    title: 'References',
+    desc: 'Personal endorsements from key colleagues. Each page includes a quote and a signature slot.',
+    position: 'right'
+  },
+  {
+    target: '[data-page="resources"]',
+    eyebrow: 'Step 5 of 6',
+    title: 'Resources',
+    desc: 'Two interactive reading journeys: Recognize the Patterns and The Boiling Frog.',
+    position: 'right'
+  },
+  {
+    target: '#logoutBtn',
+    eyebrow: 'Step 6 of 6',
+    title: 'Your Profile',
+    desc: 'Sign out from here. More profile options coming soon.',
+    position: 'top'
+  }
+];
+
+var _obActive = false;
+var _obStep   = 0;
+
+function obShouldShow() {
+  if (!OB_ENABLED) return false;
+  try { return !localStorage.getItem(OB_STORAGE_KEY); } catch(e) { return true; }
+}
+
+function obMarkDone() {
+  try { localStorage.setItem(OB_STORAGE_KEY, '1'); } catch(e) {}
+}
+
+function obReset() {
+  try { localStorage.removeItem(OB_STORAGE_KEY); } catch(e) {}
+}
+
+function obStart() {
+  _obActive = true;
+  _obStep = 0;
+  obRender();
+}
+
+function obEnd() {
+  _obActive = false;
+  obMarkDone();
+  var el = document.getElementById('ob-root');
+  if (el) el.remove();
+}
+
+function obGetRect(target) {
+  if (!target) return null;
+  var el = typeof target === 'string' ? document.querySelector(target) : target;
+  if (!el) return null;
+  var r = el.getBoundingClientRect();
+  return {top: r.top, left: r.left, width: r.width, height: r.height};
+}
+
+function obCardPos(rect, position) {
+  if (!rect) return {top: '50%', left: '50%', transform: 'translate(-50%,-50%)'};
+  var pad = 16;
+  var cw  = 300;
+  var ch  = 160;
+  var style = '';
+  if (position === 'right') {
+    var t = Math.min(rect.top, window.innerHeight - ch - pad);
+    style = 'top:'+Math.max(pad,t)+'px;left:'+(rect.left+rect.width+pad)+'px';
+  } else if (position === 'left') {
+    var t = Math.min(rect.top, window.innerHeight - ch - pad);
+    style = 'top:'+Math.max(pad,t)+'px;left:'+(rect.left-cw-pad)+'px';
+  } else if (position === 'bottom') {
+    style = 'top:'+(rect.top+rect.height+pad)+'px;left:'+Math.min(rect.left, window.innerWidth-cw-pad)+'px';
+  } else if (position === 'top') {
+    style = 'top:'+(rect.top-ch-pad)+'px;left:'+Math.min(rect.left, window.innerWidth-cw-pad)+'px';
+  }
+  return style;
+}
+
+function obRender() {
+  var existing = document.getElementById('ob-root');
+  if (existing) existing.remove();
+
+  var step = OB_STEPS[_obStep];
+  var total = OB_STEPS.length;
+  var root = document.createElement('div');
+  root.id = 'ob-root';
+
+  // Welcome step
+  if (_obStep === 0) {
+    root.innerHTML = '<div class="ob-backdrop" style="pointer-events:all"></div>'
+      + '<div class="ob-welcome">'
+      + '<div class="ob-welcome-card">'
+      + '<div class="ob-welcome-mark"><svg width="22" height="22" viewBox="0 0 18 18" fill="none"><path d="M3 9L7 4.5L8.5 6L5.5 9L8.5 12L7 13.5L3 9Z" fill="white"/><path d="M9 9L13 4.5L14.5 6L11.5 9L14.5 12L13 13.5L9 9Z" fill="white" opacity=".45"/></svg></div>'
+      + '<div class="ob-welcome-title">'+step.title+'</div>'
+      + '<div class="ob-welcome-desc">'+step.desc+'</div>'
+      + '<button class="ob-welcome-btn" id="ob-next">Start the tour</button>'
+      + '<button class="ob-welcome-skip" id="ob-skip">Skip for now</button>'
+      + '</div></div>';
+    document.body.appendChild(root);
+    document.getElementById('ob-next').onclick = function() { _obStep++; obRender(); };
+    document.getElementById('ob-skip').onclick = obEnd;
+    return;
+  }
+
+  // Highlight step
+  var rect = obGetRect(step.target);
+  var hl = '';
+  if (rect) {
+    var pad = 6;
+    hl = '<div class="ob-highlight" style="top:'+(rect.top-pad)+'px;left:'+(rect.left-pad)+'px;width:'+(rect.width+pad*2)+'px;height:'+(rect.height+pad*2)+'px"></div>';
+  }
+
+  var dots = OB_STEPS.slice(1).map(function(s,i) {
+    return '<div class="ob-dot'+(i===_obStep-1?' act':'')+'"></div>';
+  }).join('');
+
+  var cardStyle = typeof obCardPos(rect, step.position) === 'string'
+    ? obCardPos(rect, step.position)
+    : 'top:50%;left:50%;transform:translate(-50%,-50%)';
+
+  var isLast = _obStep === total - 1;
+
+  root.innerHTML = '<div class="ob-backdrop" style="pointer-events:all"></div>'
+    + hl
+    + '<div class="ob-card" style="'+cardStyle+';pointer-events:all">'
+    + '<div class="ob-card-eyebrow">'+step.eyebrow+'</div>'
+    + '<div class="ob-card-title">'+step.title+'</div>'
+    + '<div class="ob-card-desc">'+step.desc+'</div>'
+    + '<div class="ob-card-nav">'
+    + '<div class="ob-dots">'+dots+'</div>'
+    + '<div class="ob-btns">'
+    + (_obStep > 1 ? '<button class="ob-btn-back" id="ob-back">Back</button>' : '')
+    + '<button class="ob-btn-skip" id="ob-skip">Skip</button>'
+    + '<button class="ob-btn-next" id="ob-next">'+(isLast ? 'Done \u2713' : 'Next \u2192')+'</button>'
+    + '</div></div></div>';
+
+  document.body.appendChild(root);
+
+  document.getElementById('ob-next').onclick = function() {
+    if (isLast) { obEnd(); } else { _obStep++; obRender(); }
+  };
+  document.getElementById('ob-skip').onclick = obEnd;
+  var back = document.getElementById('ob-back');
+  if (back) back.onclick = function() { _obStep--; obRender(); };
+}
 
 function buildNav() {
   document.getElementById('nav').innerHTML = NAV_CONFIG.map(function(sec) {
