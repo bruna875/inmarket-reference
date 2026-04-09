@@ -236,11 +236,15 @@ tr:hover .link-btn,.link-btn.has-link{opacity:1;color:var(--accent)}
     </div>
     <div class="atitle">Sign in</div>
     <div class="asub">Enter your credentials to continue</div>
-    <div class="fwrap"><div class="flabel">Email</div><input class="finput" id="em" type="text" value="poorhumans@inmarket.com" placeholder="you@company.com"/></div>
+    <div class="fwrap"><div class="flabel">Email</div><input class="finput" id="em" type="text" value="condoadmin@inmarket.ai" placeholder="you@company.com"/></div>
     <div class="fwrap"><div class="flabel">Password</div><input class="finput" id="pw" type="password" placeholder="••••••••"/></div>
     <div class="aerr" id="err"></div>
     <button class="abtn" id="loginBtn">Sign in</button>
-    <div class="ahint">Demo: poorhumans@inmarket.com / babbazzi2026</div>
+    <div class="ahint" style="background:#F4FCF0;border:1px solid rgba(102,194,32,.25);border-radius:8px;padding:10px 14px;margin-top:14px;text-align:left;color:var(--muted);font-size:11px;line-height:1.6">
+      <div style="font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.5px;color:var(--accent);margin-bottom:5px">Demo credentials</div>
+      <div><strong style="color:var(--text)">Email:</strong> condoadmin@inmarket.ai</div>
+      <div><strong style="color:var(--text)">Password:</strong> passiveaggressive</div>
+    </div>
   </div>
 </div>
 <div id="app">
@@ -253,7 +257,7 @@ tr:hover .link-btn,.link-btn.has-link{opacity:1;color:var(--accent)}
       <nav class="sbnav" id="nav"></nav>
       <div class="sbfoot">
         <div class="avatar" id="av">AD</div>
-        <div class="uinfo"><div class="uname" id="un">Admin</div><div class="urole">Product Manager</div></div>
+        <div class="uinfo"><div class="uname" id="un">Admin</div><div class="urole">Condo Administrator / Head of Product</div></div>
         <div class="logoutbtn" id="logoutBtn" title="Sign out"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M6 3H3v10h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 5l3 3-3 3M13 8H6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </div>
     </div>
@@ -938,7 +942,7 @@ function toggleSb(){collapsed=!collapsed;document.getElementById('sb').classList
 
 function login() {
   var e = document.getElementById('em').value.trim(), p = document.getElementById('pw').value;
-  if (e === 'poorhumans@inmarket.com' && p === 'babbazzi2026') {
+  if (e === 'condoadmin@inmarket.ai' && p === 'passiveaggressive') {
     document.getElementById('auth').classList.add('gone');
     setTimeout(function(){document.getElementById('auth').style.display='none';},300);
     document.getElementById('app').classList.add('show');
@@ -954,7 +958,7 @@ function login() {
       if (obShouldShow()) { setTimeout(obStart, 400); }
     });
   } else {
-    document.getElementById('err').textContent = 'Invalid credentials. Try: poorhumans@inmarket.com / babbazzi2026';
+    document.getElementById('err').textContent = 'Invalid credentials. Try: condoadmin@inmarket.ai / passiveaggressive';
   }
 }
 
