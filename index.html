@@ -256,7 +256,7 @@ tr:hover .link-btn,.link-btn.has-link{opacity:1;color:var(--accent)}
       </div>
       <nav class="sbnav" id="nav"></nav>
       <div class="sbfoot">
-        <div class="avatar" id="av">AD</div>
+        <div class="avatar" id="av"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><ellipse cx="10" cy="13" rx="7" ry="5" fill="#9DC47A" opacity=".85"/><ellipse cx="10" cy="12" rx="5.5" ry="3.8" fill="#8BAF6A" opacity=".9"/><circle cx="7.5" cy="8.5" r="2.2" fill="#6B8A50"/><circle cx="12.5" cy="8.5" r="2.2" fill="#6B8A50"/><circle cx="7.5" cy="8.5" r="1.4" fill="#fff" opacity=".9"/><circle cx="12.5" cy="8.5" r="1.4" fill="#fff" opacity=".9"/><circle cx="7.9" cy="8.5" r=".7" fill="#2A3A1A"/><circle cx="12.9" cy="8.5" r=".7" fill="#2A3A1A"/><path d="M8.5 12 Q10 13.5 11.5 12" stroke="#5A7A40" stroke-width=".8" fill="none" stroke-linecap="round"/></svg></div>
         <div class="uinfo"><div class="uname" id="un">Admin</div><div class="urole">Head of Product</div></div>
         <div class="logoutbtn" id="logoutBtn" title="Sign out"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M6 3H3v10h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 5l3 3-3 3M13 8H6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </div>
@@ -285,6 +285,9 @@ tr:hover .link-btn,.link-btn.has-link{opacity:1;color:var(--accent)}
 <script>
 (function() {
 'use strict';
+
+// ── Mini Frog ─────────────────────────────────────────────────────────────────
+var MINI_FROG = '<svg width="36" height="36" viewBox="0 0 36 36" fill="none" style="animation:ld-bob 2s ease-in-out infinite"><style>@keyframes ld-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}@keyframes ld-blink2{0%,48%,52%,100%{opacity:1}50%{opacity:0}}</style><ellipse cx="18" cy="24" rx="10" ry="7" fill="#9DC47A" opacity=".85"/><ellipse cx="18" cy="22.5" rx="8" ry="5.5" fill="#8BAF6A" opacity=".9"/><circle cx="14" cy="15.5" r="3.2" fill="#6B8A50"/><circle cx="22" cy="15.5" r="3.2" fill="#6B8A50"/><circle cx="14" cy="15.5" r="2" fill="#fff" opacity=".9"/><circle cx="22" cy="15.5" r="2" fill="#fff" opacity=".9"/><circle cx="14.5" cy="15.5" r="1" fill="#2A3A1A" style="animation:ld-blink2 4s ease infinite"/><circle cx="22.5" cy="15.5" r="1" fill="#2A3A1A" style="animation:ld-blink2 4s ease infinite"/><path d="M16 22 Q18 24.5 20 22" stroke="#5A7A40" stroke-width="1" fill="none" stroke-linecap="round"/></svg>';
 
 // ── EmailJS ───────────────────────────────────────────────────────────────────
 var EJS_SVC    = 'service_7ix3z7i';
@@ -762,7 +765,7 @@ function obRender() {
     root.innerHTML = '<div class="ob-backdrop" style="pointer-events:all"></div>'
       + '<div class="ob-welcome">'
       + '<div class="ob-welcome-card">'
-      + '<div class="ob-welcome-mark"><svg width="22" height="22" viewBox="0 0 18 18" fill="none"><path d="M3 9L7 4.5L8.5 6L5.5 9L8.5 12L7 13.5L3 9Z" fill="white"/><path d="M9 9L13 4.5L14.5 6L11.5 9L14.5 12L13 13.5L9 9Z" fill="white" opacity=".45"/></svg></div>'
+      + '<div style="margin:0 auto 20px;width:48px;height:48px;display:flex;align-items:center;justify-content:center">'+MINI_FROG+'</div>'
       + '<div class="ob-welcome-title">'+step.title+'</div>'
       + '<div class="ob-welcome-desc">'+step.desc+'</div>'
       + '<button class="ob-welcome-btn" id="ob-next">Start the tour</button>'
@@ -793,7 +796,10 @@ function obRender() {
   root.innerHTML = '<div class="ob-backdrop" style="pointer-events:all"></div>'
     + hl
     + '<div class="ob-card" style="'+cardStyle+';pointer-events:all">'
+    + '<div style="display:flex;align-items:flex-start;justify-content:space-between">'
     + '<div class="ob-card-eyebrow">'+step.eyebrow+'</div>'
+    + '<div style="flex-shrink:0;margin-top:-4px;margin-right:-4px">'+MINI_FROG+'</div>'
+    + '</div>'
     + '<div class="ob-card-title">'+step.title+'</div>'
     + '<div class="ob-card-desc">'+step.desc+'</div>'
     + '<div class="ob-card-nav">'
@@ -851,8 +857,8 @@ function loadData(cb) {
     + '@keyframes ld-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}'
     + '@keyframes ld-blink{0%,48%,52%,100%{opacity:1}50%{opacity:0}}'
     + '@keyframes ld-spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}'
-    + '@keyframes ld-fade{0%,16%{opacity:0;transform:translateY(6px)}5%,11%{opacity:1;transform:translateY(0)}13%{opacity:0;transform:translateY(-6px)}}'
-    + '.ld-phrase{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;animation:ld-fade 15s infinite;font-size:13px;font-weight:500;color:var(--muted);letter-spacing:-.2px}'
+    + '@keyframes ld-fade{0%,26%{opacity:0;transform:translateY(6px)}7%,19%{opacity:1;transform:translateY(0)}22%{opacity:0;transform:translateY(-6px)}}'
+    + '.ld-phrase{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;animation:ld-fade 9s infinite;font-size:13px;font-weight:500;color:var(--muted);letter-spacing:-.2px}'
     + '</style>'
     + '<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="animation:ld-bob 2s ease-in-out infinite">'
     // frog body
@@ -883,12 +889,10 @@ function loadData(cb) {
     + '<path d="M100 36 A8 8 0 0 1 108 44" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" fill="none" style="transform-origin:100px 44px;animation:ld-spin 1s linear infinite"/>'
     + '</svg>'
     // rotating phrases
-    + '<div style="position:relative;height:20px;width:260px;overflow:hidden">'
-    + '<div class="ld-phrase" style="animation-delay:0s">pulling roadmap data\u2026</div>'
-    + '<div class="ld-phrase" style="animation-delay:3s">vibe coding dashboard\u2026</div>'
-    + '<div class="ld-phrase" style="animation-delay:6s">exposing manipulations\u2026</div>'
-    + '<div class="ld-phrase" style="animation-delay:9s">protecting dignity\u2026</div>'
-    + '<div class="ld-phrase" style="animation-delay:12s">debunking defamation\u2026</div>'
+    + '<div style="position:relative;height:20px;width:360px;overflow:hidden">'
+    + '<div class="ld-phrase" style="animation-delay:0s">pulling roadmap data and vibe coding dashboard\u2026</div>'
+    + '<div class="ld-phrase" style="animation-delay:3s">exposing manipulations and debunking defamation\u2026</div>'
+    + '<div class="ld-phrase" style="animation-delay:6s">protecting dignity\u2026</div>'
     + '</div>'
     + '</div>';
   fetch('/api/data')
@@ -991,7 +995,7 @@ function login() {
     setTimeout(function(){document.getElementById('auth').style.display='none';},300);
     document.getElementById('app').classList.add('show');
     var name = e.split('@')[0];
-    document.getElementById('av').textContent = name.slice(0,2).toUpperCase();
+    // avatar is the frog SVG, don't overwrite
     document.getElementById('un').textContent = name.charAt(0).toUpperCase()+name.slice(1);
     Promise.all([
       loadSavedSignatures(),
