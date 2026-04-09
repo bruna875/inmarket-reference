@@ -252,15 +252,19 @@ var _sigCodes = {};
 var _sigDone  = {};
 
 function loadSavedSignatures() {
-  var r = localStorage.getItem('inmarket_sig_done');
-  if (r) {
-    try { _sigDone = JSON.parse(r); } catch(e) { _sigDone = {}; }
-  }
+  return fetch('/api/signatures')
+    .then(function(r) { return r.json(); })
+    .then(function(data) { _sigDone = data || {}; })
+    .catch(function() { _sigDone = {}; });
 }
 
 function saveSig(pageId, name) {
   _sigDone[pageId] = {name: name};
-  localStorage.setItem('inmarket_sig_done', JSON.stringify(_sigDone));
+  fetch('/api/signatures', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(_sigDone)
+  }).catch(function(e) { console.warn('sig save failed', e); });
 }
 
 // ── Signature UI ──────────────────────────────────────────────────────────────
@@ -606,9 +610,10 @@ function login() {
     var name = e.split('@')[0];
     document.getElementById('av').textContent = name.slice(0, 2).toUpperCase();
     document.getElementById('un').textContent = name.charAt(0).toUpperCase() + name.slice(1);
-    loadSavedSignatures();
-    buildNav();
-    loadData(function() { document.getElementById('content').innerHTML = PAGES[activeId](); });
+    loadSavedSignatures().then(function() {
+      buildNav();
+      loadData(function() { document.getElementById('content').innerHTML = PAGES[activeId](); });
+    });
   } else {
     document.getElementById('err').textContent = 'Invalid credentials. Try: poorhumans@inmarket.com / babbazzi2026';
   }
