@@ -19,49 +19,56 @@ var OB_STEPS = [
     target: null, // welcome screen
     eyebrow: 'Welcome',
     title: 'Your InMarket Dashboard',
-    desc: 'A quick tour to help you find your way around. It will only take a minute.'
+    desc: 'A quick tour to help you find your way around. It will not take much more than viewing a vibe coding YouTube video by a Asian tinkerer kid.'
   },
   {
     target: '[data-page="roadmap"]',
-    eyebrow: 'Step 1 of 6',
+    eyebrow: 'Step 1 of 7',
     title: 'Product Roadmap',
     desc: 'Track all quarterly initiatives, their delivery status, added value and ROI across Q1–Q4 and Backlog.',
     position: 'right'
   },
   {
     target: '#ob-datasource',
-    eyebrow: 'Step 2 of 6',
+    eyebrow: 'Step 2 of 7',
     title: 'Data Source',
     desc: 'The roadmap data is pulled live from a Google Sheet. Click here anytime to view or edit the source.',
     position: 'bottom'
   },
   {
     target: '[data-page="teamcapacity"]',
-    eyebrow: 'Step 3 of 6',
+    eyebrow: 'Step 3 of 7',
     title: 'Team Capacity',
     desc: 'Coming soon — a view of team allocation and capacity across initiatives.',
     position: 'right'
   },
   {
     target: '[data-page="ref_deniece_kennedy"]',
-    eyebrow: 'Step 4 of 6',
+    eyebrow: 'Step 4 of 7',
     title: 'References',
     desc: 'Personal endorsements from key colleagues. Each page includes a quote and a signature slot.',
     position: 'right'
   },
   {
     target: '[data-page="resources"]',
-    eyebrow: 'Step 5 of 6',
+    eyebrow: 'Step 5 of 7',
     title: 'Resources',
     desc: 'Two interactive reading journeys: Recognize the Patterns and The Boiling Frog.',
     position: 'right'
   },
   {
     target: '.sbfoot',
-    eyebrow: 'Step 6 of 6',
+    eyebrow: 'Step 6 of 7',
     title: 'Your Profile',
     desc: 'Your account info and sign-out option. More profile features coming soon.',
     position: 'top'
+  },
+  {
+    target: '#askMarshallBtn',
+    eyebrow: 'Step 7 of 7',
+    title: 'Ask Marshall',
+    desc: 'Got a question? Ask Marshall. He\u2019ll confidently give you an answer. Whether it\u2019s the right one is another story entirely.',
+    position: 'bottom'
   }
 ];
 
