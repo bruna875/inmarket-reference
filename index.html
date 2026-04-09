@@ -846,7 +846,51 @@ function setPage(id, label) {
 
 function loadData(cb) {
   var el = document.getElementById('content');
-  if (el) el.innerHTML = '<div style="padding:40px 32px;font-size:13px;color:var(--muted)">Loading data...</div>';
+  if (el) el.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:70vh;flex-direction:column;gap:20px">'
+    + '<style>'
+    + '@keyframes ld-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}'
+    + '@keyframes ld-blink{0%,48%,52%,100%{opacity:1}50%{opacity:0}}'
+    + '@keyframes ld-spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}'
+    + '@keyframes ld-fade{0%,16%{opacity:0;transform:translateY(6px)}5%,11%{opacity:1;transform:translateY(0)}13%{opacity:0;transform:translateY(-6px)}}'
+    + '.ld-phrase{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;animation:ld-fade 15s infinite;font-size:13px;font-weight:500;color:var(--muted);letter-spacing:-.2px}'
+    + '</style>'
+    + '<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="animation:ld-bob 2s ease-in-out infinite">'
+    // frog body
+    + '<ellipse cx="60" cy="78" rx="28" ry="20" fill="#9DC47A" opacity=".85"/>'
+    + '<ellipse cx="60" cy="74" rx="22" ry="15" fill="#8BAF6A" opacity=".9"/>'
+    // eyes
+    + '<circle cx="50" cy="58" r="8" fill="#6B8A50"/>'
+    + '<circle cx="70" cy="58" r="8" fill="#6B8A50"/>'
+    + '<circle cx="50" cy="58" r="5" fill="#fff" opacity=".9"/>'
+    + '<circle cx="70" cy="58" r="5" fill="#fff" opacity=".9"/>'
+    + '<circle cx="51.5" cy="58" r="2.5" fill="#2A3A1A" style="animation:ld-blink 4s ease infinite"/>'
+    + '<circle cx="71.5" cy="58" r="2.5" fill="#2A3A1A" style="animation:ld-blink 4s ease infinite"/>'
+    // mouth
+    + '<path d="M54 72 Q60 77 66 72" stroke="#5A7A40" stroke-width="2" fill="none" stroke-linecap="round"/>'
+    // legs
+    + '<path d="M40 88 Q32 98 26 94 Q32 90 40 92" fill="#8BAF6A" opacity=".7"/>'
+    + '<path d="M80 88 Q88 98 94 94 Q88 90 80 92" fill="#8BAF6A" opacity=".7"/>'
+    // laptop
+    + '<rect x="38" y="80" width="44" height="28" rx="3" fill="#E8E6E0" stroke="#C8C6C0" stroke-width="1.5"/>'
+    + '<rect x="42" y="84" width="36" height="18" rx="2" fill="#fff"/>'
+    + '<rect x="30" y="108" width="60" height="4" rx="2" fill="#C8C6C0"/>'
+    // screen glow lines
+    + '<line x1="46" y1="90" x2="62" y2="90" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" opacity=".6"/>'
+    + '<line x1="46" y1="94" x2="72" y2="94" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" opacity=".35"/>'
+    + '<line x1="46" y1="98" x2="56" y2="98" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" opacity=".5"/>'
+    // loading spinner
+    + '<circle cx="100" cy="44" r="8" stroke="var(--border-md)" stroke-width="2" fill="none"/>'
+    + '<path d="M100 36 A8 8 0 0 1 108 44" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" fill="none" style="transform-origin:100px 44px;animation:ld-spin 1s linear infinite"/>'
+    + '</svg>'
+    // rotating phrases
+    + '<div style="position:relative;height:20px;width:260px;overflow:hidden">'
+    + '<div class="ld-phrase" style="animation-delay:0s">pulling roadmap data\u2026</div>'
+    + '<div class="ld-phrase" style="animation-delay:3s">vibe coding dashboard\u2026</div>'
+    + '<div class="ld-phrase" style="animation-delay:6s">exposing manipulations\u2026</div>'
+    + '<div class="ld-phrase" style="animation-delay:9s">protecting dignity\u2026</div>'
+    + '<div class="ld-phrase" style="animation-delay:12s">debunking defamation\u2026</div>'
+    + '</div>'
+    + '</div>';
   fetch('/api/data')
     .then(function(r){return r.json();})
     .then(function(data){
