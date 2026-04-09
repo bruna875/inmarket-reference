@@ -373,7 +373,7 @@ async function loadSavedPhotos() {
   for (var i = 0; i < REFERENCES.length; i++) {
     var r = REFERENCES[i];
     try {
-      var result = await window.storage.get('photo:' + r.id);
+      var result = await window.storage.get('photo:' + r.id, true); // shared=true
       if (result && result.value) {
         r.photo = result.value;
       }
@@ -398,7 +398,7 @@ document.getElementById('photoFileInput').addEventListener('change', function(e)
       ref.photo = dataUrl;
       // Persist to storage
       try {
-        await window.storage.set('photo:' + ref.id, dataUrl);
+        await window.storage.set('photo:' + ref.id, dataUrl, true); // shared=true
       } catch(e) { console.warn('Storage save failed', e); }
       // Update avatar in DOM without full re-render
       var avatarEl = document.getElementById('ref-avatar-' + _uploadTargetId);
