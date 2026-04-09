@@ -7,7 +7,8 @@ var PAGES = {
   teamcapacity: renderTeamCapacity,
   wip:          renderWIP,
   resources:    renderResources,
-  boilingfrog:  renderBoilingFrog
+  boilingfrog:  renderBoilingFrog,
+  faqdsar:      renderFaqDsar
 };
 
 // ── Onboarding ────────────────────────────────────────────────────────────────
