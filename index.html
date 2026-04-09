@@ -175,7 +175,7 @@ tr:hover .link-btn,.link-btn.has-link{opacity:1;color:var(--accent)}
 .sig-done{display:flex;align-items:center;gap:10px}
 .sig-done-check{width:28px;height:28px;background:#EAF3DE;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .sig-done-text{font-size:13px;color:var(--text)}
-.sig-done-name{font-family:'Segoe Script','Brush Script MT',cursive;font-size:22px;color:var(--accent);margin-left:4px}
+.sig-done-name{font-family:'Segoe Script','Brush Script MT',cursive;font-size:22px;color:var(--text);margin-left:4px}
 </style>
 </head>
 <body>
@@ -289,11 +289,15 @@ function sigRefresh(pageId, pageLabel, toEmail){
 
 async function sigRequest(pageId, pageLabel, toEmail){
   var code = sigGenCode();
-  _sigCodes[pageId] = {code:code, expires:Date.now()+10*60*1000};
+  // Try to get the full name from the page heading
+  var signerName = pageLabel;
+  var h = document.querySelector('.ptitle');
+  if(h && h.textContent && !PAGES[pageId]) signerName = h.textContent.trim();
+  _sigCodes[pageId] = {code:code, expires:Date.now()+10*60*1000, signerName:signerName};
   var btn = document.querySelector('[data-sq="'+pageId+'"]');
   if(btn){btn.textContent='Sending\u2026';btn.disabled=true;}
   try{
-    await ejsSend(toEmail, code, toEmail.split('@')[0], pageLabel);
+    await ejsSend(toEmail, code, signerName, pageLabel);
   } catch(e){ console.error(e); }
   sigRefresh(pageId, pageLabel, toEmail);
 }
@@ -313,11 +317,15 @@ async function sigVerify(pageId, pageLabel, toEmail){
     inp.style.borderColor='#C0392B';
     return;
   }
-  var name = toEmail.split('@')[0];
-  _sigDone[pageId] = {name:name};
+  // Get name from page or email, capitalize each word
+  var rawName = stored.signerName || toEmail.split('@')[0];
+  var displayName = rawName.split(' ').map(function(w){
+    return w.charAt(0).toUpperCase() + w.slice(1).toLowerCase();
+  }).join(' ');
+  _sigDone[pageId] = {name: displayName};
   delete _sigCodes[pageId];
   sigRefresh(pageId, pageLabel, toEmail);
-  try{ await ejsSend(SIG_NOTIFY, '\u2713 SIGNED', name+' signed \u201c'+pageLabel+'\u201d', pageLabel); }
+  try{ await ejsSend(SIG_NOTIFY, '\u2713 SIGNED', displayName+' signed \u201c'+pageLabel+'\u201d', pageLabel); }
   catch(e){ console.warn(e); }
 }
 
@@ -406,7 +414,9 @@ function renderRef(r){
   var quoteBlock=r.quote
     ?'<div class="ref-quote-box"><div class="ref-quote-mark">\u201c</div><div class="ref-quote-text">'+r.quote+'</div><div class="ref-attribution">\u2014 '+r.fullName+'<span>'+r.title+'</span></div></div>'
     :'<div class="ref-empty">Quote not yet available.</div>';
-  return '<div class="ref-layout"><div class="ref-photo-col"><div class="ref-avatar">'+avatarInner+'</div><div class="ref-name">'+r.fullName+'</div><div class="ref-title-small">'+r.title+'</div></div><div class="ref-right">'+quoteBlock+'</div></div>';
+  var pageId = 'ref_'+r.id;
+  var sigHtml = '<div id="sig-wrap-'+pageId+'">'+sigBoxHtml(pageId, r.fullName, 'bruna@saykudos.co')+'</div>';
+  return '<div class="ref-layout"><div class="ref-photo-col"><div class="ref-avatar">'+avatarInner+'</div><div class="ref-name">'+r.fullName+'</div><div class="ref-title-small">'+r.title+'</div></div><div class="ref-right">'+quoteBlock+sigHtml+'</div></div>';
 }
 
 function renderRoadmap(){
