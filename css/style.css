@@ -279,11 +279,61 @@ tr:hover .link-btn,.link-btn.has-link{opacity:1;color:var(--accent)}
 .qprog-foot-label{font-size:10px;color:var(--faint)}
 .qprog-foot-val{font-size:14px;font-weight:500;color:#66C220}
 .qprog-foot-sub{font-size:11px;font-weight:400;color:var(--muted)}
-/* ── Capacity placeholder ── */
-.cap-placeholder{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:48px 32px;text-align:center;max-width:480px}
-.cap-placeholder-icon{margin:0 auto 16px;display:block;opacity:.3}
-.cap-placeholder-title{font-size:15px;font-weight:500;color:var(--text);margin-bottom:8px}
-.cap-placeholder-desc{font-size:13px;color:var(--faint)}
+/* ── Capacity ── */
+.cap-empty{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:48px 32px;text-align:center;font-size:13px;color:var(--faint)}
+.cap-scorecard-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:20px}
+.cap-scorecard{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center}
+.cap-scorecard-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.cap-scorecard-val{margin-top:4px}
+.cap-scorecard-used{font-size:18px;font-weight:500;color:var(--text)}
+.cap-scorecard-budget{font-size:12px;color:var(--muted)}
+.cap-scorecard-remaining{font-size:11px;color:var(--faint);margin-top:2px}
+.cap-scorecard-over{color:#A32D2D}
+.cap-gauge-svg{display:block;margin:0 auto;overflow:visible}
+.cap-gauge-pct{font-size:14px;font-weight:500;fill:var(--text)}
+/* ── Capacity bars ── */
+.cap-bar-empty{font-size:11px;color:var(--faint)}
+.cap-bar-track{height:20px;background:var(--bg);border-radius:5px;overflow:hidden}
+.cap-bar-fill{height:100%;border-radius:5px;display:flex;align-items:center;padding-left:8px;min-width:32px}
+.cap-bar-pct-label{font-size:10px;font-weight:500;color:#fff}
+.cap-bar-over-wrap{display:flex;align-items:center;gap:8px}
+.cap-bar-over-track{flex:1;position:relative}
+.cap-bar-over-track .cap-bar-track{overflow:visible;position:relative}
+.cap-bar-budget-marker{position:absolute;top:-4px;bottom:-4px;width:1.5px;background:var(--faint);z-index:2}
+.cap-bar-budget-label{position:absolute;top:-12px;font-size:9px;color:var(--faint);transform:translateX(-50%)}
+.cap-bar-fill-over{height:100%;width:100%;background:#A32D2D;border-radius:5px;display:flex;align-items:center;padding-left:8px}
+.cap-bar-hatch{position:absolute;right:0;top:0;height:20px;background:repeating-linear-gradient(45deg,#A32D2D22,#A32D2D22 3px,transparent 3px,transparent 6px);border-radius:0 5px 5px 0}
+.cap-bar-over-badge{font-size:11px;font-weight:500;color:#A32D2D;background:#FDECEA;padding:2px 8px;border-radius:12px;white-space:nowrap;flex-shrink:0}
+/* ── Capacity stats ── */
+.cap-stats{text-align:right;font-size:12px}
+.cap-stats-used{font-weight:500;color:var(--text)}
+.cap-stats-over{color:#A32D2D}
+.cap-stats-budget{font-size:11px;color:var(--faint)}
+/* ── Capacity blocks ── */
+.cap-block{background:var(--surface);border:1px solid var(--border);border-radius:12px;margin-bottom:16px;overflow:hidden}
+.cap-block-head{padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.cap-block-title{font-size:14px;font-weight:500;color:var(--text)}
+.cap-block-role{font-size:11px;color:var(--faint)}
+.cap-block-badge{font-size:11px;color:var(--muted);background:var(--bg);padding:2px 10px;border-radius:20px}
+.cap-block-bars{padding:16px 20px}
+.cap-block-table{padding:0 20px 16px}
+.cap-block-table-only{padding:0 20px 16px}
+.cap-block-table-divider{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.4px;color:var(--faint);padding:12px 0 8px;border-top:0.5px solid var(--border)}
+/* ── Capacity discipline rows ── */
+.cap-disc-row{display:grid;grid-template-columns:90px 1fr 80px;gap:14px;align-items:center;padding:8px 0}
+.cap-disc-row-border{border-top:0.5px solid var(--border)}
+.cap-disc-label{font-size:12px;color:var(--muted)}
+/* ── Capacity init table ── */
+.cap-init-table{width:100%;border-collapse:collapse;font-size:12px}
+.cap-init-thead-row{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.4px;color:var(--faint)}
+.cap-init-tbody{border-top:0.5px solid var(--border)}
+.cap-tr{border-top:0.5px solid var(--border)}
+.cap-cell-muted{color:var(--muted);white-space:nowrap}
+.cap-cell-total{font-weight:500;color:var(--text)}
+/* ── Capacity legend ── */
+.cap-legend{display:flex;gap:16px;padding:4px 0}
+.cap-legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted)}
+.cap-legend-dot{width:8px;height:8px;border-radius:2px}
 /* ── Misc inline extractions ── */
 .empty-kanban-msg{padding:8px;font-size:12px;color:var(--faint)}
 .filter-wrap{padding:12px 18px 4px}
