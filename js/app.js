@@ -180,3 +180,60 @@ document.getElementById('linkClearBtn').addEventListener('click', clearLink);
 document.getElementById('obReplayBtn').addEventListener('click', function() { obReset(); obStart(); });
 document.getElementById('pw').addEventListener('keydown', function(e){if(e.key==='Enter')login();});
 document.getElementById('em').addEventListener('keydown', function(e){if(e.key==='Enter')login();});
+
+// ── User popover ─────────────────────────────────────────────────────────────
+var _userPopOpen = false;
+
+function userPopClose() {
+  _userPopOpen = false;
+  var el = document.getElementById('user-popover');
+  if (el) el.remove();
+}
+
+function userPopToggle(e) {
+  if (e.target.closest('#logoutBtn') || e.target.closest('.logoutbtn')) return;
+  if (_userPopOpen) { userPopClose(); return; }
+  _userPopOpen = true;
+
+  var box = document.getElementById('userBox');
+  var rect = box.getBoundingClientRect();
+
+  var pop = document.createElement('div');
+  pop.id = 'user-popover';
+  pop.style.cssText = 'position:fixed;z-index:910;background:var(--surface);border:1px solid var(--border);border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,.12);width:220px;padding:6px 0;'
+    + 'left:' + rect.left + 'px;bottom:' + (window.innerHeight - rect.top + 8) + 'px;';
+
+  var userName = document.getElementById('un').textContent;
+
+  pop.innerHTML = '<div data-userpop="profile" style="padding:10px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:background .1s"'
+    + ' onmouseover="this.style.background=\'var(--bg)\'" onmouseout="this.style.background=\'\'">'
+    + '<svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="5.5" r="2.5" stroke="currentColor" stroke-width="1.4"/><path d="M3 14c0-2.8 2.2-5 5-5s5 2.2 5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>'
+    + '<div><div style="font-size:12px;font-weight:500;color:var(--text)">Profile</div>'
+    + '<div style="font-size:11px;color:var(--faint)">' + userName + '</div></div>'
+    + '</div>'
+    + '<div data-userpop="language" style="padding:10px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:background .1s"'
+    + ' onmouseover="this.style.background=\'var(--bg)\'" onmouseout="this.style.background=\'\'">'
+    + '<svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.4"/><path d="M2 8h12M8 2c-1.5 1.5-2.5 3.5-2.5 6s1 4.5 2.5 6c1.5-1.5 2.5-3.5 2.5-6s-1-4.5-2.5-6" stroke="currentColor" stroke-width="1.3"/></svg>'
+    + '<div><div style="font-size:12px;font-weight:500;color:var(--text)">Language</div>'
+    + '<div style="font-size:11px;color:var(--faint)">Passive Aggressive</div></div>'
+    + '</div>'
+    + '<div style="height:1px;background:var(--border);margin:4px 12px"></div>'
+    + '<div data-userpop="privacy" style="padding:10px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:background .1s"'
+    + ' onmouseover="this.style.background=\'var(--bg)\'" onmouseout="this.style.background=\'\'">'
+    + '<svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M8 2L3 4.5V7c0 3.5 2.1 6.5 5 7.5 2.9-1 5-4 5-7.5V4.5L8 2z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M6 8.5l1.5 1.5L10 7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+    + '<div style="font-size:12px;font-weight:500;color:var(--text)">Privacy Policy</div>'
+    + '</div>';
+
+  document.body.appendChild(pop);
+
+  setTimeout(function() {
+    document.addEventListener('click', function h(ev) {
+      if (!pop.contains(ev.target) && !box.contains(ev.target)) {
+        userPopClose();
+        document.removeEventListener('click', h);
+      }
+    });
+  }, 0);
+}
+
+document.getElementById('userBox').addEventListener('click', userPopToggle);
