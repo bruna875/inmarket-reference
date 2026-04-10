@@ -74,7 +74,7 @@ function roiRenderContent(q){var label=q==='all'?'All Year':q==='backlog'?'Backl
 function buildROISummaries(){var cq=currentQ();return buildQFilter('roi','switchROIQuarter')+'<div id="roi-content">'+buildScatterPlot(cq)+roiRenderContent(cq)+'</div>';}
 
 
-var _ganttGroupBy = 'team';
+var _ganttGroupBy = 'driver';
 
 function buildGantt() {
   var statusColors = {'on-track':'#3B6D11','at-risk':'#BA7517','delayed':'#A32D2D','not-started':'#888780'};
@@ -99,7 +99,7 @@ function buildGantt() {
 
   var toggle = '<div style="display:flex;align-items:center;gap:6px;margin-bottom:14px">'
     + '<span style="font-size:11px;color:var(--faint)">Group by</span>'
-    + ['team','theme','driver'].map(function(v) {
+    + ['driver','theme','team'].map(function(v) {
       var lbl = v === 'team' ? 'Team' : v === 'theme' ? 'Theme' : 'Driver';
       var act = v === groupKey;
       return '<button data-ganttgroup="' + v + '" style="font-size:11px;padding:3px 10px;border-radius:20px;border:1px solid ' + (act ? 'var(--accent)' : 'var(--border)') + ';background:' + (act ? 'var(--accent)' : 'transparent') + ';color:' + (act ? '#fff' : 'var(--muted)') + ';cursor:pointer;font-weight:500">' + lbl + '</button>';
@@ -148,7 +148,7 @@ function buildGantt() {
         var bid = 'gbar-' + barIdx++;
         return '<td style="' + bgStyle + 'padding:4px;vertical-align:middle;border-bottom:0.5px solid var(--border)">'
           + '<div class="gantt-bar" id="' + bid + '" style="height:24px;background:' + c + ';border-radius:4px;margin:0 2px;cursor:default;position:relative"'
-          + ' data-gtt="' + i.title.replace(/"/g,'&quot;') + '|' + i.techLead + '|' + i.productOwner + '|' + sLabel + '"></div></td>';
+          + ' data-gtt="' + i.title.replace(/"/g,'&quot;') + '|' + i.techLead + '|' + i.productOwner + '|' + sLabel + '|' + i.roi + '|' + i.addedValue + '"></div></td>';
       }).join('');
 
       rows += '<tr>' + nameCell + qCells + '</tr>';
@@ -187,6 +187,8 @@ function ganttTooltipInit() {
         + '<div><span style="color:var(--faint)">Eng Lead:</span> ' + (parts[1] || '\u2014') + '</div>'
         + '<div><span style="color:var(--faint)">Prod Lead:</span> ' + (parts[2] || '\u2014') + '</div>'
         + '<div><span style="color:var(--faint)">Status:</span> ' + (parts[3] || '\u2014') + '</div>'
+        + '<div><span style="color:var(--faint)">ROI:</span> ' + (parts[4] || '\u2014') + '</div>'
+        + '<div><span style="color:var(--faint)">Added Value:</span> ' + (parts[5] || '\u2014') + '</div>'
         + '</div>';
       tooltip.style.display = 'block';
       var rect = bar.getBoundingClientRect();
