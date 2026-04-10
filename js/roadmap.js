@@ -146,9 +146,11 @@ function buildGantt() {
         var active = qs.indexOf(q) > -1;
         if (!active) return '<td style="' + bgStyle + 'padding:4px;vertical-align:middle;border-bottom:0.5px solid var(--border)"></td>';
         var bid = 'gbar-' + barIdx++;
-        return '<td style="' + bgStyle + 'padding:4px;vertical-align:middle;border-bottom:0.5px solid var(--border)">'
+          var roiF = (function(v){if(!v||v==='\u2014')return '\u2014';var n=parseFloat(String(v).replace(/[^0-9.-]/g,''));if(isNaN(n))return String(v);return Math.round(n*100)+'%';})(i.roi);
+          var avF = (function(v){if(!v||v==='\u2014')return '\u2014';var n=parseFloat(String(v).replace(/[^0-9.-]/g,''));if(isNaN(n))return String(v);return '$'+n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,',');})(i.addedValue);
+          return '<td style="' + bgStyle + 'padding:4px;vertical-align:middle;border-bottom:0.5px solid var(--border)">'
           + '<div class="gantt-bar" id="' + bid + '" style="height:24px;background:' + c + ';border-radius:4px;margin:0 2px;cursor:default;position:relative"'
-          + ' data-gtt="' + i.title.replace(/"/g,'&quot;') + '|' + i.techLead + '|' + i.productOwner + '|' + sLabel + '|' + i.roi + '|' + i.addedValue + '"></div></td>';
+          + ' data-gtt="' + i.title.replace(/"/g,'&quot;') + '|' + i.techLead + '|' + i.productOwner + '|' + sLabel + '|' + roiF + '|' + avF + '"></div></td>';
       }).join('');
 
       rows += '<tr>' + nameCell + qCells + '</tr>';
@@ -187,8 +189,8 @@ function ganttTooltipInit() {
         + '<div><span style="color:var(--faint)">Eng Lead:</span> ' + (parts[1] || '\u2014') + '</div>'
         + '<div><span style="color:var(--faint)">Prod Lead:</span> ' + (parts[2] || '\u2014') + '</div>'
         + '<div><span style="color:var(--faint)">Status:</span> ' + (parts[3] || '\u2014') + '</div>'
-        + '<div><span style="color:var(--faint)">ROI:</span> ' + (parts[4] && parts[4] !== '\u2014' ? Math.round(parseFloat(parts[4])*100) + '%' : '\u2014') + '</div>'
-        + '<div><span style="color:var(--faint)">Added Value:</span> ' + (parts[5] && parts[5] !== '\u2014' ? '$' + parts[5] : '\u2014') + '</div>'
+        + '<div><span style="color:var(--faint)">ROI:</span> ' + (parts[4] || '\u2014') + '</div>'
+        + '<div><span style="color:var(--faint)">Added Value:</span> ' + (parts[5] || '\u2014') + '</div>'
         + '</div>';
       tooltip.style.display = 'block';
       var rect = bar.getBoundingClientRect();
