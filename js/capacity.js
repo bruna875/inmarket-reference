@@ -139,26 +139,22 @@ function capScorecardHtml(label, used, budget) {
   var over = remaining < 0;
   var color = pct > 95 ? '#A32D2D' : pct >= 80 ? '#BA7517' : '#3B6D11';
   var cappedPct = Math.min(pct, 100);
-  var r = 32, cx = 40, cy = 44;
-  var totalArc = Math.PI * r;
-  var fillArc = (cappedPct / 100) * totalArc;
-  var startX = cx - r, startY = cy;
-  var endAngle = Math.PI * (1 - cappedPct / 100);
-  var endX = cx + r * Math.cos(endAngle);
-  var endY = cy - r * Math.sin(endAngle);
-  var largeArc = cappedPct > 50 ? 1 : 0;
-  var bgPath = 'M' + startX + ' ' + cy + ' A' + r + ' ' + r + ' 0 1 1 ' + (cx + r) + ' ' + cy;
-  var fillPath = 'M' + startX + ' ' + cy + ' A' + r + ' ' + r + ' 0 ' + largeArc + ' 1 ' + endX.toFixed(1) + ' ' + endY.toFixed(1);
-  var gauge = '<svg width="80" height="48" viewBox="0 0 80 48" style="display:block;margin:0 auto">'
-    + '<path d="' + bgPath + '" fill="none" stroke="#E8E6E0" stroke-width="6" stroke-linecap="round"/>'
-    + (cappedPct > 0 ? '<path d="' + fillPath + '" fill="none" stroke="' + color + '" stroke-width="6" stroke-linecap="round"/>' : '')
-    + '<text x="' + cx + '" y="' + (cy - 2) + '" text-anchor="middle" style="font-size:14px;font-weight:500;fill:var(--text)">' + pct + '%</text>'
+  var r = 30, sw = 6;
+  var halfCirc = Math.PI * r;
+  var fillLen = (cappedPct / 100) * halfCirc;
+  var gapLen = halfCirc - fillLen;
+  var size = (r + sw) * 2;
+  var cx = size / 2, cy = size / 2 + 4;
+  var gauge = '<svg width="' + size + '" height="' + Math.round(size * 0.6) + '" viewBox="0 0 ' + size + ' ' + Math.round(size * 0.65) + '" style="display:block;margin:0 auto;overflow:visible">'
+    + '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="none" stroke="#E8E6E0" stroke-width="' + sw + '" stroke-dasharray="' + halfCirc.toFixed(1) + ' ' + (halfCirc * 2).toFixed(1) + '" stroke-linecap="round" style="transform:rotate(180deg);transform-origin:' + cx + 'px ' + cy + 'px"/>'
+    + (cappedPct > 0 ? '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="none" stroke="' + color + '" stroke-width="' + sw + '" stroke-dasharray="' + fillLen.toFixed(1) + ' ' + (halfCirc * 2 - fillLen).toFixed(1) + '" stroke-linecap="round" style="transform:rotate(180deg);transform-origin:' + cx + 'px ' + cy + 'px"/>' : '')
+    + '<text x="' + cx + '" y="' + (cy - 4) + '" text-anchor="middle" dominant-baseline="central" style="font-size:14px;font-weight:500;fill:var(--text)">' + pct + '%</text>'
     + '</svg>';
   return '<div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center">'
     + '<div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">' + label + '</div>'
     + gauge
     + '<div style="margin-top:4px"><span style="font-size:18px;font-weight:500;color:var(--text)">' + Math.round(used) + '</span> <span style="font-size:12px;color:var(--muted)">/ ' + Math.round(budget) + ' days</span></div>'
-    + '<div style="font-size:11px;color:' + (over ? '#A32D2D' : 'var(--faint)') + ';margin-top:2px">' + (over ? Math.abs(Math.round(remaining)) + 'd over budget' : Math.round(remaining) + 'd remaining') + '</div>'
+    + '<div style="font-size:11px;color:' + (over ? '#A32D2D' : 'var(--faint)') + ';margin-top:2px">' + (over ? Math.abs(Math.round(remaining)) + 'd over budget' : Math.round(remaining) + 'd available') + '</div>'
     + '</div>';
 }
 
@@ -194,9 +190,9 @@ function capRender(q) {
     + '</div>'
     + buildQFilter('cap','switchCapQuarter')
     + '<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:20px">'
-    + capScorecardHtml('Total design', totD, budD)
     + capScorecardHtml('Total engineering', totE, budE)
     + capScorecardHtml('Total product', totP, budP)
+    + capScorecardHtml('Total design', totD, budD)
     + '</div>'
     + blocks
     + '<div style="display:flex;gap:16px;padding:4px 0">'
