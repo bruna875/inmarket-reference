@@ -24,8 +24,8 @@ var MARSHALL_RESPONSES = [
   "I'm not saying I'm always right about UX. I'm saying the ROI of listening to me has been historically positive. Ask Mike Don. Or Todd. Actually Todd is calling me I have to go.",
   "That's cute. You think that's a hard problem. When Mike Don and I redesigned the entire UX at [REDACTED], we delivered 500% ROI. Before lunch. Leadership.",
   "Quick answer because Todd is calling me I have to go: it's a Leadership gap. The ROI is there, the UX is there, but nobody is Leading. Except me. When I'm available. Which is now. Actually no, Todd is calling.",
-  "Mike Don told me — and I quote — 'Marshall, you're the only one who gets UX and ROI at the same time.' I didn't ask for the compliment. Leaders don't. It just happens.",
-  "See, this is exactly why Leadership matters. Without someone like me connecting the dots between UX and ROI, teams just wander. Mike Don saw it too. He called it 'the Marshall effect'.",
+  "Mike Don told me \u2014 and I quote \u2014 'Maresciallo, you're the only one who gets UX and ROI at the same time.' I didn't ask for the compliment. Leaders don't. It just happens.",
+  "See, this is exactly why Leadership matters. Without someone like me connecting the dots between UX and ROI, teams just wander. Mike Don saw it too. He called it 'the Maresciallo effect'.",
   "Real quick before Todd calls me again: the ROI on this initiative is negative unless you fix the UX. I know because I've seen this pattern fourteen times. Fifteen now. Leadership.",
   "I appreciate the question. I really do. But a Leader would already know the answer. The ROI speaks for itself. Mike Don would agree. Todd would too but he's always on the phone."
 ];
@@ -39,7 +39,12 @@ function marshallGetResponse() {
 
 function marshallAvatar(size) {
   size = size || 28;
-  return '<img src="' + MARSHALL_PHOTO + '" style="width:' + size + 'px;height:' + size + 'px;border-radius:50%;object-fit:cover;flex-shrink:0" alt="Marshall" />';
+  var barH = Math.round(size * 0.22);
+  var barTop = Math.round(size * 0.32);
+  return '<div style="position:relative;width:' + size + 'px;height:' + size + 'px;border-radius:50%;overflow:hidden;flex-shrink:0">'
+    + '<img src="' + MARSHALL_PHOTO + '" style="width:100%;height:100%;object-fit:cover;display:block" alt="Maresciallo" />'
+    + '<div style="position:absolute;top:' + barTop + 'px;left:0;width:100%;height:' + barH + 'px;background:#66C220;opacity:.92;transform:rotate(-2deg)"></div>'
+    + '</div>';
 }
 
 function marshallRenderMessages() {
@@ -90,7 +95,7 @@ function marshallToggle() {
   el.innerHTML = '<div style="padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">'
     + '<div style="display:flex;align-items:center;gap:8px">'
     + marshallAvatar(24)
-    + '<span style="font-size:13px;font-weight:500;color:var(--text)">Ask Marshall</span>'
+    + '<span style="font-size:13px;font-weight:500;color:var(--text)">Ask Maresciallo</span>'
     + '<span style="font-size:10px;color:var(--faint);background:var(--bg);padding:1px 6px;border-radius:10px">online</span>'
     + '</div>'
     + '<button id="marshall-close" style="background:none;border:none;cursor:pointer;color:var(--faint);padding:2px" title="Close"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>'
@@ -104,7 +109,7 @@ function marshallToggle() {
   document.body.appendChild(el);
 
   if (_marshallMessages.length === 0) {
-    _marshallMessages.push({from: 'marshall', text: "Marshall here. Go ahead, ask me anything \u2014 Mike Don says I have a gift for making complex things simple. His words. Leadership."});
+    _marshallMessages.push({from: 'marshall', text: "Maresciallo here. Go ahead, ask me anything \u2014 Mike Don says I have a gift for making complex things simple. His words. Leadership."});
   }
   marshallRenderMessages();
 
