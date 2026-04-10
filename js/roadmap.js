@@ -187,8 +187,8 @@ function ganttTooltipInit() {
         + '<div><span style="color:var(--faint)">Eng Lead:</span> ' + (parts[1] || '\u2014') + '</div>'
         + '<div><span style="color:var(--faint)">Prod Lead:</span> ' + (parts[2] || '\u2014') + '</div>'
         + '<div><span style="color:var(--faint)">Status:</span> ' + (parts[3] || '\u2014') + '</div>'
-        + '<div><span style="color:var(--faint)">ROI:</span> ' + (parts[4] || '\u2014') + '</div>'
-        + '<div><span style="color:var(--faint)">Added Value:</span> ' + (parts[5] || '\u2014') + '</div>'
+        + '<div><span style="color:var(--faint)">ROI:</span> ' + (parts[4] && parts[4] !== '\u2014' ? Math.round(parseFloat(parts[4])*100) + '%' : '\u2014') + '</div>'
+        + '<div><span style="color:var(--faint)">Added Value:</span> ' + (parts[5] && parts[5] !== '\u2014' ? '$' + parts[5] : '\u2014') + '</div>'
         + '</div>';
       tooltip.style.display = 'block';
       var rect = bar.getBoundingClientRect();
