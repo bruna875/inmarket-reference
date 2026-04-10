@@ -74,19 +74,37 @@ function roiRenderContent(q){var label=q==='all'?'All Year':q==='backlog'?'Backl
 function buildROISummaries(){var cq=currentQ();return buildQFilter('roi','switchROIQuarter')+'<div id="roi-content">'+buildScatterPlot(cq)+roiRenderContent(cq)+'</div>';}
 
 
+var _ganttGroupBy = 'team';
+
 function buildGantt() {
   var statusColors = {'on-track':'#3B6D11','at-risk':'#BA7517','delayed':'#A32D2D','not-started':'#888780'};
   var statusLabels = {'on-track':'On Track','at-risk':'At Risk','delayed':'Delayed','not-started':'Not Started'};
   var cq = currentQ();
-  var teams = {};
+  var groupKey = _ganttGroupBy;
+
+  var groups = {};
   initiatives.forEach(function(i) {
     if (i.quarter === 'Backlog') return;
-    var t = i.team;
-    if (!teams[t]) teams[t] = [];
-    teams[t].push(i);
+    var g = groupKey === 'team' ? i.team : groupKey === 'theme' ? i.theme : i.driver;
+    if (!g) g = 'Other';
+    if (!groups[g]) groups[g] = [];
+    groups[g].push(i);
   });
-  var teamNames = Object.keys(teams);
-  teamNames.sort();
+  var groupNames = Object.keys(groups);
+  groupNames.sort();
+
+  var subLabels = {team: ['Driver','Theme'], theme: ['Driver','Team'], driver: ['Theme','Team']};
+  var subKeys = {team: ['driver','theme'], theme: ['driver','team'], driver: ['theme','team']};
+  var sl = subLabels[groupKey], sk = subKeys[groupKey];
+
+  var toggle = '<div style="display:flex;align-items:center;gap:6px;margin-bottom:14px">'
+    + '<span style="font-size:11px;color:var(--faint)">Group by</span>'
+    + ['team','theme','driver'].map(function(v) {
+      var lbl = v === 'team' ? 'Team' : v === 'theme' ? 'Theme' : 'Driver';
+      var act = v === groupKey;
+      return '<button data-ganttgroup="' + v + '" style="font-size:11px;padding:3px 10px;border-radius:20px;border:1px solid ' + (act ? 'var(--accent)' : 'var(--border)') + ';background:' + (act ? 'var(--accent)' : 'transparent') + ';color:' + (act ? '#fff' : 'var(--muted)') + ';cursor:pointer;font-weight:500">' + lbl + '</button>';
+    }).join('')
+    + '</div>';
 
   var legend = '<div style="display:flex;gap:14px;margin-bottom:14px;font-size:11px;color:var(--muted)">'
     + '<span style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:7px;border-radius:2px;background:#3B6D11;display:inline-block"></span>On Track</span>'
@@ -107,17 +125,19 @@ function buildGantt() {
 
   var barIdx = 0;
   var rows = '';
-  teamNames.forEach(function(team) {
-    rows += '<tr><td colspan="5" style="padding:10px 8px 6px 0;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.5px;color:var(--faint);border-bottom:0.5px solid var(--border);background:var(--bg)">' + team + '</td></tr>';
-    teams[team].forEach(function(i) {
+  groupNames.forEach(function(gName) {
+    rows += '<tr><td colspan="5" style="padding:10px 8px 6px 0;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.5px;color:var(--faint);border-bottom:0.5px solid var(--border);background:var(--bg)">' + gName + '</td></tr>';
+    groups[gName].forEach(function(i) {
       var c = statusColors[i.deliveryStatus] || '#888780';
       var sLabel = statusLabels[i.deliveryStatus] || 'Not Started';
       var qs = [i.quarter];
+      var v1 = sk[0] === 'driver' ? i.driver : sk[0] === 'theme' ? i.theme : i.team;
+      var v2 = sk[1] === 'driver' ? i.driver : sk[1] === 'theme' ? i.theme : i.team;
       var nameCell = '<td style="padding:8px 8px 8px 0;vertical-align:middle;border-bottom:0.5px solid var(--border)">'
         + '<div style="font-size:12px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:250px">' + i.title + '</div>'
         + '<div style="font-size:10px;color:var(--faint);margin-top:2px">'
-        + 'Driver: <span style="color:var(--muted)">' + i.driver + '</span>'
-        + ' \u00b7 Theme: <span style="color:var(--muted)">' + i.theme + '</span>'
+        + sl[0] + ': <span style="color:var(--muted)">' + v1 + '</span>'
+        + ' \u00b7 ' + sl[1] + ': <span style="color:var(--muted)">' + v2 + '</span>'
         + '</div></td>';
 
       var qCells = qHeaders.map(function(q) {
@@ -135,12 +155,21 @@ function buildGantt() {
     });
   });
 
-  return legend
+  return toggle + legend
     + '<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 20px;overflow-x:auto;position:relative">'
     + '<table style="width:100%;min-width:780px;border-collapse:collapse">'
     + thead + '<tbody>' + rows + '</tbody></table>'
     + '<div id="gantt-tooltip" style="display:none;position:absolute;z-index:50;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 14px;pointer-events:none;box-shadow:0 4px 16px rgba(0,0,0,.1);max-width:240px"></div>'
     + '</div>';
+}
+
+function switchGanttGroup(g) {
+  _ganttGroupBy = g;
+  var panel = document.getElementById('rt-gantt');
+  if (panel) {
+    panel.innerHTML = buildGantt();
+    ganttTooltipInit();
+  }
 }
 
 function ganttTooltipInit() {
