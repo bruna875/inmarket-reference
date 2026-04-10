@@ -137,10 +137,28 @@ function capScorecardHtml(label, used, budget) {
   var pct = budget > 0 ? Math.round(used / budget * 100) : 0;
   var remaining = budget - used;
   var over = remaining < 0;
-  return '<div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px">'
+  var color = pct > 95 ? '#A32D2D' : pct >= 80 ? '#BA7517' : '#3B6D11';
+  var cappedPct = Math.min(pct, 100);
+  var r = 32, cx = 40, cy = 44;
+  var totalArc = Math.PI * r;
+  var fillArc = (cappedPct / 100) * totalArc;
+  var startX = cx - r, startY = cy;
+  var endAngle = Math.PI * (1 - cappedPct / 100);
+  var endX = cx + r * Math.cos(endAngle);
+  var endY = cy - r * Math.sin(endAngle);
+  var largeArc = cappedPct > 50 ? 1 : 0;
+  var bgPath = 'M' + startX + ' ' + cy + ' A' + r + ' ' + r + ' 0 1 1 ' + (cx + r) + ' ' + cy;
+  var fillPath = 'M' + startX + ' ' + cy + ' A' + r + ' ' + r + ' 0 ' + largeArc + ' 1 ' + endX.toFixed(1) + ' ' + endY.toFixed(1);
+  var gauge = '<svg width="80" height="48" viewBox="0 0 80 48" style="display:block;margin:0 auto">'
+    + '<path d="' + bgPath + '" fill="none" stroke="#E8E6E0" stroke-width="6" stroke-linecap="round"/>'
+    + (cappedPct > 0 ? '<path d="' + fillPath + '" fill="none" stroke="' + color + '" stroke-width="6" stroke-linecap="round"/>' : '')
+    + '<text x="' + cx + '" y="' + (cy - 2) + '" text-anchor="middle" style="font-size:14px;font-weight:500;fill:var(--text)">' + pct + '%</text>'
+    + '</svg>';
+  return '<div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center">'
     + '<div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">' + label + '</div>'
-    + '<div style="display:flex;align-items:baseline;gap:8px"><span style="font-size:24px;font-weight:500;color:var(--text)">' + Math.round(used) + '</span><span style="font-size:13px;color:var(--muted)">/ ' + Math.round(budget) + ' days</span></div>'
-    + '<div style="font-size:12px;color:' + (over ? '#A32D2D' : 'var(--faint)') + ';margin-top:4px">' + pct + '% utilized' + (over ? ' \u00b7 ' + Math.abs(Math.round(remaining)) + 'd over' : ' \u00b7 ' + Math.round(remaining) + 'd remaining') + '</div>'
+    + gauge
+    + '<div style="margin-top:4px"><span style="font-size:18px;font-weight:500;color:var(--text)">' + Math.round(used) + '</span> <span style="font-size:12px;color:var(--muted)">/ ' + Math.round(budget) + ' days</span></div>'
+    + '<div style="font-size:11px;color:' + (over ? '#A32D2D' : 'var(--faint)') + ';margin-top:2px">' + (over ? Math.abs(Math.round(remaining)) + 'd over budget' : Math.round(remaining) + 'd remaining') + '</div>'
     + '</div>';
 }
 
