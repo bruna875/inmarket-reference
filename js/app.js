@@ -140,7 +140,7 @@ function toggleSb(){collapsed=!collapsed;document.getElementById('sb').classList
 
 function login() {
   var e = document.getElementById('em').value.trim(), p = document.getElementById('pw').value;
-  if (e === 'condoadmin@inmarket.ai' && p === 'HelixCapital') {
+  if (e === 'condoadmin@verygoodpeeps.co' && p === 'HelixCapital') {
     document.getElementById('auth').classList.add('gone');
     setTimeout(function(){document.getElementById('auth').style.display='none';},300);
     document.getElementById('app').classList.add('show');
@@ -156,7 +156,7 @@ function login() {
       if (obShouldShow()) { setTimeout(obStart, 400); }
     });
   } else {
-    document.getElementById('err').textContent = 'Invalid credentials. Try: condoadmin@inmarket.ai / HelixCapital';
+    document.getElementById('err').textContent = 'Invalid credentials. Try: condoadmin@verygoodpeeps.co / HelixCapital';
   }
 }
 
