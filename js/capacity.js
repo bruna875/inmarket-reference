@@ -83,18 +83,31 @@ function capTeamBlock(teamName, used, budget, inits) {
   var totalUsed = used.design + used.engineering + used.product;
   var totalBudget = budget.design + budget.engineering + budget.product;
   var initRows = inits.map(function(ini) {
-    return '<div style="display:grid;grid-template-columns:1fr auto auto auto auto 55px 55px 55px 55px;gap:8px;padding:6px 0;align-items:center;font-size:12px;border-top:0.5px solid var(--border)">'
-      + '<div style="color:var(--text);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + ini.title + '</div>'
-      + '<div>' + driverBadge(ini.driver) + '</div>'
-      + '<div>' + themeBadge(ini.theme) + '</div>'
-      + '<div style="color:var(--muted);font-size:11px;white-space:nowrap">' + (ini.techLead || '\u2014') + '</div>'
-      + '<div style="color:var(--muted);font-size:11px;white-space:nowrap">' + (ini.productOwner || '\u2014') + '</div>'
-      + '<div style="color:var(--muted);text-align:right">' + (ini.design ? Math.round(ini.design) + 'd' : '\u2014') + '</div>'
-      + '<div style="color:var(--muted);text-align:right">' + (ini.engineering ? Math.round(ini.engineering) + 'd' : '\u2014') + '</div>'
-      + '<div style="color:var(--muted);text-align:right">' + (ini.product ? Math.round(ini.product) + 'd' : '\u2014') + '</div>'
-      + '<div style="color:var(--text);font-weight:500;text-align:right">' + Math.round(ini.total) + 'd</div>'
-      + '</div>';
+    return '<tr style="border-top:0.5px solid var(--border)">'
+      + '<td style="padding:8px 8px 8px 0;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px">' + ini.title + '</td>'
+      + '<td style="padding:8px">' + driverBadge(ini.driver) + '</td>'
+      + '<td style="padding:8px">' + themeBadge(ini.theme) + '</td>'
+      + '<td style="padding:8px;color:var(--muted);white-space:nowrap">' + (ini.techLead || '\u2014') + '</td>'
+      + '<td style="padding:8px;color:var(--muted);white-space:nowrap">' + (ini.productOwner || '\u2014') + '</td>'
+      + '<td style="padding:8px;text-align:right;color:var(--muted)">' + (ini.design ? Math.round(ini.design) + 'd' : '\u2014') + '</td>'
+      + '<td style="padding:8px;text-align:right;color:var(--muted)">' + (ini.engineering ? Math.round(ini.engineering) + 'd' : '\u2014') + '</td>'
+      + '<td style="padding:8px;text-align:right;color:var(--muted)">' + (ini.product ? Math.round(ini.product) + 'd' : '\u2014') + '</td>'
+      + '<td style="padding:8px 0 8px 8px;text-align:right;font-weight:500;color:var(--text)">' + Math.round(ini.total) + 'd</td>'
+      + '</tr>';
   }).join('');
+
+  var initTable = '<table style="width:100%;border-collapse:collapse;font-size:12px">'
+    + '<thead><tr style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.4px;color:var(--faint)">'
+    + '<th style="text-align:left;padding:4px 8px 4px 0">Initiative</th>'
+    + '<th style="text-align:left;padding:4px 8px">Driver</th>'
+    + '<th style="text-align:left;padding:4px 8px">Theme</th>'
+    + '<th style="text-align:left;padding:4px 8px">Eng lead</th>'
+    + '<th style="text-align:left;padding:4px 8px">Prod lead</th>'
+    + '<th style="text-align:right;padding:4px 8px">Design</th>'
+    + '<th style="text-align:right;padding:4px 8px">Engineering</th>'
+    + '<th style="text-align:right;padding:4px 8px">Product</th>'
+    + '<th style="text-align:right;padding:4px 0 4px 8px">Total</th>'
+    + '</tr></thead><tbody style="border-top:0.5px solid var(--border)">' + initRows + '</tbody></table>';
 
   return '<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;margin-bottom:16px;overflow:hidden">'
     + '<div style="padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">'
@@ -119,10 +132,8 @@ function capTeamBlock(teamName, used, budget, inits) {
     + '</div>'
     + '</div>'
     + '<div style="padding:0 20px 16px">'
-    + '<div style="display:grid;grid-template-columns:1fr auto auto auto auto 55px 55px 55px 55px;gap:8px;padding:12px 0 4px;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.4px;color:var(--faint);border-top:0.5px solid var(--border)">'
-    + '<div>Initiatives</div><div>Driver</div><div>Theme</div><div>Eng Lead</div><div>Prod Lead</div><div style="text-align:right">Design</div><div style="text-align:right">Engineering</div><div style="text-align:right">Product</div><div style="text-align:right">Total</div>'
-    + '</div>'
-    + initRows
+    + '<div style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.4px;color:var(--faint);padding:12px 0 8px;border-top:0.5px solid var(--border)"></div>'
+    + initTable
     + '</div>'
     + '</div>';
 }
