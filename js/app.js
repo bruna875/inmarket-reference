@@ -53,6 +53,9 @@ document.addEventListener('click', function(e) {
   var ni = e.target.closest('[data-page]');
   if (ni) { setPage(ni.dataset.page, ni.dataset.label); return; }
 
+  var ct = e.target.closest('[data-captab]');
+  if (ct) { switchCapTab(ct.dataset.captab); return; }
+
   var ti = e.target.closest('[data-tab]');
   if (ti) { var id=ti.dataset.tab; document.querySelectorAll('.tabnav .tabitem').forEach(function(b){b.classList.remove('act');}); ti.classList.add('act'); document.querySelectorAll('.tabpanel').forEach(function(p){p.classList.remove('act');}); var tp=document.getElementById('rt-'+id); if(tp)tp.classList.add('act'); if(id==='roi')setTimeout(function(){renderScatterChart(currentQ());},50); return; }
 
