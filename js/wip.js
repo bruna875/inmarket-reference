@@ -19,10 +19,9 @@ function renderWIP() {
   }).join('');
   return '<div class="ptitle">Work in Progress</div><div class="psub">Experimental features</div>'
     + '<div class="wip-box"><div class="wip-eyebrow">\ud83d\udea7 Under construction</div><div class="wip-heading">Testing ground</div><div class="wip-body">This space is for testing new functionality before it goes live. Things here may change, break, or disappear entirely. No promises.</div></div>'
-    + '<div style="display:flex;flex-direction:column;gap:12px">'+sigBoxes+'</div>'
-    + '<div style="margin-top:32px;padding-top:20px;border-top:1px solid var(--border)">'
-    + '<div style="font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.6px;color:var(--faint);margin-bottom:10px">Dev Tools</div>'
-    + '<button id="resetSigsBtn" style="height:32px;padding:0 14px;background:none;border:1px solid #FDECEA;border-radius:8px;font-size:12px;font-family:inherit;cursor:pointer;color:#A93226;transition:background .15s" onmouseover="this.style.background=\'#FDECEA\'" onmouseout="this.style.background=\'none\'">Reset all signatures</button>'
+    + '<div class="wip-sig-list">'+sigBoxes+'</div>'
+    + '<div class="wip-devtools">'
+    + '<div class="wip-devtools-title">Dev Tools</div>'
+    + '<button id="resetSigsBtn" class="wip-reset-btn">Reset all signatures</button>'
     + '</div>';
 }
-
