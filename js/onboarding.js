@@ -61,14 +61,14 @@ var OB_STEPS = [
     target: '.sbfoot',
     eyebrow: 'Step 6 of 7',
     title: 'Your Profile',
-    desc: 'Your account info and sign-out option. More profile features coming soon.',
+    desc: 'Your account info: Profile, Language Style and Privacy Policy.',
     position: 'top'
   },
   {
     target: '#askMarshallBtn',
     eyebrow: 'Step 7 of 7',
-    title: 'Ask Marshall',
-    desc: 'Got a question? Ask Marshall. He\u2019ll confidently give you an answer. Whether it\u2019s the right one is another story entirely.',
+    title: 'Ask Maresciallo',
+    desc: 'Got a question? Ask Maresciallo. He\u2019ll confidently give you an answer. Whether it\u2019s the right one is another story entirely.',
     position: 'bottom'
   }
 ];
