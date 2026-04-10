@@ -31,6 +31,7 @@ function setPage(id, label) {
     content.innerHTML = '<div class="ptitle">'+label+'</div>';
   }
   buildNav();
+  if (id === 'roadmap') setTimeout(ganttTooltipInit, 50);
 }
 
 var capBudgetData = {};
@@ -57,7 +58,7 @@ document.addEventListener('click', function(e) {
   if (ct) { switchCapTab(ct.dataset.captab); return; }
 
   var ti = e.target.closest('[data-tab]');
-  if (ti) { var id=ti.dataset.tab; document.querySelectorAll('.tabnav .tabitem').forEach(function(b){b.classList.remove('act');}); ti.classList.add('act'); document.querySelectorAll('.tabpanel').forEach(function(p){p.classList.remove('act');}); var tp=document.getElementById('rt-'+id); if(tp)tp.classList.add('act'); if(id==='roi')setTimeout(function(){renderScatterChart(currentQ());},50); return; }
+  if (ti) { var id=ti.dataset.tab; document.querySelectorAll('.tabnav .tabitem').forEach(function(b){b.classList.remove('act');}); ti.classList.add('act'); document.querySelectorAll('.tabpanel').forEach(function(p){p.classList.remove('act');}); var tp=document.getElementById('rt-'+id); if(tp)tp.classList.add('act'); if(id==='roi')setTimeout(function(){renderScatterChart(currentQ());},50); if(id==='gantt')setTimeout(ganttTooltipInit,50); return; }
 
   var qb = e.target.closest('[data-qfn]');
   if (qb) { var fn=qb.dataset.qfn,q=qb.dataset.q; if(fn==='switchTableQuarter')switchTableQuarter(q); else if(fn==='switchKanbanQuarter')switchKanbanQuarter(q); else if(fn==='switchROIQuarter')switchROIQuarter(q); else if(fn==='switchCapQuarter')switchCapQuarter(q); return; }
@@ -159,6 +160,7 @@ function login() {
       buildColorMaps();
       buildNav();
       document.getElementById('content').innerHTML = PAGES[activeId]();
+      setTimeout(ganttTooltipInit, 50);
       if (obShouldShow()) { setTimeout(obStart, 400); }
     });
   } else {
