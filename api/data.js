@@ -2,7 +2,7 @@ export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET");
 
-  const SHEET_URL = "https://script.google.com/macros/s/AKfycbwTcU3Dt0k-Es_zxTK_mHQdym_4rCdri6croZtzo-mgRVVL6rLoikdw3zVCkQw1wufWSQ/exec";
+  const SHEET_URL = "https://script.google.com/macros/library/d/13MMs04e_Svw2gNvwdakInwKGxdM9i1Eie3Geo6qHs1hVlwGlE1JvaTtd/6";
 
   try {
     const response = await fetch(SHEET_URL);
