@@ -1,28 +1,21 @@
 // capacity.js — Team Capacity page
 
 
-var CAP_BUDGET = {
-  Q1: {Measurement:{design:70,engineering:140,product:40},Platform:{design:60,engineering:130,product:38},Ads:{design:65,engineering:120,product:20}},
-  Q2: {Measurement:{design:75,engineering:150,product:42},Platform:{design:65,engineering:140,product:42},Ads:{design:70,engineering:130,product:21}},
-  Q3: {Measurement:{design:70,engineering:145,product:38},Platform:{design:60,engineering:135,product:40},Ads:{design:60,engineering:125,product:22}},
-  Q4: {Measurement:{design:65,engineering:130,product:35},Platform:{design:55,engineering:120,product:36},Ads:{design:55,engineering:110,product:18}}
-};
-
 function capGetBudget(q) {
-  if (q === 'all') {
+  var budget = capBudgetData || {};
+  if (q === 'all' || q === 'backlog') {
+    var multiplier = q === 'all' ? 4 : 1;
     var merged = {};
-    ['Q1','Q2','Q3','Q4'].forEach(function(qk) {
-      var qb = CAP_BUDGET[qk] || {};
-      Object.keys(qb).forEach(function(team) {
-        if (!merged[team]) merged[team] = {design:0,engineering:0,product:0};
-        merged[team].design += qb[team].design || 0;
-        merged[team].engineering += qb[team].engineering || 0;
-        merged[team].product += qb[team].product || 0;
-      });
+    Object.keys(budget).forEach(function(team) {
+      merged[team] = {
+        design: (budget[team].design || 0) * multiplier,
+        engineering: (budget[team].engineering || 0) * multiplier,
+        product: (budget[team].product || 0) * multiplier
+      };
     });
     return merged;
   }
-  return CAP_BUDGET[q] || {};
+  return budget;
 }
 
 function capCalc(q) {
