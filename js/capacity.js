@@ -64,7 +64,7 @@ function capCalc(q) {
 // ── UI Components ────────────────────────────────────────────────────────
 
 function capBarHtml(used, budget) {
-  if (budget <= 0) return '<div style="font-size:11px;color:var(--faint)">\u2014</div>';
+  if (budget <= 0) return '<div class="cap-bar-empty">\u2014</div>';
 
   var pct = Math.round(used / budget * 100);
   var over = used > budget;
@@ -74,30 +74,28 @@ function capBarHtml(used, budget) {
   if (over) {
     var budgetPct = Math.round(budget / used * 100);
     var overPct = 100 - budgetPct;
-    return '<div style="display:flex;align-items:center;gap:8px">'
-      + '<div style="flex:1;position:relative">'
-      + '<div style="height:20px;background:var(--bg);border-radius:5px;overflow:visible;position:relative">'
-      + '<div style="position:absolute;left:' + budgetPct + '%;top:-4px;bottom:-4px;width:1.5px;background:var(--faint);z-index:2"></div>'
-      + '<div style="position:absolute;left:' + budgetPct + '%;top:-12px;font-size:9px;color:var(--faint);transform:translateX(-50%)">budget</div>'
-      + '<div style="height:100%;width:100%;background:#A32D2D;border-radius:5px;display:flex;align-items:center;padding-left:8px">'
-      + '<span style="font-size:10px;font-weight:500;color:#fff">' + pct + '%</span></div></div>'
-      + '<div style="position:absolute;right:0;top:0;width:' + overPct + '%;height:20px;'
-      + 'background:repeating-linear-gradient(45deg,#A32D2D22,#A32D2D22 3px,transparent 3px,transparent 6px);border-radius:0 5px 5px 0"></div>'
+    return '<div class="cap-bar-over-wrap">'
+      + '<div class="cap-bar-over-track">'
+      + '<div class="cap-bar-track">'
+      + '<div class="cap-bar-budget-marker" style="left:' + budgetPct + '%"></div>'
+      + '<div class="cap-bar-budget-label" style="left:' + budgetPct + '%">budget</div>'
+      + '<div class="cap-bar-fill-over">'
+      + '<span class="cap-bar-pct-label">' + pct + '%</span></div></div>'
+      + '<div class="cap-bar-hatch" style="width:' + overPct + '%"></div>'
       + '</div>'
-      + '<span style="font-size:11px;font-weight:500;color:#A32D2D;background:#FDECEA;padding:2px 8px;border-radius:12px;white-space:nowrap;flex-shrink:0">'
-      + '+' + Math.round(overDays) + 'd</span></div>';
+      + '<span class="cap-bar-over-badge">+' + Math.round(overDays) + 'd</span></div>';
   }
 
-  return '<div style="height:20px;background:var(--bg);border-radius:5px;overflow:hidden">'
-    + '<div style="height:100%;width:' + pct + '%;background:' + color + ';border-radius:5px;display:flex;align-items:center;padding-left:8px;min-width:32px">'
-    + '<span style="font-size:10px;font-weight:500;color:#fff">' + pct + '%</span></div></div>';
+  return '<div class="cap-bar-track">'
+    + '<div class="cap-bar-fill" style="width:' + pct + '%;background:' + color + '">'
+    + '<span class="cap-bar-pct-label">' + pct + '%</span></div></div>';
 }
 
 function capStatsHtml(used, budget) {
   var over = used > budget;
-  return '<div style="text-align:right;font-size:12px">'
-    + '<div style="font-weight:500;color:' + (over ? '#A32D2D' : 'var(--text)') + '">' + Math.round(used) + 'd</div>'
-    + '<div style="font-size:11px;color:var(--faint)">of ' + Math.round(budget) + '</div></div>';
+  return '<div class="cap-stats">'
+    + '<div class="cap-stats-used' + (over ? ' cap-stats-over' : '') + '">' + Math.round(used) + 'd</div>'
+    + '<div class="cap-stats-budget">of ' + Math.round(budget) + '</div></div>';
 }
 
 function capScorecardHtml(label, used, budget) {
@@ -114,7 +112,7 @@ function capScorecardHtml(label, used, budget) {
   var size = (r + sw) * 2;
   var cx = size / 2, cy = size / 2 + 4;
 
-  var gauge = '<svg width="' + size + '" height="' + Math.round(size * 0.6) + '" viewBox="0 0 ' + size + ' ' + Math.round(size * 0.65) + '" style="display:block;margin:0 auto;overflow:visible">'
+  var gauge = '<svg width="' + size + '" height="' + Math.round(size * 0.6) + '" viewBox="0 0 ' + size + ' ' + Math.round(size * 0.65) + '" class="cap-gauge-svg">'
     + '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="none" stroke="#E8E6E0" stroke-width="' + sw + '" '
     + 'stroke-dasharray="' + halfCirc.toFixed(1) + ' ' + (halfCirc * 2).toFixed(1) + '" stroke-linecap="round" '
     + 'style="transform:rotate(180deg);transform-origin:' + cx + 'px ' + cy + 'px"/>'
@@ -124,14 +122,14 @@ function capScorecardHtml(label, used, budget) {
         + 'style="transform:rotate(180deg);transform-origin:' + cx + 'px ' + cy + 'px"/>'
       : '')
     + '<text x="' + cx + '" y="' + (cy - 4) + '" text-anchor="middle" dominant-baseline="central" '
-    + 'style="font-size:14px;font-weight:500;fill:var(--text)">' + pct + '%</text></svg>';
+    + 'class="cap-gauge-pct">' + pct + '%</text></svg>';
 
-  return '<div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center">'
-    + '<div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">' + label + '</div>'
+  return '<div class="cap-scorecard">'
+    + '<div class="cap-scorecard-label">' + label + '</div>'
     + gauge
-    + '<div style="margin-top:4px"><span style="font-size:18px;font-weight:500;color:var(--text)">' + Math.round(used) + '</span> '
-    + '<span style="font-size:12px;color:var(--muted)">/ ' + Math.round(budget) + ' days</span></div>'
-    + '<div style="font-size:11px;color:' + (over ? '#A32D2D' : 'var(--faint)') + ';margin-top:2px">'
+    + '<div class="cap-scorecard-val"><span class="cap-scorecard-used">' + Math.round(used) + '</span> '
+    + '<span class="cap-scorecard-budget">/ ' + Math.round(budget) + ' days</span></div>'
+    + '<div class="cap-scorecard-remaining' + (over ? ' cap-scorecard-over' : '') + '">'
     + (over ? Math.abs(Math.round(remaining)) + 'd over budget' : Math.round(remaining) + 'd available') + '</div></div>';
 }
 
@@ -140,19 +138,19 @@ function capScorecardHtml(label, used, budget) {
 
 function capInitTable(inits, columns) {
   var headers = columns.map(function(col) {
-    return '<th style="text-align:' + (col.align || 'left') + ';padding:' + (col.headerPad || '4px 8px') + '">' + col.label + '</th>';
+    return '<th class="cap-th" style="text-align:' + (col.align || 'left') + ';padding:' + (col.headerPad || '4px 8px') + '">' + col.label + '</th>';
   }).join('');
 
   var rows = inits.map(function(ini) {
     var cells = columns.map(function(col) {
-      return '<td style="padding:8px' + (col.style || '') + '">' + col.render(ini) + '</td>';
+      return '<td class="cap-td" style="padding:8px' + (col.style || '') + '">' + col.render(ini) + '</td>';
     }).join('');
-    return '<tr style="border-top:0.5px solid var(--border)">' + cells + '</tr>';
+    return '<tr class="cap-tr">' + cells + '</tr>';
   }).join('');
 
-  return '<table style="width:100%;border-collapse:collapse;font-size:12px">'
-    + '<thead><tr style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.4px;color:var(--faint)">'
-    + headers + '</tr></thead><tbody style="border-top:0.5px solid var(--border)">' + rows + '</tbody></table>';
+  return '<table class="cap-init-table">'
+    + '<thead><tr class="cap-init-thead-row">'
+    + headers + '</tr></thead><tbody class="cap-init-tbody">' + rows + '</tbody></table>';
 }
 
 // Column definitions for team blocks
@@ -160,12 +158,12 @@ var CAP_TEAM_COLS = [
   { label: 'Initiative', align: 'left', headerPad: '4px 8px 4px 0', style: ' 8px 8px 0;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px', render: function(i) { return i.title; } },
   { label: 'Driver',     render: function(i) { return driverBadge(i.driver); } },
   { label: 'Theme',      render: function(i) { return themeBadge(i.theme); } },
-  { label: 'Prod lead',  render: function(i) { return '<span style="color:var(--muted);white-space:nowrap">' + (i.productOwner || '\u2014') + '</span>'; } },
-  { label: 'Eng lead',   render: function(i) { return '<span style="color:var(--muted);white-space:nowrap">' + (i.techLead || '\u2014') + '</span>'; } },
-  { label: 'Design',     align: 'right', render: function(i) { return '<span style="color:var(--muted)">' + (i.design ? Math.round(i.design) + 'd' : '\u2014') + '</span>'; } },
-  { label: 'Engineering', align: 'right', render: function(i) { return '<span style="color:var(--muted)">' + (i.engineering ? Math.round(i.engineering) + 'd' : '\u2014') + '</span>'; } },
-  { label: 'Product',    align: 'right', render: function(i) { return '<span style="color:var(--muted)">' + (i.product ? Math.round(i.product) + 'd' : '\u2014') + '</span>'; } },
-  { label: 'Total',      align: 'right', render: function(i) { return '<span style="font-weight:500;color:var(--text)">' + Math.round(i.total) + 'd</span>'; } },
+  { label: 'Prod lead',  render: function(i) { return '<span class="cap-cell-muted">' + (i.productOwner || '\u2014') + '</span>'; } },
+  { label: 'Eng lead',   render: function(i) { return '<span class="cap-cell-muted">' + (i.techLead || '\u2014') + '</span>'; } },
+  { label: 'Design',     align: 'right', render: function(i) { return '<span class="cap-cell-muted">' + (i.design ? Math.round(i.design) + 'd' : '\u2014') + '</span>'; } },
+  { label: 'Engineering', align: 'right', render: function(i) { return '<span class="cap-cell-muted">' + (i.engineering ? Math.round(i.engineering) + 'd' : '\u2014') + '</span>'; } },
+  { label: 'Product',    align: 'right', render: function(i) { return '<span class="cap-cell-muted">' + (i.product ? Math.round(i.product) + 'd' : '\u2014') + '</span>'; } },
+  { label: 'Total',      align: 'right', render: function(i) { return '<span class="cap-cell-total">' + Math.round(i.total) + 'd</span>'; } },
   { label: 'ROI',        align: 'right', headerPad: '4px 0 4px 8px', render: function(i) { return roiHtml(i.roi); } }
 ];
 
@@ -175,10 +173,10 @@ var CAP_LEADER_COLS = [
   { label: 'Team',       headerPad: '12px 8px 4px', render: function(i) { return i.team; } },
   { label: 'Driver',     headerPad: '12px 8px 4px', render: function(i) { return driverBadge(i.driver); } },
   { label: 'Theme',      headerPad: '12px 8px 4px', render: function(i) { return themeBadge(i.theme); } },
-  { label: 'Design',     align: 'right', headerPad: '12px 8px 4px', render: function(i) { return '<span style="color:var(--muted)">' + (i.design ? Math.round(i.design) + 'd' : '\u2014') + '</span>'; } },
-  { label: 'Engineering', align: 'right', headerPad: '12px 8px 4px', render: function(i) { return '<span style="color:var(--muted)">' + (i.engineering ? Math.round(i.engineering) + 'd' : '\u2014') + '</span>'; } },
-  { label: 'Product',    align: 'right', headerPad: '12px 8px 4px', render: function(i) { return '<span style="color:var(--muted)">' + (i.product ? Math.round(i.product) + 'd' : '\u2014') + '</span>'; } },
-  { label: 'Total',      align: 'right', headerPad: '12px 8px 4px', render: function(i) { return '<span style="font-weight:500;color:var(--text)">' + Math.round(i.total) + 'd</span>'; } },
+  { label: 'Design',     align: 'right', headerPad: '12px 8px 4px', render: function(i) { return '<span class="cap-cell-muted">' + (i.design ? Math.round(i.design) + 'd' : '\u2014') + '</span>'; } },
+  { label: 'Engineering', align: 'right', headerPad: '12px 8px 4px', render: function(i) { return '<span class="cap-cell-muted">' + (i.engineering ? Math.round(i.engineering) + 'd' : '\u2014') + '</span>'; } },
+  { label: 'Product',    align: 'right', headerPad: '12px 8px 4px', render: function(i) { return '<span class="cap-cell-muted">' + (i.product ? Math.round(i.product) + 'd' : '\u2014') + '</span>'; } },
+  { label: 'Total',      align: 'right', headerPad: '12px 8px 4px', render: function(i) { return '<span class="cap-cell-total">' + Math.round(i.total) + 'd</span>'; } },
   { label: 'ROI',        align: 'right', headerPad: '12px 0 4px 8px', render: function(i) { return roiHtml(i.roi); } }
 ];
 
@@ -195,23 +193,22 @@ function capTeamBlock(teamName, used, budget, inits) {
   ];
 
   var bars = disciplines.map(function(d, i) {
-    return '<div style="display:grid;grid-template-columns:90px 1fr 80px;gap:14px;align-items:center;padding:8px 0'
-      + (i > 0 ? ';border-top:0.5px solid var(--border)' : '') + '">'
-      + '<div style="font-size:12px;color:var(--muted)">' + d.label + '</div>'
+    return '<div class="cap-disc-row' + (i > 0 ? ' cap-disc-row-border' : '') + '">'
+      + '<div class="cap-disc-label">' + d.label + '</div>'
       + capBarHtml(used[d.key], budget[d.key])
       + capStatsHtml(used[d.key], budget[d.key])
       + '</div>';
   }).join('');
 
-  return '<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;margin-bottom:16px;overflow:hidden">'
-    + '<div style="padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">'
-    + '<div style="font-size:14px;font-weight:500;color:var(--text)">' + teamName + '</div>'
-    + '<span style="font-size:11px;color:var(--muted);background:var(--bg);padding:2px 10px;border-radius:20px">'
+  return '<div class="cap-block">'
+    + '<div class="cap-block-head">'
+    + '<div class="cap-block-title">' + teamName + '</div>'
+    + '<span class="cap-block-badge">'
     + inits.length + ' initiative' + (inits.length !== 1 ? 's' : '') + ' \u00b7 ' + Math.round(totalUsed) + ' days</span>'
     + '</div>'
-    + '<div style="padding:16px 20px">' + bars + '</div>'
-    + '<div style="padding:0 20px 16px">'
-    + '<div style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.4px;color:var(--faint);padding:12px 0 8px;border-top:0.5px solid var(--border)"></div>'
+    + '<div class="cap-block-bars">' + bars + '</div>'
+    + '<div class="cap-block-table">'
+    + '<div class="cap-block-table-divider"></div>'
     + capInitTable(inits, CAP_TEAM_COLS)
     + '</div></div>';
 }
@@ -223,14 +220,14 @@ function capLeaderBlock(leaderName, role, inits) {
   var total = 0;
   inits.forEach(function(ini) { total += ini.total; });
 
-  return '<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;margin-bottom:16px;overflow:hidden">'
-    + '<div style="padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">'
-    + '<div><div style="font-size:14px;font-weight:500;color:var(--text)">' + leaderName + '</div>'
-    + '<div style="font-size:11px;color:var(--faint)">' + role + '</div></div>'
-    + '<span style="font-size:11px;color:var(--muted);background:var(--bg);padding:2px 10px;border-radius:20px">'
+  return '<div class="cap-block">'
+    + '<div class="cap-block-head">'
+    + '<div><div class="cap-block-title">' + leaderName + '</div>'
+    + '<div class="cap-block-role">' + role + '</div></div>'
+    + '<span class="cap-block-badge">'
     + inits.length + ' initiative' + (inits.length !== 1 ? 's' : '') + ' \u00b7 ' + Math.round(total) + 'd total</span>'
     + '</div>'
-    + '<div style="padding:0 20px 16px">' + capInitTable(inits, CAP_LEADER_COLS) + '</div></div>';
+    + '<div class="cap-block-table-only">' + capInitTable(inits, CAP_LEADER_COLS) + '</div></div>';
 }
 
 
@@ -259,8 +256,7 @@ function capRenderByLeader(q, leaderKey, role) {
   names.sort();
 
   if (!names.length) {
-    return '<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:48px 32px;text-align:center">'
-      + '<div style="font-size:13px;color:var(--faint)">No initiatives</div></div>';
+    return '<div class="cap-empty">No initiatives</div>';
   }
 
   return names.map(function(name) {
@@ -301,21 +297,20 @@ function capRender(q) {
   }).join('');
 
   if (teamNames.length === 0) {
-    blocks = '<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:48px 32px;text-align:center">'
-      + '<div style="font-size:13px;color:var(--faint)">No initiatives for ' + label + '</div></div>';
+    blocks = '<div class="cap-empty">No initiatives for ' + label + '</div>';
   }
 
   // Allocation tab content
-  var allocContent = '<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:20px">'
+  var allocContent = '<div class="cap-scorecard-grid">'
     + capScorecardHtml('Total engineering', totE, budE)
     + capScorecardHtml('Total product', totP, budP)
     + capScorecardHtml('Total design', totD, budD)
     + '</div>'
     + blocks
-    + '<div style="display:flex;gap:16px;padding:4px 0">'
-    + '<span style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted)"><span style="width:8px;height:8px;border-radius:2px;background:#3B6D11"></span>Under 80%</span>'
-    + '<span style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted)"><span style="width:8px;height:8px;border-radius:2px;background:#BA7517"></span>80\u201395%</span>'
-    + '<span style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted)"><span style="width:8px;height:8px;border-radius:2px;background:#A32D2D"></span>Over 95%</span>'
+    + '<div class="cap-legend">'
+    + '<span class="cap-legend-item"><span class="cap-legend-dot" style="background:#3B6D11"></span>Under 80%</span>'
+    + '<span class="cap-legend-item"><span class="cap-legend-dot" style="background:#BA7517"></span>80\u201395%</span>'
+    + '<span class="cap-legend-item"><span class="cap-legend-dot" style="background:#A32D2D"></span>Over 95%</span>'
     + '</div>';
 
   // Leader tab contents
@@ -328,9 +323,9 @@ function capRender(q) {
   }
 
   // Assemble page
-  return '<div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px">'
+  return '<div class="roadmap-header">'
     + '<div><div class="ptitle">Team Capacity</div>'
-    + '<div class="psub" style="margin-bottom:0">Budget utilization by team and discipline \u2014 Design, Engineering, Product</div></div></div>'
+    + '<div class="psub psub-flush">Budget utilization by team and discipline \u2014 Design, Engineering, Product</div></div></div>'
     + '<div class="tabnav">' + tabBtn('allocation', 'Team Allocation') + tabBtn('englead', 'By Eng Lead') + tabBtn('prodlead', 'By Prod Lead') + '</div>'
     + buildQFilter('cap', 'switchCapQuarter')
     + '<div id="cap-allocation" style="' + (_capTab === 'allocation' ? '' : 'display:none') + '">' + allocContent + '</div>'
