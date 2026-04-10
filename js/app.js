@@ -25,7 +25,7 @@ function setPage(id, label) {
     var rid = id.slice(4);
     var ref = REFERENCES.filter(function(r){return r.id===rid;})[0];
     content.innerHTML = ref
-      ? '<div class="ptitle">'+ref.fullName+'</div><div class="psub" style="margin-bottom:24px">'+ref.title+'</div>'+renderRef(ref)
+      ? '<div class="ptitle">'+anonName(ref.fullName)+'</div><div class="psub" style="margin-bottom:24px">'+ref.title+'</div>'+renderRef(ref)
       : '<div class="ptitle">'+label+'</div>';
   } else {
     content.innerHTML = '<div class="ptitle">'+label+'</div>';
