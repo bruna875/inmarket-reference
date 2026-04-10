@@ -54,7 +54,7 @@ function faqRenderAccordion() {
       + '<span style="font-size:13px;font-weight:500;color:var(--text);flex:1">' + item.q + '</span>'
       + '<svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="flex-shrink:0;transition:transform .2s;transform:rotate(' + (isOpen ? '180' : '0') + 'deg)"><path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>'
       + '</div>'
-      + (isOpen ? '<div style="padding:0 18px 16px;font-size:12.5px;line-height:1.7;color:var(--muted)">' + item.a + '</div>' : '')
+      + (isOpen ? '<div style="padding:10px 18px 16px;font-size:12.5px;line-height:1.7;color:var(--muted)">' + item.a + '</div>' : '')
       + '</div>';
   }).join('');
 }
