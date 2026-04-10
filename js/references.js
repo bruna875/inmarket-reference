@@ -11,7 +11,7 @@ function anonName(full) {
 function renderRef(r) {
   var dispName = anonName(r.fullName);
   var initials = r.fullName.split(' ').map(function(w){return w[0];}).join('');
-  var barTop = {deniece_kennedy:32, arthur_haedike:38, teresa_thomas:33, michael_della_penna:33, stanley_turek:30, tonya_may:38, trina_rizzo:38, jason_knapp:38, todd_morris:32};
+  var barTop = {deniece_kennedy:32, arthur_haedike:38, teresa_thomas:33, michael_della_penna:28, stanley_turek:30, tonya_may:32, trina_rizzo:38, jason_knapp:38, todd_morris:32};
   var top = barTop[r.id] !== undefined ? barTop[r.id] : 38;
   var avatarInner = r.photo
     ? '<div style="position:relative;width:100%;height:100%"><img src="'+r.photo+'" alt="'+dispName+'">'
