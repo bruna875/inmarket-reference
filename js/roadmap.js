@@ -37,7 +37,7 @@ var SC_PALETTE=['#66C220','#378ADD','#BA7517','#D4537E','#888780','#1D9E75','#7F
 function scGetColor(idx){return SC_PALETTE[idx%SC_PALETTE.length];}
 var _driverColorMap={}, _themeColorMap={};
 var SC_GREENS=['#3B6D11','#66C220','#1D9E75','#27500A','#8BAF6A','#0F6E56','#97C459','#173404','#5DCAA5','#639922','#9DC47A','#04342C'];
-function buildColorMaps(){var ds=[],ts=[];initiatives.forEach(function(i){if(ds.indexOf(i.driver)===-1)ds.push(i.driver);if(ts.indexOf(i.theme)===-1)ts.push(i.theme);});ds.sort();ts.sort();_driverColorMap={};_themeColorMap={};ds.forEach(function(d,i){_driverColorMap[d]=SC_GREENS[i%SC_GREENS.length];});ts.forEach(function(t,i){_themeColorMap[t]=scGetColor(i);});}
+function buildColorMaps(){var ds=[],ts=[];initiatives.forEach(function(i){if(ds.indexOf(i.driver)===-1)ds.push(i.driver);if(ts.indexOf(i.theme)===-1)ts.push(i.theme);});ds.sort();ts.sort();_driverColorMap={};_themeColorMap={};ds.forEach(function(d,i){_driverColorMap[d]=scGetColor(i);});ts.forEach(function(t,i){_themeColorMap[t]=SC_GREENS[i%SC_GREENS.length];});}
 function badgeHtml(text,color){var bg=color+'18';return '<span style="display:inline-block;font-size:11px;font-weight:500;padding:2px 9px;border-radius:20px;background:'+bg+';color:'+color+';white-space:nowrap">'+text+'</span>';}
 function driverBadge(val){return badgeHtml(val,_driverColorMap[val]||'#888780');}
 function themeBadge(val){return badgeHtml(val,_themeColorMap[val]||'#888780');}
