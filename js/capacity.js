@@ -1,316 +1,245 @@
-// capacity.js — Team Capacity page
+// app.js — navigation, routing, data loading, events, init
 
 
-function capGetBudget(q) {
-  var budget = capBudgetData || {};
-  if (q === 'all' || q === 'backlog') {
-    var multiplier = q === 'all' ? 4 : 1;
-    var merged = {};
-    Object.keys(budget).forEach(function(team) {
-      merged[team] = {
-        design: (budget[team].design || 0) * multiplier,
-        engineering: (budget[team].engineering || 0) * multiplier,
-        product: (budget[team].product || 0) * multiplier
-      };
-    });
-    return merged;
-  }
-  return budget;
-}
-
-function capCalc(q) {
-  var subset = q === 'all' ? initiatives.filter(function(i){return i.quarter!=='Backlog';}) : q === 'backlog' ? initiatives.filter(function(i){return i.quarter==='Backlog';}) : initiatives.filter(function(i){return i.quarter===q;});
-  var teams = {};
-  subset.forEach(function(i) {
-    var t = i.team;
-    if (!teams[t]) teams[t] = {design:0,engineering:0,product:0,initiatives:[]};
-    var d = parseFloat(i.designDays) || 0;
-    var e = parseFloat(i.engineeringDays) || 0;
-    var p = parseFloat(i.productDays) || 0;
-    teams[t].design += d;
-    teams[t].engineering += e;
-    teams[t].product += p;
-    teams[t].initiatives.push({title:i.title,design:d,engineering:e,product:p,total:d+e+p,driver:i.driver,theme:i.theme,techLead:i.techLead,productOwner:i.productOwner,roi:i.roi});
-  });
-  return teams;
-}
-
-function capBarHtml(used, budget, label) {
-  if (budget <= 0) return '<div style="font-size:11px;color:var(--faint)">\u2014</div>';
-  var pct = Math.round(used / budget * 100);
-  var over = used > budget;
-  var overDays = used - budget;
-  var color = pct > 95 ? '#A32D2D' : pct >= 80 ? '#BA7517' : '#3B6D11';
-
-  if (over) {
-    var budgetPct = Math.round(budget / used * 100);
-    var overPct = 100 - budgetPct;
-    return '<div style="display:flex;align-items:center;gap:8px">'
-      + '<div style="flex:1;position:relative">'
-      + '<div style="height:20px;background:var(--bg);border-radius:5px;overflow:visible;position:relative">'
-      + '<div style="position:absolute;left:' + budgetPct + '%;top:-4px;bottom:-4px;width:1.5px;background:var(--faint);z-index:2"></div>'
-      + '<div style="position:absolute;left:' + budgetPct + '%;top:-12px;font-size:9px;color:var(--faint);transform:translateX(-50%)">budget</div>'
-      + '<div style="height:100%;width:100%;background:#A32D2D;border-radius:5px;display:flex;align-items:center;padding-left:8px"><span style="font-size:10px;font-weight:500;color:#fff">' + pct + '%</span></div>'
-      + '</div>'
-      + '<div style="position:absolute;right:0;top:0;width:' + overPct + '%;height:20px;background:repeating-linear-gradient(45deg,#A32D2D22,#A32D2D22 3px,transparent 3px,transparent 6px);border-radius:0 5px 5px 0"></div>'
-      + '</div>'
-      + '<span style="font-size:11px;font-weight:500;color:#A32D2D;background:#FDECEA;padding:2px 8px;border-radius:12px;white-space:nowrap;flex-shrink:0">+' + Math.round(overDays) + 'd</span>'
-      + '</div>';
-  }
-
-  return '<div style="height:20px;background:var(--bg);border-radius:5px;overflow:hidden">'
-    + '<div style="height:100%;width:' + pct + '%;background:' + color + ';border-radius:5px;display:flex;align-items:center;padding-left:8px;min-width:32px">'
-    + '<span style="font-size:10px;font-weight:500;color:#fff">' + pct + '%</span>'
-    + '</div></div>';
-}
-
-function capStatsHtml(used, budget) {
-  var over = used > budget;
-  return '<div style="text-align:right;font-size:12px">'
-    + '<div style="font-weight:500;color:' + (over ? '#A32D2D' : 'var(--text)') + '">' + Math.round(used) + 'd</div>'
-    + '<div style="font-size:11px;color:var(--faint)">of ' + Math.round(budget) + '</div>'
-    + '</div>';
-}
-
-function capTeamBlock(teamName, used, budget, inits) {
-  var totalUsed = used.design + used.engineering + used.product;
-  var totalBudget = budget.design + budget.engineering + budget.product;
-  var initRows = inits.map(function(ini) {
-    return '<tr style="border-top:0.5px solid var(--border)">'
-      + '<td style="padding:8px 8px 8px 0;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px">' + ini.title + '</td>'
-      + '<td style="padding:8px">' + driverBadge(ini.driver) + '</td>'
-      + '<td style="padding:8px">' + themeBadge(ini.theme) + '</td>'
-      + '<td style="padding:8px;color:var(--muted);white-space:nowrap">' + (ini.productOwner || '\u2014') + '</td>'
-      + '<td style="padding:8px;color:var(--muted);white-space:nowrap">' + (ini.techLead || '\u2014') + '</td>'
-      + '<td style="padding:8px;text-align:right;color:var(--muted)">' + (ini.design ? Math.round(ini.design) + 'd' : '\u2014') + '</td>'
-      + '<td style="padding:8px;text-align:right;color:var(--muted)">' + (ini.engineering ? Math.round(ini.engineering) + 'd' : '\u2014') + '</td>'
-      + '<td style="padding:8px;text-align:right;color:var(--muted)">' + (ini.product ? Math.round(ini.product) + 'd' : '\u2014') + '</td>'
-      + '<td style="padding:8px;text-align:right;font-weight:500;color:var(--text)">' + Math.round(ini.total) + 'd</td>'
-      + '<td style="padding:8px 0 8px 8px;text-align:right">' + roiHtml(ini.roi) + '</td>'
-      + '</tr>';
+function buildNav() {
+  document.getElementById('nav').innerHTML = NAV_CONFIG.map(function(sec) {
+    return '<div><div class="seclabel">'+sec.section+'</div>'
+      + sec.items.map(function(item) {
+          var act = item.id === activeId;
+          return '<div class="nitem'+(act?' act':'')+'" data-page="'+item.id+'" data-label="'+item.label+'">'
+            + (act?'<div class="nbar"></div>':'')
+            + '<div class="nico">'+item.icon+'</div>'
+            + '<span class="nlabel">'+item.label+'</span>'
+            + '</div>';
+        }).join('') + '</div>';
   }).join('');
-
-  var initTable = '<table style="width:100%;border-collapse:collapse;font-size:12px">'
-    + '<thead><tr style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.4px;color:var(--faint)">'
-    + '<th style="text-align:left;padding:4px 8px 4px 0">Initiative</th>'
-    + '<th style="text-align:left;padding:4px 8px">Driver</th>'
-    + '<th style="text-align:left;padding:4px 8px">Theme</th>'
-    + '<th style="text-align:left;padding:4px 8px">Prod lead</th>'
-    + '<th style="text-align:left;padding:4px 8px">Eng lead</th>'
-    + '<th style="text-align:right;padding:4px 8px">Design</th>'
-    + '<th style="text-align:right;padding:4px 8px">Engineering</th>'
-    + '<th style="text-align:right;padding:4px 8px">Product</th>'
-    + '<th style="text-align:right;padding:4px 8px">Total</th>'
-    + '<th style="text-align:right;padding:4px 0 4px 8px">ROI</th>'
-    + '</tr></thead><tbody style="border-top:0.5px solid var(--border)">' + initRows + '</tbody></table>';
-
-  return '<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;margin-bottom:16px;overflow:hidden">'
-    + '<div style="padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">'
-    + '<div style="font-size:14px;font-weight:500;color:var(--text)">' + teamName + '</div>'
-    + '<span style="font-size:11px;color:var(--muted);background:var(--bg);padding:2px 10px;border-radius:20px">' + inits.length + ' initiative' + (inits.length !== 1 ? 's' : '') + ' \u00b7 ' + Math.round(totalUsed) + ' days</span>'
-    + '</div>'
-    + '<div style="padding:16px 20px">'
-    + '<div style="display:grid;grid-template-columns:90px 1fr 80px;gap:14px;align-items:center;padding:8px 0">'
-    + '<div style="font-size:12px;color:var(--muted)">Design</div>'
-    + capBarHtml(used.design, budget.design)
-    + capStatsHtml(used.design, budget.design)
-    + '</div>'
-    + '<div style="display:grid;grid-template-columns:90px 1fr 80px;gap:14px;align-items:center;padding:8px 0;border-top:0.5px solid var(--border)">'
-    + '<div style="font-size:12px;color:var(--muted)">Engineering</div>'
-    + capBarHtml(used.engineering, budget.engineering)
-    + capStatsHtml(used.engineering, budget.engineering)
-    + '</div>'
-    + '<div style="display:grid;grid-template-columns:90px 1fr 80px;gap:14px;align-items:center;padding:8px 0;border-top:0.5px solid var(--border)">'
-    + '<div style="font-size:12px;color:var(--muted)">Product</div>'
-    + capBarHtml(used.product, budget.product)
-    + capStatsHtml(used.product, budget.product)
-    + '</div>'
-    + '</div>'
-    + '<div style="padding:0 20px 16px">'
-    + '<div style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.4px;color:var(--faint);padding:12px 0 8px;border-top:0.5px solid var(--border)"></div>'
-    + initTable
-    + '</div>'
-    + '</div>';
 }
 
-function capScorecardHtml(label, used, budget) {
-  var pct = budget > 0 ? Math.round(used / budget * 100) : 0;
-  var remaining = budget - used;
-  var over = remaining < 0;
-  var color = pct > 95 ? '#A32D2D' : pct >= 80 ? '#BA7517' : '#3B6D11';
-  var cappedPct = Math.min(pct, 100);
-  var r = 30, sw = 6;
-  var halfCirc = Math.PI * r;
-  var fillLen = (cappedPct / 100) * halfCirc;
-  var gapLen = halfCirc - fillLen;
-  var size = (r + sw) * 2;
-  var cx = size / 2, cy = size / 2 + 4;
-  var gauge = '<svg width="' + size + '" height="' + Math.round(size * 0.6) + '" viewBox="0 0 ' + size + ' ' + Math.round(size * 0.65) + '" style="display:block;margin:0 auto;overflow:visible">'
-    + '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="none" stroke="#E8E6E0" stroke-width="' + sw + '" stroke-dasharray="' + halfCirc.toFixed(1) + ' ' + (halfCirc * 2).toFixed(1) + '" stroke-linecap="round" style="transform:rotate(180deg);transform-origin:' + cx + 'px ' + cy + 'px"/>'
-    + (cappedPct > 0 ? '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="none" stroke="' + color + '" stroke-width="' + sw + '" stroke-dasharray="' + fillLen.toFixed(1) + ' ' + (halfCirc * 2 - fillLen).toFixed(1) + '" stroke-linecap="round" style="transform:rotate(180deg);transform-origin:' + cx + 'px ' + cy + 'px"/>' : '')
-    + '<text x="' + cx + '" y="' + (cy - 4) + '" text-anchor="middle" dominant-baseline="central" style="font-size:14px;font-weight:500;fill:var(--text)">' + pct + '%</text>'
-    + '</svg>';
-  return '<div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center">'
-    + '<div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">' + label + '</div>'
-    + gauge
-    + '<div style="margin-top:4px"><span style="font-size:18px;font-weight:500;color:var(--text)">' + Math.round(used) + '</span> <span style="font-size:12px;color:var(--muted)">/ ' + Math.round(budget) + ' days</span></div>'
-    + '<div style="font-size:11px;color:' + (over ? '#A32D2D' : 'var(--faint)') + ';margin-top:2px">' + (over ? Math.abs(Math.round(remaining)) + 'd over budget' : Math.round(remaining) + 'd available') + '</div>'
-    + '</div>';
-}
-
-var _capQ = null;
-var _capTab = 'allocation';
-
-function capLeaderBlock(leaderName, role, inits) {
-  var totD = 0, totE = 0, totP = 0;
-  inits.forEach(function(ini) { totD += ini.design; totE += ini.engineering; totP += ini.product; });
-  var total = totD + totE + totP;
-  var initRows = inits.map(function(ini) {
-    return '<tr style="border-top:0.5px solid var(--border)">'
-      + '<td style="padding:8px 8px 8px 0;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px">' + ini.title + '</td>'
-      + '<td style="padding:8px">' + ini.team + '</td>'
-      + '<td style="padding:8px">' + driverBadge(ini.driver) + '</td>'
-      + '<td style="padding:8px">' + themeBadge(ini.theme) + '</td>'
-      + '<td style="padding:8px;text-align:right;color:var(--muted)">' + (ini.design ? Math.round(ini.design) + 'd' : '\u2014') + '</td>'
-      + '<td style="padding:8px;text-align:right;color:var(--muted)">' + (ini.engineering ? Math.round(ini.engineering) + 'd' : '\u2014') + '</td>'
-      + '<td style="padding:8px;text-align:right;color:var(--muted)">' + (ini.product ? Math.round(ini.product) + 'd' : '\u2014') + '</td>'
-      + '<td style="padding:8px;text-align:right;font-weight:500;color:var(--text)">' + Math.round(ini.total) + 'd</td>'
-      + '<td style="padding:8px 0 8px 8px;text-align:right">' + roiHtml(ini.roi) + '</td>'
-      + '</tr>';
-  }).join('');
-
-  return '<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;margin-bottom:16px;overflow:hidden">'
-    + '<div style="padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">'
-    + '<div><div style="font-size:14px;font-weight:500;color:var(--text)">' + leaderName + '</div>'
-    + '<div style="font-size:11px;color:var(--faint)">' + role + '</div></div>'
-    + '<span style="font-size:11px;color:var(--muted);background:var(--bg);padding:2px 10px;border-radius:20px">' + inits.length + ' initiative' + (inits.length !== 1 ? 's' : '') + ' \u00b7 ' + Math.round(total) + 'd total</span>'
-    + '</div>'
-    + '<div style="padding:0 20px 16px">'
-    + '<table style="width:100%;border-collapse:collapse;font-size:12px">'
-    + '<thead><tr style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.4px;color:var(--faint)">'
-    + '<th style="text-align:left;padding:12px 8px 4px 0">Initiative</th>'
-    + '<th style="text-align:left;padding:12px 8px 4px">Team</th>'
-    + '<th style="text-align:left;padding:12px 8px 4px">Driver</th>'
-    + '<th style="text-align:left;padding:12px 8px 4px">Theme</th>'
-    + '<th style="text-align:right;padding:12px 8px 4px">Design</th>'
-    + '<th style="text-align:right;padding:12px 8px 4px">Engineering</th>'
-    + '<th style="text-align:right;padding:12px 8px 4px">Product</th>'
-    + '<th style="text-align:right;padding:12px 8px 4px">Total</th>'
-    + '<th style="text-align:right;padding:12px 0 4px 8px">ROI</th>'
-    + '</tr></thead><tbody>' + initRows + '</tbody></table>'
-    + '</div></div>';
-}
-
-function capRenderByLeader(q) {
-  var subset = q === 'all' ? initiatives.filter(function(i){return i.quarter!=='Backlog';}) : q === 'backlog' ? initiatives.filter(function(i){return i.quarter==='Backlog';}) : initiatives.filter(function(i){return i.quarter===q;});
-
-  var engLeaders = {}, prodLeaders = {};
-  subset.forEach(function(i) {
-    var d = parseFloat(i.designDays) || 0;
-    var e = parseFloat(i.engineeringDays) || 0;
-    var p = parseFloat(i.productDays) || 0;
-    var ini = {title:i.title,design:d,engineering:e,product:p,total:d+e+p,driver:i.driver,theme:i.theme,team:i.team,roi:i.roi};
-    if (i.techLead) {
-      if (!engLeaders[i.techLead]) engLeaders[i.techLead] = [];
-      engLeaders[i.techLead].push(ini);
-    }
-    if (i.productOwner) {
-      if (!prodLeaders[i.productOwner]) prodLeaders[i.productOwner] = [];
-      prodLeaders[i.productOwner].push(ini);
-    }
-  });
-
-  var engNames = Object.keys(engLeaders); engNames.sort();
-  var prodNames = Object.keys(prodLeaders); prodNames.sort();
-
-  var engBlocks = engNames.map(function(name) {
-    return capLeaderBlock(name, 'Engineering Lead', engLeaders[name]);
-  }).join('');
-
-  var prodBlocks = prodNames.map(function(name) {
-    return capLeaderBlock(name, 'Product Lead', prodLeaders[name]);
-  }).join('');
-
-  if (!engBlocks && !prodBlocks) {
-    return '<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:48px 32px;text-align:center">'
-      + '<div style="font-size:13px;color:var(--faint)">No initiatives for ' + (q === 'all' ? 'All Year' : q) + '</div></div>';
-  }
-
-  var html = '';
-  if (engBlocks) {
-    html += '<div style="font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.5px;color:var(--faint);margin-bottom:12px">Engineering leads</div>' + engBlocks;
-  }
-  if (prodBlocks) {
-    html += '<div style="font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.5px;color:var(--faint);margin:20px 0 12px">Product leads</div>' + prodBlocks;
-  }
-  return html;
-}
-
-function capRender(q) {
-  _capQ = q || currentQ();
-  var label = _capQ === 'all' ? 'All Year' : _capQ;
-  var teams = capCalc(_capQ);
-  var budgets = capGetBudget(_capQ);
-  var teamNames = Object.keys(teams);
-  teamNames.sort();
-
-  var totD = 0, totE = 0, totP = 0, budD = 0, budE = 0, budP = 0;
-  teamNames.forEach(function(t) {
-    totD += teams[t].design; totE += teams[t].engineering; totP += teams[t].product;
-    var b = budgets[t] || {design:0,engineering:0,product:0};
-    budD += b.design; budE += b.engineering; budP += b.product;
-  });
-
-  var blocks = teamNames.map(function(t) {
-    var b = budgets[t] || {design:0,engineering:0,product:0};
-    return capTeamBlock(t, teams[t], b, teams[t].initiatives);
-  }).join('');
-
-  if (teamNames.length === 0) {
-    blocks = '<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:48px 32px;text-align:center">'
-      + '<div style="font-size:13px;color:var(--faint)">No initiatives for ' + label + '</div></div>';
-  }
-
-  var allocContent = '<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:20px">'
-    + capScorecardHtml('Total engineering', totE, budE)
-    + capScorecardHtml('Total product', totP, budP)
-    + capScorecardHtml('Total design', totD, budD)
-    + '</div>'
-    + blocks
-    + '<div style="display:flex;gap:16px;padding:4px 0">'
-    + '<span style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted)"><span style="width:8px;height:8px;border-radius:2px;background:#3B6D11"></span>Under 80%</span>'
-    + '<span style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted)"><span style="width:8px;height:8px;border-radius:2px;background:#BA7517"></span>80\u201395%</span>'
-    + '<span style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted)"><span style="width:8px;height:8px;border-radius:2px;background:#A32D2D"></span>Over 95%</span>'
-    + '</div>';
-
-  var leaderContent = capRenderByLeader(_capQ);
-
-  return '<div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px">'
-    + '<div><div class="ptitle">Team Capacity</div><div class="psub" style="margin-bottom:0">Budget utilization by team and discipline \u2014 Design, Engineering, Product</div></div>'
-    + '</div>'
-    + '<div class="tabnav"><button class="tabitem' + (_capTab === 'allocation' ? ' act' : '') + '" data-captab="allocation">Team Allocation</button><button class="tabitem' + (_capTab === 'leader' ? ' act' : '') + '" data-captab="leader">By Leader</button></div>'
-    + buildQFilter('cap','switchCapQuarter')
-    + '<div id="cap-allocation" style="' + (_capTab === 'allocation' ? '' : 'display:none') + '">' + allocContent + '</div>'
-    + '<div id="cap-leader" style="' + (_capTab === 'leader' ? '' : 'display:none') + '">' + leaderContent + '</div>';
-}
-
-function switchCapTab(tab) {
-  _capTab = tab;
-  document.querySelectorAll('[data-captab]').forEach(function(btn) {
-    btn.classList.toggle('act', btn.dataset.captab === tab);
-  });
-  var alloc = document.getElementById('cap-allocation');
-  var leader = document.getElementById('cap-leader');
-  if (alloc) alloc.style.display = tab === 'allocation' ? '' : 'none';
-  if (leader) leader.style.display = tab === 'leader' ? '' : 'none';
-}
-
-function switchCapQuarter(q) {
+function setPage(id, label) {
+  activeId = id;
+  document.getElementById('pgname').textContent = label;
   var content = document.getElementById('content');
-  if (content) content.innerHTML = capRender(q);
-  setQAct('cap', q);
+  if (PAGES[id]) {
+    content.innerHTML = PAGES[id]();
+  } else if (id.startsWith('ref_')) {
+    var rid = id.slice(4);
+    var ref = REFERENCES.filter(function(r){return r.id===rid;})[0];
+    content.innerHTML = ref
+      ? '<div class="ptitle">'+anonName(ref.fullName)+'</div><div class="psub" style="margin-bottom:24px">'+ref.title+'</div>'+renderRef(ref)
+      : '<div class="ptitle">'+label+'</div>';
+  } else {
+    content.innerHTML = '<div class="ptitle">'+label+'</div>';
+  }
+  buildNav();
 }
 
-function renderTeamCapacity() {
-  return capRender(currentQ());
+var capBudgetData = {};
+function loadData(cb) {
+  var el = document.getElementById('content');
+  if (el) el.innerHTML = renderLoader();
+  fetch('/api/data')
+    .then(function(r){return r.json();})
+    .then(function(data){
+      initiatives = (data.initiatives||[]).map(function(i){
+        return {quarter:String(i.quarter||'').trim(),title:String(i.title||'').trim(),driver:String(i.driver||'').trim(),team:String(i.team||'').trim(),theme:String(i.theme||'').trim(),productOwner:String(i.productOwner||'').trim(),techLead:String(i.techLead||'').trim(),addedValue:(i.addedValue!==undefined&&i.addedValue!=='')?i.addedValue:'\u2014',roi:(i.roi!==undefined&&i.roi!=='')?i.roi:'\u2014',designDays:i.designDays||0,engineeringDays:i.engineeringDays||0,productDays:i.productDays||0,deliveryStatus:'not-started',confidence:'medium',link:''};
+      });
+      capBudgetData = data.capBudget || {};
+      loadLocalState(function(){if(cb)cb();});
+    })
+    .catch(function(err){if(el)el.innerHTML='<div style="padding:40px 32px;font-size:13px;color:#C0392B">Failed to load data.<br><br>'+err+'</div>';});
 }
+
+document.addEventListener('click', function(e) {
+  var ni = e.target.closest('[data-page]');
+  if (ni) { setPage(ni.dataset.page, ni.dataset.label); return; }
+
+  var ct = e.target.closest('[data-captab]');
+  if (ct) { switchCapTab(ct.dataset.captab); return; }
+
+  var ti = e.target.closest('[data-tab]');
+  if (ti) { var id=ti.dataset.tab; document.querySelectorAll('.tabnav .tabitem').forEach(function(b){b.classList.remove('act');}); ti.classList.add('act'); document.querySelectorAll('.tabpanel').forEach(function(p){p.classList.remove('act');}); var tp=document.getElementById('rt-'+id); if(tp)tp.classList.add('act'); if(id==='roi')setTimeout(function(){renderScatterChart(currentQ());},50); return; }
+
+  var qb = e.target.closest('[data-qfn]');
+  if (qb) { var fn=qb.dataset.qfn,q=qb.dataset.q; if(fn==='switchTableQuarter')switchTableQuarter(q); else if(fn==='switchKanbanQuarter')switchKanbanQuarter(q); else if(fn==='switchROIQuarter')switchROIQuarter(q); else if(fn==='switchCapQuarter')switchCapQuarter(q); return; }
+
+  var dw = e.target.closest('.ds-wrap[data-idx]');
+  if (dw) { e.stopPropagation(); var idx=parseInt(dw.dataset.idx); document.querySelectorAll('.status-menu').forEach(function(m){m.remove();}); var menu=document.createElement('div'); menu.className='status-menu'; menu.style.cssText='position:fixed;z-index:999;background:var(--surface);border:1px solid var(--border-md);border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,0.12);padding:4px;min-width:130px;'; deliveryOpts.forEach(function(o){var item=document.createElement('div'); item.style.cssText='padding:7px 10px;border-radius:6px;cursor:pointer;font-size:12px;'; item.innerHTML='<span class="pill '+o.cls+'" style="pointer-events:none">'+o.label+'</span>'; item.onmouseenter=function(){item.style.background='var(--bg)';}; item.onmouseleave=function(){item.style.background='';}; item.onclick=function(ev){ev.stopPropagation();updateStatus(idx,o.val);menu.remove();}; menu.appendChild(item);}); var r=dw.getBoundingClientRect(); menu.style.top=(r.bottom+4)+'px'; menu.style.left=r.left+'px'; document.body.appendChild(menu); setTimeout(function(){document.addEventListener('click',function h(){menu.remove();document.removeEventListener('click',h);});},0); return; }
+
+  var lb = e.target.closest('[data-link-idx]');
+  if (lb) { e.stopPropagation(); var idx2=parseInt(lb.dataset.linkIdx); _linkIdx=idx2; var pop=document.getElementById('linkPopup'); document.getElementById('linkInput').value=initiatives[idx2].link||''; document.getElementById('linkOpenBtn').disabled=!initiatives[idx2].link; var r2=lb.getBoundingClientRect(); pop.style.top=(r2.bottom+6)+'px'; pop.style.left=Math.min(r2.left,window.innerWidth-316)+'px'; pop.classList.add('show'); setTimeout(function(){document.getElementById('linkInput').focus();},50); return; }
+
+  var fr = e.target.closest('[data-reset]');
+  if (fr) { var sfx=fr.dataset.reset; if(sfx==='q')resetFiltersQ(); else resetFilters(); return; }
+
+  var sq = e.target.closest('[data-sq]');
+  if (sq) { sigRequest(sq.dataset.sq, decodeURIComponent(sq.dataset.sl), sq.dataset.se); return; }
+
+  var sr = e.target.closest('[data-sr]');
+  if (sr) { sigRequest(sr.dataset.sr, decodeURIComponent(sr.dataset.sl), sr.dataset.se); return; }
+
+  var sv = e.target.closest('[data-sv]');
+  if (sv) { sigVerify(sv.dataset.sv, decodeURIComponent(sv.dataset.sl), sv.dataset.se); return; }
+
+  var wd = e.target.closest('[data-wiz]');
+  if (wd) {
+    var wizId = wd.dataset.wiz;
+    var dir   = parseInt(wd.dataset.wizDir);
+    var cur   = _wizState[wizId] !== undefined ? _wizState[wizId] : 0;
+    var items = wizId === 'frog' ? _wizItemsFrog : _wizItemsPatterns;
+    wizSetIndex(wizId, cur + dir, items);
+    return;
+  }
+
+  var wt = e.target.closest('[data-wiz-toggle]');
+  if (wt) {
+    var wtId  = wt.dataset.wizToggle;
+    var wtIdx = parseInt(wt.dataset.wizIdx);
+    var wtItems = wtId === 'frog' ? _wizItemsFrog : _wizItemsPatterns;
+    wizSetIndex(wtId, wtIdx, wtItems);
+    return;
+  }
+
+  var rs = e.target.closest('#resetSigsBtn');
+  if (rs) {
+    if (!confirm('Reset all signatures? This cannot be undone.')) return;
+    fetch('/api/signatures', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({})})
+      .then(function() { _sigDone = {}; setPage(activeId, document.getElementById('pgname').textContent); })
+      .catch(function(e) { console.error(e); });
+    return;
+  }
+
+  var pop2 = document.getElementById('linkPopup');
+  if (pop2.classList.contains('show') && !pop2.contains(e.target)) closePopup();
+});
+
+document.addEventListener('change', function(e) {
+  var ss = e.target.closest('[data-status-idx]');
+  if (ss) { updateStatus(parseInt(ss.dataset.statusIdx), ss.value); return; }
+  var ff = e.target.closest('[data-filter]');
+  if (ff) { var sfx=ff.dataset.filter; if(sfx==='q')applyFiltersQ(); else applyFilters(); return; }
+});
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') {
+    var inp = e.target.closest('.sig-code-input');
+    if (inp) { var pid = inp.id.replace('sig-inp-',''); var sv2 = document.querySelector('[data-sv="'+pid+'"]'); if(sv2) sv2.click(); }
+  }
+  if (e.key === 'Escape') closePopup();
+});
+
+function updateStatus(idx,val){initiatives[idx].deliveryStatus=val;var opt=deliveryOpts.filter(function(o){return o.val===val;})[0]||deliveryOpts[0];
+  // Update all pills matching this index (table + kanban)
+  document.querySelectorAll('.ds-wrap[data-idx="'+idx+'"] .ds-pill').forEach(function(p){p.className='pill ds-pill '+opt.cls;p.textContent=opt.label;});
+  document.querySelectorAll('.ds-select[data-status-idx="'+idx+'"]').forEach(function(s){s.value=val;});
+  saveLocalState();
+  // Refresh table view scorecards
+  var aq='';['Q1','Q2','Q3','Q4','all'].forEach(function(q){var b=document.getElementById('tbl-btn-'+q);if(b&&b.classList.contains('act'))aq=q;});if(!aq)aq=currentQ();var label=aq==='all'?'All Year':aq,subset=aq==='all'?initiatives:initiatives.filter(function(i){return i.quarter===aq;});refreshCards(subset,label);
+  // Refresh quarterly progress bars
+  var qpWrap=document.querySelector('#rt-quarterly');if(qpWrap){var oldBars=qpWrap.querySelector(':scope > div:first-child');if(oldBars){var tmp=document.createElement('div');tmp.innerHTML=buildQuarterlyProgressBars();oldBars.replaceWith(tmp.firstChild);}}
+}
+function closePopup(){document.getElementById('linkPopup').classList.remove('show');_linkIdx=null;}
+function openCurrentLink(){var u=document.getElementById('linkInput').value.trim();if(u)window.open(u,'_blank');}
+function saveLink(){if(_linkIdx===null)return;var idx=_linkIdx;initiatives[idx].link=document.getElementById('linkInput').value.trim();closePopup();var rows=document.querySelectorAll('#rt-table table tbody tr');if(rows[idx])rows[idx].cells[1].innerHTML=titleCellHtml(idx);saveLocalState();}
+function clearLink(){if(_linkIdx===null)return;var idx=_linkIdx;initiatives[idx].link='';closePopup();var rows=document.querySelectorAll('#rt-table table tbody tr');if(rows[idx])rows[idx].cells[1].innerHTML=titleCellHtml(idx);saveLocalState();}
+function toggleSb(){collapsed=!collapsed;document.getElementById('sb').classList.toggle('col',collapsed);document.getElementById('togico').innerHTML=collapsed?'<path d="M4 2l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>':'<path d="M6 2L3 5l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>';}
+
+function login() {
+  var e = document.getElementById('em').value.trim(), p = document.getElementById('pw').value;
+  if (e === 'condoadmin@verygoodpeeps.co' && p === 'HelixCapital') {
+    document.getElementById('auth').classList.add('gone');
+    setTimeout(function(){document.getElementById('auth').style.display='none';},300);
+    document.getElementById('app').classList.add('show');
+    var name = e.split('@')[0];
+    // avatar is the frog SVG, don't overwrite
+    document.getElementById('un').textContent = name.charAt(0).toUpperCase()+name.slice(1);
+    Promise.all([
+      loadSavedSignatures(),
+      new Promise(function(resolve){loadData(resolve);})
+    ]).then(function(){
+      buildColorMaps();
+      buildNav();
+      document.getElementById('content').innerHTML = PAGES[activeId]();
+      if (obShouldShow()) { setTimeout(obStart, 400); }
+    });
+  } else {
+    document.getElementById('err').textContent = 'Invalid credentials. Try: condoadmin@verygoodpeeps.co / HelixCapital';
+  }
+}
+
+function logout() {
+  document.getElementById('app').classList.remove('show');
+  document.getElementById('auth').style.display = 'flex';
+  setTimeout(function(){document.getElementById('auth').classList.remove('gone');},10);
+  document.getElementById('pw').value = '';
+  document.getElementById('err').textContent = '';
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+var m = new Date().getMonth(), y = new Date().getFullYear();
+document.getElementById('qbadge').textContent = 'Q'+(m<3?1:m<6?2:m<9?3:4)+' '+y;
+document.getElementById('loginBtn').addEventListener('click', login);
+document.getElementById('logoutBtn').addEventListener('click', logout);
+document.getElementById('tog').addEventListener('click', toggleSb);
+document.getElementById('linkOpenBtn').addEventListener('click', openCurrentLink);
+document.getElementById('linkSaveBtn').addEventListener('click', saveLink);
+document.getElementById('linkClearBtn').addEventListener('click', clearLink);
+document.getElementById('obReplayBtn').addEventListener('click', function() { obReset(); obStart(); });
+document.getElementById('pw').addEventListener('keydown', function(e){if(e.key==='Enter')login();});
+document.getElementById('em').addEventListener('keydown', function(e){if(e.key==='Enter')login();});
+
+// ── User popover ─────────────────────────────────────────────────────────────
+var _userPopOpen = false;
+
+function userPopClose() {
+  _userPopOpen = false;
+  var el = document.getElementById('user-popover');
+  if (el) el.remove();
+}
+
+function userPopToggle(e) {
+  if (e.target.closest('#logoutBtn') || e.target.closest('.logoutbtn')) return;
+  if (_userPopOpen) { userPopClose(); return; }
+  _userPopOpen = true;
+
+  var box = document.getElementById('userBox');
+  var rect = box.getBoundingClientRect();
+
+  var pop = document.createElement('div');
+  pop.id = 'user-popover';
+  pop.style.cssText = 'position:fixed;z-index:910;background:var(--surface);border:1px solid var(--border);border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,.12);width:220px;padding:6px 0;'
+    + 'left:' + rect.left + 'px;bottom:' + (window.innerHeight - rect.top + 8) + 'px;';
+
+  var userName = document.getElementById('un').textContent;
+
+  pop.innerHTML = '<div data-userpop="profile" style="padding:10px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:background .1s"'
+    + ' onmouseover="this.style.background=\'var(--bg)\'" onmouseout="this.style.background=\'\'">'
+    + '<svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="5.5" r="2.5" stroke="currentColor" stroke-width="1.4"/><path d="M3 14c0-2.8 2.2-5 5-5s5 2.2 5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>'
+    + '<div><div style="font-size:12px;font-weight:500;color:var(--text)">Profile</div>'
+    + '<div style="font-size:11px;color:var(--faint)">' + userName + '</div></div>'
+    + '</div>'
+    + '<div data-userpop="language" style="padding:10px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:background .1s"'
+    + ' onmouseover="this.style.background=\'var(--bg)\'" onmouseout="this.style.background=\'\'">'
+    + '<svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.4"/><path d="M2 8h12M8 2c-1.5 1.5-2.5 3.5-2.5 6s1 4.5 2.5 6c1.5-1.5 2.5-3.5 2.5-6s-1-4.5-2.5-6" stroke="currentColor" stroke-width="1.3"/></svg>'
+    + '<div><div style="font-size:12px;font-weight:500;color:var(--text)">Language</div>'
+    + '<div style="font-size:11px;color:var(--faint)">Passive Aggressive</div></div>'
+    + '</div>'
+    + '<div style="height:1px;background:var(--border);margin:4px 12px"></div>'
+    + '<div data-userpop="privacy" style="padding:10px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:background .1s"'
+    + ' onmouseover="this.style.background=\'var(--bg)\'" onmouseout="this.style.background=\'\'">'
+    + '<svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M8 2L3 4.5V7c0 3.5 2.1 6.5 5 7.5 2.9-1 5-4 5-7.5V4.5L8 2z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M6 8.5l1.5 1.5L10 7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+    + '<div style="font-size:12px;font-weight:500;color:var(--text)">Privacy Policy</div>'
+    + '</div>';
+
+  document.body.appendChild(pop);
+
+  setTimeout(function() {
+    document.addEventListener('click', function h(ev) {
+      if (!pop.contains(ev.target) && !box.contains(ev.target)) {
+        userPopClose();
+        document.removeEventListener('click', h);
+      }
+    });
+  }, 0);
+}
+
+document.getElementById('userBox').addEventListener('click', userPopToggle);
