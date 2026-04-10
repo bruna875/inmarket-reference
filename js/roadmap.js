@@ -116,8 +116,8 @@ function buildGantt() {
       var nameCell = '<td style="padding:8px 8px 8px 0;vertical-align:middle;border-bottom:0.5px solid var(--border)">'
         + '<div style="font-size:12px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:250px">' + i.title + '</div>'
         + '<div style="font-size:10px;color:var(--faint);margin-top:2px;display:flex;gap:4px;align-items:center;flex-wrap:wrap">'
-        + '<span style="color:var(--faint)">Driver</span> ' + driverBadge(i.driver)
-        + ' <span style="color:var(--faint);margin-left:4px">Theme</span> ' + themeBadge(i.theme)
+        + '<span style="color:var(--faint)">Driver</span> <span style="font-size:10px;color:var(--muted)">' + i.driver + '</span>'
+        + ' <span style="color:var(--faint);margin-left:4px">Theme</span> <span style="font-size:10px;color:var(--muted)">' + i.theme + '</span>'
         + '</div></td>';
 
       var qCells = qHeaders.map(function(q) {
