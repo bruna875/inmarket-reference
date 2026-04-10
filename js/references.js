@@ -4,8 +4,7 @@
 function anonName(full) {
   var parts = full.split(' ');
   if (parts.length < 2) return full;
-  var last = parts[parts.length - 1];
-  return parts.slice(0, -1).join(' ') + ' ' + last.charAt(0) + '.';
+  return parts[0] + ' ' + parts[1].charAt(0) + '.';
 }
 
 function renderRef(r) {
@@ -14,7 +13,7 @@ function renderRef(r) {
   var barTop = {deniece_kennedy:32, arthur_haedike:38, teresa_thomas:33, michael_della_penna:28, stanley_turek:30, tonya_may:32, trina_rizzo:38, jason_knapp:38, todd_morris:32};
   var top = barTop[r.id] !== undefined ? barTop[r.id] : 38;
   var avatarInner = r.photo
-    ? '<div style="position:relative;width:100%;height:100%"><img src="'+r.photo+'" alt="'+dispName+'">'
+    ? '<div style="position:relative;width:100%;height:100%"><img src="'+r.photo+'" alt="'+dispName+'" style="filter:blur(2.5px)">'
       + '<div style="position:absolute;top:'+top+'%;left:5%;width:90%;height:18%;background:#66C220;transform:rotate(-2deg);border-radius:2px;display:flex;align-items:center;justify-content:center">'
       + '<span style="font-size:8px;font-weight:500;color:#fff;letter-spacing:.5px;text-transform:uppercase">Privacy Badge</span>'
       + '</div></div>'
