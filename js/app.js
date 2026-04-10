@@ -33,6 +33,7 @@ function setPage(id, label) {
   buildNav();
 }
 
+var capBudgetData = {};
 function loadData(cb) {
   var el = document.getElementById('content');
   if (el) el.innerHTML = renderLoader();
@@ -42,6 +43,7 @@ function loadData(cb) {
       initiatives = (data.initiatives||[]).map(function(i){
         return {quarter:String(i.quarter||'').trim(),title:String(i.title||'').trim(),driver:String(i.driver||'').trim(),team:String(i.team||'').trim(),theme:String(i.theme||'').trim(),productOwner:String(i.productOwner||'').trim(),techLead:String(i.techLead||'').trim(),addedValue:(i.addedValue!==undefined&&i.addedValue!=='')?i.addedValue:'\u2014',roi:(i.roi!==undefined&&i.roi!=='')?i.roi:'\u2014',designDays:i.designDays||0,engineeringDays:i.engineeringDays||0,productDays:i.productDays||0,deliveryStatus:'not-started',confidence:'medium',link:''};
       });
+      capBudgetData = data.capBudget || {};
       loadLocalState(function(){if(cb)cb();});
     })
     .catch(function(err){if(el)el.innerHTML='<div style="padding:40px 32px;font-size:13px;color:#C0392B">Failed to load data.<br><br>'+err+'</div>';});
