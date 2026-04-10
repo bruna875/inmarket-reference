@@ -26,7 +26,7 @@ function capGetBudget(q) {
 }
 
 function capCalc(q) {
-  var subset = q === 'all' ? initiatives.filter(function(i){return i.quarter!=='Backlog';}) : initiatives.filter(function(i){return i.quarter===q;});
+  var subset = q === 'all' ? initiatives.filter(function(i){return i.quarter!=='Backlog';}) : q === 'backlog' ? initiatives.filter(function(i){return i.quarter==='Backlog';}) : initiatives.filter(function(i){return i.quarter===q;});
   var teams = {};
   subset.forEach(function(i) {
     var t = i.team;
@@ -37,7 +37,7 @@ function capCalc(q) {
     teams[t].design += d;
     teams[t].engineering += e;
     teams[t].product += p;
-    teams[t].initiatives.push({title:i.title,design:d,engineering:e,product:p,total:d+e+p});
+    teams[t].initiatives.push({title:i.title,design:d,engineering:e,product:p,total:d+e+p,driver:i.driver,theme:i.theme,techLead:i.techLead,productOwner:i.productOwner});
   });
   return teams;
 }
@@ -83,8 +83,12 @@ function capTeamBlock(teamName, used, budget, inits) {
   var totalUsed = used.design + used.engineering + used.product;
   var totalBudget = budget.design + budget.engineering + budget.product;
   var initRows = inits.map(function(ini) {
-    return '<div style="display:grid;grid-template-columns:1fr 55px 55px 55px 55px;gap:8px;padding:6px 0;align-items:center;font-size:12px;border-top:0.5px solid var(--border)">'
+    return '<div style="display:grid;grid-template-columns:1fr auto auto auto auto 55px 55px 55px 55px;gap:8px;padding:6px 0;align-items:center;font-size:12px;border-top:0.5px solid var(--border)">'
       + '<div style="color:var(--text);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + ini.title + '</div>'
+      + '<div>' + driverBadge(ini.driver) + '</div>'
+      + '<div>' + themeBadge(ini.theme) + '</div>'
+      + '<div style="color:var(--muted);font-size:11px;white-space:nowrap">' + (ini.techLead || '\u2014') + '</div>'
+      + '<div style="color:var(--muted);font-size:11px;white-space:nowrap">' + (ini.productOwner || '\u2014') + '</div>'
       + '<div style="color:var(--muted);text-align:right">' + (ini.design ? Math.round(ini.design) + 'd' : '\u2014') + '</div>'
       + '<div style="color:var(--muted);text-align:right">' + (ini.engineering ? Math.round(ini.engineering) + 'd' : '\u2014') + '</div>'
       + '<div style="color:var(--muted);text-align:right">' + (ini.product ? Math.round(ini.product) + 'd' : '\u2014') + '</div>'
@@ -115,9 +119,8 @@ function capTeamBlock(teamName, used, budget, inits) {
     + '</div>'
     + '</div>'
     + '<div style="padding:0 20px 16px">'
-    + '<div style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.4px;color:var(--faint);padding:12px 0 8px;border-top:0.5px solid var(--border)">Initiatives</div>'
-    + '<div style="display:grid;grid-template-columns:1fr 55px 55px 55px 55px;gap:8px;padding:0 0 4px;font-size:11px;color:var(--faint);text-transform:uppercase;letter-spacing:.3px">'
-    + '<div>Name</div><div style="text-align:right">Des</div><div style="text-align:right">Eng</div><div style="text-align:right">Prod</div><div style="text-align:right">Total</div>'
+    + '<div style="display:grid;grid-template-columns:1fr auto auto auto auto 55px 55px 55px 55px;gap:8px;padding:12px 0 4px;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.4px;color:var(--faint);border-top:0.5px solid var(--border)">'
+    + '<div>Initiatives</div><div>Driver</div><div>Theme</div><div>Eng Lead</div><div>Prod Lead</div><div style="text-align:right">Design</div><div style="text-align:right">Engineering</div><div style="text-align:right">Product</div><div style="text-align:right">Total</div>'
     + '</div>'
     + initRows
     + '</div>'
