@@ -74,6 +74,70 @@ function roiRenderContent(q){var label=q==='all'?'All Year':q==='backlog'?'Backl
 function buildROISummaries(){var cq=currentQ();return buildQFilter('roi','switchROIQuarter')+'<div id="roi-content">'+buildScatterPlot(cq)+roiRenderContent(cq)+'</div>';}
 
 
+function buildGantt() {
+  var statusColors = {'on-track':'#3B6D11','at-risk':'#BA7517','delayed':'#A32D2D','not-started':'#888780'};
+  var statusLabels = {'on-track':'On Track','at-risk':'At Risk','delayed':'Delayed','not-started':'Not Started'};
+  var cq = currentQ();
+  var teams = {};
+  initiatives.forEach(function(i) {
+    if (i.quarter === 'Backlog') return;
+    var t = i.team;
+    if (!teams[t]) teams[t] = [];
+    teams[t].push(i);
+  });
+  var teamNames = Object.keys(teams);
+  teamNames.sort();
+
+  var legend = '<div style="display:flex;gap:14px;margin-bottom:14px;font-size:11px;color:var(--muted)">'
+    + '<span style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:7px;border-radius:2px;background:#3B6D11;display:inline-block"></span>On Track</span>'
+    + '<span style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:7px;border-radius:2px;background:#BA7517;display:inline-block"></span>At Risk</span>'
+    + '<span style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:7px;border-radius:2px;background:#888780;display:inline-block"></span>Not Started</span>'
+    + '<span style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:7px;border-radius:2px;background:#A32D2D;display:inline-block"></span>Delayed</span>'
+    + '</div>';
+
+  var qHeaders = ['Q1','Q2','Q3','Q4'];
+  var thead = '<thead><tr>'
+    + '<th style="width:230px;min-width:230px;padding:8px 8px 8px 0;text-align:left;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.4px;color:var(--faint);border-bottom:1px solid var(--border)"></th>'
+    + qHeaders.map(function(q) {
+      var isCurrent = q === cq;
+      return '<th style="width:18.75%;padding:8px;text-align:center;font-size:12px;font-weight:500;color:var(--text);border-bottom:1px solid var(--border);border-left:0.5px solid var(--border)'
+        + (isCurrent ? ';background:rgba(102,194,32,0.04)' : '') + '">' + q + '</th>';
+    }).join('')
+    + '</tr></thead>';
+
+  var rows = '';
+  teamNames.forEach(function(team) {
+    rows += '<tr><td colspan="5" style="padding:10px 8px 6px 0;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.5px;color:var(--faint);border-bottom:0.5px solid var(--border);background:var(--bg)">' + team + '</td></tr>';
+    teams[team].forEach(function(i) {
+      var c = statusColors[i.deliveryStatus] || '#888780';
+      var sLabel = statusLabels[i.deliveryStatus] || 'Not Started';
+      var qs = [i.quarter];
+      var nameCell = '<td style="padding:8px 8px 8px 0;vertical-align:middle;border-bottom:0.5px solid var(--border)">'
+        + '<div style="font-size:12px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:220px">' + i.title + '</div>'
+        + '<div style="font-size:10px;color:var(--faint);margin-top:2px;display:flex;gap:6px;align-items:center;flex-wrap:wrap">'
+        + '<span style="display:inline-block;padding:1px 6px;border-radius:10px;background:' + c + '18;color:' + c + ';font-size:10px;font-weight:500">' + i.driver + '</span>'
+        + '<span>' + i.theme + '</span>'
+        + '</div></td>';
+
+      var qCells = qHeaders.map(function(q) {
+        var isCurrent = q === cq;
+        var bgStyle = 'border-left:0.5px solid var(--border);' + (isCurrent ? 'background:rgba(102,194,32,0.04);' : '');
+        var active = qs.indexOf(q) > -1;
+        if (!active) return '<td style="' + bgStyle + 'padding:4px;vertical-align:middle;border-bottom:0.5px solid var(--border)"></td>';
+        return '<td style="' + bgStyle + 'padding:4px;vertical-align:middle;border-bottom:0.5px solid var(--border)">'
+          + '<div class="gantt-bar" style="height:24px;background:' + c + ';border-radius:4px;margin:0 2px;cursor:default" title="' + i.title + '\nEng Lead: ' + i.techLead + '\nProd Lead: ' + i.productOwner + '\nStatus: ' + sLabel + '\nDriver: ' + i.driver + '\nTheme: ' + i.theme + '"></div></td>';
+      }).join('');
+
+      rows += '<tr>' + nameCell + qCells + '</tr>';
+    });
+  });
+
+  return legend
+    + '<div style="overflow-x:auto">'
+    + '<table style="width:100%;min-width:780px;border-collapse:collapse">'
+    + thead + '<tbody>' + rows + '</tbody></table></div>';
+}
+
 function renderRoadmap() {
   var quarters=['Q1','Q2','Q3','Q4','Backlog'];
   var cq=currentQ();
@@ -84,8 +148,9 @@ function renderRoadmap() {
     +'<div><div class="ptitle">Product Roadmap</div><div class="psub" style="margin-bottom:0">Quarterly initiatives and progress status</div></div>'
     +'<a id="ob-datasource" href="https://docs.google.com/spreadsheets/d/1g7c51-WX8UqFKJzKrnPzJ_fZSKsagnNj57Jir2v9quc/edit?usp=sharing" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-size:11px;color:var(--muted);text-decoration:none;font-weight:500;white-space:nowrap;transition:border-color .15s,color .15s;flex-shrink:0;margin-top:4px" onmouseover="this.style.borderColor=\'var(--accent)\';this.style.color=\'var(--accent)\'" onmouseout="this.style.borderColor=\'var(--border)\';this.style.color=\'var(--muted)\'"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M5 5h6M5 8h6M5 11h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Data source \u2192</a>'
     +'</div>'
-    +'<div class="tabnav"><button class="tabitem act" data-tab="table">Table View</button><button class="tabitem" data-tab="quarterly">Quarterly</button><button class="tabitem" data-tab="roi">By ROI</button></div>'
-    +'<div id="rt-table" class="tabpanel act">'+buildQFilter('tbl','switchTableQuarter')
+    +'<div class="tabnav"><button class="tabitem act" data-tab="gantt">Gantt</button><button class="tabitem" data-tab="table">Table View</button><button class="tabitem" data-tab="quarterly">Quarterly</button><button class="tabitem" data-tab="roi">By ROI</button></div>'
+    +'<div id="rt-gantt" class="tabpanel act">'+buildGantt()+'</div>'
+    +'<div id="rt-table" class="tabpanel">'+buildQFilter('tbl','switchTableQuarter')
     +'<div class="cards">'+scInitiatives()+scGrouped('sc-driver','By Driver','driver')+scGrouped('sc-theme','By Theme','theme')+scGrouped('sc-team','By Team','team')+'</div>'
     +'<div class="twrap"><div class="thead-row">Initiatives</div><div style="padding:12px 18px 4px">'+buildFilterBar()+'</div>'
     +'<table><thead><tr><th>Quarter</th><th>Initiative</th><th>Driver</th><th>Product Owner</th><th>Tech Lead</th><th>Theme</th><th>Team</th><th>Added Value</th><th>ROI</th><th>Status</th></tr></thead><tbody>'+tableRows+'</tbody></table></div></div>'
