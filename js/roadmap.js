@@ -134,7 +134,7 @@ function buildGantt() {
       var v1 = sk[0] === 'driver' ? i.driver : sk[0] === 'theme' ? i.theme : i.team;
       var v2 = sk[1] === 'driver' ? i.driver : sk[1] === 'theme' ? i.theme : i.team;
       var nameCell = '<td style="padding:8px 8px 8px 0;vertical-align:middle;border-bottom:0.5px solid var(--border)">'
-        + '<div style="font-size:12px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:250px">' + i.title + '</div>'
+        + '<div style="font-size:12px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:250px" title="' + i.title.replace(/"/g,'&quot;') + '">' + i.title + '</div>'
         + '<div style="font-size:10px;color:var(--faint);margin-top:2px">'
         + sl[0] + ': <span style="color:var(--muted)">' + v1 + '</span>'
         + ' \u00b7 ' + sl[1] + ': <span style="color:var(--muted)">' + v2 + '</span>'
