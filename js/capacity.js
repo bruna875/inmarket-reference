@@ -37,7 +37,7 @@ function capCalc(q) {
     teams[t].design += d;
     teams[t].engineering += e;
     teams[t].product += p;
-    teams[t].initiatives.push({title:i.title,design:d,engineering:e,product:p,total:d+e+p,driver:i.driver,theme:i.theme,techLead:i.techLead,productOwner:i.productOwner});
+    teams[t].initiatives.push({title:i.title,design:d,engineering:e,product:p,total:d+e+p,driver:i.driver,theme:i.theme,techLead:i.techLead,productOwner:i.productOwner,roi:i.roi});
   });
   return teams;
 }
@@ -87,12 +87,13 @@ function capTeamBlock(teamName, used, budget, inits) {
       + '<td style="padding:8px 8px 8px 0;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px">' + ini.title + '</td>'
       + '<td style="padding:8px">' + driverBadge(ini.driver) + '</td>'
       + '<td style="padding:8px">' + themeBadge(ini.theme) + '</td>'
-      + '<td style="padding:8px;color:var(--muted);white-space:nowrap">' + (ini.techLead || '\u2014') + '</td>'
       + '<td style="padding:8px;color:var(--muted);white-space:nowrap">' + (ini.productOwner || '\u2014') + '</td>'
+      + '<td style="padding:8px;color:var(--muted);white-space:nowrap">' + (ini.techLead || '\u2014') + '</td>'
       + '<td style="padding:8px;text-align:right;color:var(--muted)">' + (ini.design ? Math.round(ini.design) + 'd' : '\u2014') + '</td>'
       + '<td style="padding:8px;text-align:right;color:var(--muted)">' + (ini.engineering ? Math.round(ini.engineering) + 'd' : '\u2014') + '</td>'
       + '<td style="padding:8px;text-align:right;color:var(--muted)">' + (ini.product ? Math.round(ini.product) + 'd' : '\u2014') + '</td>'
-      + '<td style="padding:8px 0 8px 8px;text-align:right;font-weight:500;color:var(--text)">' + Math.round(ini.total) + 'd</td>'
+      + '<td style="padding:8px;text-align:right;font-weight:500;color:var(--text)">' + Math.round(ini.total) + 'd</td>'
+      + '<td style="padding:8px 0 8px 8px;text-align:right">' + roiHtml(ini.roi) + '</td>'
       + '</tr>';
   }).join('');
 
@@ -101,12 +102,13 @@ function capTeamBlock(teamName, used, budget, inits) {
     + '<th style="text-align:left;padding:4px 8px 4px 0">Initiative</th>'
     + '<th style="text-align:left;padding:4px 8px">Driver</th>'
     + '<th style="text-align:left;padding:4px 8px">Theme</th>'
-    + '<th style="text-align:left;padding:4px 8px">Eng lead</th>'
     + '<th style="text-align:left;padding:4px 8px">Prod lead</th>'
+    + '<th style="text-align:left;padding:4px 8px">Eng lead</th>'
     + '<th style="text-align:right;padding:4px 8px">Design</th>'
     + '<th style="text-align:right;padding:4px 8px">Engineering</th>'
     + '<th style="text-align:right;padding:4px 8px">Product</th>'
-    + '<th style="text-align:right;padding:4px 0 4px 8px">Total</th>'
+    + '<th style="text-align:right;padding:4px 8px">Total</th>'
+    + '<th style="text-align:right;padding:4px 0 4px 8px">ROI</th>'
     + '</tr></thead><tbody style="border-top:0.5px solid var(--border)">' + initRows + '</tbody></table>';
 
   return '<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;margin-bottom:16px;overflow:hidden">'
