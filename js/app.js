@@ -151,6 +151,7 @@ function login() {
       loadSavedSignatures(),
       new Promise(function(resolve){loadData(resolve);})
     ]).then(function(){
+      buildColorMaps();
       buildNav();
       document.getElementById('content').innerHTML = PAGES[activeId]();
       if (obShouldShow()) { setTimeout(obStart, 400); }
