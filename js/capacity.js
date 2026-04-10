@@ -128,7 +128,7 @@ function capScorecardHtml(label, used, budget) {
   var pct = budget > 0 ? Math.round(used / budget * 100) : 0;
   var remaining = budget - used;
   var over = remaining < 0;
-  return '<div style="background:var(--bg);border-radius:8px;padding:14px">'
+  return '<div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px">'
     + '<div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">' + label + '</div>'
     + '<div style="display:flex;align-items:baseline;gap:8px"><span style="font-size:24px;font-weight:500;color:var(--text)">' + Math.round(used) + '</span><span style="font-size:13px;color:var(--muted)">/ ' + Math.round(budget) + ' days</span></div>'
     + '<div style="font-size:12px;color:' + (over ? '#A32D2D' : 'var(--faint)') + ';margin-top:4px">' + pct + '% utilized' + (over ? ' \u00b7 ' + Math.abs(Math.round(remaining)) + 'd over' : ' \u00b7 ' + Math.round(remaining) + 'd remaining') + '</div>'
