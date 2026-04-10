@@ -57,6 +57,9 @@ document.addEventListener('click', function(e) {
   var ct = e.target.closest('[data-captab]');
   if (ct) { switchCapTab(ct.dataset.captab); return; }
 
+  var gg = e.target.closest('[data-ganttgroup]');
+  if (gg) { switchGanttGroup(gg.dataset.ganttgroup); return; }
+
   var ti = e.target.closest('[data-tab]');
   if (ti) { var id=ti.dataset.tab; document.querySelectorAll('.tabnav .tabitem').forEach(function(b){b.classList.remove('act');}); ti.classList.add('act'); document.querySelectorAll('.tabpanel').forEach(function(p){p.classList.remove('act');}); var tp=document.getElementById('rt-'+id); if(tp)tp.classList.add('act'); if(id==='roi')setTimeout(function(){renderScatterChart(currentQ());},50); if(id==='gantt')setTimeout(ganttTooltipInit,50); return; }
 
