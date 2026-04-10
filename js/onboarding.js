@@ -19,7 +19,7 @@ var OB_STEPS = [
   {
     target: null, // welcome screen
     eyebrow: 'Welcome',
-    title: 'Your InMarket Dashboard',
+    title: 'Your Very Good Peeps Dashboard',
     desc: 'A quick tour to help you find your way around. It will not take much more than viewing a vibe coding YouTube video by a Asian tinkerer kid.'
   },
   {
@@ -61,7 +61,7 @@ var OB_STEPS = [
     target: '.sbfoot',
     eyebrow: 'Step 6 of 7',
     title: 'Your Profile',
-    desc: 'Your account info: Profile, Language Style and Privacy Policy.',
+    desc: 'Your account info and sign-out option. More profile features coming soon.',
     position: 'top'
   },
   {
