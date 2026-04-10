@@ -97,7 +97,7 @@ function buildGantt() {
 
   var qHeaders = ['Q1','Q2','Q3','Q4'];
   var thead = '<thead><tr>'
-    + '<th style="width:230px;min-width:230px;padding:8px 8px 8px 0;text-align:left;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.4px;color:var(--faint);border-bottom:1px solid var(--border)"></th>'
+    + '<th style="width:260px;min-width:260px;padding:8px 8px 8px 0;text-align:left;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.4px;color:var(--faint);border-bottom:1px solid var(--border)"></th>'
     + qHeaders.map(function(q) {
       var isCurrent = q === cq;
       return '<th style="width:18.75%;padding:8px;text-align:center;font-size:12px;font-weight:500;color:var(--text);border-bottom:1px solid var(--border);border-left:0.5px solid var(--border)'
@@ -105,6 +105,7 @@ function buildGantt() {
     }).join('')
     + '</tr></thead>';
 
+  var barIdx = 0;
   var rows = '';
   teamNames.forEach(function(team) {
     rows += '<tr><td colspan="5" style="padding:10px 8px 6px 0;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.5px;color:var(--faint);border-bottom:0.5px solid var(--border);background:var(--bg)">' + team + '</td></tr>';
@@ -113,10 +114,10 @@ function buildGantt() {
       var sLabel = statusLabels[i.deliveryStatus] || 'Not Started';
       var qs = [i.quarter];
       var nameCell = '<td style="padding:8px 8px 8px 0;vertical-align:middle;border-bottom:0.5px solid var(--border)">'
-        + '<div style="font-size:12px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:220px">' + i.title + '</div>'
-        + '<div style="font-size:10px;color:var(--faint);margin-top:2px;display:flex;gap:6px;align-items:center;flex-wrap:wrap">'
-        + '<span style="display:inline-block;padding:1px 6px;border-radius:10px;background:' + c + '18;color:' + c + ';font-size:10px;font-weight:500">' + i.driver + '</span>'
-        + '<span>' + i.theme + '</span>'
+        + '<div style="font-size:12px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:250px">' + i.title + '</div>'
+        + '<div style="font-size:10px;color:var(--faint);margin-top:2px;display:flex;gap:4px;align-items:center;flex-wrap:wrap">'
+        + '<span style="color:var(--faint)">Driver</span> ' + driverBadge(i.driver)
+        + ' <span style="color:var(--faint);margin-left:4px">Theme</span> ' + themeBadge(i.theme)
         + '</div></td>';
 
       var qCells = qHeaders.map(function(q) {
@@ -124,8 +125,10 @@ function buildGantt() {
         var bgStyle = 'border-left:0.5px solid var(--border);' + (isCurrent ? 'background:rgba(102,194,32,0.04);' : '');
         var active = qs.indexOf(q) > -1;
         if (!active) return '<td style="' + bgStyle + 'padding:4px;vertical-align:middle;border-bottom:0.5px solid var(--border)"></td>';
+        var bid = 'gbar-' + barIdx++;
         return '<td style="' + bgStyle + 'padding:4px;vertical-align:middle;border-bottom:0.5px solid var(--border)">'
-          + '<div class="gantt-bar" style="height:24px;background:' + c + ';border-radius:4px;margin:0 2px;cursor:default" title="' + i.title + '\nEng Lead: ' + i.techLead + '\nProd Lead: ' + i.productOwner + '\nStatus: ' + sLabel + '\nDriver: ' + i.driver + '\nTheme: ' + i.theme + '"></div></td>';
+          + '<div class="gantt-bar" id="' + bid + '" style="height:24px;background:' + c + ';border-radius:4px;margin:0 2px;cursor:default;position:relative"'
+          + ' data-gtt="' + i.title.replace(/"/g,'&quot;') + '|' + i.techLead + '|' + i.productOwner + '|' + sLabel + '"></div></td>';
       }).join('');
 
       rows += '<tr>' + nameCell + qCells + '</tr>';
@@ -133,9 +136,39 @@ function buildGantt() {
   });
 
   return legend
-    + '<div style="overflow-x:auto">'
+    + '<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 20px;overflow-x:auto;position:relative">'
     + '<table style="width:100%;min-width:780px;border-collapse:collapse">'
-    + thead + '<tbody>' + rows + '</tbody></table></div>';
+    + thead + '<tbody>' + rows + '</tbody></table>'
+    + '<div id="gantt-tooltip" style="display:none;position:absolute;z-index:50;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 14px;pointer-events:none;box-shadow:0 4px 16px rgba(0,0,0,.1);max-width:240px"></div>'
+    + '</div>';
+}
+
+function ganttTooltipInit() {
+  var wrap = document.querySelector('#rt-gantt .gantt-bar');
+  if (!wrap) return;
+  var tooltip = document.getElementById('gantt-tooltip');
+  if (!tooltip) return;
+  document.querySelectorAll('.gantt-bar').forEach(function(bar) {
+    bar.addEventListener('mouseenter', function(e) {
+      var d = bar.dataset.gtt;
+      if (!d) return;
+      var parts = d.split('|');
+      tooltip.innerHTML = '<div style="font-size:12px;font-weight:500;color:var(--text);margin-bottom:6px">' + parts[0] + '</div>'
+        + '<div style="font-size:11px;color:var(--muted);display:flex;flex-direction:column;gap:3px">'
+        + '<div><span style="color:var(--faint)">Eng Lead:</span> ' + (parts[1] || '\u2014') + '</div>'
+        + '<div><span style="color:var(--faint)">Prod Lead:</span> ' + (parts[2] || '\u2014') + '</div>'
+        + '<div><span style="color:var(--faint)">Status:</span> ' + (parts[3] || '\u2014') + '</div>'
+        + '</div>';
+      tooltip.style.display = 'block';
+      var rect = bar.getBoundingClientRect();
+      var wrapRect = bar.closest('div[style*="overflow-x"]').getBoundingClientRect();
+      tooltip.style.left = (rect.left - wrapRect.left + rect.width / 2 - 120) + 'px';
+      tooltip.style.top = (rect.top - wrapRect.top - tooltip.offsetHeight - 8) + 'px';
+    });
+    bar.addEventListener('mouseleave', function() {
+      tooltip.style.display = 'none';
+    });
+  });
 }
 
 function renderRoadmap() {
