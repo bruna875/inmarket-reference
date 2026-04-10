@@ -1,19 +1,15 @@
-// ═══════════════════════════════════════════════════════════════════════════
-// app.js — Navigation, routing, data loading, event handling, init
-// ═══════════════════════════════════════════════════════════════════════════
+// app.js — navigation, routing, data loading, events, init
 
-
-// ── Navigation ───────────────────────────────────────────────────────────
 
 function buildNav() {
   document.getElementById('nav').innerHTML = NAV_CONFIG.map(function(sec) {
-    return '<div><div class="seclabel">' + sec.section + '</div>'
+    return '<div><div class="seclabel">'+sec.section+'</div>'
       + sec.items.map(function(item) {
           var act = item.id === activeId;
-          return '<div class="nitem' + (act ? ' act' : '') + '" data-page="' + item.id + '" data-label="' + item.label + '">'
-            + (act ? '<div class="nbar"></div>' : '')
-            + '<div class="nico">' + item.icon + '</div>'
-            + '<span class="nlabel">' + item.label + '</span>'
+          return '<div class="nitem'+(act?' act':'')+'" data-page="'+item.id+'" data-label="'+item.label+'">'
+            + (act?'<div class="nbar"></div>':'')
+            + '<div class="nico">'+item.icon+'</div>'
+            + '<span class="nlabel">'+item.label+'</span>'
             + '</div>';
         }).join('') + '</div>';
   }).join('');
@@ -23,463 +19,149 @@ function setPage(id, label) {
   activeId = id;
   document.getElementById('pgname').textContent = label;
   var content = document.getElementById('content');
-
   if (PAGES[id]) {
     content.innerHTML = PAGES[id]();
   } else if (id.startsWith('ref_')) {
     var rid = id.slice(4);
-    var ref = REFERENCES.filter(function(r) { return r.id === rid; })[0];
+    var ref = REFERENCES.filter(function(r){return r.id===rid;})[0];
     content.innerHTML = ref
-      ? '<div class="ptitle">' + anonName(ref.fullName) + '</div><div class="psub" style="margin-bottom:24px">' + ref.title + '</div>' + renderRef(ref)
-      : '<div class="ptitle">' + label + '</div>';
+      ? '<div class="ptitle">'+ref.fullName+'</div><div class="psub psub-lg">'+ref.title+'</div>'+renderRef(ref)
+      : '<div class="ptitle">'+label+'</div>';
   } else {
-    content.innerHTML = '<div class="ptitle">' + label + '</div>';
+    content.innerHTML = '<div class="ptitle">'+label+'</div>';
   }
-
   buildNav();
-  if (id === 'roadmap') setTimeout(ganttTooltipInit, 50);
 }
-
-
-// ── Data Loading ─────────────────────────────────────────────────────────
-
-var capBudgetData = {};
 
 function loadData(cb) {
   var el = document.getElementById('content');
   if (el) el.innerHTML = renderLoader();
-
   fetch('/api/data')
-    .then(function(r) { return r.json(); })
-    .then(function(data) {
-      initiatives = (data.initiatives || []).map(function(i) {
-        return {
-          quarter:        String(i.quarter || '').trim(),
-          title:          String(i.title || '').trim(),
-          driver:         String(i.driver || '').trim(),
-          team:           String(i.team || '').trim(),
-          theme:          String(i.theme || '').trim(),
-          productOwner:   String(i.productOwner || '').trim(),
-          techLead:       String(i.techLead || '').trim(),
-          addedValue:     (i.addedValue !== undefined && i.addedValue !== '') ? i.addedValue : '\u2014',
-          roi:            (i.roi !== undefined && i.roi !== '') ? i.roi : '\u2014',
-          designDays:     i.designDays || 0,
-          engineeringDays: i.engineeringDays || 0,
-          productDays:    i.productDays || 0,
-          deliveryStatus: 'not-started',
-          confidence:     'medium',
-          link:           ''
-        };
+    .then(function(r){return r.json();})
+    .then(function(data){
+      initiatives = (data.initiatives||[]).map(function(i){
+        return {quarter:String(i.quarter||'').trim(),title:String(i.title||'').trim(),driver:String(i.driver||'').trim(),team:String(i.team||'').trim(),theme:String(i.theme||'').trim(),productOwner:String(i.productOwner||'').trim(),techLead:String(i.techLead||'').trim(),addedValue:(i.addedValue!==undefined&&i.addedValue!=='')?i.addedValue:'\u2014',roi:(i.roi!==undefined&&i.roi!=='')?i.roi:'\u2014',deliveryStatus:'not-started',confidence:'medium',link:''};
       });
-      capBudgetData = data.capBudget || {};
-      loadLocalState(function() { if (cb) cb(); });
+      loadLocalState(function(){if(cb)cb();});
     })
-    .catch(function(err) {
-      if (el) el.innerHTML = '<div style="padding:40px 32px;font-size:13px;color:#C0392B">Failed to load data.<br><br>' + err + '</div>';
-    });
+    .catch(function(err){if(el)el.innerHTML='<div class="load-error">Failed to load data.<br><br>'+err+'</div>';});
 }
 
-
-// ── Click Event Handlers ─────────────────────────────────────────────────
-
-function handlePageClick(e) {
+document.addEventListener('click', function(e) {
   var ni = e.target.closest('[data-page]');
-  if (ni) { setPage(ni.dataset.page, ni.dataset.label); return true; }
-  return false;
-}
+  if (ni) { setPage(ni.dataset.page, ni.dataset.label); return; }
 
-function handleCapTabClick(e) {
-  var ct = e.target.closest('[data-captab]');
-  if (ct) { switchCapTab(ct.dataset.captab); return true; }
-  return false;
-}
-
-function handleGanttGroupClick(e) {
-  var gg = e.target.closest('[data-ganttgroup]');
-  if (gg) { switchGanttGroup(gg.dataset.ganttgroup); return true; }
-  return false;
-}
-
-function handleTabClick(e) {
   var ti = e.target.closest('[data-tab]');
-  if (!ti) return false;
+  if (ti) { var id=ti.dataset.tab; document.querySelectorAll('.tabnav .tabitem').forEach(function(b){b.classList.remove('act');}); ti.classList.add('act'); document.querySelectorAll('.tabpanel').forEach(function(p){p.classList.remove('act');}); var tp=document.getElementById('rt-'+id); if(tp)tp.classList.add('act'); if(id==='roi')setTimeout(function(){renderScatterChart(currentQ());},50); return; }
 
-  var id = ti.dataset.tab;
-  document.querySelectorAll('.tabnav .tabitem').forEach(function(b) { b.classList.remove('act'); });
-  ti.classList.add('act');
-  document.querySelectorAll('.tabpanel').forEach(function(p) { p.classList.remove('act'); });
-  var tp = document.getElementById('rt-' + id);
-  if (tp) tp.classList.add('act');
-  if (id === 'roi') setTimeout(function() { renderScatterChart(currentQ()); }, 50);
-  if (id === 'gantt') setTimeout(ganttTooltipInit, 50);
-  return true;
-}
-
-function handleQuarterFilterClick(e) {
   var qb = e.target.closest('[data-qfn]');
-  if (!qb) return false;
+  if (qb) { var fn=qb.dataset.qfn,q=qb.dataset.q; if(fn==='switchTableQuarter')switchTableQuarter(q); else if(fn==='switchKanbanQuarter')switchKanbanQuarter(q); else if(fn==='switchROIQuarter')switchROIQuarter(q); return; }
 
-  var fn = qb.dataset.qfn, q = qb.dataset.q;
-  var handlers = {
-    switchTableQuarter: switchTableQuarter,
-    switchKanbanQuarter: switchKanbanQuarter,
-    switchROIQuarter: switchROIQuarter,
-    switchCapQuarter: switchCapQuarter
-  };
-  if (handlers[fn]) handlers[fn](q);
-  return true;
-}
-
-function handleStatusClick(e) {
   var dw = e.target.closest('.ds-wrap[data-idx]');
-  if (!dw) return false;
+  if (dw) { e.stopPropagation(); var idx=parseInt(dw.dataset.idx); document.querySelectorAll('.status-menu').forEach(function(m){m.remove();}); var menu=document.createElement('div'); menu.className='status-menu'; deliveryOpts.forEach(function(o){var item=document.createElement('div'); item.className='status-menu-item'; item.innerHTML='<span class="pill '+o.cls+'">'+o.label+'</span>'; item.onclick=function(ev){ev.stopPropagation();updateStatus(idx,o.val);menu.remove();}; menu.appendChild(item);}); var r=dw.getBoundingClientRect(); menu.style.top=(r.bottom+4)+'px'; menu.style.left=r.left+'px'; document.body.appendChild(menu); setTimeout(function(){document.addEventListener('click',function h(){menu.remove();document.removeEventListener('click',h);});},0); return; }
 
-  e.stopPropagation();
-  var idx = parseInt(dw.dataset.idx);
-
-  // Remove any existing menu
-  document.querySelectorAll('.status-menu').forEach(function(m) { m.remove(); });
-
-  // Build menu
-  var menu = document.createElement('div');
-  menu.className = 'status-menu';
-  menu.style.cssText = 'position:fixed;z-index:999;background:var(--surface);border:1px solid var(--border-md);'
-    + 'border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,0.12);padding:4px;min-width:130px;';
-
-  deliveryOpts.forEach(function(o) {
-    var item = document.createElement('div');
-    item.style.cssText = 'padding:7px 10px;border-radius:6px;cursor:pointer;font-size:12px;';
-    item.innerHTML = '<span class="pill ' + o.cls + '" style="pointer-events:none">' + o.label + '</span>';
-    item.onmouseenter = function() { item.style.background = 'var(--bg)'; };
-    item.onmouseleave = function() { item.style.background = ''; };
-    item.onclick = function(ev) { ev.stopPropagation(); updateStatus(idx, o.val); menu.remove(); };
-    menu.appendChild(item);
-  });
-
-  var r = dw.getBoundingClientRect();
-  menu.style.top = (r.bottom + 4) + 'px';
-  menu.style.left = r.left + 'px';
-  document.body.appendChild(menu);
-
-  setTimeout(function() {
-    document.addEventListener('click', function h() { menu.remove(); document.removeEventListener('click', h); });
-  }, 0);
-  return true;
-}
-
-function handleLinkClick(e) {
   var lb = e.target.closest('[data-link-idx]');
-  if (!lb) return false;
+  if (lb) { e.stopPropagation(); var idx2=parseInt(lb.dataset.linkIdx); _linkIdx=idx2; var pop=document.getElementById('linkPopup'); document.getElementById('linkInput').value=initiatives[idx2].link||''; document.getElementById('linkOpenBtn').disabled=!initiatives[idx2].link; var r2=lb.getBoundingClientRect(); pop.style.top=(r2.bottom+6)+'px'; pop.style.left=Math.min(r2.left,window.innerWidth-316)+'px'; pop.classList.add('show'); setTimeout(function(){document.getElementById('linkInput').focus();},50); return; }
 
-  e.stopPropagation();
-  var idx = parseInt(lb.dataset.linkIdx);
-  _linkIdx = idx;
-
-  var pop = document.getElementById('linkPopup');
-  document.getElementById('linkInput').value = initiatives[idx].link || '';
-  document.getElementById('linkOpenBtn').disabled = !initiatives[idx].link;
-
-  var r = lb.getBoundingClientRect();
-  pop.style.top = (r.bottom + 6) + 'px';
-  pop.style.left = Math.min(r.left, window.innerWidth - 316) + 'px';
-  pop.classList.add('show');
-  setTimeout(function() { document.getElementById('linkInput').focus(); }, 50);
-  return true;
-}
-
-function handleResetClick(e) {
   var fr = e.target.closest('[data-reset]');
-  if (!fr) return false;
-  var sfx = fr.dataset.reset;
-  if (sfx === 'q') resetFiltersQ(); else resetFilters();
-  return true;
-}
+  if (fr) { resetFilters(); return; }
 
-function handleSignatureClicks(e) {
   var sq = e.target.closest('[data-sq]');
-  if (sq) { sigRequest(sq.dataset.sq, decodeURIComponent(sq.dataset.sl), sq.dataset.se); return true; }
+  if (sq) { sigRequest(sq.dataset.sq, decodeURIComponent(sq.dataset.sl), sq.dataset.se); return; }
 
   var sr = e.target.closest('[data-sr]');
-  if (sr) { sigRequest(sr.dataset.sr, decodeURIComponent(sr.dataset.sl), sr.dataset.se); return true; }
+  if (sr) { sigRequest(sr.dataset.sr, decodeURIComponent(sr.dataset.sl), sr.dataset.se); return; }
 
   var sv = e.target.closest('[data-sv]');
-  if (sv) { sigVerify(sv.dataset.sv, decodeURIComponent(sv.dataset.sl), sv.dataset.se); return true; }
+  if (sv) { sigVerify(sv.dataset.sv, decodeURIComponent(sv.dataset.sl), sv.dataset.se); return; }
 
-  return false;
-}
-
-function handleWizardClicks(e) {
   var wd = e.target.closest('[data-wiz]');
   if (wd) {
     var wizId = wd.dataset.wiz;
-    var dir = parseInt(wd.dataset.wizDir);
-    var cur = _wizState[wizId] !== undefined ? _wizState[wizId] : 0;
+    var dir   = parseInt(wd.dataset.wizDir);
+    var cur   = _wizState[wizId] !== undefined ? _wizState[wizId] : 0;
     var items = wizId === 'frog' ? _wizItemsFrog : _wizItemsPatterns;
     wizSetIndex(wizId, cur + dir, items);
-    return true;
+    return;
   }
 
   var wt = e.target.closest('[data-wiz-toggle]');
   if (wt) {
-    var wtId = wt.dataset.wizToggle;
+    var wtId  = wt.dataset.wizToggle;
     var wtIdx = parseInt(wt.dataset.wizIdx);
     var wtItems = wtId === 'frog' ? _wizItemsFrog : _wizItemsPatterns;
     wizSetIndex(wtId, wtIdx, wtItems);
-    return true;
+    return;
   }
 
-  return false;
-}
-
-function handleResetSignaturesClick(e) {
   var rs = e.target.closest('#resetSigsBtn');
-  if (!rs) return false;
+  if (rs) {
+    if (!confirm('Reset all signatures? This cannot be undone.')) return;
+    fetch('/api/signatures', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({})})
+      .then(function() { _sigDone = {}; setPage(activeId, document.getElementById('pgname').textContent); })
+      .catch(function(e) { console.error(e); });
+    return;
+  }
 
-  if (!confirm('Reset all signatures? This cannot be undone.')) return true;
-  fetch('/api/signatures', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({}) })
-    .then(function() {
-      _sigDone = {};
-      setPage(activeId, document.getElementById('pgname').textContent);
-    })
-    .catch(function(e) { console.error(e); });
-  return true;
-}
-
-
-// ── Main Click Dispatcher ────────────────────────────────────────────────
-
-document.addEventListener('click', function(e) {
-  if (handlePageClick(e)) return;
-  if (handleCapTabClick(e)) return;
-  if (handleGanttGroupClick(e)) return;
-  if (handleTabClick(e)) return;
-  if (handleQuarterFilterClick(e)) return;
-  if (handleStatusClick(e)) return;
-  if (handleLinkClick(e)) return;
-  if (handleResetClick(e)) return;
-  if (handleSignatureClicks(e)) return;
-  if (handleWizardClicks(e)) return;
-  if (handleResetSignaturesClick(e)) return;
-
-  // Close popup if clicking outside
-  var pop = document.getElementById('linkPopup');
-  if (pop.classList.contains('show') && !pop.contains(e.target)) closePopup();
+  var pop2 = document.getElementById('linkPopup');
+  if (pop2.classList.contains('show') && !pop2.contains(e.target)) closePopup();
 });
-
-
-// ── Change & Keydown Handlers ────────────────────────────────────────────
 
 document.addEventListener('change', function(e) {
   var ss = e.target.closest('[data-status-idx]');
   if (ss) { updateStatus(parseInt(ss.dataset.statusIdx), ss.value); return; }
-
   var ff = e.target.closest('[data-filter]');
-  if (ff) {
-    var sfx = ff.dataset.filter;
-    if (sfx === 'q') applyFiltersQ(); else applyFilters();
-  }
+  if (ff) { applyFilters(); return; }
 });
 
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Enter') {
     var inp = e.target.closest('.sig-code-input');
-    if (inp) {
-      var pid = inp.id.replace('sig-inp-', '');
-      var sv2 = document.querySelector('[data-sv="' + pid + '"]');
-      if (sv2) sv2.click();
-    }
+    if (inp) { var pid = inp.id.replace('sig-inp-',''); var sv2 = document.querySelector('[data-sv="'+pid+'"]'); if(sv2) sv2.click(); }
   }
   if (e.key === 'Escape') closePopup();
 });
 
-
-// ── Status Updates ───────────────────────────────────────────────────────
-
-function updateStatus(idx, val) {
-  initiatives[idx].deliveryStatus = val;
-  var opt = deliveryOpts.filter(function(o) { return o.val === val; })[0] || deliveryOpts[0];
-
-  // Update all matching pills (table + kanban)
-  document.querySelectorAll('.ds-wrap[data-idx="' + idx + '"] .ds-pill').forEach(function(p) {
-    p.className = 'pill ds-pill ' + opt.cls;
-    p.textContent = opt.label;
-  });
-  document.querySelectorAll('.ds-select[data-status-idx="' + idx + '"]').forEach(function(s) {
-    s.value = val;
-  });
-
-  saveLocalState();
-
-  // Refresh table view scorecards
-  var aq = '';
-  ['Q1', 'Q2', 'Q3', 'Q4', 'all'].forEach(function(q) {
-    var b = document.getElementById('tbl-btn-' + q);
-    if (b && b.classList.contains('act')) aq = q;
-  });
-  if (!aq) aq = currentQ();
-  var label = aq === 'all' ? 'All Year' : aq;
-  var subset = aq === 'all' ? initiatives : initiatives.filter(function(i) { return i.quarter === aq; });
-  refreshCards(subset, label);
-
-  // Refresh quarterly progress bars
-  var qpWrap = document.querySelector('#rt-quarterly');
-  if (qpWrap) {
-    var oldBars = qpWrap.querySelector(':scope > div:first-child');
-    if (oldBars) {
-      var tmp = document.createElement('div');
-      tmp.innerHTML = buildQuarterlyProgressBars();
-      oldBars.replaceWith(tmp.firstChild);
-    }
-  }
-}
-
-
-// ── Link Popup ───────────────────────────────────────────────────────────
-
-function closePopup() {
-  document.getElementById('linkPopup').classList.remove('show');
-  _linkIdx = null;
-}
-
-function openCurrentLink() {
-  var u = document.getElementById('linkInput').value.trim();
-  if (u) window.open(u, '_blank');
-}
-
-function saveLink() {
-  if (_linkIdx === null) return;
-  var idx = _linkIdx;
-  initiatives[idx].link = document.getElementById('linkInput').value.trim();
-  closePopup();
-  var rows = document.querySelectorAll('#rt-table table tbody tr');
-  if (rows[idx]) rows[idx].cells[1].innerHTML = titleCellHtml(idx);
-  saveLocalState();
-}
-
-function clearLink() {
-  if (_linkIdx === null) return;
-  var idx = _linkIdx;
-  initiatives[idx].link = '';
-  closePopup();
-  var rows = document.querySelectorAll('#rt-table table tbody tr');
-  if (rows[idx]) rows[idx].cells[1].innerHTML = titleCellHtml(idx);
-  saveLocalState();
-}
-
-
-// ── Sidebar Toggle ───────────────────────────────────────────────────────
-
-function toggleSb() {
-  collapsed = !collapsed;
-  document.getElementById('sb').classList.toggle('col', collapsed);
-  document.getElementById('togico').innerHTML = collapsed
-    ? '<path d="M4 2l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>'
-    : '<path d="M6 2L3 5l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>';
-}
-
-
-// ── Auth ──────────────────────────────────────────────────────────────────
+function updateStatus(idx,val){initiatives[idx].deliveryStatus=val;var opt=deliveryOpts.filter(function(o){return o.val===val;})[0]||deliveryOpts[0];var p=document.getElementById('ds-pill-'+idx);if(p){p.className='pill ds-pill '+opt.cls;p.textContent=opt.label;}saveLocalState();}
+function closePopup(){document.getElementById('linkPopup').classList.remove('show');_linkIdx=null;}
+function openCurrentLink(){var u=document.getElementById('linkInput').value.trim();if(u)window.open(u,'_blank');}
+function saveLink(){if(_linkIdx===null)return;var idx=_linkIdx;initiatives[idx].link=document.getElementById('linkInput').value.trim();closePopup();var rows=document.querySelectorAll('#rt-table table tbody tr');if(rows[idx])rows[idx].cells[1].innerHTML=titleCellHtml(idx);saveLocalState();}
+function clearLink(){if(_linkIdx===null)return;var idx=_linkIdx;initiatives[idx].link='';closePopup();var rows=document.querySelectorAll('#rt-table table tbody tr');if(rows[idx])rows[idx].cells[1].innerHTML=titleCellHtml(idx);saveLocalState();}
+function toggleSb(){collapsed=!collapsed;document.getElementById('sb').classList.toggle('col',collapsed);document.getElementById('togico').innerHTML=collapsed?'<path d="M4 2l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>':'<path d="M6 2L3 5l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>';}
 
 function login() {
-  var e = document.getElementById('em').value.trim();
-  var p = document.getElementById('pw').value;
-
-  if (e === 'condoadmin@verygoodpeeps.co' && p === 'HelixCapital') {
+  var e = document.getElementById('em').value.trim(), p = document.getElementById('pw').value;
+  if (e === 'condoadmin@inmarket.ai' && p === 'HelixCapital') {
     document.getElementById('auth').classList.add('gone');
-    setTimeout(function() { document.getElementById('auth').style.display = 'none'; }, 300);
+    setTimeout(function(){document.getElementById('auth').style.display='none';},300);
     document.getElementById('app').classList.add('show');
-
     var name = e.split('@')[0];
-    document.getElementById('un').textContent = name.charAt(0).toUpperCase() + name.slice(1);
-
+    // avatar is the frog SVG, don't overwrite
+    document.getElementById('un').textContent = name.charAt(0).toUpperCase()+name.slice(1);
     Promise.all([
       loadSavedSignatures(),
-      new Promise(function(resolve) { loadData(resolve); })
-    ]).then(function() {
-      buildColorMaps();
+      new Promise(function(resolve){loadData(resolve);})
+    ]).then(function(){
       buildNav();
       document.getElementById('content').innerHTML = PAGES[activeId]();
-      setTimeout(ganttTooltipInit, 50);
-      if (obShouldShow()) setTimeout(obStart, 400);
+      if (obShouldShow()) { setTimeout(obStart, 400); }
     });
   } else {
-    document.getElementById('err').textContent = 'Invalid credentials. Try: condoadmin@verygoodpeeps.co / HelixCapital';
+    document.getElementById('err').textContent = 'Invalid credentials. Try: condoadmin@inmarket.ai / HelixCapital';
   }
 }
 
 function logout() {
   document.getElementById('app').classList.remove('show');
   document.getElementById('auth').style.display = 'flex';
-  setTimeout(function() { document.getElementById('auth').classList.remove('gone'); }, 10);
+  setTimeout(function(){document.getElementById('auth').classList.remove('gone');},10);
   document.getElementById('pw').value = '';
   document.getElementById('err').textContent = '';
 }
 
-
-// ── User Popover ─────────────────────────────────────────────────────────
-
-var _userPopOpen = false;
-
-function userPopClose() {
-  _userPopOpen = false;
-  var el = document.getElementById('user-popover');
-  if (el) el.remove();
-}
-
-function userPopToggle(e) {
-  if (e.target.closest('#logoutBtn') || e.target.closest('.logoutbtn')) return;
-  if (_userPopOpen) { userPopClose(); return; }
-  _userPopOpen = true;
-
-  var box = document.getElementById('userBox');
-  var rect = box.getBoundingClientRect();
-  var userName = document.getElementById('un').textContent;
-
-  var pop = document.createElement('div');
-  pop.id = 'user-popover';
-  pop.style.cssText = 'position:fixed;z-index:910;background:var(--surface);border:1px solid var(--border);'
-    + 'border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,.12);width:220px;padding:6px 0;'
-    + 'left:' + rect.left + 'px;bottom:' + (window.innerHeight - rect.top + 8) + 'px;';
-
-  var menuItem = function(icon, label, sublabel, dataAttr) {
-    return '<div data-userpop="' + dataAttr + '" style="padding:10px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:background .1s"'
-      + ' onmouseover="this.style.background=\'var(--bg)\'" onmouseout="this.style.background=\'\'">'
-      + icon + '<div><div style="font-size:12px;font-weight:500;color:var(--text)">' + label + '</div>'
-      + (sublabel ? '<div style="font-size:11px;color:var(--faint)">' + sublabel + '</div>' : '')
-      + '</div></div>';
-  };
-
-  pop.innerHTML = menuItem(
-    '<svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="5.5" r="2.5" stroke="currentColor" stroke-width="1.4"/><path d="M3 14c0-2.8 2.2-5 5-5s5 2.2 5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>',
-    'Profile', userName, 'profile'
-  ) + menuItem(
-    '<svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.4"/><path d="M2 8h12M8 2c-1.5 1.5-2.5 3.5-2.5 6s1 4.5 2.5 6c1.5-1.5 2.5-3.5 2.5-6s-1-4.5-2.5-6" stroke="currentColor" stroke-width="1.3"/></svg>',
-    'Language', 'Passive Aggressive', 'language'
-  )
-  + '<div style="height:1px;background:var(--border);margin:4px 12px"></div>'
-  + menuItem(
-    '<svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M8 2L3 4.5V7c0 3.5 2.1 6.5 5 7.5 2.9-1 5-4 5-7.5V4.5L8 2z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M6 8.5l1.5 1.5L10 7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-    'Privacy Policy', null, 'privacy'
-  );
-
-  document.body.appendChild(pop);
-
-  setTimeout(function() {
-    document.addEventListener('click', function h(ev) {
-      if (!pop.contains(ev.target) && !box.contains(ev.target)) {
-        userPopClose();
-        document.removeEventListener('click', h);
-      }
-    });
-  }, 0);
-}
-
-
-// ── Init ─────────────────────────────────────────────────────────────────
-
+// ── Init ──────────────────────────────────────────────────────────────────────
 var m = new Date().getMonth(), y = new Date().getFullYear();
-document.getElementById('qbadge').textContent = 'Q' + (m < 3 ? 1 : m < 6 ? 2 : m < 9 ? 3 : 4) + ' ' + y;
-
+document.getElementById('qbadge').textContent = 'Q'+(m<3?1:m<6?2:m<9?3:4)+' '+y;
 document.getElementById('loginBtn').addEventListener('click', login);
 document.getElementById('logoutBtn').addEventListener('click', logout);
 document.getElementById('tog').addEventListener('click', toggleSb);
@@ -487,6 +169,5 @@ document.getElementById('linkOpenBtn').addEventListener('click', openCurrentLink
 document.getElementById('linkSaveBtn').addEventListener('click', saveLink);
 document.getElementById('linkClearBtn').addEventListener('click', clearLink);
 document.getElementById('obReplayBtn').addEventListener('click', function() { obReset(); obStart(); });
-document.getElementById('pw').addEventListener('keydown', function(e) { if (e.key === 'Enter') login(); });
-document.getElementById('em').addEventListener('keydown', function(e) { if (e.key === 'Enter') login(); });
-document.getElementById('userBox').addEventListener('click', userPopToggle);
+document.getElementById('pw').addEventListener('keydown', function(e){if(e.key==='Enter')login();});
+document.getElementById('em').addEventListener('keydown', function(e){if(e.key==='Enter')login();});
