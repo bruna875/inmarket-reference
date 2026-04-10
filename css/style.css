@@ -279,7 +279,12 @@ tr:hover .link-btn,.link-btn.has-link{opacity:1;color:var(--accent)}
 .qprog-foot-label{font-size:10px;color:var(--faint)}
 .qprog-foot-val{font-size:14px;font-weight:500;color:#66C220}
 .qprog-foot-sub{font-size:11px;font-weight:400;color:var(--muted)}
-/* ── Capacity ── */
+/* ── Capacity placeholder ── */
+.cap-placeholder{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:48px 32px;text-align:center;max-width:480px}
+.cap-placeholder-icon{margin:0 auto 16px;display:block;opacity:.3}
+.cap-placeholder-title{font-size:15px;font-weight:500;color:var(--text);margin-bottom:8px}
+.cap-placeholder-desc{font-size:13px;color:var(--faint)}
+/* ── Capacity (production-ready, unused until capacity.js is wired) ── */
 .cap-empty{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:48px 32px;text-align:center;font-size:13px;color:var(--faint)}
 .cap-scorecard-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:20px}
 .cap-scorecard{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center}
