@@ -159,6 +159,92 @@ function capScorecardHtml(label, used, budget) {
 }
 
 var _capQ = null;
+var _capTab = 'allocation';
+
+function capLeaderBlock(leaderName, role, inits) {
+  var totD = 0, totE = 0, totP = 0;
+  inits.forEach(function(ini) { totD += ini.design; totE += ini.engineering; totP += ini.product; });
+  var total = totD + totE + totP;
+  var initRows = inits.map(function(ini) {
+    return '<tr style="border-top:0.5px solid var(--border)">'
+      + '<td style="padding:8px 8px 8px 0;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px">' + ini.title + '</td>'
+      + '<td style="padding:8px">' + ini.team + '</td>'
+      + '<td style="padding:8px">' + driverBadge(ini.driver) + '</td>'
+      + '<td style="padding:8px">' + themeBadge(ini.theme) + '</td>'
+      + '<td style="padding:8px;text-align:right;color:var(--muted)">' + (ini.design ? Math.round(ini.design) + 'd' : '\u2014') + '</td>'
+      + '<td style="padding:8px;text-align:right;color:var(--muted)">' + (ini.engineering ? Math.round(ini.engineering) + 'd' : '\u2014') + '</td>'
+      + '<td style="padding:8px;text-align:right;color:var(--muted)">' + (ini.product ? Math.round(ini.product) + 'd' : '\u2014') + '</td>'
+      + '<td style="padding:8px;text-align:right;font-weight:500;color:var(--text)">' + Math.round(ini.total) + 'd</td>'
+      + '<td style="padding:8px 0 8px 8px;text-align:right">' + roiHtml(ini.roi) + '</td>'
+      + '</tr>';
+  }).join('');
+
+  return '<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;margin-bottom:16px;overflow:hidden">'
+    + '<div style="padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">'
+    + '<div><div style="font-size:14px;font-weight:500;color:var(--text)">' + leaderName + '</div>'
+    + '<div style="font-size:11px;color:var(--faint)">' + role + '</div></div>'
+    + '<span style="font-size:11px;color:var(--muted);background:var(--bg);padding:2px 10px;border-radius:20px">' + inits.length + ' initiative' + (inits.length !== 1 ? 's' : '') + ' \u00b7 ' + Math.round(total) + 'd total</span>'
+    + '</div>'
+    + '<div style="padding:0 20px 16px">'
+    + '<table style="width:100%;border-collapse:collapse;font-size:12px">'
+    + '<thead><tr style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.4px;color:var(--faint)">'
+    + '<th style="text-align:left;padding:12px 8px 4px 0">Initiative</th>'
+    + '<th style="text-align:left;padding:12px 8px 4px">Team</th>'
+    + '<th style="text-align:left;padding:12px 8px 4px">Driver</th>'
+    + '<th style="text-align:left;padding:12px 8px 4px">Theme</th>'
+    + '<th style="text-align:right;padding:12px 8px 4px">Design</th>'
+    + '<th style="text-align:right;padding:12px 8px 4px">Engineering</th>'
+    + '<th style="text-align:right;padding:12px 8px 4px">Product</th>'
+    + '<th style="text-align:right;padding:12px 8px 4px">Total</th>'
+    + '<th style="text-align:right;padding:12px 0 4px 8px">ROI</th>'
+    + '</tr></thead><tbody>' + initRows + '</tbody></table>'
+    + '</div></div>';
+}
+
+function capRenderByLeader(q) {
+  var subset = q === 'all' ? initiatives.filter(function(i){return i.quarter!=='Backlog';}) : q === 'backlog' ? initiatives.filter(function(i){return i.quarter==='Backlog';}) : initiatives.filter(function(i){return i.quarter===q;});
+
+  var engLeaders = {}, prodLeaders = {};
+  subset.forEach(function(i) {
+    var d = parseFloat(i.designDays) || 0;
+    var e = parseFloat(i.engineeringDays) || 0;
+    var p = parseFloat(i.productDays) || 0;
+    var ini = {title:i.title,design:d,engineering:e,product:p,total:d+e+p,driver:i.driver,theme:i.theme,team:i.team,roi:i.roi};
+    if (i.techLead) {
+      if (!engLeaders[i.techLead]) engLeaders[i.techLead] = [];
+      engLeaders[i.techLead].push(ini);
+    }
+    if (i.productOwner) {
+      if (!prodLeaders[i.productOwner]) prodLeaders[i.productOwner] = [];
+      prodLeaders[i.productOwner].push(ini);
+    }
+  });
+
+  var engNames = Object.keys(engLeaders); engNames.sort();
+  var prodNames = Object.keys(prodLeaders); prodNames.sort();
+
+  var engBlocks = engNames.map(function(name) {
+    return capLeaderBlock(name, 'Engineering Lead', engLeaders[name]);
+  }).join('');
+
+  var prodBlocks = prodNames.map(function(name) {
+    return capLeaderBlock(name, 'Product Lead', prodLeaders[name]);
+  }).join('');
+
+  if (!engBlocks && !prodBlocks) {
+    return '<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:48px 32px;text-align:center">'
+      + '<div style="font-size:13px;color:var(--faint)">No initiatives for ' + (q === 'all' ? 'All Year' : q) + '</div></div>';
+  }
+
+  var html = '';
+  if (engBlocks) {
+    html += '<div style="font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.5px;color:var(--faint);margin-bottom:12px">Engineering leads</div>' + engBlocks;
+  }
+  if (prodBlocks) {
+    html += '<div style="font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.5px;color:var(--faint);margin:20px 0 12px">Product leads</div>' + prodBlocks;
+  }
+  return html;
+}
 
 function capRender(q) {
   _capQ = q || currentQ();
@@ -185,11 +271,7 @@ function capRender(q) {
       + '<div style="font-size:13px;color:var(--faint)">No initiatives for ' + label + '</div></div>';
   }
 
-  return '<div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px">'
-    + '<div><div class="ptitle">Team Capacity</div><div class="psub" style="margin-bottom:0">Budget utilization by team and discipline \u2014 Design, Engineering, Product</div></div>'
-    + '</div>'
-    + buildQFilter('cap','switchCapQuarter')
-    + '<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:20px">'
+  var allocContent = '<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:20px">'
     + capScorecardHtml('Total engineering', totE, budE)
     + capScorecardHtml('Total product', totP, budP)
     + capScorecardHtml('Total design', totD, budD)
@@ -200,6 +282,27 @@ function capRender(q) {
     + '<span style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted)"><span style="width:8px;height:8px;border-radius:2px;background:#BA7517"></span>80\u201395%</span>'
     + '<span style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted)"><span style="width:8px;height:8px;border-radius:2px;background:#A32D2D"></span>Over 95%</span>'
     + '</div>';
+
+  var leaderContent = capRenderByLeader(_capQ);
+
+  return '<div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px">'
+    + '<div><div class="ptitle">Team Capacity</div><div class="psub" style="margin-bottom:0">Budget utilization by team and discipline \u2014 Design, Engineering, Product</div></div>'
+    + '</div>'
+    + '<div class="tabnav"><button class="tabitem' + (_capTab === 'allocation' ? ' act' : '') + '" data-captab="allocation">Team Allocation</button><button class="tabitem' + (_capTab === 'leader' ? ' act' : '') + '" data-captab="leader">By Leader</button></div>'
+    + buildQFilter('cap','switchCapQuarter')
+    + '<div id="cap-allocation" style="' + (_capTab === 'allocation' ? '' : 'display:none') + '">' + allocContent + '</div>'
+    + '<div id="cap-leader" style="' + (_capTab === 'leader' ? '' : 'display:none') + '">' + leaderContent + '</div>';
+}
+
+function switchCapTab(tab) {
+  _capTab = tab;
+  document.querySelectorAll('[data-captab]').forEach(function(btn) {
+    btn.classList.toggle('act', btn.dataset.captab === tab);
+  });
+  var alloc = document.getElementById('cap-allocation');
+  var leader = document.getElementById('cap-leader');
+  if (alloc) alloc.style.display = tab === 'allocation' ? '' : 'none';
+  if (leader) leader.style.display = tab === 'leader' ? '' : 'none';
 }
 
 function switchCapQuarter(q) {
