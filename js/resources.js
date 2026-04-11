@@ -31,18 +31,6 @@ var _wizItemsPatterns = [
     desc: '<b>When someone finally exits \u2014 obviously pushed \u2014 a new wound opens.</b> The departure itself is experienced as an act of aggression. After everything that had been done to make that person leave, the act of leaving is still taken personally. <b>Brought to the next level.</b> New narratives emerge: they weren\u2019t loyal, they gave up, they burned bridges, they \u201cchose wrong.\u201d Those who stayed may find the exit deployed as retroactive evidence for every prior accusation. And the person who left \u2014 now absent, unable to correct the record, no longer part of the room where things are said \u2014 becomes a permanent, convenient explanation for whatever goes wrong next. <b>Eh no! Not this time, so sorry! Kindness is a choice, not a weakness, and can be retired at any time.</b>'
   },
   {
-    label: 'Step 7',
-    title: 'Empathy Exercise',
-    html: '<div class="emp-intro">Before you close this chapter \u2014 one more thing.</div>'
-      + '<div class="emp-cards">'
-      + '<div class="emp-card"><div class="emp-num">1</div><div class="emp-text">Digest the behaviors described.</div></div>'
-      + '<div class="emp-card"><div class="emp-num">2</div><div class="emp-text">Replace the victim\u2019s face with the one of your beloved ones: your daughter, your son, your mum, your wife, your husband.</div></div>'
-      + '<div class="emp-card"><div class="emp-num">3</div><div class="emp-text">Acknowledge your emotions and let them enter: is there anger, discomfort, sadness, guiltiness?</div></div>'
-      + '<div class="emp-card emp-card--firm"><div class="emp-num">4</div><div class="emp-text">I know you are looking for a self-indulging excuse. Stay focused. Don\u2019t run away from the emotion.</div></div>'
-      + '<div class="emp-card emp-card--close"><div class="emp-num">5</div><div class="emp-text">Be compassionate.</div></div>'
-      + '</div>'
-  },
-  {
     label: 'Final Quiz',
     title: 'How Well Did You Recognize the Pattern?',
     html: '<div class="quiz-prompt">Based on everything you just read \u2014 what is the most accurate clinical description of the behavior pattern?</div>'
@@ -64,6 +52,28 @@ var _wizItemsPatterns = [
       + '</div>'
       + '</div>'
       + '<div id="quiz-result"></div>'
+  },
+  {
+    label: 'Step 7',
+    title: 'Empathy Exercise',
+    html: '<div class="emp-intro">Before you close this chapter \u2014 one more thing.</div>'
+      + '<div class="emp-row">'
+
+      + '<div class="emp-card"><div class="emp-emoji">📋</div><div class="emp-num">1</div><div class="emp-text">Digest the behaviors described.</div></div>'
+      + '<div class="emp-connector"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'
+
+      + '<div class="emp-card"><div class="emp-emoji">🪞</div><div class="emp-num">2</div><div class="emp-text">Replace the victim\u2019s face with the one of your beloved ones: your daughter, your son, your mum, your wife, your husband.</div></div>'
+      + '<div class="emp-connector"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'
+
+      + '<div class="emp-card"><div class="emp-emoji">🌊</div><div class="emp-num">3</div><div class="emp-text">Acknowledge your emotions and let them enter: is there anger, discomfort, sadness, guiltiness?</div></div>'
+      + '<div class="emp-connector"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'
+
+      + '<div class="emp-card emp-card--yellow"><div class="emp-emoji">🎯</div><div class="emp-num">4</div><div class="emp-text">I know you are looking for a self-indulging excuse. Stay focused. Don\u2019t run away from the emotion.</div></div>'
+      + '<div class="emp-connector"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'
+
+      + '<div class="emp-card"><div class="emp-emoji">🕊️</div><div class="emp-num">5</div><div class="emp-text">Be compassionate.</div></div>'
+
+      + '</div>'
   }
 ];
 
