@@ -405,7 +405,7 @@ document.getElementById('upsellBadge').addEventListener('click', function() {
   overlay.innerHTML =
     '<div class="upsell-modal">'
     + '<div class="upsell-modal-title">Get in touch with your Adulting Specialist</div>'
-    + '<div class="upsell-modal-desc">Own it. Feel it. Talk it out.</div>'
+    + '<div class="upsell-modal-desc">Upgrade and unlock features like empathy, accountability, conflict management and emotional intelligence.</div>'
     + '<img class="upsell-modal-photo" src="https://res.cloudinary.com/dhfrgr4qd/image/upload/v1775846605/jennifer_salonga_pjoqbz.jpg" alt="Jennifer Salonga"/>'
     + '<div class="upsell-modal-info">'
     + '<div class="upsell-modal-name">Jennifer Salonga</div>'
