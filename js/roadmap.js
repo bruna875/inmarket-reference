@@ -194,9 +194,16 @@ function ganttTooltipInit() {
         + '</div>';
       tooltip.style.display = 'block';
       var rect = bar.getBoundingClientRect();
-      var wrapRect = bar.closest('.gantt-wrap').getBoundingClientRect();
-      tooltip.style.left = (rect.left - wrapRect.left + rect.width / 2 - 120) + 'px';
-      tooltip.style.top = (rect.top - wrapRect.top - tooltip.offsetHeight - 8) + 'px';
+      var tipW = tooltip.offsetWidth || 240;
+      var tipH = tooltip.offsetHeight;
+      var left = rect.left + rect.width / 2 - tipW / 2;
+      var top  = rect.top - tipH - 8;
+      // clamp horizontally within viewport
+      left = Math.max(8, Math.min(left, window.innerWidth - tipW - 8));
+      // if it would go above viewport, show below the bar instead
+      if (top < 8) top = rect.bottom + 8;
+      tooltip.style.left = left + 'px';
+      tooltip.style.top  = top  + 'px';
     });
     bar.addEventListener('mouseleave', function() {
       tooltip.style.display = 'none';
