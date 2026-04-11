@@ -30,7 +30,7 @@ function renderProfile() {
     +   '</div>'
     + '</div>'
     + '<div class="prof-desc">'
-    +   'Manages the shared spaces, enforces the rules nobody agreed to, and keeps the operations running so everyone else can pretend they live in a meritocracy. '
+    +   'Manages the shared spaces, enforces the rules nobody agreed to, and keeps the operations running so everyone else can pretend they are delivering results. '
     +   'Responsible for structural decisions, access control, and the kind of coordination work that only becomes visible when it stops happening.'
     + '</div>'
 

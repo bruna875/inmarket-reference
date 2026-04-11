@@ -27,7 +27,7 @@ function renderLoader() {
     + '<div class="loader-phrases">'
     + '<div class="ld-phrase" style="animation-delay:0s">pulling roadmap data and vibe coding dashboard\u2026</div>'
     + '<div class="ld-phrase" style="animation-delay:3s">exposing manipulations and debunking defamation\u2026</div>'
-    + '<div class="ld-phrase" style="animation-delay:6s">protecting dignity\u2026</div>'
+    + '<div class="ld-phrase" style="animation-delay:6s">protecting dignity and getting it off my chest\u2026</div>'
     + '</div>'
     + '</div>';
 }
