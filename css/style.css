@@ -801,6 +801,33 @@ tr:hover .link-btn, .link-btn.has-link { opacity: 1; color: var(--accent) }
 .quiz-result-correct { color: #3B6D11 }
 .quiz-result-wrong { color: #A93226 }
 
+/* ── Empathy Exercise ───────────────────────────────────────────────────────── */
+.emp-intro {
+  font-size: 12px; color: var(--faint); font-style: italic;
+  margin-bottom: 14px; line-height: 1.6;
+}
+.emp-cards { display: flex; flex-direction: column; gap: 8px; margin-bottom: 4px }
+.emp-card {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 13px 16px; border-radius: 10px;
+  background: var(--bg); border: 1px solid var(--border);
+}
+.emp-card--firm {
+  background: #FFF8F0; border-color: #EDCFA0;
+}
+.emp-card--close {
+  background: #F0F7E8; border-color: #B8D49A;
+}
+.emp-num {
+  flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%;
+  background: var(--surface); border: 1.5px solid var(--border-md);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 600; color: var(--muted); margin-top: 1px;
+}
+.emp-card--firm .emp-num { border-color: #EDCFA0; color: #A0702A }
+.emp-card--close .emp-num { border-color: #B8D49A; color: #3B6D11 }
+.emp-text { font-size: 12.5px; color: var(--text); line-height: 1.65 }
+
 /* ── Signature ──────────────────────────────────────────────────────────────── */
 .sig-box {
   background: var(--surface); border: 1px solid var(--border);

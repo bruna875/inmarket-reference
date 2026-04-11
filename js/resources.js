@@ -8,12 +8,12 @@ var _wizItemsPatterns = [
   {
     label: 'Chapter 1',
     title: 'Something Deeply Offensive Happened',
-    desc: 'It started with a disruption to the natural order. Professionalizing the Company. As a senior professional, you don\u2019t consider it your job to prioritize below-your-level design tasks on secondary app projects over strategic contributions to major company objectives. You start working closely with a different manager \u2014 one who was assigned to you. He seems liking you. Outrageously, at least for someone who had always considered you part of their personal orbit. By any reasonable standard, these were entirely unremarkable organizational changes. But something about them has been registered as a wound. Crisis. Betrayal. Intolerable offense. Deep, personal, unforgivable. And that changed everything.'
+    desc: 'It started with a disruption to the natural order. Professionalizing the Company. You underestimate the identitarian impact of design tasks on a secondary app project which were a bit frustrating for a 16-years experienced product leader; culpably, you preferred focusing on your contributions to major company objectives assigned to you (without giving you any tool to achieve them). You start working closely with a different manager \u2014 one who was assigned to you. He seems liking you. <b>Outrageously, at least for someone who had always considered you part of their personal orbit.</b> By any reasonable standard, these were entirely unremarkable organizational changes. But something about them has been registered as a wound. <b>Crisis. Betrayal. Intolerable offense. Deep, personal, unforgivable.</b> And that changed everything - as you will discover only years later.'
   },
   {
     label: 'Chapter 2',
     title: 'Suddenly, You Were Always the Problem',
-    desc: 'The disruption needed an explanation \u2014 and one arrived quickly, efficiently, and with remarkable consistency across every audience. Suddenly, you start being described as incompetent, lazy, slow, disloyal, or \u2014 a classic \u2014 \u201cnot a culture fit.\u201d You even get labeled as \u201cunstable\u201d after four months of obsessive control and harassment. Stories circulate that bear little resemblance to events as they actually occurred. The manipulation becomes massive. Conversations happen exclusively behind closed doors: almost a year spent talking about who you are. The reputational campaign wasn\u2019t advertised as one. It was framed as \u201chonest feedback,\u201d or \u201cconcerns I simply had to raise.\u201d The goal was singular: to establish you as the source of every problem \u2014 preferably before you had a chance to name what was happening.'
+    desc: 'The disruption needed an explanation \u2014 and one arrived quickly, efficiently, and with remarkable consistency across every audience. Suddenly, you start being described as incompetent, lazy, slow, disloyal, or \u2014 a classic \u2014 \u201cnot a culture fit.\u201d <b>You even get labeled as \u201cunstable\u201d after four months of obsessive control and harassment</b>. Stories circulate that bear little resemblance to events as they actually occurred. The manipulation becomes massive. <b>Conversations happen exclusively behind closed doors: almost a year spent talking about who you are, but you are never in the room</b>. The reputational campaign wasn\u2019t advertised as one. It was framed as \u201chonest feedback,\u201d or \u201cconcerns I simply had to raise.\u201d The goal was singular: to establish you as the source of every problem \u2014 preferably before you had a chance to name what was happening. Of course: <b> before, you were just a "betrayal". But now there is more: you are "the unloyal usurpator".</b> '
   },
   {
     label: 'Chapter 3',
@@ -23,12 +23,24 @@ var _wizItemsPatterns = [
   {
     label: 'Chapter 4',
     title: 'They Weren\u2019t All True Believers',
-    desc: 'Few of them genuinely believed the narrative might be true. The majority sensed it was one-sided but found that the social cost of curiosity was higher than the cost of alignment. A few simply needed proximity to power more than they needed accuracy. Together, they formed a functional system: some carried the message, some enforced the silence, some just declined to contradict. They were not, for the most part, villains. Most were people trying to navigate an environment where the rules of engagement had quietly shifted. That\u2019s precisely what made them effective. To him.'
+    desc: 'Few of them genuinely believed the narrative might be true. <b>The majority sensed it was one-sided but found that the social cost of curiosity was higher than the cost of alignment.</b> A few simply needed proximity to power more than they needed accuracy. Together, <b>they formed a functional system:</b> some carried the message, some enforced the silence, some just declined to contradict. They were not, for the most part, villains. Most were people trying to navigate an environment where the rules of engagement had quietly shifted. That\u2019s precisely what made them effective. To him.'
   },
   {
     label: 'Chapter 5',
     title: 'Leaving Was the Final Insult',
-    desc: 'When someone finally exits \u2014 obviously pushed \u2014 a new wound opens. The departure itself is experienced as an act of aggression. After everything that had been done to make that person leave, the act of leaving is still taken personally. Brought to the next level. New narratives emerge: they weren\u2019t loyal, they gave up, they burned bridges, they \u201cchose wrong.\u201d Those who stayed may find the exit deployed as retroactive evidence for every prior accusation. And the person who left \u2014 now absent, unable to correct the record, no longer part of the room where things are said \u2014 becomes a permanent, convenient explanation for whatever goes wrong next.'
+    desc: '<b>When someone finally exits \u2014 obviously pushed \u2014 a new wound opens.</b> The departure itself is experienced as an act of aggression. After everything that had been done to make that person leave, the act of leaving is still taken personally. <b>Brought to the next level.</b> New narratives emerge: they weren\u2019t loyal, they gave up, they burned bridges, they \u201cchose wrong.\u201d Those who stayed may find the exit deployed as retroactive evidence for every prior accusation. And the person who left \u2014 now absent, unable to correct the record, no longer part of the room where things are said \u2014 becomes a permanent, convenient explanation for whatever goes wrong next. <b>Eh no! Not this time, so sorry! Kindness is a choice, not a weakness, and can be retired at any time.</b>'
+  },
+  {
+    label: 'Step 7',
+    title: 'Empathy Exercise',
+    html: '<div class="emp-intro">Before you close this chapter \u2014 one more thing.</div>'
+      + '<div class="emp-cards">'
+      + '<div class="emp-card"><div class="emp-num">1</div><div class="emp-text">Digest the behaviors described.</div></div>'
+      + '<div class="emp-card"><div class="emp-num">2</div><div class="emp-text">Replace the victim\u2019s face with the one of your beloved ones: your daughter, your son, your mum, your wife, your husband.</div></div>'
+      + '<div class="emp-card"><div class="emp-num">3</div><div class="emp-text">Acknowledge your emotions and let them enter: is there anger, discomfort, sadness, guiltiness?</div></div>'
+      + '<div class="emp-card emp-card--firm"><div class="emp-num">4</div><div class="emp-text">I know you are looking for a self-indulging excuse. Stay focused. Don\u2019t run away from the emotion.</div></div>'
+      + '<div class="emp-card emp-card--close"><div class="emp-num">5</div><div class="emp-text">Be compassionate.</div></div>'
+      + '</div>'
   },
   {
     label: 'Final Quiz',
@@ -43,7 +55,7 @@ var _wizItemsPatterns = [
       + '<div class="quiz-card" data-quiz-option="correct">'
       + '<div class="quiz-card-selector"></div>'
       + '<div class="quiz-card-content"><div class="quiz-card-title">Narcissistic Personality Disorder with Antisocial and Paranoid Traits</div>'
-      + '<div class="quiz-card-desc">Also known as Malignant Narcissism. Characterized by grandiosity, absence of empathy, obsessive need for control, and a tendency toward suspicious, persecutory thinking.</div></div>'
+      + '<div class="quiz-card-desc">Also known as Malignant Narcissism. Characterized by grandiosity, absence of empathy, obsessive need for control, and a tendency toward suspicious, persecutory thinking. Forget they can change: it is egosyntonic. </div></div>'
       + '</div>'
       + '<div class="quiz-card" data-quiz-option="wrong2">'
       + '<div class="quiz-card-selector"></div>'
