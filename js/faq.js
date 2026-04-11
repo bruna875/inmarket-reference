@@ -1,10 +1,10 @@
 // faq.js — Data Directory page
 
 var FAQ_CATEGORIES = [
-  {id: 'privacy',    label: 'Privacy & Data Protection'},
-  {id: 'access',     label: 'Access Requests'},
-  {id: 'retention',  label: 'Data Retention'},
-  {id: 'compliance', label: 'Regulatory Compliance'}
+  {id: 'privacy',    label: 'Privacy',    fullLabel: 'Privacy & Data Protection'},
+  {id: 'access',     label: 'Access',     fullLabel: 'Access Requests'},
+  {id: 'retention',  label: 'Retention',  fullLabel: 'Data Retention'},
+  {id: 'compliance', label: 'Compliance', fullLabel: 'Regulatory Compliance'}
 ];
 
 var FAQ_ITEMS = [
@@ -27,7 +27,7 @@ var _faqOpenIdx   = -1;
 
 function faqCatLabel(catId) {
   var c = FAQ_CATEGORIES.filter(function(x) { return x.id === catId; })[0];
-  return c ? c.label : catId;
+  return c ? (c.fullLabel || c.label) : catId;
 }
 
 function faqFilterItems() {
@@ -37,10 +37,16 @@ function faqFilterItems() {
 
 function faqRenderTabs() {
   var tabs = [{id:'all', label:'All'}].concat(FAQ_CATEGORIES);
-  return tabs.map(function(c) {
+  var chips = tabs.map(function(c) {
     var act = c.id === _faqActiveCat;
     return '<button class="dd-tab' + (act ? ' act' : '') + '" data-faqcat="' + c.id + '">' + c.label + '</button>';
   }).join('');
+  return '<div class="dd-chips">' + chips + '</div>'
+    + '<div class="dd-tab-divider"></div>'
+    + '<button class="dd-calc-btn" id="openCalcBtn">'
+    + '<svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="12" height="12" rx="2"/><path d="M5 5h2M9 5h2M5 8h2M9 8h2M5 11h2M9 11h2"/></svg>'
+    + 'Risk Calculator'
+    + '</button>';
 }
 
 function faqRenderAccordion() {
@@ -85,10 +91,10 @@ function renderFaqDsar() {
   _faqOpenIdx   = -1;
 
   return '<div class="page-header">'
-    + '<div><div class="ptitle">Data Directory</div><div class="psub psub-flush">Frequently asked questions and Data Subject Access Request reference</div></div>'
+    + '<div><div class="ptitle">Data Directory</div><div class="psub psub-flush">FAQ and Data Subject Access Request reference</div></div>'
     + '<button class="faq-dsar-btn" id="dsarReportBtn">'
     + '<svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M4 2h5l4 4v8a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M9 2v4h4" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M6 9h4M6 11.5h3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>'
-    + 'Convert DSAR Directory in Board Report</button>'
+    + 'Board Report</button>'
     + '</div>'
 
     // ── Tabs (All + categories) ──────────────────────────────
@@ -99,12 +105,14 @@ function renderFaqDsar() {
     // ── Accordion ────────────────────────────────────────────
     + '<div class="faq-panel-wrap">'
     + '<div id="faq-panel">' + faqRenderAccordion() + '</div>'
-    + '</div>'
-    + '<div class="dd-section-divider"></div>'
-    + renderCalculator();
+    + '</div>';
 }
 
 document.addEventListener('click', function(e) {
+  if (e.target.closest('#openCalcBtn')) {
+    openCalculatorModal();
+    return;
+  }
   var cat = e.target.closest('[data-faqcat]');
   if (cat) {
     _faqActiveCat = cat.dataset.faqcat;
