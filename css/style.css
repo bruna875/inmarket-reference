@@ -1145,10 +1145,10 @@ tr:hover .link-btn, .link-btn.has-link { opacity: 1; color: var(--accent) }
 
 /* ── Data Directory ─────────────────────────────────────────────────────────── */
 .dd-tabs {
-  display: flex; align-items: center; gap: 8px; margin-bottom: 4px; width: 100%;
+  margin-bottom: 4px; width: 100%;
 }
 .dd-chips {
-  display: flex; flex-wrap: wrap; gap: 6px; flex: 1; min-width: 0;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 6px; width: 100%;
 }
 .dd-tab {
   padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 500;
@@ -1245,7 +1245,7 @@ tr:hover .link-btn, .link-btn.has-link { opacity: 1; color: var(--accent) }
 
 /* ── Inline Calculator panel ─────────────────────────────────────────────────── */
 .dd-calc-panel {
-  margin-top: 12px;
+  margin-top: 16px;
   background: var(--surface); border: 1px solid var(--border);
   border-radius: 12px; overflow: hidden;
 }

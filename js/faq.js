@@ -1,29 +1,32 @@
 // faq.js — Data Directory page
 
 var FAQ_CATEGORIES = [
-  {id: 'privacy',    label: 'Privacy',    fullLabel: 'Privacy & Data Protection'},
-  {id: 'access',     label: 'Access',     fullLabel: 'Access Requests'},
-  {id: 'retention',  label: 'Retention',  fullLabel: 'Data Retention'},
-  {id: 'compliance', label: 'Compliance', fullLabel: 'Regulatory Compliance'}
+  {id: 'privacy',      label: 'Privacy',                fullLabel: 'Privacy & Data Protection'},
+  {id: 'managerial',   label: 'Managerial Malice',      fullLabel: 'Managerial Malice'},
+  {id: 'character',    label: 'Character Assassination', fullLabel: 'Character Assassination'},
+  {id: 'hostile',      label: 'Hostile Work Env.',       fullLabel: 'Hostile Work Environment'},
+  {id: 'health',       label: 'Health',                 fullLabel: 'Health'},
+  {id: 'stereotyped',  label: 'Stereotyped Language',   fullLabel: 'Stereotyped Language'}
 ];
 
 var FAQ_ITEMS = [
-  {cat: 'privacy',    q: 'What personal data does Very Good Peeps collect?',                    a: 'Very Good Peeps collects device identifiers, location data, and behavioral signals to power its measurement and attribution products. All data collection is disclosed in the company\u2019s privacy policy and complies with applicable regulations.'},
-  {cat: 'privacy',    q: 'How is personal data processed and stored?',                          a: 'Personal data is processed in secure cloud environments with encryption at rest and in transit. Data is stored in US-based data centers with SOC 2 Type II compliance and access controls enforced via role-based permissions.'},
-  {cat: 'privacy',    q: 'What is the legal basis for processing personal data?',               a: 'Processing is based on legitimate interest for B2B measurement services, and on consent where required by local regulation (e.g. GDPR Article 6). Consent mechanisms are managed through certified CMP partners.'},
-  {cat: 'access',     q: 'How can an individual submit a Data Subject Access Request (DSAR)?',  a: 'Individuals can submit a DSAR by emailing privacy@verygoodpeeps.co or through the online request form on the company\u2019s privacy page. Requests are acknowledged within 48 hours and fulfilled within the statutory 30-day window.'},
-  {cat: 'access',     q: 'What information is provided in response to a DSAR?',                 a: 'The response includes a summary of personal data held, the purposes of processing, categories of recipients, retention periods, and the individual\u2019s rights under applicable law. Data is delivered in a machine-readable format upon request.'},
-  {cat: 'access',     q: 'Can a DSAR be submitted on behalf of another person?',                a: 'Yes, authorized agents may submit DSARs on behalf of data subjects. Proof of authorization (such as a power of attorney or signed declaration) is required before the request can be processed.'},
-  {cat: 'retention',  q: 'How long is personal data retained?',                                 a: 'Retention periods vary by data type: device identifiers are retained for up to 13 months, aggregated measurement data for up to 3 years, and contractual records for 7 years. Data is purged automatically upon expiration.'},
-  {cat: 'retention',  q: 'Can a user request early deletion of their data?',                    a: 'Yes. Deletion requests are processed under the same DSAR workflow. Upon verification, personal data is deleted or anonymized within 30 days. Certain data may be retained longer if required by law.'},
-  {cat: 'retention',  q: 'How is data disposed of at end of retention?',                        a: 'Data is permanently deleted through cryptographic erasure for encrypted stores and secure overwrite for unencrypted systems. Deletion is logged and auditable. Third-party sub-processors are contractually required to follow the same disposal standards.'},
-  {cat: 'compliance', q: 'Which privacy regulations does Very Good Peeps comply with?',         a: 'Very Good Peeps maintains compliance with GDPR, CCPA/CPRA, VCDPA, CPA, and other US state privacy laws. The company also adheres to NAI and DAA self-regulatory principles for digital advertising.'},
-  {cat: 'compliance', q: 'Does Very Good Peeps conduct Data Protection Impact Assessments?',    a: 'Yes. DPIAs are conducted for all new products and significant changes to existing data processing activities. Results are reviewed by the privacy team and, where required, shared with the relevant supervisory authority.'},
-  {cat: 'compliance', q: 'How are data breaches handled?',                                      a: 'Very Good Peeps maintains an incident response plan with defined escalation paths. Breaches are assessed within 24 hours, affected parties and supervisory authorities are notified within 72 hours where required, and remediation actions are documented and reviewed.'}
+  {cat: 'privacy',     q: 'What personal data does Very Good Peeps collect?',                    a: 'Very Good Peeps collects device identifiers, location data, and behavioral signals to power its measurement and attribution products. All data collection is disclosed in the company\u2019s privacy policy and complies with applicable regulations.'},
+  {cat: 'privacy',     q: 'How is personal data processed and stored?',                          a: 'Personal data is processed in secure cloud environments with encryption at rest and in transit. Data is stored in US-based data centers with SOC 2 Type II compliance and access controls enforced via role-based permissions.'},
+  {cat: 'managerial',  q: 'What is the legal basis for processing personal data?',               a: 'Processing is based on legitimate interest for B2B measurement services, and on consent where required by local regulation (e.g. GDPR Article 6). Consent mechanisms are managed through certified CMP partners.'},
+  {cat: 'managerial',  q: 'How can an individual submit a Data Subject Access Request (DSAR)?',  a: 'Individuals can submit a DSAR by emailing privacy@verygoodpeeps.co or through the online request form on the company\u2019s privacy page. Requests are acknowledged within 48 hours and fulfilled within the statutory 30-day window.'},
+  {cat: 'character',   q: 'What information is provided in response to a DSAR?',                 a: 'The response includes a summary of personal data held, the purposes of processing, categories of recipients, retention periods, and the individual\u2019s rights under applicable law. Data is delivered in a machine-readable format upon request.'},
+  {cat: 'character',   q: 'Can a DSAR be submitted on behalf of another person?',                a: 'Yes, authorized agents may submit DSARs on behalf of data subjects. Proof of authorization (such as a power of attorney or signed declaration) is required before the request can be processed.'},
+  {cat: 'hostile',     q: 'How long is personal data retained?',                                 a: 'Retention periods vary by data type: device identifiers are retained for up to 13 months, aggregated measurement data for up to 3 years, and contractual records for 7 years. Data is purged automatically upon expiration.'},
+  {cat: 'hostile',     q: 'Can a user request early deletion of their data?',                    a: 'Yes. Deletion requests are processed under the same DSAR workflow. Upon verification, personal data is deleted or anonymized within 30 days. Certain data may be retained longer if required by law.'},
+  {cat: 'health',      q: 'How is data disposed of at end of retention?',                        a: 'Data is permanently deleted through cryptographic erasure for encrypted stores and secure overwrite for unencrypted systems. Deletion is logged and auditable. Third-party sub-processors are contractually required to follow the same disposal standards.'},
+  {cat: 'health',      q: 'Which privacy regulations does Very Good Peeps comply with?',         a: 'Very Good Peeps maintains compliance with GDPR, CCPA/CPRA, VCDPA, CPA, and other US state privacy laws. The company also adheres to NAI and DAA self-regulatory principles for digital advertising.'},
+  {cat: 'stereotyped', q: 'Does Very Good Peeps conduct Data Protection Impact Assessments?',    a: 'Yes. DPIAs are conducted for all new products and significant changes to existing data processing activities. Results are reviewed by the privacy team and, where required, shared with the relevant supervisory authority.'},
+  {cat: 'stereotyped', q: 'How are data breaches handled?',                                      a: 'Very Good Peeps maintains an incident response plan with defined escalation paths. Breaches are assessed within 24 hours, affected parties and supervisory authorities are notified within 72 hours where required, and remediation actions are documented and reviewed.'}
 ];
 
-var _faqActiveCat = 'all';
-var _faqOpenIdx   = -1;
+var _faqActiveCat     = 'all';
+var _faqOpenIdx       = -1;
+var _calcPanelOpen    = false;
 var _dsarDropdownOpen = false;
 
 function faqCatLabel(catId) {
@@ -42,15 +45,16 @@ function faqRenderTabs() {
     var act = c.id === _faqActiveCat;
     return '<button class="dd-tab' + (act ? ' act' : '') + '" data-faqcat="' + c.id + '">' + c.label + '</button>';
   }).join('');
-  return '<div class="dd-chips">' + chips + '</div>'
-    + '<div class="dd-tab-divider"></div>'
+
+  // Calc button lives inside the same chips wrapper
+  var calcBtn = '<div class="dd-tab-divider"></div>'
     + '<button class="dd-calc-btn' + (_calcPanelOpen ? ' act' : '') + '" id="openCalcBtn">'
     + '<svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="12" height="12" rx="2"/><path d="M5 5h2M9 5h2M5 8h2M9 8h2M5 11h2M9 11h2"/></svg>'
     + 'Risk Calculator'
     + '</button>';
-}
 
-var _calcPanelOpen = false;
+  return '<div class="dd-chips">' + chips + calcBtn + '</div>';
+}
 
 function faqRenderAccordion() {
   var items = faqFilterItems();
@@ -93,8 +97,7 @@ function faqToggleCalcPanel() {
   _calcPanelOpen = !_calcPanelOpen;
   var panel = document.getElementById('dd-calc-panel');
   if (panel) panel.style.display = _calcPanelOpen ? 'block' : 'none';
-  // refresh tabs to update button active state
-  faqRefreshTabs();
+  faqRefreshTabs(); // update button active state
 }
 
 function faqOpenRadarModal() {
@@ -109,7 +112,8 @@ function faqOpenRadarModal() {
     '<div class="modal-card" style="max-width:440px;">'
     + '<div class="modal-header">'
     + '<div style="display:flex;align-items:center;gap:8px;">'
-    + '<svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg>'
+    // Flag icon = segnalazione
+    + '<svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14V2"/><path d="M3 2h9l-2.5 3.5L12 9H3"/></svg>'
     + '<span class="modal-title">Any Data out of radar?</span>'
     + '</div>'
     + '<button class="modal-close" id="radarModalClose">'
@@ -158,7 +162,8 @@ function renderFaqDsar() {
 
     // ── Secondary CTA ────────────────────────────────────────
     + '<button class="faq-radar-btn" id="radarBtn">'
-    + '<svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 1.5"/></svg>'
+    // Flag / pennant icon
+    + '<svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14V2"/><path d="M3 2h9l-2.5 3.5L12 9H3"/></svg>'
     + 'Any Data out of radar?'
     + '</button>'
 
@@ -184,18 +189,18 @@ function renderFaqDsar() {
     + '</div>'
     + '</div>'
 
-    // ── Tabs (All + categories + Calc button) ────────────────
+    // ── Tabs: chips + calc button all in one wrapper ─────────
     + '<div class="dd-tabs" id="dd-tabs">' + faqRenderTabs() + '</div>'
-
-    // ── Inline Risk Calculator panel ─────────────────────────
-    + '<div id="dd-calc-panel" style="display:none;">' + renderCalculatorPanel() + '</div>'
 
     + '<div class="dd-section-divider"></div>'
 
     // ── Accordion ────────────────────────────────────────────
     + '<div class="faq-panel-wrap">'
     + '<div id="faq-panel">' + faqRenderAccordion() + '</div>'
-    + '</div>';
+    + '</div>'
+
+    // ── Inline Risk Calculator — below FAQ ───────────────────
+    + '<div id="dd-calc-panel" style="display:none;">' + renderCalculatorPanel() + '</div>';
 }
 
 document.addEventListener('click', function(e) {
