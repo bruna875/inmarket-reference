@@ -95,8 +95,12 @@ function faqRefresh() {
 
 function faqToggleCalcPanel() {
   _calcPanelOpen = !_calcPanelOpen;
-  var panel = document.getElementById('dd-calc-panel');
-  if (panel) panel.style.display = _calcPanelOpen ? 'block' : 'none';
+  var panel   = document.getElementById('dd-calc-panel');
+  var divider = document.querySelector('.dd-section-divider');
+  var faqWrap = document.querySelector('.faq-panel-wrap');
+  if (panel)   panel.style.display   = _calcPanelOpen ? 'block' : 'none';
+  if (divider) divider.style.display = _calcPanelOpen ? 'none'  : '';
+  if (faqWrap) faqWrap.style.display = _calcPanelOpen ? 'none'  : '';
   faqRefreshTabs();
 }
 
