@@ -96,14 +96,7 @@ function faqRefresh() {
 function faqToggleCalcPanel() {
   _calcPanelOpen = !_calcPanelOpen;
   var panel = document.getElementById('dd-calc-panel');
-  if (panel) {
-    panel.style.display = _calcPanelOpen ? 'block' : 'none';
-    if (_calcPanelOpen) {
-      setTimeout(function() {
-        panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 40);
-    }
-  }
+  if (panel) panel.style.display = _calcPanelOpen ? 'block' : 'none';
   faqRefreshTabs();
 }
 
@@ -199,15 +192,15 @@ function renderFaqDsar() {
     // ── Tabs: chips + calc button all in one wrapper ─────────
     + '<div class="dd-tabs" id="dd-tabs">' + faqRenderTabs() + '</div>'
 
+    // ── Inline Risk Calculator — directly below chips ────────
+    + '<div id="dd-calc-panel" style="display:none;">' + renderCalculatorPanel() + '</div>'
+
     + '<div class="dd-section-divider"></div>'
 
     // ── Accordion ────────────────────────────────────────────
     + '<div class="faq-panel-wrap">'
     + '<div id="faq-panel">' + faqRenderAccordion() + '</div>'
-    + '</div>'
-
-    // ── Inline Risk Calculator — below FAQ ───────────────────
-    + '<div id="dd-calc-panel" style="display:none;">' + renderCalculatorPanel() + '</div>';
+    + '</div>';
 }
 
 document.addEventListener('click', function(e) {
