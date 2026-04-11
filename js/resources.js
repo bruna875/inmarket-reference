@@ -54,7 +54,7 @@ var _wizItemsPatterns = [
       + '<div id="quiz-result"></div>'
   },
   {
-    label: 'Step 7',
+    label: 'Empathy Exercise',
     title: 'Empathy Exercise',
     html: '<div class="emp-intro">Before you close this chapter \u2014 one more thing.</div>'
       + '<div class="emp-row">'
