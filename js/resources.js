@@ -5,11 +5,54 @@
 var _wizState = {};
 
 var _wizItemsPatterns = [
-  {label:'Pattern 1', title:'The Overpromise Loop', desc:'When teams consistently commit to more than they can deliver \u2014 and why it happens. Covers sprint planning anti-patterns, capacity mismatch, and how pressure cascades from leadership into the backlog.'},
-  {label:'Pattern 2', title:'Fake Agility', desc:'The gap between agile vocabulary and agile practice. How standups become status meetings, retrospectives become theater, and velocity becomes vanity.'},
-  {label:'Pattern 3', title:'The Consensus Trap', desc:'When alignment becomes a goal in itself, decisions stall, ownership diffuses, and the loudest voice wins. A pattern common in cross-functional product work.'},
-  {label:'Pattern 4', title:'Metric Gaming', desc:'The moment teams optimize for the measurement instead of the outcome. OKRs, NPS, and DAU numbers that look great while the product deteriorates.'},
-  {label:'Pattern 5', title:'Scope Gravity', desc:'The invisible force that pulls every project toward expanding scope. Why \u2018just one more thing\u2019 is never just one thing.'}
+  {
+    label: 'Chapter 1',
+    title: 'Something Deeply Offensive Happened',
+    desc: 'It started with a disruption to the natural order. Professionalizing the Company. As a senior professional, you don\u2019t consider it your job to prioritize below-your-level design tasks on secondary app projects over strategic contributions to major company objectives. You start working closely with a different manager \u2014 one who was assigned to you. He seems liking you. Outrageously, at least for someone who had always considered you part of their personal orbit. By any reasonable standard, these were entirely unremarkable organizational changes. But something about them has been registered as a wound. Crisis. Betrayal. Intolerable offense. Deep, personal, unforgivable. And that changed everything.'
+  },
+  {
+    label: 'Chapter 2',
+    title: 'Suddenly, You Were Always the Problem',
+    desc: 'The disruption needed an explanation \u2014 and one arrived quickly, efficiently, and with remarkable consistency across every audience. Suddenly, you start being described as incompetent, lazy, slow, disloyal, or \u2014 a classic \u2014 \u201cnot a culture fit.\u201d You even get labeled as \u201cunstable\u201d after four months of obsessive control and harassment. Stories circulate that bear little resemblance to events as they actually occurred. The manipulation becomes massive. Conversations happen exclusively behind closed doors: almost a year spent talking about who you are. The reputational campaign wasn\u2019t advertised as one. It was framed as \u201chonest feedback,\u201d or \u201cconcerns I simply had to raise.\u201d The goal was singular: to establish you as the source of every problem \u2014 preferably before you had a chance to name what was happening.'
+  },
+  {
+    label: 'Chapter 3',
+    title: 'You Begin to Doubt Your Own Notes',
+    desc: 'When you raise concerns, you are told you are being paranoid, oversensitive, or simply misremembering. You are told to \u201cfocus on the future.\u201d The solid informal networks that had once included you quietly close. Colleagues become distant \u2014 not hostile, just\u2026 unavailable. And because none of it was documented, and none of it was announced, it was nearly impossible to point to. You start questioning your own memory. That, of course, was the point.'
+  },
+  {
+    label: 'Chapter 4',
+    title: 'They Weren\u2019t All True Believers',
+    desc: 'Few of them genuinely believed the narrative might be true. The majority sensed it was one-sided but found that the social cost of curiosity was higher than the cost of alignment. A few simply needed proximity to power more than they needed accuracy. Together, they formed a functional system: some carried the message, some enforced the silence, some just declined to contradict. They were not, for the most part, villains. Most were people trying to navigate an environment where the rules of engagement had quietly shifted. That\u2019s precisely what made them effective. To him.'
+  },
+  {
+    label: 'Chapter 5',
+    title: 'Leaving Was the Final Insult',
+    desc: 'When someone finally exits \u2014 obviously pushed \u2014 a new wound opens. The departure itself is experienced as an act of aggression. After everything that had been done to make that person leave, the act of leaving is still taken personally. Brought to the next level. New narratives emerge: they weren\u2019t loyal, they gave up, they burned bridges, they \u201cchose wrong.\u201d Those who stayed may find the exit deployed as retroactive evidence for every prior accusation. And the person who left \u2014 now absent, unable to correct the record, no longer part of the room where things are said \u2014 becomes a permanent, convenient explanation for whatever goes wrong next.'
+  },
+  {
+    label: 'Final Quiz',
+    title: 'How Well Did You Recognize the Pattern?',
+    html: '<div class="quiz-prompt">Based on everything you just read \u2014 what is the most accurate clinical description of the behavior pattern?</div>'
+      + '<div class="quiz-cards">'
+      + '<div class="quiz-card" data-quiz-option="wrong1">'
+      + '<div class="quiz-card-selector"></div>'
+      + '<div class="quiz-card-content"><div class="quiz-card-title">Visionary Excellence Syndrome</div>'
+      + '<div class="quiz-card-desc">Marked by exceptional strategic clarity and the rare ability to inspire teams toward ambitious goals. Often misunderstood by those operating at a lower level of vision.</div></div>'
+      + '</div>'
+      + '<div class="quiz-card" data-quiz-option="correct">'
+      + '<div class="quiz-card-selector"></div>'
+      + '<div class="quiz-card-content"><div class="quiz-card-title">Narcissistic Personality Disorder with Antisocial and Paranoid Traits</div>'
+      + '<div class="quiz-card-desc">Also known as Malignant Narcissism. Characterized by grandiosity, absence of empathy, obsessive need for control, and a tendency toward suspicious, persecutory thinking.</div></div>'
+      + '</div>'
+      + '<div class="quiz-card" data-quiz-option="wrong2">'
+      + '<div class="quiz-card-selector"></div>'
+      + '<div class="quiz-card-content"><div class="quiz-card-title">Extraordinary Public Figure Profile</div>'
+      + '<div class="quiz-card-desc">Distinguished by respectful attitude, genuine likability, and an authentic capacity to build lasting trust and psycological safety at every level of the organization.</div></div>'
+      + '</div>'
+      + '</div>'
+      + '<div id="quiz-result"></div>'
+  }
 ];
 
 var _wizItemsFrog = [
@@ -37,12 +80,12 @@ function wizHtml(wizId, items) {
       if (i < items.length - 1) {
         navHtml += '<button class="wiz-btn wiz-btn-next" data-wiz="' + wizId + '" data-wiz-dir="1">Next \u2192</button>';
       } else {
-        navHtml += '<span class="wiz-done-badge"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 4" stroke="#3B6D11" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> All done</span>';
+        navHtml += '<button class="wiz-btn wiz-btn-restart" data-wiz-restart="' + wizId + '"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M13.5 5.5A6 6 0 1 0 14 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M14 2v4h-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Restart journey</button>';
       }
       navHtml += '</div>';
       bodyHtml = '<div class="wiz-body">'
         + (item.svg || '')
-        + '<div class="res-card-desc">' + item.desc + '</div>'
+        + (item.html ? item.html : '<div class="res-card-desc">' + item.desc + '</div>')
         + navHtml
         + '</div>';
     }
@@ -71,17 +114,21 @@ function wizSetIndex(wizId, idx, items) {
 
 function renderResources() {
   if (_wizState['patterns'] === undefined) _wizState['patterns'] = 0;
-  return '<div class="ptitle">Recognize the Patterns</div><div class="psub">Recurring dynamics worth naming \u2014 because you can\u2019t fix what you can\u2019t see</div>'
+  return '<div class="ptitle">Recognize the Patterns</div><div class="psub">A guided journey through a very specific dynamic \u2014 told without ever saying its name</div>'
+    + '<blockquote class="res-quote">'
+    + '\u201cHe who fights with monsters should look to it that he himself does not become a monster. And if you gaze long into an abyss, the abyss also gazes into you.\u201d'
+    + '<footer>\u2014 Friedrich Nietzsche, <em>Beyond Good and Evil</em> (1886), Aphorism 146</footer>'
+    + '</blockquote>'
     + wizHtml('patterns', _wizItemsPatterns);
 }
 
 function renderBoilingFrog() {
   if (_wizState['frog'] === undefined) _wizState['frog'] = 0;
-  return '<div class="ptitle">The Boiling Frog</div>'
+  return '<div class="ptitle">The Boiling Frog Theory</div>'
     + '<div class="psub">On how organizations learn to tolerate what they should never have accepted</div>'
-    + '<div style="background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:12px;padding:18px 22px;margin-bottom:16px">'
-    + '<div style="font-size:12px;font-style:italic;color:var(--muted);line-height:1.75">\u201cThe most dangerous things in an organization are not the ones people argue about. They are the ones nobody mentions anymore.\u201d</div>'
-    + '</div>'
+    + '<blockquote class="res-quote">'
+    + '\u201cThe first step in developing a learning organization is to foster a climate where people can challenge their own and others\u2019 mental models and tell the truth about what is actually happening.\u201d'
+    + '<footer>\u2014 Peter Senge,<em>The Fifth Discipline: The Art &amp; Practice of The Learning Organization</em></footer>'
+    + '</blockquote>'
     + wizHtml('frog', _wizItemsFrog);
 }
-

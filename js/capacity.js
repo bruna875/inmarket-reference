@@ -45,30 +45,30 @@ function capBarHtml(used, budget, label) {
   if (over) {
     var budgetPct = Math.round(budget / used * 100);
     var overPct = 100 - budgetPct;
-    return '<div style="display:flex;align-items:center;gap:8px">'
-      + '<div style="flex:1;position:relative">'
-      + '<div style="height:20px;background:var(--bg);border-radius:5px;overflow:visible;position:relative">'
-      + '<div style="position:absolute;left:' + budgetPct + '%;top:-4px;bottom:-4px;width:1.5px;background:var(--faint);z-index:2"></div>'
-      + '<div style="position:absolute;left:' + budgetPct + '%;top:-12px;font-size:9px;color:var(--faint);transform:translateX(-50%)">budget</div>'
-      + '<div style="height:100%;width:100%;background:#A32D2D;border-radius:5px;display:flex;align-items:center;padding-left:8px"><span style="font-size:10px;font-weight:500;color:#fff">' + pct + '%</span></div>'
+    return '<div class="cap-bar-over-wrap">'
+      + '<div class="cap-bar-over-track">'
+      + '<div class="cap-bar-bg">'
+      + '<div class="cap-bar-budget-line" style="left:' + budgetPct + '%"></div>'
+      + '<div class="cap-bar-budget-label" style="left:' + budgetPct + '%">budget</div>'
+      + '<div class="cap-bar-over-fill"><span class="cap-bar-pct">' + pct + '%</span></div>'
       + '</div>'
-      + '<div style="position:absolute;right:0;top:0;width:' + overPct + '%;height:20px;background:repeating-linear-gradient(45deg,#A32D2D22,#A32D2D22 3px,transparent 3px,transparent 6px);border-radius:0 5px 5px 0"></div>'
+      + '<div class="cap-bar-over-hatch" style="width:' + overPct + '%"></div>'
       + '</div>'
-      + '<span style="font-size:11px;font-weight:500;color:#A32D2D;background:#FDECEA;padding:2px 8px;border-radius:12px;white-space:nowrap;flex-shrink:0">+' + Math.round(overDays) + 'd</span>'
+      + '<span class="cap-bar-over-badge">+' + Math.round(overDays) + 'd</span>'
       + '</div>';
   }
 
-  return '<div style="height:20px;background:var(--bg);border-radius:5px;overflow:hidden">'
-    + '<div style="height:100%;width:' + pct + '%;background:' + color + ';border-radius:5px;display:flex;align-items:center;padding-left:8px;min-width:32px">'
-    + '<span style="font-size:10px;font-weight:500;color:#fff">' + pct + '%</span>'
+  return '<div class="cap-bar-track">'
+    + '<div class="cap-bar-fill" style="width:' + pct + '%;background:' + color + '">'
+    + '<span class="cap-bar-pct">' + pct + '%</span>'
     + '</div></div>';
 }
 
 function capStatsHtml(used, budget) {
   var over = used > budget;
-  return '<div style="text-align:right;font-size:12px">'
-    + '<div style="font-weight:500;color:' + (over ? '#A32D2D' : 'var(--text)') + '">' + Math.round(used) + 'd</div>'
-    + '<div style="font-size:11px;color:var(--faint)">of ' + Math.round(budget) + '</div>'
+  return '<div class="cap-stats">'
+    + '<div class="cap-stats-val' + (over ? ' over' : '') + '">' + Math.round(used) + 'd</div>'
+    + '<div class="cap-stats-of">of ' + Math.round(budget) + '</div>'
     + '</div>';
 }
 
@@ -76,58 +76,58 @@ function capTeamBlock(teamName, used, budget, inits) {
   var totalUsed = used.design + used.engineering + used.product;
   var totalBudget = budget.design + budget.engineering + budget.product;
   var initRows = inits.map(function(ini) {
-    return '<tr style="border-top:0.5px solid var(--border)">'
-      + '<td style="padding:8px 8px 8px 0;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px">' + ini.title + '</td>'
-      + '<td style="padding:8px">' + driverBadge(ini.driver) + '</td>'
-      + '<td style="padding:8px">' + themeBadge(ini.theme) + '</td>'
-      + '<td style="padding:8px;color:var(--muted);white-space:nowrap">' + (ini.productOwner || '\u2014') + '</td>'
-      + '<td style="padding:8px;color:var(--muted);white-space:nowrap">' + (ini.techLead || '\u2014') + '</td>'
-      + '<td style="padding:8px;text-align:right;color:var(--muted)">' + (ini.design ? Math.round(ini.design) + 'd' : '\u2014') + '</td>'
-      + '<td style="padding:8px;text-align:right;color:var(--muted)">' + (ini.engineering ? Math.round(ini.engineering) + 'd' : '\u2014') + '</td>'
-      + '<td style="padding:8px;text-align:right;color:var(--muted)">' + (ini.product ? Math.round(ini.product) + 'd' : '\u2014') + '</td>'
-      + '<td style="padding:8px;text-align:right;font-weight:500;color:var(--text)">' + Math.round(ini.total) + 'd</td>'
-      + '<td style="padding:8px 0 8px 8px;text-align:right">' + roiHtml(ini.roi) + '</td>'
+    return '<tr class="cap-init-tr">'
+      + '<td class="cap-init-td-name">' + ini.title + '</td>'
+      + '<td class="cap-init-td">' + driverBadge(ini.driver) + '</td>'
+      + '<td class="cap-init-td">' + themeBadge(ini.theme) + '</td>'
+      + '<td class="cap-init-td" style="color:var(--muted);white-space:nowrap">' + (ini.productOwner || '\u2014') + '</td>'
+      + '<td class="cap-init-td" style="color:var(--muted);white-space:nowrap">' + (ini.techLead || '\u2014') + '</td>'
+      + '<td class="cap-init-td-num">' + (ini.design ? Math.round(ini.design) + 'd' : '\u2014') + '</td>'
+      + '<td class="cap-init-td-num">' + (ini.engineering ? Math.round(ini.engineering) + 'd' : '\u2014') + '</td>'
+      + '<td class="cap-init-td-num">' + (ini.product ? Math.round(ini.product) + 'd' : '\u2014') + '</td>'
+      + '<td class="cap-init-td-total">' + Math.round(ini.total) + 'd</td>'
+      + '<td class="cap-init-td-roi">' + roiHtml(ini.roi) + '</td>'
       + '</tr>';
   }).join('');
 
-  var initTable = '<table style="width:100%;border-collapse:collapse;font-size:12px">'
-    + '<thead><tr style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.4px;color:var(--faint)">'
-    + '<th style="text-align:left;padding:4px 8px 4px 0">Initiative</th>'
-    + '<th style="text-align:left;padding:4px 8px">Driver</th>'
-    + '<th style="text-align:left;padding:4px 8px">Theme</th>'
-    + '<th style="text-align:left;padding:4px 8px">Prod lead</th>'
-    + '<th style="text-align:left;padding:4px 8px">Eng lead</th>'
-    + '<th style="text-align:right;padding:4px 8px">Design</th>'
-    + '<th style="text-align:right;padding:4px 8px">Engineering</th>'
-    + '<th style="text-align:right;padding:4px 8px">Product</th>'
-    + '<th style="text-align:right;padding:4px 8px">Total</th>'
-    + '<th style="text-align:right;padding:4px 0 4px 8px">ROI</th>'
-    + '</tr></thead><tbody style="border-top:0.5px solid var(--border)">' + initRows + '</tbody></table>';
+  var initTable = '<table class="cap-init-table">'
+    + '<thead><tr class="cap-init-th">'
+    + '<th class="cap-th-left-first">Initiative</th>'
+    + '<th class="cap-th-left">Driver</th>'
+    + '<th class="cap-th-left">Theme</th>'
+    + '<th class="cap-th-left">Prod lead</th>'
+    + '<th class="cap-th-left">Eng lead</th>'
+    + '<th class="cap-th-right">Design</th>'
+    + '<th class="cap-th-right">Engineering</th>'
+    + '<th class="cap-th-right">Product</th>'
+    + '<th class="cap-th-right">Total</th>'
+    + '<th class="cap-th-right-last">ROI</th>'
+    + '</tr></thead><tbody class="cap-init-tbody">' + initRows + '</tbody></table>';
 
-  return '<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;margin-bottom:16px;overflow:hidden">'
-    + '<div style="padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">'
-    + '<div style="font-size:14px;font-weight:500;color:var(--text)">' + teamName + '</div>'
-    + '<span style="font-size:11px;color:var(--muted);background:var(--bg);padding:2px 10px;border-radius:20px">' + inits.length + ' initiative' + (inits.length !== 1 ? 's' : '') + ' \u00b7 ' + Math.round(totalUsed) + ' days</span>'
+  return '<div class="cap-team-block">'
+    + '<div class="cap-team-header">'
+    + '<div class="cap-team-name">' + teamName + '</div>'
+    + '<span class="cap-team-meta">' + inits.length + ' initiative' + (inits.length !== 1 ? 's' : '') + ' \u00b7 ' + Math.round(totalUsed) + ' days</span>'
     + '</div>'
-    + '<div style="padding:16px 20px">'
-    + '<div style="display:grid;grid-template-columns:90px 1fr 80px;gap:14px;align-items:center;padding:8px 0">'
-    + '<div style="font-size:12px;color:var(--muted)">Design</div>'
+    + '<div class="cap-team-body">'
+    + '<div class="cap-bar-row">'
+    + '<div class="cap-bar-label">Design</div>'
     + capBarHtml(used.design, budget.design)
     + capStatsHtml(used.design, budget.design)
     + '</div>'
-    + '<div style="display:grid;grid-template-columns:90px 1fr 80px;gap:14px;align-items:center;padding:8px 0;border-top:0.5px solid var(--border)">'
-    + '<div style="font-size:12px;color:var(--muted)">Engineering</div>'
+    + '<div class="cap-bar-row">'
+    + '<div class="cap-bar-label">Engineering</div>'
     + capBarHtml(used.engineering, budget.engineering)
     + capStatsHtml(used.engineering, budget.engineering)
     + '</div>'
-    + '<div style="display:grid;grid-template-columns:90px 1fr 80px;gap:14px;align-items:center;padding:8px 0;border-top:0.5px solid var(--border)">'
-    + '<div style="font-size:12px;color:var(--muted)">Product</div>'
+    + '<div class="cap-bar-row">'
+    + '<div class="cap-bar-label">Product</div>'
     + capBarHtml(used.product, budget.product)
     + capStatsHtml(used.product, budget.product)
     + '</div>'
     + '</div>'
-    + '<div style="padding:0 20px 16px">'
-    + '<div style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.4px;color:var(--faint);padding:12px 0 8px;border-top:0.5px solid var(--border)"></div>'
+    + '<div class="cap-init-table-wrap">'
+    + '<div class="cap-init-sep"></div>'
     + initTable
     + '</div>'
     + '</div>';
@@ -150,11 +150,11 @@ function capScorecardHtml(label, used, budget) {
     + (cappedPct > 0 ? '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="none" stroke="' + color + '" stroke-width="' + sw + '" stroke-dasharray="' + fillLen.toFixed(1) + ' ' + (halfCirc * 2 - fillLen).toFixed(1) + '" stroke-linecap="round" style="transform:rotate(180deg);transform-origin:' + cx + 'px ' + cy + 'px"/>' : '')
     + '<text x="' + cx + '" y="' + (cy - 4) + '" text-anchor="middle" dominant-baseline="central" style="font-size:14px;font-weight:500;fill:var(--text)">' + pct + '%</text>'
     + '</svg>';
-  return '<div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center">'
-    + '<div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">' + label + '</div>'
+  return '<div class="cap-scorecard">'
+    + '<div class="cap-scorecard-label">' + label + '</div>'
     + gauge
-    + '<div style="margin-top:4px"><span style="font-size:18px;font-weight:500;color:var(--text)">' + Math.round(used) + '</span> <span style="font-size:12px;color:var(--muted)">/ ' + Math.round(budget) + ' days</span></div>'
-    + '<div style="font-size:11px;color:' + (over ? '#A32D2D' : 'var(--faint)') + ';margin-top:2px">' + (over ? Math.abs(Math.round(remaining)) + 'd over budget' : Math.round(remaining) + 'd available') + '</div>'
+    + '<div style="margin-top:4px"><span class="cap-scorecard-big">' + Math.round(used) + '</span> <span class="cap-scorecard-of">/ ' + Math.round(budget) + ' days</span></div>'
+    + '<div class="cap-scorecard-rem" style="color:' + (over ? '#A32D2D' : 'var(--faint)') + '">' + (over ? Math.abs(Math.round(remaining)) + 'd over budget' : Math.round(remaining) + 'd available') + '</div>'
     + '</div>';
 }
 
@@ -166,37 +166,37 @@ function capLeaderBlock(leaderName, role, inits) {
   inits.forEach(function(ini) { totD += ini.design; totE += ini.engineering; totP += ini.product; });
   var total = totD + totE + totP;
   var initRows = inits.map(function(ini) {
-    return '<tr style="border-top:0.5px solid var(--border)">'
-      + '<td style="padding:8px 8px 8px 0;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px">' + ini.title + '</td>'
-      + '<td style="padding:8px">' + ini.team + '</td>'
-      + '<td style="padding:8px">' + driverBadge(ini.driver) + '</td>'
-      + '<td style="padding:8px">' + themeBadge(ini.theme) + '</td>'
-      + '<td style="padding:8px;text-align:right;color:var(--muted)">' + (ini.design ? Math.round(ini.design) + 'd' : '\u2014') + '</td>'
-      + '<td style="padding:8px;text-align:right;color:var(--muted)">' + (ini.engineering ? Math.round(ini.engineering) + 'd' : '\u2014') + '</td>'
-      + '<td style="padding:8px;text-align:right;color:var(--muted)">' + (ini.product ? Math.round(ini.product) + 'd' : '\u2014') + '</td>'
-      + '<td style="padding:8px;text-align:right;font-weight:500;color:var(--text)">' + Math.round(ini.total) + 'd</td>'
-      + '<td style="padding:8px 0 8px 8px;text-align:right">' + roiHtml(ini.roi) + '</td>'
+    return '<tr class="cap-init-tr">'
+      + '<td class="cap-init-td-name">' + ini.title + '</td>'
+      + '<td class="cap-init-td">' + (ini.team || '') + '</td>'
+      + '<td class="cap-init-td">' + driverBadge(ini.driver) + '</td>'
+      + '<td class="cap-init-td">' + themeBadge(ini.theme) + '</td>'
+      + '<td class="cap-init-td-num">' + (ini.design ? Math.round(ini.design) + 'd' : '\u2014') + '</td>'
+      + '<td class="cap-init-td-num">' + (ini.engineering ? Math.round(ini.engineering) + 'd' : '\u2014') + '</td>'
+      + '<td class="cap-init-td-num">' + (ini.product ? Math.round(ini.product) + 'd' : '\u2014') + '</td>'
+      + '<td class="cap-init-td-total">' + Math.round(ini.total) + 'd</td>'
+      + '<td class="cap-init-td-roi">' + roiHtml(ini.roi) + '</td>'
       + '</tr>';
   }).join('');
 
-  return '<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;margin-bottom:16px;overflow:hidden">'
-    + '<div style="padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">'
-    + '<div><div style="font-size:14px;font-weight:500;color:var(--text)">' + leaderName + '</div>'
-    + '<div style="font-size:11px;color:var(--faint)">' + role + '</div></div>'
-    + '<span style="font-size:11px;color:var(--muted);background:var(--bg);padding:2px 10px;border-radius:20px">' + inits.length + ' initiative' + (inits.length !== 1 ? 's' : '') + ' \u00b7 ' + Math.round(total) + 'd total</span>'
+  return '<div class="cap-team-block">'
+    + '<div class="cap-leader-header">'
+    + '<div><div class="cap-leader-name">' + leaderName + '</div>'
+    + '<div class="cap-leader-role">' + role + '</div></div>'
+    + '<span class="cap-team-meta">' + inits.length + ' initiative' + (inits.length !== 1 ? 's' : '') + ' \u00b7 ' + Math.round(total) + 'd total</span>'
     + '</div>'
-    + '<div style="padding:0 20px 16px">'
-    + '<table style="width:100%;border-collapse:collapse;font-size:12px">'
-    + '<thead><tr style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.4px;color:var(--faint)">'
-    + '<th style="text-align:left;padding:12px 8px 4px 0">Initiative</th>'
-    + '<th style="text-align:left;padding:12px 8px 4px">Team</th>'
-    + '<th style="text-align:left;padding:12px 8px 4px">Driver</th>'
-    + '<th style="text-align:left;padding:12px 8px 4px">Theme</th>'
-    + '<th style="text-align:right;padding:12px 8px 4px">Design</th>'
-    + '<th style="text-align:right;padding:12px 8px 4px">Engineering</th>'
-    + '<th style="text-align:right;padding:12px 8px 4px">Product</th>'
-    + '<th style="text-align:right;padding:12px 8px 4px">Total</th>'
-    + '<th style="text-align:right;padding:12px 0 4px 8px">ROI</th>'
+    + '<div class="cap-init-table-wrap">'
+    + '<table class="cap-init-table">'
+    + '<thead><tr class="cap-init-th">'
+    + '<th class="cap-th-left-lg-first">Initiative</th>'
+    + '<th class="cap-th-left-lg">Team</th>'
+    + '<th class="cap-th-left-lg">Driver</th>'
+    + '<th class="cap-th-left-lg">Theme</th>'
+    + '<th class="cap-th-right-lg">Design</th>'
+    + '<th class="cap-th-right-lg">Engineering</th>'
+    + '<th class="cap-th-right-lg">Product</th>'
+    + '<th class="cap-th-right-lg">Total</th>'
+    + '<th class="cap-th-right-lg-last">ROI</th>'
     + '</tr></thead><tbody>' + initRows + '</tbody></table>'
     + '</div></div>';
 }
@@ -210,7 +210,7 @@ function capRenderByEngLead(q) {
     if (i.techLead) { if (!leaders[i.techLead]) leaders[i.techLead] = []; leaders[i.techLead].push(ini); }
   });
   var names = Object.keys(leaders); names.sort();
-  if (!names.length) return '<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:48px 32px;text-align:center"><div style="font-size:13px;color:var(--faint)">No initiatives</div></div>';
+  if (!names.length) return '<div class="cap-empty"><div class="cap-empty-text">No initiatives</div></div>';
   return names.map(function(name) { return capLeaderBlock(name, 'Engineering Lead', leaders[name]); }).join('');
 }
 
@@ -223,7 +223,7 @@ function capRenderByProdLead(q) {
     if (i.productOwner) { if (!leaders[i.productOwner]) leaders[i.productOwner] = []; leaders[i.productOwner].push(ini); }
   });
   var names = Object.keys(leaders); names.sort();
-  if (!names.length) return '<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:48px 32px;text-align:center"><div style="font-size:13px;color:var(--faint)">No initiatives</div></div>';
+  if (!names.length) return '<div class="cap-empty"><div class="cap-empty-text">No initiatives</div></div>';
   return names.map(function(name) { return capLeaderBlock(name, 'Product Lead', leaders[name]); }).join('');
 }
 
@@ -248,33 +248,33 @@ function capRender(q) {
   }).join('');
 
   if (teamNames.length === 0) {
-    blocks = '<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:48px 32px;text-align:center">'
-      + '<div style="font-size:13px;color:var(--faint)">No initiatives for ' + label + '</div></div>';
+    blocks = '<div class="cap-empty"><div class="cap-empty-text">No initiatives for ' + label + '</div></div>';
   }
 
-  var allocContent = '<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:20px">'
+  var allocContent = '<div class="cap-summary-grid">'
     + capScorecardHtml('Total engineering', totE, budE)
     + capScorecardHtml('Total product', totP, budP)
     + capScorecardHtml('Total design', totD, budD)
     + '</div>'
     + blocks
-    + '<div style="display:flex;gap:16px;padding:4px 0">'
-    + '<span style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted)"><span style="width:8px;height:8px;border-radius:2px;background:#3B6D11"></span>Under 80%</span>'
-    + '<span style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted)"><span style="width:8px;height:8px;border-radius:2px;background:#BA7517"></span>80\u201395%</span>'
-    + '<span style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted)"><span style="width:8px;height:8px;border-radius:2px;background:#A32D2D"></span>Over 95%</span>'
+    + '<div class="cap-legend">'
+    + '<span class="cap-legend-item"><span class="cap-legend-dot" style="background:#3B6D11"></span>Under 80%</span>'
+    + '<span class="cap-legend-item"><span class="cap-legend-dot" style="background:#BA7517"></span>80\u201395%</span>'
+    + '<span class="cap-legend-item"><span class="cap-legend-dot" style="background:#A32D2D"></span>Over 95%</span>'
     + '</div>';
 
   var engLeadContent = capRenderByEngLead(_capQ);
   var prodLeadContent = capRenderByProdLead(_capQ);
 
-  return '<div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px">'
-    + '<div><div class="ptitle">Team Capacity</div><div class="psub" style="margin-bottom:0">Budget utilization by team and discipline \u2014 Design, Engineering, Product</div></div>'
+  return '<div class="page-header">'
+    + '<div><div class="ptitle">Team Capacity</div><div class="psub psub-flush">Budget utilization by team and discipline \u2014 Design, Engineering, Product</div></div>'
+    + '<a href="https://docs.google.com/spreadsheets/d/1g7c51-WX8UqFKJzKrnPzJ_fZSKsagnNj57Jir2v9quc/edit?usp=sharing" target="_blank" class="roadmap-datasource"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M5 5h6M5 8h6M5 11h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>The Infamous Data Model \u2192</a>'
     + '</div>'
     + '<div class="tabnav"><button class="tabitem' + (_capTab === 'allocation' ? ' act' : '') + '" data-captab="allocation">Team Allocation</button><button class="tabitem' + (_capTab === 'englead' ? ' act' : '') + '" data-captab="englead">By Eng Lead</button><button class="tabitem' + (_capTab === 'prodlead' ? ' act' : '') + '" data-captab="prodlead">By Prod Lead</button></div>'
     + buildQFilter('cap','switchCapQuarter')
-    + '<div id="cap-allocation" style="' + (_capTab === 'allocation' ? '' : 'display:none') + '">' + allocContent + '</div>'
-    + '<div id="cap-englead" style="' + (_capTab === 'englead' ? '' : 'display:none') + '">' + engLeadContent + '</div>'
-    + '<div id="cap-prodlead" style="' + (_capTab === 'prodlead' ? '' : 'display:none') + '">' + prodLeadContent + '</div>';
+    + '<div id="cap-allocation" class="tabpanel' + (_capTab === 'allocation' ? ' act' : '') + '">' + allocContent + '</div>'
+    + '<div id="cap-englead" class="tabpanel' + (_capTab === 'englead' ? ' act' : '') + '">' + engLeadContent + '</div>'
+    + '<div id="cap-prodlead" class="tabpanel' + (_capTab === 'prodlead' ? ' act' : '') + '">' + prodLeadContent + '</div>';
 }
 
 function switchCapTab(tab) {
@@ -282,12 +282,10 @@ function switchCapTab(tab) {
   document.querySelectorAll('[data-captab]').forEach(function(btn) {
     btn.classList.toggle('act', btn.dataset.captab === tab);
   });
-  var alloc = document.getElementById('cap-allocation');
-  var eng = document.getElementById('cap-englead');
-  var prod = document.getElementById('cap-prodlead');
-  if (alloc) alloc.style.display = tab === 'allocation' ? '' : 'none';
-  if (eng) eng.style.display = tab === 'englead' ? '' : 'none';
-  if (prod) prod.style.display = tab === 'prodlead' ? '' : 'none';
+  ['cap-allocation', 'cap-englead', 'cap-prodlead'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.toggle('act', id === 'cap-' + tab);
+  });
 }
 
 function switchCapQuarter(q) {

@@ -18,6 +18,9 @@ function buildNav() {
 function setPage(id, label) {
   activeId = id;
   document.getElementById('pgname').textContent = label;
+  var secName = 'Product';
+  NAV_CONFIG.forEach(function(sec) { sec.items.forEach(function(item) { if (item.id === id) secName = sec.section; }); });
+  var secEl = document.getElementById('secname'); if (secEl) secEl.textContent = secName;
   var content = document.getElementById('content');
   if (PAGES[id]) {
     content.innerHTML = PAGES[id]();
@@ -25,7 +28,7 @@ function setPage(id, label) {
     var rid = id.slice(4);
     var ref = REFERENCES.filter(function(r){return r.id===rid;})[0];
     content.innerHTML = ref
-      ? '<div class="ptitle">'+anonName(ref.fullName)+'</div><div class="psub" style="margin-bottom:24px">'+ref.title+'</div>'+renderRef(ref)
+      ? '<div class="ptitle">'+ref.name+'</div><div class="psub" style="margin-bottom:24px">'+ref.title+'</div>'+renderRef(ref)
       : '<div class="ptitle">'+label+'</div>';
   } else {
     content.innerHTML = '<div class="ptitle">'+label+'</div>';
@@ -47,7 +50,7 @@ function loadData(cb) {
       capBudgetData = data.capBudget || {};
       loadLocalState(function(){if(cb)cb();});
     })
-    .catch(function(err){if(el)el.innerHTML='<div style="padding:40px 32px;font-size:13px;color:#C0392B">Failed to load data.<br><br>'+err+'</div>';});
+    .catch(function(err){if(el)el.innerHTML='<div class="load-error">Failed to load data.<br><br>'+err+'</div>';});
 }
 
 document.addEventListener('click', function(e) {
@@ -67,7 +70,7 @@ document.addEventListener('click', function(e) {
   if (qb) { var fn=qb.dataset.qfn,q=qb.dataset.q; if(fn==='switchTableQuarter')switchTableQuarter(q); else if(fn==='switchKanbanQuarter')switchKanbanQuarter(q); else if(fn==='switchROIQuarter')switchROIQuarter(q); else if(fn==='switchCapQuarter')switchCapQuarter(q); return; }
 
   var dw = e.target.closest('.ds-wrap[data-idx]');
-  if (dw) { e.stopPropagation(); var idx=parseInt(dw.dataset.idx); document.querySelectorAll('.status-menu').forEach(function(m){m.remove();}); var menu=document.createElement('div'); menu.className='status-menu'; menu.style.cssText='position:fixed;z-index:999;background:var(--surface);border:1px solid var(--border-md);border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,0.12);padding:4px;min-width:130px;'; deliveryOpts.forEach(function(o){var item=document.createElement('div'); item.style.cssText='padding:7px 10px;border-radius:6px;cursor:pointer;font-size:12px;'; item.innerHTML='<span class="pill '+o.cls+'" style="pointer-events:none">'+o.label+'</span>'; item.onmouseenter=function(){item.style.background='var(--bg)';}; item.onmouseleave=function(){item.style.background='';}; item.onclick=function(ev){ev.stopPropagation();updateStatus(idx,o.val);menu.remove();}; menu.appendChild(item);}); var r=dw.getBoundingClientRect(); menu.style.top=(r.bottom+4)+'px'; menu.style.left=r.left+'px'; document.body.appendChild(menu); setTimeout(function(){document.addEventListener('click',function h(){menu.remove();document.removeEventListener('click',h);});},0); return; }
+  if (dw) { e.stopPropagation(); var idx=parseInt(dw.dataset.idx); document.querySelectorAll('.status-menu').forEach(function(m){m.remove();}); var menu=document.createElement('div'); menu.className='status-menu'; deliveryOpts.forEach(function(o){var item=document.createElement('div'); item.className='status-menu-item'; item.innerHTML='<span class="pill '+o.cls+'" style="pointer-events:none">'+o.label+'</span>'; item.onclick=function(ev){ev.stopPropagation();updateStatus(idx,o.val);menu.remove();}; menu.appendChild(item);}); var r=dw.getBoundingClientRect(); menu.style.top=(r.bottom+4)+'px'; menu.style.left=r.left+'px'; document.body.appendChild(menu); setTimeout(function(){document.addEventListener('click',function h(){menu.remove();document.removeEventListener('click',h);});},0); return; }
 
   var lb = e.target.closest('[data-link-idx]');
   if (lb) { e.stopPropagation(); var idx2=parseInt(lb.dataset.linkIdx); _linkIdx=idx2; var pop=document.getElementById('linkPopup'); document.getElementById('linkInput').value=initiatives[idx2].link||''; document.getElementById('linkOpenBtn').disabled=!initiatives[idx2].link; var r2=lb.getBoundingClientRect(); pop.style.top=(r2.bottom+6)+'px'; pop.style.left=Math.min(r2.left,window.innerWidth-316)+'px'; pop.classList.add('show'); setTimeout(function(){document.getElementById('linkInput').focus();},50); return; }
@@ -76,13 +79,37 @@ document.addEventListener('click', function(e) {
   if (fr) { var sfx=fr.dataset.reset; if(sfx==='q')resetFiltersQ(); else resetFilters(); return; }
 
   var sq = e.target.closest('[data-sq]');
-  if (sq) { sigRequest(sq.dataset.sq, decodeURIComponent(sq.dataset.sl), sq.dataset.se); return; }
+  if (sq) { sigOpenModal(sq.dataset.sq, decodeURIComponent(sq.dataset.sl), sq.dataset.se); return; }
 
   var sr = e.target.closest('[data-sr]');
   if (sr) { sigRequest(sr.dataset.sr, decodeURIComponent(sr.dataset.sl), sr.dataset.se); return; }
 
   var sv = e.target.closest('[data-sv]');
   if (sv) { sigVerify(sv.dataset.sv, decodeURIComponent(sv.dataset.sl), sv.dataset.se); return; }
+
+  var qo = e.target.closest('[data-quiz-option]');
+  if (qo) {
+    var isCorrect = qo.dataset.quizOption === 'correct';
+    document.querySelectorAll('[data-quiz-option]').forEach(function(c) {
+      c.classList.remove('quiz-card--correct', 'quiz-card--wrong', 'quiz-card--selected');
+    });
+    qo.classList.add(isCorrect ? 'quiz-card--correct' : 'quiz-card--wrong');
+    var result = document.getElementById('quiz-result');
+    if (result) {
+      result.innerHTML = isCorrect
+        ? '<div class="quiz-celebrate">\ud83c\udf89\ud83c\udf8a\ud83e\udd73</div><div class="quiz-result-msg quiz-result-correct">Correct. You recognized it. And now you can\u2019t unsee it.</div>'
+        : '<div class="quiz-result-msg quiz-result-wrong">Not quite. Go back and read more carefully \u2014 the answer was there all along.</div>';
+    }
+    return;
+  }
+
+  var wr = e.target.closest('[data-wiz-restart]');
+  if (wr) {
+    var wrId = wr.dataset.wizRestart;
+    var wrItems = wrId === 'frog' ? _wizItemsFrog : _wizItemsPatterns;
+    wizSetIndex(wrId, 0, wrItems);
+    return;
+  }
 
   var wd = e.target.closest('[data-wiz]');
   if (wd) {
@@ -147,9 +174,88 @@ function saveLink(){if(_linkIdx===null)return;var idx=_linkIdx;initiatives[idx].
 function clearLink(){if(_linkIdx===null)return;var idx=_linkIdx;initiatives[idx].link='';closePopup();var rows=document.querySelectorAll('#rt-table table tbody tr');if(rows[idx])rows[idx].cells[1].innerHTML=titleCellHtml(idx);saveLocalState();}
 function toggleSb(){collapsed=!collapsed;document.getElementById('sb').classList.toggle('col',collapsed);document.getElementById('togico').innerHTML=collapsed?'<path d="M4 2l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>':'<path d="M6 2L3 5l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>';}
 
+function openSendCredentialsModal() {
+  var existing = document.getElementById('cred-modal-overlay');
+  if (existing) existing.remove();
+  var overlay = document.createElement('div');
+  overlay.id = 'cred-modal-overlay';
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.35);display:flex;align-items:center;justify-content:center;z-index:200;';
+  overlay.innerHTML =
+    '<div style="background:#fff;border-radius:14px;padding:28px 28px 24px;width:360px;box-shadow:0 8px 40px rgba(0,0,0,0.12);">'
+    + '<div style="font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.5px;color:var(--faint);margin-bottom:6px;">Send credentials</div>'
+    + '<div style="font-size:17px;font-weight:500;letter-spacing:-.4px;color:var(--text);margin-bottom:6px;">Enter your email</div>'
+    + '<div style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:20px;">We\'ll send the access credentials to your inbox.</div>'
+    + '<input id="cred-modal-inp" type="email" placeholder="you@company.com" style="width:100%;height:40px;border:1px solid rgba(0,0,0,0.12);border-radius:8px;padding:0 12px;font-size:13px;font-family:inherit;color:var(--text);outline:none;margin-bottom:8px;"/>'
+    + '<div id="cred-modal-err" style="font-size:11px;color:#C0392B;min-height:16px;margin-bottom:12px;"></div>'
+    + '<div style="display:flex;gap:8px;">'
+    + '<button id="cred-modal-cancel" style="flex:1;height:38px;background:transparent;border:1px solid rgba(0,0,0,0.12);border-radius:8px;font-size:13px;font-family:inherit;cursor:pointer;color:var(--muted);">Cancel</button>'
+    + '<button id="cred-modal-send" style="flex:2;height:38px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:500;font-family:inherit;cursor:pointer;">Send credentials</button>'
+    + '</div>'
+    + '</div>';
+  document.body.appendChild(overlay);
+
+  var inp = document.getElementById('cred-modal-inp');
+  var err = document.getElementById('cred-modal-err');
+  inp.focus();
+
+  function isAllowed(email) {
+    var refEmails = REFERENCES.map(function(r) { return r.sigEmail || ''; });
+    var allEmails = refEmails.concat(PROFILE_SIG_EMAILS || []);
+    var unique = allEmails.filter(function(e, i, a) { return e && a.indexOf(e) === i; });
+    return unique.some(function(e) { return e.toLowerCase() === email.toLowerCase(); });
+  }
+
+  inp.addEventListener('blur', function() {
+    var val = inp.value.trim();
+    if (val && !isAllowed(val)) {
+      err.textContent = 'This email is not allowed to access the dashboard. Try with your work email.';
+      inp.style.borderColor = '#C0392B';
+    } else {
+      err.textContent = '';
+      inp.style.borderColor = '';
+    }
+  });
+  inp.addEventListener('input', function() {
+    if (err.textContent) { err.textContent = ''; inp.style.borderColor = ''; }
+  });
+
+  document.getElementById('cred-modal-send').addEventListener('click', function() {
+    var val = inp.value.trim();
+    if (!val) { err.textContent = 'Please enter your email.'; return; }
+    if (!isAllowed(val)) {
+      err.textContent = 'This email is not allowed to access the dashboard. Try with your work email.';
+      inp.style.borderColor = '#C0392B';
+      return;
+    }
+    var btn = document.getElementById('cred-modal-send');
+    btn.textContent = 'Sending\u2026';
+    btn.disabled = true;
+    ejsSendWelcome(val)
+      .then(function() {
+        overlay.querySelector('div').innerHTML =
+          '<div style="text-align:center;padding:12px 0 8px;">'
+          + '<div style="font-size:32px;margin-bottom:14px;">🐸</div>'
+          + '<div style="font-size:17px;font-weight:500;letter-spacing:-.4px;color:var(--text);margin-bottom:8px;">Credentials sent!</div>'
+          + '<div style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:20px;">Check your inbox at <strong style="color:var(--text);">'+val+'</strong>.</div>'
+          + '<button id="cred-modal-close" style="height:38px;padding:0 28px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:500;font-family:inherit;cursor:pointer;">Got it</button>'
+          + '</div>';
+        document.getElementById('cred-modal-close').addEventListener('click', function() { overlay.remove(); });
+      })
+      .catch(function() {
+        err.textContent = 'Something went wrong. Please try again.';
+        btn.textContent = 'Send credentials';
+        btn.disabled = false;
+      });
+  });
+
+  document.getElementById('cred-modal-cancel').addEventListener('click', function() { overlay.remove(); });
+  overlay.addEventListener('click', function(e) { if (e.target === overlay) overlay.remove(); });
+  inp.addEventListener('keydown', function(e) { if (e.key === 'Enter') document.getElementById('cred-modal-send').click(); });
+}
+
 function login() {
   var e = document.getElementById('em').value.trim(), p = document.getElementById('pw').value;
-  if (e === 'condoadmin@verygoodpeeps.co' && p === 'HelixCapital') {
+  if (e === 'condoadmin@verygoodpeeps.ai' && p === 'HelixCapital') {
     document.getElementById('auth').classList.add('gone');
     setTimeout(function(){document.getElementById('auth').style.display='none';},300);
     document.getElementById('app').classList.add('show');
@@ -167,7 +273,7 @@ function login() {
       if (obShouldShow()) { setTimeout(obStart, 400); }
     });
   } else {
-    document.getElementById('err').textContent = 'Invalid credentials. Try: condoadmin@verygoodpeeps.co / HelixCapital';
+    document.getElementById('err').textContent = 'Invalid credentials. Try: condoadmin@verygoodpeeps.ai / HelixCapital';
   }
 }
 
@@ -183,6 +289,7 @@ function logout() {
 var m = new Date().getMonth(), y = new Date().getFullYear();
 document.getElementById('qbadge').textContent = 'Q'+(m<3?1:m<6?2:m<9?3:4)+' '+y;
 document.getElementById('loginBtn').addEventListener('click', login);
+document.getElementById('sendCredBtn').addEventListener('click', openSendCredentialsModal);
 document.getElementById('logoutBtn').addEventListener('click', logout);
 document.getElementById('tog').addEventListener('click', toggleSb);
 document.getElementById('linkOpenBtn').addEventListener('click', openCurrentLink);
@@ -211,31 +318,39 @@ function userPopToggle(e) {
 
   var pop = document.createElement('div');
   pop.id = 'user-popover';
-  pop.style.cssText = 'position:fixed;z-index:910;background:var(--surface);border:1px solid var(--border);border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,.12);width:220px;padding:6px 0;'
-    + 'left:' + rect.left + 'px;bottom:' + (window.innerHeight - rect.top + 8) + 'px;';
+  pop.className = 'user-popover';
+  pop.style.left = rect.left + 'px';
+  pop.style.bottom = (window.innerHeight - rect.top + 8) + 'px';
 
   var userName = document.getElementById('un').textContent;
 
-  pop.innerHTML = '<div data-userpop="profile" style="padding:10px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:background .1s"'
-    + ' onmouseover="this.style.background=\'var(--bg)\'" onmouseout="this.style.background=\'\'">'
+  pop.innerHTML = '<div class="user-pop-item" data-userpop="profile">'
     + '<svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="5.5" r="2.5" stroke="currentColor" stroke-width="1.4"/><path d="M3 14c0-2.8 2.2-5 5-5s5 2.2 5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>'
-    + '<div><div style="font-size:12px;font-weight:500;color:var(--text)">Profile</div>'
-    + '<div style="font-size:11px;color:var(--faint)">' + userName + '</div></div>'
+    + '<div><div class="user-pop-item-title">Profile</div>'
+    + '<div class="user-pop-item-sub">' + userName + '</div></div>'
     + '</div>'
-    + '<div data-userpop="language" style="padding:10px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:background .1s"'
-    + ' onmouseover="this.style.background=\'var(--bg)\'" onmouseout="this.style.background=\'\'">'
+    + '<div class="user-pop-item" data-userpop="language">'
     + '<svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.4"/><path d="M2 8h12M8 2c-1.5 1.5-2.5 3.5-2.5 6s1 4.5 2.5 6c1.5-1.5 2.5-3.5 2.5-6s-1-4.5-2.5-6" stroke="currentColor" stroke-width="1.3"/></svg>'
-    + '<div><div style="font-size:12px;font-weight:500;color:var(--text)">Language</div>'
-    + '<div style="font-size:11px;color:var(--faint)">Passive Aggressive</div></div>'
+    + '<div><div class="user-pop-item-title">Choose Language Style</div>'
+    + '<div class="user-pop-item-sub">Passive Aggressive</div></div>'
     + '</div>'
-    + '<div style="height:1px;background:var(--border);margin:4px 12px"></div>'
-    + '<div data-userpop="privacy" style="padding:10px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:background .1s"'
-    + ' onmouseover="this.style.background=\'var(--bg)\'" onmouseout="this.style.background=\'\'">'
+    + '<div class="user-pop-divider"></div>'
+    + '<div class="user-pop-item" data-userpop="privacy">'
     + '<svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M8 2L3 4.5V7c0 3.5 2.1 6.5 5 7.5 2.9-1 5-4 5-7.5V4.5L8 2z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M6 8.5l1.5 1.5L10 7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>'
-    + '<div style="font-size:12px;font-weight:500;color:var(--text)">Privacy Policy</div>'
+    + '<div class="user-pop-item-title">Privacy Policy</div>'
     + '</div>';
 
   document.body.appendChild(pop);
+
+  pop.querySelector('[data-userpop="profile"]').addEventListener('click', function() {
+    userPopClose();
+    setPage('profile', 'Profile');
+  });
+
+  pop.querySelector('[data-userpop="language"]').addEventListener('click', function() {
+    userPopClose();
+    openLanguageModal();
+  });
 
   setTimeout(function() {
     document.addEventListener('click', function h(ev) {
@@ -247,4 +362,84 @@ function userPopToggle(e) {
   }, 0);
 }
 
+function openLanguageModal() {
+  var existing = document.getElementById('lang-modal-overlay');
+  if (existing) { existing.remove(); return; }
+  var overlay = document.createElement('div');
+  overlay.id = 'lang-modal-overlay';
+  overlay.innerHTML =
+    '<div class="upsell-modal" style="max-width:520px;width:90vw">'
+    + '<div class="upsell-modal-title" style="font-size:16px;margin-bottom:6px">Choose Language Style</div>'
+    + '<div style="color:var(--muted);font-size:12px;margin-bottom:20px">How would you like this dashboard to speak to you?</div>'
+    + '<div class="lang-options">'
+    + '<div class="lang-opt lang-opt--selected">'
+    + '<div class="lang-opt-name">Passive Aggressive</div>'
+    + '<div class="lang-opt-desc">Says one thing, means another. Subtly intimidating. You\u2019ll get the message.</div>'
+    + '<div class="lang-opt-check"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5L13 5" stroke="#66C220" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'
+    + '</div>'
+    + '<div class="lang-opt lang-opt--disabled">'
+    + '<div class="lang-opt-name">Stereotypical <span class="lang-badge lang-badge--soon">coming soon</span></div>'
+    + '<div class="lang-opt-desc">Broad generalizations delivered with full confidence.</div>'
+    + '</div>'
+    + '<div class="lang-opt lang-opt--disabled">'
+    + '<div class="lang-opt-name">Collaborative <span class="lang-badge lang-badge--dep">deprecated</span></div>'
+    + '<div class="lang-opt-desc">Warm, inclusive, clear and aligned. Removed in release v3.4 (March 2025).</div>'
+    + '</div>'
+    + '</div>'
+    + '<div class="upsell-modal-actions" style="margin-top:20px">'
+    + '<button class="sig-btn" id="lang-modal-close">Got it</button>'
+    + '</div>'
+    + '</div>';
+  document.body.appendChild(overlay);
+  document.getElementById('lang-modal-close').addEventListener('click', function() { overlay.remove(); });
+  overlay.addEventListener('click', function(e) { if (e.target === overlay) overlay.remove(); });
+}
+
 document.getElementById('userBox').addEventListener('click', userPopToggle);
+
+document.getElementById('upsellBadge').addEventListener('click', function() {
+  var existing = document.getElementById('upsell-modal-overlay');
+  if (existing) { existing.remove(); return; }
+  var overlay = document.createElement('div');
+  overlay.id = 'upsell-modal-overlay';
+  overlay.innerHTML =
+    '<div class="upsell-modal">'
+    + '<div class="upsell-modal-title">Get in touch with your Adulting Specialist</div>'
+    + '<img class="upsell-modal-photo" src="https://res.cloudinary.com/dhfrgr4qd/image/upload/v1775846605/jennifer_salonga_pjoqbz.jpg" alt="Jennifer Salonga"/>'
+    + '<div class="upsell-modal-info">'
+    + '<div class="upsell-modal-name">Jennifer Salonga</div>'
+    + '<div class="upsell-modal-role">Adulting Specialist</div>'
+    + '<div class="upsell-modal-meta">'
+    + '<span class="upsell-modal-meta-item"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="6" width="13" height="8.5" rx="1.5"/><path d="M5.5 6V4.5a2.5 2.5 0 015 0V6"/><line x1="1.5" y1="10" x2="14.5" y2="10"/></svg>Helix Capital</span>'
+    + '<span class="upsell-modal-meta-item"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2a4.5 4.5 0 014.5 4.5c0 3-4.5 7.5-4.5 7.5S3.5 9.5 3.5 6.5A4.5 4.5 0 018 2z"/><circle cx="8" cy="6.5" r="1.5"/></svg>Philippines</span>'
+    + '</div>'
+    + '</div>'
+    + '<div class="upsell-modal-actions">'
+    + '<button class="sig-btn-sec" id="upsell-modal-close">Back</button>'
+    + '<a class="sig-btn upsell-modal-linkedin" href="https://www.linkedin.com/in/jennifer-salonga-045107257/" target="_blank" rel="noopener">Message on LinkedIn</a>'
+    + '</div>'
+    + '</div>';
+  document.body.appendChild(overlay);
+  document.getElementById('upsell-modal-close').addEventListener('click', function() { overlay.remove(); });
+  overlay.addEventListener('click', function(e) { if (e.target === overlay) overlay.remove(); });
+});
+
+document.getElementById('livestreamBtn').addEventListener('click', function() {
+  var existing = document.getElementById('livestream-modal-overlay');
+  if (existing) { existing.remove(); return; }
+  var overlay = document.createElement('div');
+  overlay.id = 'livestream-modal-overlay';
+  overlay.innerHTML =
+    '<div class="upsell-modal">'
+    + '<div style="display:inline-block;background:#deeeff;color:#3a7fc1;font-size:10px;font-weight:600;letter-spacing:.4px;padding:3px 9px;border-radius:5px;margin-bottom:14px;text-transform:uppercase">Coming Soon</div>'
+    + '<div class="upsell-modal-title" style="font-size:16px;margin-bottom:16px">My Bedroom LiveStreaming</div>'
+    + '<svg width="80" height="80" viewBox="0 0 80 80" fill="none" style="display:block;margin:0 auto 18px"><rect x="4" y="52" width="72" height="22" rx="5" fill="#DDD9D0" opacity=".8"/><ellipse cx="40" cy="47" rx="22" ry="15" fill="#9DC47A"/><ellipse cx="40" cy="45" rx="20" ry="13" fill="#8BAF6A"/><circle cx="29" cy="34" r="10" fill="#6B8A50"/><circle cx="51" cy="34" r="10" fill="#6B8A50"/><circle cx="29" cy="34" r="7" fill="#fff" opacity=".9"/><circle cx="51" cy="34" r="7" fill="#fff" opacity=".9"/><circle cx="30.5" cy="34" r="3.5" fill="#2A3A1A"/><circle cx="52.5" cy="34" r="3.5" fill="#2A3A1A"/><circle cx="32" cy="32" r="1.5" fill="#fff" opacity=".8"/><circle cx="54" cy="32" r="1.5" fill="#fff" opacity=".8"/><path d="M19 52 Q22 47 26 52" stroke="#8BAF6A" stroke-width="2.5" stroke-linecap="round" fill="none"/><path d="M54 52 Q58 47 61 52" stroke="#8BAF6A" stroke-width="2.5" stroke-linecap="round" fill="none"/><circle cx="37" cy="42" r="1" fill="#6B8A50" opacity=".6"/><circle cx="43" cy="42" r="1" fill="#6B8A50" opacity=".6"/></svg>'
+    + '<div style="color:var(--muted);font-size:13px;line-height:1.6;text-align:center;max-width:260px;margin:0 auto 20px">For those who feel the urge to keep watching, even post-resignation.<br><br>If you want to continue controlling obsessively \u2014 this one is for you.<br><br><em>Don\u2019t judge too much!</em></div>'
+    + '<div class="upsell-modal-actions">'
+    + '<button class="sig-btn-sec" id="livestream-modal-close">Close</button>'
+    + '</div>'
+    + '</div>';
+  document.body.appendChild(overlay);
+  document.getElementById('livestream-modal-close').addEventListener('click', function() { overlay.remove(); });
+  overlay.addEventListener('click', function(e) { if (e.target === overlay) overlay.remove(); });
+});

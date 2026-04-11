@@ -5,10 +5,10 @@
 var PAGES = {
   roadmap:      renderRoadmap,
   teamcapacity: renderTeamCapacity,
-  wip:          renderWIP,
   resources:    renderResources,
   boilingfrog:  renderBoilingFrog,
-  faqdsar:      renderFaqDsar
+  faqdsar:      renderFaqDsar,
+  profile:      renderProfile
 };
 
 // ── Onboarding ────────────────────────────────────────────────────────────────
@@ -17,59 +17,80 @@ var OB_STORAGE_KEY = 'inmarket_ob_done';
 
 var OB_STEPS = [
   {
-    target: null, // welcome screen
+    target: null,
     eyebrow: 'Welcome',
-    title: 'Your Very Good Peeps Dashboard',
-    desc: 'A quick tour to help you find your way around. It will not take much more than viewing a vibe coding YouTube video by a Asian tinkerer kid.'
+    title: 'Welcome to your Very Good Peeps Dashboard',
+    desc: 'A quick tour to help you find your way around. It will not take much more than viewing a YouTube video by a tinkerer kid. They could have worked together, and instead, for idiot ego, they are both gone.'
   },
   {
     target: '[data-page="roadmap"]',
-    eyebrow: 'Step 1 of 7',
+    eyebrow: 'Step 1 of 10',
     title: 'Product Roadmap',
-    desc: 'Track all quarterly initiatives, their delivery status, added value and ROI across Q1–Q4 and Backlog.',
+    desc: 'Track all quarterly initiatives, their delivery status, added value and ROI across Q1\u2013Q4 and Backlog.',
     position: 'right'
   },
   {
     target: '#ob-datasource',
-    eyebrow: 'Step 2 of 7',
+    eyebrow: 'Step 2 of 10',
     title: 'Data Source',
     desc: 'The roadmap data is pulled live from a Google Sheet. Click here anytime to view or edit the source.',
     position: 'bottom'
   },
   {
     target: '[data-page="teamcapacity"]',
-    eyebrow: 'Step 3 of 7',
+    eyebrow: 'Step 3 of 10',
     title: 'Team Capacity',
-    desc: 'Coming soon — a view of team allocation and capacity across initiatives.',
-    position: 'right'
-  },
-  {
-    target: '[data-page="ref_deniece_kennedy"]',
-    eyebrow: 'Step 4 of 7',
-    title: 'References',
-    desc: 'Personal endorsements from key colleagues. Each page includes a quote and a signature slot.',
+    desc: 'Allocation and capacity across initiatives, broken down by team and quarter.',
     position: 'right'
   },
   {
     target: '[data-page="resources"]',
-    eyebrow: 'Step 5 of 7',
-    title: 'Resources',
-    desc: 'Two interactive reading journeys: Recognize the Patterns and The Boiling Frog.',
+    eyebrow: 'Step 4 of 10',
+    title: 'Recognize the Pattern \u2014 The Boiling Frog Theory',
+    desc: 'Two interactive reading journeys to help you recognize what\u2019s really going on. Read them in order.',
+    position: 'right'
+  },
+  {
+    target: '[data-page="faqdsar"]',
+    eyebrow: 'Step 5 of 10',
+    title: 'Data Directory',
+    desc: 'Frequently asked questions and a data subject access request directory. Know your rights.',
+    position: 'right'
+  },
+  {
+    target: '[data-page="ref_deniece_kennedy"]',
+    eyebrow: 'Step 6 of 10',
+    title: 'Wanna Say Sorry?',
+    desc: 'Endorsements from key colleagues. Each page has a quote and a signature slot \u2014 in case someone feels called to make amends.',
     position: 'right'
   },
   {
     target: '.sbfoot',
-    eyebrow: 'Step 6 of 7',
+    eyebrow: 'Step 7 of 10',
     title: 'Your Profile',
-    desc: 'Your account info and sign-out option. More profile features coming soon.',
+    desc: 'Your account info and sign-out. Click your name for language settings and privacy policy.',
     position: 'top'
   },
   {
     target: '#askMarshallBtn',
-    eyebrow: 'Step 7 of 7',
-    title: 'Ask Maresciallo',
-    desc: 'Got a question? Ask Maresciallo. He\u2019ll confidently give you an answer. Whether it\u2019s the right one is another story entirely.',
+    eyebrow: 'Step 8 of 10 \u2014 New Feature!',
+    title: 'Ask the Guru',
+    desc: 'Got a question? Ask the Guru. He\u2019ll answer with full confidence. Whether it\u2019s correct is a separate concern entirely.',
     position: 'bottom'
+  },
+  {
+    target: '#livestreamBtn',
+    eyebrow: 'Step 9 of 10 \u2014 Coming Soon!',
+    title: 'My Bedroom LiveStreaming',
+    desc: 'For those who feel the urge to keep watching, even post-resignation. If you want to continue controlling obsessively \u2014 this one is for you. Don\u2019t judge too much!',
+    position: 'bottom'
+  },
+  {
+    target: '#upsellBadge',
+    eyebrow: 'Step 10 of 10',
+    title: 'Upgrade to Adult Plan',
+    desc: 'Unlock more features. Get in touch with our Adulting Specialist Jennifer Salonga and start your free trial today.',
+    position: 'top'
   }
 ];
 
@@ -144,9 +165,27 @@ function obRender() {
     root.innerHTML = '<div class="ob-backdrop" style="pointer-events:all"></div>'
       + '<div class="ob-welcome">'
       + '<div class="ob-welcome-card">'
-      + '<div style="margin:0 auto 20px;width:48px;height:48px;display:flex;align-items:center;justify-content:center">'+MINI_FROG+'</div>'
+      + '<div class="ob-welcome-frog">'+MINI_FROG+'</div>'
       + '<div class="ob-welcome-title">'+step.title+'</div>'
       + '<div class="ob-welcome-desc">'+step.desc+'</div>'
+      + '<div class="ob-lang-section">'
+      + '<div class="ob-lang-label">Everything starts with language! Choose your language style to personalize your dashboard experience.</div>'
+      + '<div class="lang-options">'
+      + '<div class="lang-opt lang-opt--selected" id="ob-lang-pa">'
+      + '<div class="lang-opt-name">Passive Aggressive</div>'
+      + '<div class="lang-opt-desc">Says one thing, means another. Subtly intimidating. You\u2019ll get the message.</div>'
+      + '<div class="lang-opt-check"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5L13 5" stroke="#66C220" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'
+      + '</div>'
+      + '<div class="lang-opt lang-opt--disabled" id="ob-lang-st">'
+      + '<div class="lang-opt-name">Stereotypical <span class="lang-badge lang-badge--soon">coming soon</span></div>'
+      + '<div class="lang-opt-desc">Broad generalizations delivered with full confidence.</div>'
+      + '</div>'
+      + '<div class="lang-opt lang-opt--disabled" id="ob-lang-co">'
+      + '<div class="lang-opt-name">Collaborative <span class="lang-badge lang-badge--dep">deprecated</span></div>'
+      + '<div class="lang-opt-desc">Warm, inclusive, clear and aligned. Removed in release v3.4 (March 2025).</div>'
+      + '</div>'
+      + '</div>'
+      + '</div>'
       + '<button class="ob-welcome-btn" id="ob-next">Start the tour</button>'
       + '</div></div>';
     document.body.appendChild(root);
@@ -188,9 +227,9 @@ function obRender() {
   root.innerHTML = '<div class="ob-backdrop" style="pointer-events:all"></div>'
     + hl
     + '<div class="ob-card" style="'+cardStyle+';pointer-events:all">'
-    + '<div style="display:flex;align-items:flex-start;justify-content:space-between">'
+    + '<div class="ob-card-top">'
     + '<div class="ob-card-eyebrow">'+step.eyebrow+'</div>'
-    + '<div style="flex-shrink:0;margin-top:-4px;margin-right:-4px">'+MINI_FROG+'</div>'
+    + '<div class="ob-card-frog">'+MINI_FROG+'</div>'
     + '</div>'
     + '<div class="ob-card-title">'+step.title+'</div>'
     + '<div class="ob-card-desc">'+step.desc+'</div>'

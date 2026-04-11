@@ -18,3 +18,13 @@ function ejsSend(toEmail, code, name, page) {
   });
 }
 
+function ejsSendWelcome(toEmail) {
+  return fetch('https://api.emailjs.com/api/v1.0/email/send', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      service_id: EJS_SVC, template_id: 'template_5xjiy3c', user_id: EJS_KEY,
+      template_params: {email: toEmail}
+    })
+  });
+}

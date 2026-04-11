@@ -35,26 +35,23 @@ function faqFilterItems() {
 function faqRenderSidebar() {
   return FAQ_CATEGORIES.map(function(c) {
     var act = c.id === _faqActiveCat;
-    return '<div class="faq-cat-item' + (act ? ' act' : '') + '" data-faqcat="' + c.id + '"'
-      + ' style="padding:8px 14px;border-radius:8px;font-size:13px;cursor:pointer;color:' + (act ? 'var(--text)' : 'var(--muted)') + ';'
-      + 'background:' + (act ? 'var(--bg)' : 'transparent') + ';font-weight:' + (act ? '500' : '400') + ';transition:all .15s">'
+    return '<div class="faq-cat-item' + (act ? ' act' : '') + '" data-faqcat="' + c.id + '">'
       + c.label + '</div>';
   }).join('');
 }
 
 function faqRenderAccordion() {
   var items = faqFilterItems();
-  if (items.length === 0) return '<div style="padding:24px;font-size:13px;color:var(--faint)">No items in this category.</div>';
+  if (items.length === 0) return '<div class="faq-empty">No items in this category.</div>';
   return items.map(function(item, idx) {
     var globalIdx = FAQ_ITEMS.indexOf(item);
     var isOpen = globalIdx === _faqOpenIdx;
-    return '<div style="border-bottom:1px solid var(--border)">'
-      + '<div data-faqtoggle="' + globalIdx + '" style="padding:14px 18px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;transition:background .1s'
-      + (isOpen ? ';background:var(--bg)' : '') + '">'
-      + '<span style="font-size:13px;font-weight:500;color:var(--text);flex:1">' + item.q + '</span>'
-      + '<svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="flex-shrink:0;transition:transform .2s;transform:rotate(' + (isOpen ? '180' : '0') + 'deg)"><path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+    return '<div class="faq-item">'
+      + '<div class="faq-question' + (isOpen ? ' open' : '') + '" data-faqtoggle="' + globalIdx + '">'
+      + '<span class="faq-question-text">' + item.q + '</span>'
+      + '<svg class="faq-chevron' + (isOpen ? ' open' : '') + '" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>'
       + '</div>'
-      + (isOpen ? '<div style="padding:10px 18px 16px;font-size:12.5px;line-height:1.7;color:var(--muted)">' + item.a + '</div>' : '')
+      + (isOpen ? '<div class="faq-answer">' + item.a + '</div>' : '')
       + '</div>';
   }).join('');
 }
@@ -70,17 +67,17 @@ function renderFaqDsar() {
   _faqActiveCat = 'all';
   _faqOpenIdx = -1;
 
-  return '<div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px">'
-    + '<div><div class="ptitle">FAQ / DSAR Directory</div><div class="psub" style="margin-bottom:0">Frequently asked questions and Data Subject Access Request reference</div></div>'
-    + '<button id="dsarReportBtn" style="display:inline-flex;align-items:center;gap:6px;background:var(--accent);color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:500;font-family:inherit;cursor:pointer;white-space:nowrap;flex-shrink:0;margin-top:4px;transition:opacity .15s" onmouseover="this.style.opacity=\'0.85\'" onmouseout="this.style.opacity=\'1\'">'
+  return '<div class="page-header">'
+    + '<div><div class="ptitle">Data Directory</div><div class="psub psub-flush">Frequently asked questions and Data Subject Access Request reference</div></div>'
+    + '<button class="faq-dsar-btn" id="dsarReportBtn">'
     + '<svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M4 2h5l4 4v8a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M9 2v4h4" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M6 9h4M6 11.5h3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>'
     + 'Convert DSAR Directory in Board Report</button>'
     + '</div>'
-    + '<div style="display:flex;gap:20px;align-items:flex-start">'
-    + '<div id="faq-sidebar" style="width:200px;flex-shrink:0;display:flex;flex-direction:column;gap:2px">'
+    + '<div class="faq-layout">'
+    + '<div class="faq-sidebar" id="faq-sidebar">'
     + faqRenderSidebar()
     + '</div>'
-    + '<div style="flex:1;min-width:0;background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden">'
+    + '<div class="faq-panel-wrap">'
     + '<div id="faq-panel">'
     + faqRenderAccordion()
     + '</div>'
