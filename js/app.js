@@ -273,7 +273,7 @@ function login() {
       if (obShouldShow()) { setTimeout(obStart, 400); }
     });
   } else {
-    document.getElementById('err').textContent = 'Invalid credentials. Try: condoadmin@verygoodpeeps.ai / HelixCapital';
+    document.getElementById('err').textContent = 'Wrong password. Try again or request your credentials via email.';
   }
 }
 
