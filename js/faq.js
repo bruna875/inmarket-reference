@@ -96,8 +96,15 @@ function faqRefresh() {
 function faqToggleCalcPanel() {
   _calcPanelOpen = !_calcPanelOpen;
   var panel = document.getElementById('dd-calc-panel');
-  if (panel) panel.style.display = _calcPanelOpen ? 'block' : 'none';
-  faqRefreshTabs(); // update button active state
+  if (panel) {
+    panel.style.display = _calcPanelOpen ? 'block' : 'none';
+    if (_calcPanelOpen) {
+      setTimeout(function() {
+        panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 40);
+    }
+  }
+  faqRefreshTabs();
 }
 
 function faqOpenRadarModal() {
