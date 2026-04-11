@@ -26,7 +26,6 @@ var FAQ_ITEMS = [
 
 var _faqActiveCat     = 'all';
 var _faqOpenIdx       = -1;
-var _calcPanelOpen    = false;
 var _dsarDropdownOpen = false;
 
 function faqCatLabel(catId) {
@@ -46,14 +45,15 @@ function faqRenderTabs() {
     return '<button class="dd-tab' + (act ? ' act' : '') + '" data-faqcat="' + c.id + '">' + c.label + '</button>';
   }).join('');
 
-  // Calc button lives inside the same chips wrapper
-  var calcBtn = '<div class="dd-tab-divider"></div>'
-    + '<button class="dd-calc-btn' + (_calcPanelOpen ? ' act' : '') + '" id="openCalcBtn">'
-    + '<svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="12" height="12" rx="2"/><path d="M5 5h2M9 5h2M5 8h2M9 8h2M5 11h2M9 11h2"/></svg>'
+  // Calculator is just another chip
+  var actCalc = _faqActiveCat === 'calc';
+  var calcChip = '<div class="dd-tab-divider"></div>'
+    + '<button class="dd-tab' + (actCalc ? ' act' : '') + '" data-faqcat="calc">'
+    + '<svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="12" height="12" rx="2"/><path d="M5 5h2M9 5h2M5 8h2M9 8h2M5 11h2M9 11h2"/></svg>'
     + 'Risk Calculator'
     + '</button>';
 
-  return '<div class="dd-chips">' + chips + calcBtn + '</div>';
+  return '<div class="dd-chips">' + chips + calcChip + '</div>';
 }
 
 function faqRenderAccordion() {
@@ -89,19 +89,15 @@ function faqRefreshPanel() {
 }
 
 function faqRefresh() {
-  faqRefreshTabs();
-  faqRefreshPanel();
-}
-
-function faqToggleCalcPanel() {
-  _calcPanelOpen = !_calcPanelOpen;
+  var isCalc = _faqActiveCat === 'calc';
   var panel   = document.getElementById('dd-calc-panel');
   var divider = document.querySelector('.dd-section-divider');
   var faqWrap = document.querySelector('.faq-panel-wrap');
-  if (panel)   panel.style.display   = _calcPanelOpen ? 'block' : 'none';
-  if (divider) divider.style.display = _calcPanelOpen ? 'none'  : '';
-  if (faqWrap) faqWrap.style.display = _calcPanelOpen ? 'none'  : '';
+  if (panel)   panel.style.display   = isCalc ? 'block' : 'none';
+  if (divider) divider.style.display = isCalc ? 'none'  : '';
+  if (faqWrap) faqWrap.style.display = isCalc ? 'none'  : '';
   faqRefreshTabs();
+  if (!isCalc) faqRefreshPanel();
 }
 
 function faqOpenRadarModal() {
@@ -157,7 +153,6 @@ function faqCloseDsarDropdown() {
 function renderFaqDsar() {
   _faqActiveCat     = 'all';
   _faqOpenIdx       = -1;
-  _calcPanelOpen    = false;
   _dsarDropdownOpen = false;
 
   return '<div class="page-header">'
@@ -208,12 +203,6 @@ function renderFaqDsar() {
 }
 
 document.addEventListener('click', function(e) {
-
-  // Risk Calculator toggle
-  if (e.target.closest('#openCalcBtn')) {
-    faqToggleCalcPanel();
-    return;
-  }
 
   // Board Report dropdown toggle
   if (e.target.closest('#dsarReportBtn')) {
