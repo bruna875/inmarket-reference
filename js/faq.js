@@ -24,6 +24,7 @@ var FAQ_ITEMS = [
 
 var _faqActiveCat = 'all';
 var _faqOpenIdx   = -1;
+var _dsarDropdownOpen = false;
 
 function faqCatLabel(catId) {
   var c = FAQ_CATEGORIES.filter(function(x) { return x.id === catId; })[0];
@@ -43,11 +44,13 @@ function faqRenderTabs() {
   }).join('');
   return '<div class="dd-chips">' + chips + '</div>'
     + '<div class="dd-tab-divider"></div>'
-    + '<button class="dd-calc-btn" id="openCalcBtn">'
+    + '<button class="dd-calc-btn' + (_calcPanelOpen ? ' act' : '') + '" id="openCalcBtn">'
     + '<svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="12" height="12" rx="2"/><path d="M5 5h2M9 5h2M5 8h2M9 8h2M5 11h2M9 11h2"/></svg>'
     + 'Risk Calculator'
     + '</button>';
 }
+
+var _calcPanelOpen = false;
 
 function faqRenderAccordion() {
   var items = faqFilterItems();
@@ -86,19 +89,106 @@ function faqRefresh() {
   faqRefreshPanel();
 }
 
+function faqToggleCalcPanel() {
+  _calcPanelOpen = !_calcPanelOpen;
+  var panel = document.getElementById('dd-calc-panel');
+  if (panel) panel.style.display = _calcPanelOpen ? 'block' : 'none';
+  // refresh tabs to update button active state
+  faqRefreshTabs();
+}
+
+function faqOpenRadarModal() {
+  var existing = document.getElementById('radar-modal-overlay');
+  if (existing) existing.remove();
+
+  var overlay = document.createElement('div');
+  overlay.id = 'radar-modal-overlay';
+  overlay.className = 'modal-overlay';
+
+  overlay.innerHTML =
+    '<div class="modal-card" style="max-width:440px;">'
+    + '<div class="modal-header">'
+    + '<div style="display:flex;align-items:center;gap:8px;">'
+    + '<svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg>'
+    + '<span class="modal-title">Any Data out of radar?</span>'
+    + '</div>'
+    + '<button class="modal-close" id="radarModalClose">'
+    + '<svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>'
+    + '</button>'
+    + '</div>'
+    + '<div class="modal-body">'
+    + '<p class="modal-desc">For sure some other data sono sfuggiti al nostro radar. Scrivici e li aggiungeremo alla directory il prima possibile.</p>'
+    + '<a href="mailto:bruna@saykudos.co" class="modal-email-btn">'
+    + '<svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M2 4h12v9a1 1 0 01-1 1H3a1 1 0 01-1-1V4z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M2 4l6 5 6-5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+    + 'Send Email'
+    + '</a>'
+    + '</div>'
+    + '</div>';
+
+  document.body.appendChild(overlay);
+  document.getElementById('radarModalClose').addEventListener('click', function() { overlay.remove(); });
+  overlay.addEventListener('click', function(e) { if (e.target === overlay) overlay.remove(); });
+}
+
+function faqToggleDsarDropdown() {
+  _dsarDropdownOpen = !_dsarDropdownOpen;
+  var menu = document.getElementById('dsarDropdownMenu');
+  if (menu) menu.style.display = _dsarDropdownOpen ? 'block' : 'none';
+  var btn = document.getElementById('dsarReportBtn');
+  if (btn) btn.classList.toggle('open', _dsarDropdownOpen);
+}
+
+function faqCloseDsarDropdown() {
+  _dsarDropdownOpen = false;
+  var menu = document.getElementById('dsarDropdownMenu');
+  if (menu) menu.style.display = 'none';
+  var btn = document.getElementById('dsarReportBtn');
+  if (btn) btn.classList.remove('open');
+}
+
 function renderFaqDsar() {
-  _faqActiveCat = 'all';
-  _faqOpenIdx   = -1;
+  _faqActiveCat     = 'all';
+  _faqOpenIdx       = -1;
+  _calcPanelOpen    = false;
+  _dsarDropdownOpen = false;
 
   return '<div class="page-header">'
     + '<div><div class="ptitle">Data Directory</div><div class="psub psub-flush">FAQ and Data Subject Access Request reference</div></div>'
+    + '<div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">'
+
+    // ── Secondary CTA ────────────────────────────────────────
+    + '<button class="faq-radar-btn" id="radarBtn">'
+    + '<svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 1.5"/></svg>'
+    + 'Any Data out of radar?'
+    + '</button>'
+
+    // ── Board Report dropdown ────────────────────────────────
+    + '<div class="dd-dropdown-wrap" id="dsarDropdownWrap">'
     + '<button class="faq-dsar-btn" id="dsarReportBtn">'
     + '<svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M4 2h5l4 4v8a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M9 2v4h4" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M6 9h4M6 11.5h3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>'
-    + 'Board Report</button>'
+    + 'Board Report'
+    + '<svg class="dd-dropdown-chevron" width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+    + '</button>'
+    + '<div class="dd-dropdown-menu" id="dsarDropdownMenu" style="display:none;">'
+    + '<button class="dd-dropdown-item" data-action="google">'
+    + '<svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M6 3H3a1 1 0 00-1 1v9a1 1 0 001 1h9a1 1 0 001-1v-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 2h5v5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2L8 8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>'
+    + 'Preview and Download from Google'
+    + '</button>'
+    + '<button class="dd-dropdown-item" data-action="email">'
+    + '<svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M2 4h12v9a1 1 0 01-1 1H3a1 1 0 01-1-1V4z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M2 4l6 5 6-5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+    + 'Send Email to Teresa'
+    + '</button>'
+    + '</div>'
     + '</div>'
 
-    // ── Tabs (All + categories) ──────────────────────────────
+    + '</div>'
+    + '</div>'
+
+    // ── Tabs (All + categories + Calc button) ────────────────
     + '<div class="dd-tabs" id="dd-tabs">' + faqRenderTabs() + '</div>'
+
+    // ── Inline Risk Calculator panel ─────────────────────────
+    + '<div id="dd-calc-panel" style="display:none;">' + renderCalculatorPanel() + '</div>'
 
     + '<div class="dd-section-divider"></div>'
 
@@ -109,10 +199,44 @@ function renderFaqDsar() {
 }
 
 document.addEventListener('click', function(e) {
+
+  // Risk Calculator toggle
   if (e.target.closest('#openCalcBtn')) {
-    openCalculatorModal();
+    faqToggleCalcPanel();
     return;
   }
+
+  // Board Report dropdown toggle
+  if (e.target.closest('#dsarReportBtn')) {
+    faqToggleDsarDropdown();
+    return;
+  }
+
+  // Dropdown items
+  var item = e.target.closest('[data-action]');
+  if (item && e.target.closest('#dsarDropdownMenu')) {
+    var action = item.dataset.action;
+    faqCloseDsarDropdown();
+    if (action === 'google') {
+      window.open('https://drive.google.com', '_blank');
+    } else if (action === 'email') {
+      window.location.href = 'mailto:teresa@verygoodpeeps.co?subject=Board%20Report%20%E2%80%94%20Data%20Directory';
+    }
+    return;
+  }
+
+  // Close dropdown when clicking outside
+  if (_dsarDropdownOpen && !e.target.closest('#dsarDropdownWrap')) {
+    faqCloseDsarDropdown();
+  }
+
+  // Radar modal
+  if (e.target.closest('#radarBtn')) {
+    faqOpenRadarModal();
+    return;
+  }
+
+  // Category tabs
   var cat = e.target.closest('[data-faqcat]');
   if (cat) {
     _faqActiveCat = cat.dataset.faqcat;
@@ -120,6 +244,8 @@ document.addEventListener('click', function(e) {
     faqRefresh();
     return;
   }
+
+  // Accordion toggle
   var tog = e.target.closest('[data-faqtoggle]');
   if (tog) {
     var idx    = parseInt(tog.dataset.faqtoggle);

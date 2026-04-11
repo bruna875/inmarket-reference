@@ -1205,6 +1205,97 @@ tr:hover .link-btn, .link-btn.has-link { opacity: 1; color: var(--accent) }
   transition: opacity .15s; align-self: flex-start;
 }
 .faq-dsar-btn:hover { opacity: .85 }
+.faq-dsar-btn.open { opacity: .9 }
+.dd-dropdown-chevron { transition: transform .2s; flex-shrink: 0 }
+.faq-dsar-btn.open .dd-dropdown-chevron { transform: rotate(180deg) }
+
+/* ── Board Report dropdown ───────────────────────────────────────────────────── */
+.dd-dropdown-wrap { position: relative; flex-shrink: 0 }
+.dd-dropdown-menu {
+  position: absolute; top: calc(100% + 6px); right: 0;
+  background: var(--surface); border: 1px solid var(--border-md);
+  border-radius: 10px; box-shadow: 0 6px 24px rgba(0,0,0,0.1);
+  min-width: 230px; overflow: hidden; z-index: 100;
+}
+.dd-dropdown-item {
+  display: flex; align-items: center; gap: 8px;
+  width: 100%; padding: 10px 14px; font-size: 12.5px;
+  font-family: inherit; font-weight: 400; color: var(--text);
+  background: none; border: none; cursor: pointer; text-align: left;
+  transition: background .1s;
+}
+.dd-dropdown-item:hover { background: var(--bg) }
+.dd-dropdown-item:not(:last-child) { border-bottom: 1px solid var(--border) }
+
+/* ── Radar / secondary CTA ───────────────────────────────────────────────────── */
+.faq-radar-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  border: 1px solid var(--border-md); background: transparent;
+  color: var(--muted); border-radius: 8px; padding: 8px 13px;
+  font-size: 11px; font-weight: 500; font-family: inherit;
+  cursor: pointer; white-space: nowrap; flex-shrink: 0;
+  transition: border-color .15s, color .15s;
+}
+.faq-radar-btn:hover { border-color: var(--accent); color: var(--accent) }
+
+/* ── Calc button active state ────────────────────────────────────────────────── */
+.dd-calc-btn.act {
+  background: var(--subtle); border-color: var(--accent); color: var(--accent);
+}
+
+/* ── Inline Calculator panel ─────────────────────────────────────────────────── */
+.dd-calc-panel {
+  margin-top: 12px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; overflow: hidden;
+}
+.dd-calc-panel-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 18px; border-bottom: 1px solid var(--border);
+}
+.dd-calc-panel-title { font-size: 13px; font-weight: 500; color: var(--text) }
+.dd-calc-coming-soon {
+  font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: .4px;
+  color: var(--faint); background: var(--bg); border: 1px solid var(--border);
+  border-radius: 4px; padding: 2px 7px;
+}
+.dd-calc-panel-body { padding: 24px 20px }
+.dd-calc-placeholder {
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+  padding: 28px 20px; background: var(--bg); border-radius: 8px;
+  border: 1px dashed var(--border-md); text-align: center;
+}
+.dd-calc-placeholder-text { font-size: 12px; color: var(--faint); line-height: 1.7 }
+
+/* ── Generic modal (shared) ──────────────────────────────────────────────────── */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.35);
+  display: flex; align-items: center; justify-content: center; z-index: 200;
+}
+.modal-card {
+  background: var(--surface); border-radius: 14px;
+  width: 92vw; box-shadow: 0 8px 40px rgba(0,0,0,0.12); overflow: hidden;
+}
+.modal-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 22px; border-bottom: 1px solid var(--border);
+}
+.modal-title { font-size: 14px; font-weight: 500; color: var(--text); letter-spacing: -.2px }
+.modal-close {
+  background: none; border: none; cursor: pointer;
+  color: var(--faint); padding: 2px; display: flex; align-items: center;
+  transition: color .15s;
+}
+.modal-close:hover { color: var(--text) }
+.modal-body { padding: 22px }
+.modal-desc { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 18px }
+.modal-email-btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--accent); color: #fff; text-decoration: none;
+  border-radius: 8px; padding: 9px 16px; font-size: 12px;
+  font-weight: 500; font-family: inherit; transition: opacity .15s;
+}
+.modal-email-btn:hover { opacity: .85 }
 
 /* ── Calculator ─────────────────────────────────────────────────────────────── */
 .calc-section {
