@@ -469,7 +469,7 @@ tr:hover .link-btn, .link-btn.has-link { opacity: 1; color: var(--accent) }
   color: var(--accent); opacity: .35;
 }
 .ref-avatar-wrap { position: relative; width: 100%; height: 100% }
-.ref-avatar-wrap img { filter: blur(8px) }
+.ref-avatar-wrap img { filter: blur(11px) }
 .ref-privacy-bar {
   position: absolute; left: 5%; width: 90%; height: 18%;
   background: #66C220; transform: rotate(-2deg); border-radius: 2px;

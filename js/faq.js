@@ -6,7 +6,7 @@ var FAQ_CATEGORIES = [
   {id: 'character',    label: 'Character Assassination', fullLabel: 'Character Assassination'},
   {id: 'hostile',      label: 'Hostile Work Env.',       fullLabel: 'Hostile Work Environment'},
   {id: 'health',       label: 'Health',                 fullLabel: 'Health'},
-  {id: 'stereotyped',  label: 'Stereotyped Language',   fullLabel: 'Stereotyped Language'}
+  {id: 'stereotyped',  label: 'Stereotypical Identifiers', fullLabel: 'Stereotypical Identifiers'}
 ];
 
 var FAQ_ITEMS = [
