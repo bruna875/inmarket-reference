@@ -1154,6 +1154,7 @@ tr:hover .link-btn, .link-btn.has-link { opacity: 1; color: var(--accent) }
   display: flex; flex-wrap: wrap; align-items: center; gap: 6px; width: 100%;
 }
 .dd-tab {
+  display: inline-flex; align-items: center; gap: 5px;
   padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 500;
   font-family: inherit; cursor: pointer; border: 1px solid var(--border);
   background: transparent; color: var(--muted); transition: all .15s;
