@@ -296,6 +296,19 @@ document.getElementById('linkOpenBtn').addEventListener('click', openCurrentLink
 document.getElementById('linkSaveBtn').addEventListener('click', saveLink);
 document.getElementById('linkClearBtn').addEventListener('click', clearLink);
 document.getElementById('obReplayBtn').addEventListener('click', function() { obReset(); obStart(); });
+
+var _notifOpen = false;
+document.getElementById('notifBtn').addEventListener('click', function(e) {
+  e.stopPropagation();
+  _notifOpen = !_notifOpen;
+  document.getElementById('notifDropdown').style.display = _notifOpen ? 'block' : 'none';
+});
+document.addEventListener('click', function(e) {
+  if (_notifOpen && !e.target.closest('#notifWrap')) {
+    _notifOpen = false;
+    document.getElementById('notifDropdown').style.display = 'none';
+  }
+});
 document.getElementById('pw').addEventListener('keydown', function(e){if(e.key==='Enter')login();});
 document.getElementById('em').addEventListener('keydown', function(e){if(e.key==='Enter')login();});
 
