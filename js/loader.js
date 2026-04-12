@@ -25,7 +25,7 @@ function renderLoader() {
     + '<path d="M100 36 A8 8 0 0 1 108 44" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" fill="none" class="ld-spin-anim"/>'
     + '</svg>'
     + '<div class="loader-phrases">'
-    + '<div class="ld-phrase" style="animation-delay:0s">pulling roadmap data and vibe coding dashboard\u2026</div>'
+    + '<div class="ld-phrase" style="animation-delay:0s">pulling roadmap data, correcting the narrative, vibe coding dashboard\u2026</div>'
     + '<div class="ld-phrase" style="animation-delay:3s">exposing manipulations and debunking defamation\u2026</div>'
     + '<div class="ld-phrase" style="animation-delay:6s">protecting dignity and getting it off my chest\u2026</div>'
     + '</div>'
