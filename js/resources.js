@@ -55,7 +55,7 @@ var _wizItemsPatterns = [
   },
   {
     label: 'Empathy Exercise',
-    title: 'Empathy Exercise',
+    title: 'Understand the pain',
     html: '<div class="emp-intro">Before you close this chapter \u2014 one more thing.</div>'
       + '<div class="emp-row">'
 
