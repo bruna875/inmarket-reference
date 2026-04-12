@@ -11,7 +11,6 @@ var CALC_SECTIONS = [
       'Attorneys & Legal Fees (Local)',
       'Attorneys & Legal Fees (International)',
       'Vicarious Liability Risks',
-      'Settlement payments',
       'Injunctions & restraining orders',
       'Arbitration costs',
       'Others'
@@ -60,10 +59,48 @@ var CALC_SECTIONS = [
 
 var _calcRows = {};
 
+function calcRandVal(min, max) {
+  return Math.round((Math.random() * (max - min) + min) / 500) * 500;
+}
+
+function calcPrefill() {
+  var rv = calcRandVal;
+  _calcRows.legal = [
+    { item: 'Litigation & Court Costs (Local)',         value: rv(150000,  400000) },
+    { item: 'Litigation & Court Costs (International)', value: rv(400000,  900000) },
+    { item: 'Attorneys & Legal Fees (Local)',           value: rv(120000,  350000) },
+    { item: 'Attorneys & Legal Fees (International)',   value: rv(300000,  750000) },
+    { item: 'Injunctions & restraining orders',        value: rv( 80000,  250000) }
+  ];
+  _calcRows.compliance = [
+    { item: 'Regulatory fines & penalties',               value: rv(200000,  600000) },
+    { item: 'Regulatory Waterfall Effect',                value: rv(150000,  450000) },
+    { item: 'Compliance Audit Costs (Internal)',          value: rv( 50000,  180000) },
+    { item: 'Compliance Independent Investigation Costs', value: rv(100000,  300000) },
+    { item: 'Data breach notification costs',            value: rv( 80000,  220000) }
+  ];
+  _calcRows.reputational = [
+    { item: 'Brand damage assessment',         value: rv(250000,  700000) },
+    { item: 'Executive reputation management', value: rv(100000,  350000) }
+  ];
+  _calcRows.corporate = [
+    { item: 'Workforce & talent loss',             value: rv(200000,  600000) },
+    { item: 'System downtime & productivity loss', value: rv(100000,  350000) }
+  ];
+  calcSave();
+}
+
 function calcInitRows() {
-  CALC_SECTIONS.forEach(function(sec) {
-    if (!_calcRows[sec.id]) _calcRows[sec.id] = [{item: '', value: ''}];
+  var hasData = CALC_SECTIONS.some(function(sec) {
+    return _calcRows[sec.id] && _calcRows[sec.id].some(function(r) { return r.item || r.value; });
   });
+  if (!hasData) {
+    calcPrefill();
+  } else {
+    CALC_SECTIONS.forEach(function(sec) {
+      if (!_calcRows[sec.id]) _calcRows[sec.id] = [{item: '', value: ''}];
+    });
+  }
 }
 
 function calcSectionTotal(secId) {
@@ -162,6 +199,11 @@ function calcRemoveRow(secId, idx) {
 function renderCalculatorPanel() {
   calcLoad();
   calcInitRows();
+  var mockInfoBox = '<div class="calc-mock-info">'
+    + '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="#c8960c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6.5"/><path d="M8 7.5v3.5"/><circle cx="8" cy="5.5" r=".6" fill="#c8960c" stroke="none"/></svg>'
+    + '<span>Pre-filled with illustrative mock data. Values are randomised \u2014 replace them with your custom scenario figures to reflect actual exposure.</span>'
+    + '</div>';
+
   return '<div class="dd-calc-panel">'
     + '<div class="dd-calc-panel-header">'
     + '<div style="display:flex;align-items:center;gap:8px;">'
@@ -170,6 +212,7 @@ function renderCalculatorPanel() {
     + '</div>'
     + '</div>'
     + '<div class="dd-calc-panel-body">'
+    + mockInfoBox
     + '<p class="dd-calc-desc">Score your exposure based on documented incidents, patterns, and compliance gaps.</p>'
     + CALC_SECTIONS.map(renderCalcSection).join('')
     + '<div class="calc-grand-row">'

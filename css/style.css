@@ -1654,3 +1654,22 @@ tr:hover .link-btn, .link-btn.has-link { opacity: 1; color: var(--accent) }
 }
 .calc-grand-label { font-size: 13px; font-weight: 600; color: var(--text); }
 .calc-grand-val { font-size: 18px; font-weight: 700; color: var(--accent); letter-spacing: -.01em; }
+
+.faq-attach-chip {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 11px; font-weight: 500; color: var(--accent);
+  background: transparent; border: 1px solid var(--accent); border-radius: 20px;
+  padding: 2px 8px 2px 6px; text-decoration: none;
+  transition: background .15s;
+}
+.faq-attach-chip:hover { background: var(--subtle); }
+
+.calc-mock-info {
+  display: flex; align-items: flex-start; gap: 8px;
+  background: #fff8e6; border: 1px solid #f0c040;
+  border-left: 3px solid #c8960c;
+  border-radius: 8px; padding: 10px 12px;
+  font-size: 12px; color: #7a5c00; line-height: 1.55;
+  margin-bottom: 4px;
+}
+.calc-mock-info svg { flex-shrink: 0; margin-top: 1px; }

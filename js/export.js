@@ -18,19 +18,20 @@ function exportBoardReport() {
     + String(today.getDate()).padStart(2, '0');
 
   // ── Palette ──────────────────────────────────────────────────────────────
-  var ACCENT       = '2D3A8C';
-  var ACCENT_LIGHT = 'EEF0FA';
+  var ACCENT       = '3A7FC1';  // medium blue (coming soon badge text)
+  var ACCENT_LIGHT = 'DEEEFF';  // light blue  (coming soon badge bg)
+  var ACCENT_DARK  = '1A4A7A';  // dark blue   (text on light bg)
   var GRAY         = '64748B';
-  var BORDER_CLR   = 'D1D5DB';
+  var BORDER_CLR   = 'B8D4EF';  // blue-tinted border
   var RED          = 'DC2626';
   var AMBER        = 'D97706';
   var WHITE        = 'FFFFFF';
-  var ROW_ALT      = 'F9FAFB';
+  var ROW_ALT      = 'F4F9FF';  // very light blue alt row
 
   // ── Layout ───────────────────────────────────────────────────────────────
-  var PAGE_W    = 11906;   // A4 width DXA
-  var MARGIN    = 1134;    // ~2 cm
-  var CW        = PAGE_W - 2 * MARGIN;  // 9638
+  var PAGE_W    = 11906;
+  var MARGIN    = 1134;
+  var CW        = PAGE_W - 2 * MARGIN;
 
   // ── Borders ──────────────────────────────────────────────────────────────
   var brd      = { style: D.BorderStyle.SINGLE, size: 1, color: BORDER_CLR };
@@ -85,6 +86,21 @@ function exportBoardReport() {
   });
   var grandTotal = calcGrandTotal();
 
+  // ── Collect FAQ data ──────────────────────────────────────────────────────
+  function getFaqByCategory(catId) {
+    return FAQ_ITEMS.filter(function(i) { return i.cat === catId; });
+  }
+  function stripHtml(s) {
+    return s.replace(/<br\s*\/?>/gi, ' ').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+  }
+  function truncate(s, max) {
+    return s.length > max ? s.slice(0, max - 1) + '\u2026' : s;
+  }
+
+  var faqCompliance  = getFaqByCategory('compliance');
+  var faqManagerial  = getFaqByCategory('managerial');
+  var faqCharacter   = getFaqByCategory('character');
+
   // ─────────────────────────────────────────────────────────────────────────
   // COVER PAGE
   // ─────────────────────────────────────────────────────────────────────────
@@ -102,7 +118,7 @@ function exportBoardReport() {
     spacer(200),
     new D.Paragraph({
       alignment: D.AlignmentType.CENTER,
-      children: [new D.TextRun({ text: 'Board Report  —  Very Good Peeps', font: 'Arial', size: 26, color: GRAY })]
+      children: [new D.TextRun({ text: 'Board Report  \u2014  Very Good Peeps', font: 'Arial', size: 26, color: GRAY })]
     }),
     spacer(200),
     hr(BORDER_CLR),
@@ -135,24 +151,24 @@ function exportBoardReport() {
     new D.TableRow({
       tableHeader: true,
       children: [
-        cell('Risk Domain',         { bold: true, fill: ACCENT, color: WHITE, w: c1a }),
-        cell('Exposure',            { bold: true, fill: ACCENT, color: WHITE, w: c1b, align: D.AlignmentType.RIGHT }),
-        cell('Status',              { bold: true, fill: ACCENT, color: WHITE, w: c1c })
+        cell('Risk Domain', { bold: true, fill: ACCENT_LIGHT, color: ACCENT_DARK, w: c1a }),
+        cell('Exposure',    { bold: true, fill: ACCENT_LIGHT, color: ACCENT_DARK, w: c1b, align: D.AlignmentType.RIGHT }),
+        cell('Status',      { bold: true, fill: ACCENT_LIGHT, color: ACCENT_DARK, w: c1c })
       ]
     })
   ].concat(sections.map(function(sec, i) {
     var bg = i % 2 === 0 ? WHITE : ROW_ALT;
     return new D.TableRow({ children: [
-      cell(sec.label,                    { fill: bg, w: c1a }),
-      cell(fmtDollar(sec.total),         { fill: bg, w: c1b, align: D.AlignmentType.RIGHT }),
+      cell(sec.label,                              { fill: bg, w: c1a }),
+      cell(fmtDollar(sec.total),                   { fill: bg, w: c1b, align: D.AlignmentType.RIGHT }),
       cell(sec.total > 0 ? 'Assessed' : 'Pending', {
         fill: bg, w: c1c, color: sec.total > 0 ? '059669' : '9CA3AF', bold: sec.total > 0
       })
     ]});
   })).concat([
     new D.TableRow({ children: [
-      cell('TOTAL ESTIMATED EXPOSURE', { bold: true, fill: ACCENT_LIGHT, color: ACCENT, w: c1a }),
-      cell(fmtDollar(grandTotal),       { bold: true, fill: ACCENT_LIGHT, color: ACCENT, w: c1b, align: D.AlignmentType.RIGHT }),
+      cell('TOTAL ESTIMATED EXPOSURE', { bold: true, fill: ACCENT_LIGHT, color: ACCENT_DARK, w: c1a }),
+      cell(fmtDollar(grandTotal),       { bold: true, fill: ACCENT_LIGHT, color: ACCENT_DARK, w: c1b, align: D.AlignmentType.RIGHT }),
       cell('',                          { fill: ACCENT_LIGHT, w: c1c })
     ]})
   ]);
@@ -174,7 +190,7 @@ function exportBoardReport() {
     new D.Paragraph({
       spacing: { after: 280 },
       children: [new D.TextRun({
-        text: '[PLACEHOLDER — Replace with executive narrative once incident data is finalized. Include key findings, the period covered, methodology used to score exposure, and board-level recommendation for action.]',
+        text: '[PLACEHOLDER \u2014 Replace with executive narrative once incident data is finalized. Include key findings, the period covered, methodology used to score exposure, and board-level recommendation for action.]',
         font: 'Arial', size: 22, color: '9CA3AF', italics: true
       })]
     }),
@@ -207,8 +223,8 @@ function exportBoardReport() {
       new D.TableRow({
         tableHeader: true,
         children: [
-          cell('Item',   { bold: true, fill: ACCENT, color: WHITE, w: c2a }),
-          cell('Amount', { bold: true, fill: ACCENT, color: WHITE, w: c2b, align: D.AlignmentType.RIGHT })
+          cell('Item',   { bold: true, fill: ACCENT_LIGHT, color: ACCENT_DARK, w: c2a }),
+          cell('Amount', { bold: true, fill: ACCENT_LIGHT, color: ACCENT_DARK, w: c2b, align: D.AlignmentType.RIGHT })
         ]
       })
     ];
@@ -217,20 +233,20 @@ function exportBoardReport() {
       sec.rows.forEach(function(row, ri) {
         var bg = ri % 2 === 0 ? WHITE : ROW_ALT;
         secRows.push(new D.TableRow({ children: [
-          cell(row.item,                              { fill: bg, w: c2a }),
-          cell(fmtDollar(parseFloat(row.value) || 0), { fill: bg, w: c2b, align: D.AlignmentType.RIGHT })
+          cell(row.item,                               { fill: bg, w: c2a }),
+          cell(fmtDollar(parseFloat(row.value) || 0),  { fill: bg, w: c2b, align: D.AlignmentType.RIGHT })
         ]}));
       });
     } else {
       secRows.push(new D.TableRow({ children: [
-        cell('[No items entered — add data in the Risk Calculator]', { fill: WHITE, w: c2a, color: '9CA3AF', italic: true }),
-        cell('—', { fill: WHITE, w: c2b, color: '9CA3AF', align: D.AlignmentType.RIGHT })
+        cell('[No items entered \u2014 add data in the Risk Calculator]', { fill: WHITE, w: c2a, color: '9CA3AF', italic: true }),
+        cell('\u2014', { fill: WHITE, w: c2b, color: '9CA3AF', align: D.AlignmentType.RIGHT })
       ]}));
     }
 
     secRows.push(new D.TableRow({ children: [
-      cell('Subtotal — ' + sec.label, { bold: true, fill: ACCENT_LIGHT, color: ACCENT, w: c2a }),
-      cell(fmtDollar(sec.total),       { bold: true, fill: ACCENT_LIGHT, color: ACCENT, w: c2b, align: D.AlignmentType.RIGHT })
+      cell('Subtotal \u2014 ' + sec.label, { bold: true, fill: ACCENT_LIGHT, color: ACCENT_DARK, w: c2a }),
+      cell(fmtDollar(sec.total),            { bold: true, fill: ACCENT_LIGHT, color: ACCENT_DARK, w: c2b, align: D.AlignmentType.RIGHT })
     ]}));
 
     breakdown.push(new D.Table({ width: { size: CW, type: D.WidthType.DXA }, columnWidths: [c2a, c2b], rows: secRows }));
@@ -241,8 +257,58 @@ function exportBoardReport() {
   // ─────────────────────────────────────────────────────────────────────────
   // SECTION 3 — DOCUMENTED RISK INDICATORS
   // ─────────────────────────────────────────────────────────────────────────
-  var c3a = Math.floor(CW * 0.28);
-  var c3b = CW - c3a;
+  var c3n  = Math.floor(CW * 0.04);
+  var c3q  = Math.floor(CW * 0.44);
+  var c3a  = Math.floor(CW * 0.38);
+  var c3p  = CW - c3n - c3q - c3a;
+
+  function faqBlock(catLabel, items, startIdx) {
+    var rows = [];
+    // Sub-header
+    rows.push(new D.TableRow({
+      children: [
+        new D.TableCell({
+          borders: borders,
+          columnSpan: 4,
+          shading: { fill: ACCENT_LIGHT, type: D.ShadingType.CLEAR },
+          margins: { top: 80, bottom: 80, left: 140, right: 140 },
+          children: [new D.Paragraph({
+            children: [new D.TextRun({ text: catLabel.toUpperCase(), font: 'Arial', size: 18, bold: true, color: ACCENT_DARK, characterSpacing: 60 })]
+          })]
+        })
+      ]
+    }));
+
+    items.forEach(function(item, idx) {
+      var n    = String(startIdx + idx + 1);
+      var bg   = idx % 2 === 0 ? WHITE : ROW_ALT;
+      var qTxt = truncate(item.q, 180);
+      var aTxt = truncate(stripHtml(item.a), 280);
+      var per  = item.meta && item.meta.period ? item.meta.period : '\u2014';
+      rows.push(new D.TableRow({ children: [
+        cell(n,    { fill: bg, w: c3n, align: D.AlignmentType.CENTER, color: GRAY }),
+        cell(qTxt, { fill: bg, w: c3q, bold: true, size: 18 }),
+        cell(aTxt, { fill: bg, w: c3a, color: '374151', size: 18 }),
+        cell(per,  { fill: bg, w: c3p, color: GRAY, size: 17, italic: true })
+      ]}));
+    });
+    return rows;
+  }
+
+  var allFaqRows = [
+    new D.TableRow({
+      tableHeader: true,
+      children: [
+        cell('#',       { bold: true, fill: ACCENT_LIGHT, color: ACCENT_DARK, w: c3n, align: D.AlignmentType.CENTER }),
+        cell('Finding', { bold: true, fill: ACCENT_LIGHT, color: ACCENT_DARK, w: c3q }),
+        cell('Status',  { bold: true, fill: ACCENT_LIGHT, color: ACCENT_DARK, w: c3a }),
+        cell('Period',  { bold: true, fill: ACCENT_LIGHT, color: ACCENT_DARK, w: c3p })
+      ]
+    })
+  ]
+  .concat(faqBlock('Compliance', faqCompliance, 0))
+  .concat(faqBlock('Managerial Malice', faqManagerial, faqCompliance.length))
+  .concat(faqBlock('Character Assassination', faqCharacter, faqCompliance.length + faqManagerial.length));
 
   var indicators = [
     new D.Paragraph({
@@ -254,43 +320,14 @@ function exportBoardReport() {
     new D.Paragraph({
       spacing: { after: 280 },
       children: [new D.TextRun({
-        text: 'The following risk categories have been identified and documented in the Data Directory. Each area represents a pattern of incidents or behavioral signals with measurable legal, compliance, reputational, or operational implications.',
+        text: 'The following risk indicators have been identified and documented across the Data Directory. Each entry represents a pattern of incidents or behavioral signals with measurable legal, compliance, reputational, or operational implications. Categories without entries are currently under preparation.',
         font: 'Arial', size: 22, color: '374151'
       })]
     }),
     new D.Table({
       width: { size: CW, type: D.WidthType.DXA },
-      columnWidths: [c3a, c3b],
-      rows: [
-        new D.TableRow({ tableHeader: true, children: [
-          cell('Category',    { bold: true, fill: ACCENT, color: WHITE, w: c3a }),
-          cell('Description', { bold: true, fill: ACCENT, color: WHITE, w: c3b })
-        ]}),
-        new D.TableRow({ children: [
-          cell('Privacy & Data Protection', { bold: true, fill: WHITE,   w: c3a }),
-          cell('[PLACEHOLDER — describe documented privacy incidents, data handling violations, and DSAR patterns]', { fill: WHITE,   w: c3b, color: '9CA3AF', italic: true })
-        ]}),
-        new D.TableRow({ children: [
-          cell('Managerial Malice',          { bold: true, fill: ROW_ALT, w: c3a }),
-          cell('[PLACEHOLDER — describe documented managerial misconduct, retaliatory behaviors, and authority abuse patterns]', { fill: ROW_ALT, w: c3b, color: '9CA3AF', italic: true })
-        ]}),
-        new D.TableRow({ children: [
-          cell('Character Assassination',    { bold: true, fill: WHITE,   w: c3a }),
-          cell('[PLACEHOLDER — describe documented instances of reputational attacks, false narratives, and credibility damage]', { fill: WHITE,   w: c3b, color: '9CA3AF', italic: true })
-        ]}),
-        new D.TableRow({ children: [
-          cell('Hostile Work Environment',   { bold: true, fill: ROW_ALT, w: c3a }),
-          cell('[PLACEHOLDER — describe documented hostile conduct patterns, escalation timeline, and HR responses]', { fill: ROW_ALT, w: c3b, color: '9CA3AF', italic: true })
-        ]}),
-        new D.TableRow({ children: [
-          cell('Health Impact',              { bold: true, fill: WHITE,   w: c3a }),
-          cell('[PLACEHOLDER — describe documented health impacts attributed to workplace conduct, including medical or psychological records]', { fill: WHITE,   w: c3b, color: '9CA3AF', italic: true })
-        ]}),
-        new D.TableRow({ children: [
-          cell('Stereotypical Identifiers',  { bold: true, fill: ROW_ALT, w: c3a }),
-          cell('[PLACEHOLDER — describe documented incidents involving protected characteristics, bias patterns, and discriminatory conduct]', { fill: ROW_ALT, w: c3b, color: '9CA3AF', italic: true })
-        ]})
-      ]
+      columnWidths: [c3n, c3q, c3a, c3p],
+      rows: allFaqRows
     }),
     new D.Paragraph({ children: [new D.PageBreak()] })
   ];
@@ -324,7 +361,7 @@ function exportBoardReport() {
     new D.Paragraph({
       spacing: { after: 280 },
       children: [new D.TextRun({
-        text: '[PLACEHOLDER — Replace each row with specific, prioritized actions for board resolution. Include owner, deadline, and measurable outcome for each item.]',
+        text: '[PLACEHOLDER \u2014 Replace each row with specific, prioritized actions for board resolution. Include owner, deadline, and measurable outcome for each item.]',
         font: 'Arial', size: 22, color: '9CA3AF', italics: true
       })]
     }),
@@ -333,15 +370,15 @@ function exportBoardReport() {
       columnWidths: [c4n, c4a, c4d, c4p],
       rows: [
         new D.TableRow({ tableHeader: true, children: [
-          cell('#',        { bold: true, fill: ACCENT, color: WHITE, w: c4n, align: D.AlignmentType.CENTER }),
-          cell('Action',   { bold: true, fill: ACCENT, color: WHITE, w: c4a }),
-          cell('Domain',   { bold: true, fill: ACCENT, color: WHITE, w: c4d }),
-          cell('Priority', { bold: true, fill: ACCENT, color: WHITE, w: c4p, align: D.AlignmentType.CENTER })
+          cell('#',        { bold: true, fill: ACCENT_LIGHT, color: ACCENT_DARK, w: c4n, align: D.AlignmentType.CENTER }),
+          cell('Action',   { bold: true, fill: ACCENT_LIGHT, color: ACCENT_DARK, w: c4a }),
+          cell('Domain',   { bold: true, fill: ACCENT_LIGHT, color: ACCENT_DARK, w: c4d }),
+          cell('Priority', { bold: true, fill: ACCENT_LIGHT, color: ACCENT_DARK, w: c4p, align: D.AlignmentType.CENTER })
         ]}),
-        actionRow('1', '[Placeholder — Legal action item]',            'Legal',           'High',   false),
-        actionRow('2', '[Placeholder — Compliance action item]',       'Compliance',      'High',   true),
-        actionRow('3', '[Placeholder — Reputational action item]',     'Reputational',    'Medium', false),
-        actionRow('4', '[Placeholder — Corporate Assets action item]', 'Corporate Assets','Medium', true)
+        actionRow('1', '[Placeholder \u2014 Legal action item]',            'Legal',           'High',   false),
+        actionRow('2', '[Placeholder \u2014 Compliance action item]',       'Compliance',      'High',   true),
+        actionRow('3', '[Placeholder \u2014 Reputational action item]',     'Reputational',    'Medium', false),
+        actionRow('4', '[Placeholder \u2014 Corporate Assets action item]', 'Corporate Assets','Medium', true)
       ]
     }),
     spacer(400)
@@ -380,7 +417,7 @@ function exportBoardReport() {
             spacing: { before: 0, after: 120 },
             tabStops: [{ type: D.TabStopType.RIGHT, position: D.TabStopPosition.MAX }],
             children: [
-              new D.TextRun({ text: 'Very Good Peeps  —  Objective Risk Assessment', font: 'Arial', size: 18, color: GRAY }),
+              new D.TextRun({ text: 'Very Good Peeps  \u2014  Objective Risk Assessment', font: 'Arial', size: 18, color: GRAY }),
               new D.TextRun({ text: '\t' + dateStr, font: 'Arial', size: 18, color: GRAY })
             ]
           })
@@ -393,7 +430,7 @@ function exportBoardReport() {
             spacing: { before: 120, after: 0 },
             tabStops: [{ type: D.TabStopType.RIGHT, position: D.TabStopPosition.MAX }],
             children: [
-              new D.TextRun({ text: 'CONFIDENTIAL — For Board Use Only', font: 'Arial', size: 16, color: GRAY }),
+              new D.TextRun({ text: 'CONFIDENTIAL \u2014 For Board Use Only', font: 'Arial', size: 16, color: GRAY }),
               new D.TextRun({ text: '\tPage ', font: 'Arial', size: 16, color: GRAY }),
               new D.TextRun({ children: [D.PageNumber.CURRENT], font: 'Arial', size: 16, color: GRAY })
             ]

@@ -50,7 +50,7 @@ var FAQ_ITEMS = [
     meta: {
       period: 'January 2026; February 2026',
       systems: ['Email', 'External Systems'],
-      keywords: ['Kudos', 'LinkedIn'],
+      keywords: ['\u201cKudos\u201d', '\u201cLinkedIn\u201d'],
       details: 'Internal Interviews; External Providers'
     }
   },
@@ -61,7 +61,7 @@ var FAQ_ITEMS = [
     meta: {
       period: 'February 2026',
       systems: ['Internal Systems', 'External Systems'],
-      keywords: ['Kudos', 'LinkedIn'],
+      keywords: ['\u201cKudos\u201d', '\u201cLinkedIn\u201d'],
       details: 'Internal Interviews; External Providers'
     }
   },
@@ -71,13 +71,13 @@ var FAQ_ITEMS = [
     a: 'Under verification. Preliminary evidence suggests a pattern of strategic obstruction characterized by the systematic cancellation of alignment meetings and a consistent lack of responsiveness to formal inquiries regarding strategic direction and objective success criteria. Specific documented instances include:<br><br>'
       + '<b>Q4 Prioritization:</b> Formal requests via email for defined quarterly objectives remained unaddressed, preventing the establishment of measurable performance benchmarks.<br><br>'
       + '<b>Project \u201cSpeed Demon\u201d:</b> Detailed inquiries submitted on December 15th regarding project priorities received no feedback, impeding operational delivery.<br><br>'
-      + '<b>Strategic Alignment:</b> The 1:1 document \u201cMultiplayer Notes for ****\u2019s Vision,\u201d developed to ensure cross-functional alignment with the Product team, was systematically disregarded; audit trails and file timestamps indicate a lack of contribution to the weekly 1:1 synchronization documents (e.g., \u201cBruna / Todd\u201d), suggesting a failure in collaborative approach.<br><br>'
+      + '<b>Strategic Alignment:</b> The 1:1 document \u201cMultiplayer Notes for ****\u2019s Vision,\u201d developed to ensure cross-functional alignment with the Product team, was systematically disregarded; audit trails and file timestamps indicate a lack of contribution to the weekly 1:1 synchronization documents (e.g., \u201cBruna / ****\u201d), suggesting a failure in collaborative approach.<br><br>'
       + 'These omissions are hypothesized to effectively obstruct the data subject\u2019s ability to meet organizational objectives and performance expectations.',
     meta: {
       period: 'October 2025; November 2025; December 2025',
       systems: ['Email', 'Google Workspace (Shared Documents)', 'Slack'],
-      keywords: ['\u201csuccess\u201d', '\u201cpriority(es)\u201d', '\u201ccriteria\u201d', '\u201croadmap\u201d', '\u201cQ4\u201d', '\u201cspeed demon\u201d', '\u201cdomino\u2019s pizza\u201d', '\u201caudience\u201d'],
-      details: 'Objective success criteria were not shared by the direct manager, who continued redirecting to another manager. Command chain appeared broken.'
+      keywords: ['\u201csuccess\u201d', '\u201cpriority(es)\u201d', '\u201croadmap\u201d', '\u201cQ4\u201d', '\u201cspeed demon\u201d', '\u201cdomino\u2019s pizza\u201d', '\u201caudience\u201d'],
+      details: 'Objective success criteria were not shared by the direct manager, who consistently redirected the data subject to a secondary manager. The command chain appeared structurally compromised.'
     }
   },
   {
@@ -88,9 +88,121 @@ var FAQ_ITEMS = [
       period: 'October 2025; November 2025',
       systems: ['Email'],
       keywords: ['\u201cgeolink\u201d', '\u201cunified platform\u201d', '\u201cinmarket platform\u201d'],
-      details: 'The direct manager of the role candidate holds a copy of this exchange, forwarded between October 2025 and November 2025.'
+      details: 'The direct manager of the candidate for the role is in possession of a copy of this exchange, forwarded between October 2025 and November 2025.'
     }
   },
+  {
+    cat: 'managerial',
+    q: 'Were irrelevant evaluation criteria presented as pertinent in order to misrepresent a qualified candidate as incompetent for a specific role?',
+    a: 'Under verification. It is hypothesized that non-sequitur inquiries, falling entirely outside the functional scope of Product Management, were utilized as proxies for \u201cbusiness sense.\u201d Specifically, knowledge regarding hospitality coffee pricing per gallon at B2B American events was presented as a relevant metric for assessing suitability for the role of Head of Product / Head of Product Development. This application of non-pertinent criteria suggests a departure from objective professional evaluation standards.',
+    meta: {
+      period: 'September 2025; October 2025',
+      systems: ['Internal Reports', 'Meeting Minutes'],
+      keywords: ['\u201cgallons\u201d', '\u201cprice\u201d', '\u201ccoffee\u201d', '\u201ccatering\u201d'],
+      details: null
+    }
+  },
+  {
+    cat: 'managerial',
+    q: 'Has there been a progressive divestment of responsibilities from a qualified Product Leader candidate, deliberately redirected toward \u201cshadow teams\u201d to operationally isolate the individual and obstruct their transition into the role?',
+    a: 'Under verification. Evidence indicates that post-September 2025, a gradual reassignment of key projects to newly formed \u201cSLAM\u201d teams occurred without a documented strategic rationale, resulting in operational friction within the broader organization. Furthermore, specifically regarding the Measurement business unit, all cross-functional projects were removed from the roadmap effective March, leading to a cessation of collaborative activity for three consecutive quarters. These actions are hypothesized to represent a systematic operational isolation of the data subject.',
+    meta: {
+      period: 'September 2025; October 2025; November 2025; December 2025',
+      systems: ['Email', 'Slack', 'Internal Reports'],
+      keywords: ['\u201caudience\u201d', '\u201caudience builder\u201d', '\u201cai audience builder\u201d', '\u201cSOC2\u201d', '\u201cunified platform\u201d'],
+      details: 'Cross-reference across multiple indicated Data Origins. Coordination required to obtain exact naming conventions for relevant entities.'
+    }
+  },
+  {
+    cat: 'character',
+    q: 'Was there a systematic attempt to \u201cdiminish\u201d the data subject\u2019s professional standing by repeatedly misclassifying their role as \u201cDesigner\u201d or \u201cJunior,\u201d despite 15+ years of experience in Product Management and Entrepreneurship?',
+    a: 'Under verification. Evidence indicates a persistent and documented misclassification of the data subject\u2019s professional profile. Despite an established 15-year background in Product Management and Entrepreneurship, the individual was consistently categorized within internal communications and organizational records as a \u201cDesigner\u201d or \u201cJunior\u201d resource. This deliberate mischaracterization is hypothesized to be a strategic effort to diminish organizational influence and delegitimize the data subject\u2019s authority in strategic decision-making processes, in violation of the principle of data accuracy to manipulate internal hierarchy and career progression.',
+    meta: {
+      period: 'Continued',
+      systems: ['Email', 'Slack', 'Internal Reports', 'Meeting Minutes'],
+      keywords: ['\u201cdesigner\u201d', '\u201cbusiness\u201d', '\u201cjunior\u201d', '\u201csenior\u201d'],
+      details: null
+    }
+  },
+  {
+    cat: 'character',
+    q: 'Was there a systematic misrepresentation and manipulation of legitimate and non-controversial events, framed as problematic, to defame the data subject\u2019s personal integrity and professional standing?',
+    a: 'Under verification. Preliminary analysis suggests a pattern of \u201cnarrative framing\u201d where legitimate personal activities and professional flexibility were decontextualized to construct a malicious narrative of low integrity. This systematic misrepresentation appears to depart from the principles of fairness and accuracy. Key instances under investigation include:<br><br>'
+      + '<b>Legit Working Location Choices:</b> The utilization of a beach-adjacent co-working space during Summer 2022 (for a limited duration of 15 entries) was retrospectively instrumentally characterized in 2025, after 3 years, as a lack of professionalism. This characterization contradicts the established \u201cWork from Anywhere\u201d corporate policy and ignores documented proof of payment for a dedicated professional workspace.<br><br>'
+      + '<b>Administrative Assistance:</b> Good-faith coordination involving Italian consular authorities (Austin/Los Angeles) and local municipalities for passport renewal \u2014 supported by direct correspondence with government officials attached \u2014 was misrepresented as an ethical breach. This suggests a manipulative intent to reframe standard administrative procedures as integrity violations. The request itself appears designed to elicit responses that could be further manipulated, in a repeating pattern.<br><br>'
+      + '<b>Decontextualized Communication:</b> The mention of moderate, personal alcohol consumption during a family dinner (Summer, 01:00 AM local time), included in a late-night response to a colleague to ensure operational continuity, was instrumentalized as \u201cconsumption during working hours.\u201d The request itself appears designed to elicit responses that could be further manipulated, in a repeating pattern.<br><br>'
+      + '<b>PTO and Scheduling:</b> The exercise of legitimate Paid Time Off (PTO) for personal events and the strategic adjustment of working hours to ensure maximum overlap with cross-continental time zones (including availability after 11:00 PM local time for a duration of four years) were reframed as \u201clow productivity\u201d and \u201clack of discipline,\u201d respectively.<br><br>'
+      + 'Audit logs and historical performance reviews confirm that no formal complaints regarding responsiveness or negligence were filed during the four-year tenure. Furthermore, the data subject\u2019s contractual framework did not include specific hourly constraints, rendering the scrutiny of private time usage a potential violation of privacy and professional dignity.',
+    meta: {
+      period: 'Continued',
+      systems: ['Email', 'Slack', 'Internal Reports', 'Meeting Minutes'],
+      keywords: ['\u201cco-working\u201d', '\u201ccoworking\u201d', '\u201cbeach\u201d', '\u201cwine\u201d', '\u201capp\u201d', '\u201cmorning\u201d', '\u201cconcert\u201d', '\u201cvacation\u201d', '\u201cpolicy\u201d', '\u201cpolicies\u201d', '\u201cpassport\u201d', '\u201ctrash\u201d', '\u201cconsulate\u201d', '\u201cetna rosso\u201d'],
+      details: 'Cross-reference across multiple indicated Data Origins. Coordination required to obtain exact naming conventions for relevant entities.',
+      attachments: [
+        { label: 'Passport and Co-working proofs', url: 'https://drive.google.com/drive/folders/1h_sQ0aaf57-C_aTVxPpjusZWp8EP2iV6?usp=drive_link' }
+      ]
+    }
+  },
+  {
+    cat: 'character',
+    q: 'Was there a malicious re-evaluation of previously disclosed, personal, and legitimate external interests?',
+    a: 'Under verification. Evidence indicates a recent and inconsistent shift in the characterization of the data subject\u2019s external interests. Despite full transparency and prior formal disclosure regarding majority shareholdings in Italian legal entities \u2014 entities to which the Company has historically and documentedly processed payments \u2014 there has been a retrospective effort to reframe these interests as \u201cproblematic.\u201d Evidence confirms that the private vehicles in question maintain no operational, geographical, or commercial overlap with the Company, differing entirely in terms of target markets, business scale, client typology, and proprietary assets. Consequently, this sudden re-characterization appears inconsistent with prior corporate approvals and the established right to hold private equity, suggesting a tactical misrepresentation of disclosed facts to create a false narrative of non-compliance where no objective conflict of interest exists under established corporate standards.',
+    meta: {
+      period: 'Continued',
+      systems: ['Procurement Records', 'Financial Audit Logs', 'Email'],
+      keywords: ['\u201ckudos\u201d', '\u201csay kudos\u201d', '\u201cconflict of interests\u201d', '\u201cshareholder\u201d', '\u201cantonio\u201d', '\u201cfilippo\u201d', '\u201ccuebiq\u201d'],
+      details: 'Verification of prior disclosure timestamps and historical approval of payments to the aforementioned entities to establish a baseline of corporate consent. Coordination required to obtain official cap table documentation and administrative documentation cross-referencing with the Company\u2019s conflict-of-interest policy. Connection with accountant already provided.'
+    }
+  },
+  {
+    cat: 'character',
+    q: 'Have there been malicious and incorrect narratives regarding the management of corporate resources?',
+    a: 'Under verification. Preliminary analysis indicates the dissemination of narratives suggesting the misuse of company resources (e.g., travel expenses and family accompaniment during corporate retreats) which are fundamentally contradicted by financial records. Audit trails demonstrate a consistent pattern of high financial prudence and cost-mitigation efforts by the data subject. Documented instances of resource optimization include:<br><br>'
+      + '<b>Voluntary Forfeiture of Entitlements:</b> The data subject consistently opted not to claim eligible meal allowances, co-working space reimbursements, mental health benefits, baggage fees, or agile development budgets.<br><br>'
+      + '<b>Budgetary Efficiency:</b> The data subject proactively reported the lack of necessity for previously approved external contractors and proposed reallocating personal \u201cAgile Development\u201d funds to facilitate the retention of key personnel (e.g., employee Wei).<br><br>'
+      + '<b>Asset and Logistics Optimization:</b> To minimize operational costs, the data subject repeatedly requested the cancellation of international shipments (e.g., corporate swag, event materials) and personally absorbed any incurred customs fees. Furthermore, personal assets (e.g., hardware/laptop) and external creative resources \u2014 funded via the data subject\u2019s independent entities \u2014 were utilized to meet critical company deadlines without additional charge to the Company.<br><br>'
+      + '<b>Compensation Integrity:</b> Records indicate that the data subject never formally requested salary increases or promotions, even suggesting the conversion of potential salary adjustments into Unvested Account Rights (UARs) to preserve corporate liquidity.<br><br>'
+      + 'These behaviors, verifiable through internal financial logs and testimonials from key personnel, suggest that the narrative of resource misuse is a factual misrepresentation, potentially constituting a defamatory action.',
+    meta: {
+      period: 'Continued',
+      systems: ['Expense Management Systems (Expensify)', 'Email', 'Slack', 'HR and Financial Records'],
+      keywords: ['\u201cexpenses\u201d', '\u201cretreat\u201d', '\u201cfamily\u201d', '\u201cparents\u201d', '\u201cmother\u201d', '\u201cdad\u201d', '\u201chotel\u201d', '\u201callowance\u201d', '\u201creimbursement\u201d', '\u201ctravel\u201d'],
+      details: null
+    }
+  },
+  {
+    cat: 'character',
+    q: 'Was there a formal request to update corporate policies \u2014 in a documented abuse of equity-based power \u2014 specifically to legitimize and objectify a demonstrably false and defamatory narrative against the data subject?',
+    a: 'Under verification. Preliminary analysis suggests an attempt to instrumentally modify internal corporate policies to retroactively justify the narratives identified. This potential strategic use of governance mechanisms appears designed to provide a veneer of legitimacy to non-objective critiques of the data subject\u2019s conduct. It is hypothesized that such efforts constitute an abuse of power by stakeholders, aimed at codifying a defamatory narrative into official company standards.',
+    meta: {
+      period: 'October 2025; November 2025; December 2025',
+      systems: ['Internal Policy Documents', 'Meeting Minutes', 'Email', 'Slack'],
+      keywords: ['\u201cpolicy\u201d', '\u201cpolicies\u201d', '\u201ccode of conduct\u201d', '\u201ccompliance\u201d', '\u201calcohol\u201d', '\u201cconflict of interests\u201d', '\u201camendment\u201d'],
+      details: 'Cross-reference across multiple indicated Data Origins. Coordination required to obtain exact naming conventions for relevant entities. Cross-reference with Personal identifiers.'
+    }
+  },
+  {
+    cat: 'managerial',
+    q: 'Have there been multiple and malicious instances of \u201cAccountability Shifting\u201d by teams responsible for systemic delays, specifically targeting the data subject?',
+    a: 'Under verification. Evidence suggests a pattern of misattribution regarding project delays \u2014 specifically concerning the integration of the Measurement Suite. Internal project management timestamps and audit trails indicate that such delays originated within the Measurement Team, yet were formally or informally attributed to the data subject\u2019s functional area. Furthermore, it is hypothesized that a narrative regarding \u201clow ROI initiatives\u201d was disseminated to mask structural deficiencies in organizational design.',
+    meta: {
+      period: 'February 2025; March 2025; April 2025; May 2025; June 2025; July 2025',
+      systems: ['Email', 'Slack', 'Internal Reports'],
+      keywords: ['\u201cunified platform\u201d', '\u201cROI\u201d', '\u201cintegration\u201d', '\u201cdelay\u201d', '\u201cmeasurement suite\u201d'],
+      details: 'Cross-reference across multiple indicated Data Origins. Coordination required to verify timestamp alignment between the Measurement Team\u2019s delivery logs and internal performance communications.'
+    }
+  },
+  {
+    cat: 'managerial',
+    q: 'Can the identified patterns of \u201cManagerial Malice\u201d be attributed to evident conflicts of interest?',
+    a: 'Under verification. Preliminary analysis suggests that the obstructive behaviors identified may stem from individuals holding specific personal interests \u2014 related to organizational status, resource control, and departmental influence \u2014 that appear structurally incompatible with the data subject\u2019s career progression. It is hypothesized that such actions were undertaken to safeguard internal power dynamics rather than to further organizational objectives. This potential alignment of personal professional gain with the systematic obstruction of a qualified individual suggests a breach of internal ethical standards and a conflict of interest in the execution of managerial duties.',
+    meta: {
+      period: 'Continued',
+      systems: [],
+      keywords: [],
+      details: null
+    }
+  }
 ];
 
 var _faqActiveCat = 'all';
@@ -105,7 +217,9 @@ var TIMELINE_BUCKETS = [
   { id: 'q3_25',  label: 'Q3 2025' },
   { id: 'q4_25',  label: 'Q4 2025' },
   { id: 'q1_26',  label: 'Q1 2026' },
-  { id: 'q2_26',  label: 'Q2 2026' }
+  { id: 'q2_26',  label: 'Q2 2026' },
+  { id: 'q3_26',  label: 'Q3 2026' },
+  { id: 'q4_26',  label: 'Q4 2026' }
 ];
 
 var _TL_MONTH_MAP = {
@@ -114,7 +228,9 @@ var _TL_MONTH_MAP = {
   'july 2025':'q3_25','august 2025':'q3_25','september 2025':'q3_25',
   'october 2025':'q4_25','november 2025':'q4_25','december 2025':'q4_25',
   'january 2026':'q1_26','february 2026':'q1_26','march 2026':'q1_26',
-  'april 2026':'q2_26','may 2026':'q2_26','june 2026':'q2_26'
+  'april 2026':'q2_26','may 2026':'q2_26','june 2026':'q2_26',
+  'july 2026':'q3_26','august 2026':'q3_26','september 2026':'q3_26',
+  'october 2026':'q4_26','november 2026':'q4_26','december 2026':'q4_26'
 };
 
 function faqPeriodToBuckets(period) {
@@ -172,7 +288,8 @@ function faqRenderTabs() {
   return '<div class="dd-chips">' + chips + calcChip + '</div>';
 }
 
-var ICO_CLOCK  = '<svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><path d="M8 5v3.5l2 1.5"/></svg>';
+var ICO_PAPERCLIP = '<svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 7.5l-5.5 5.5a4 4 0 01-5.66-5.66l6-6a2.5 2.5 0 013.54 3.54L5.5 10.5a1 1 0 01-1.42-1.42L10 3"/></svg>';
+var ICO_CLOCK  ='<svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><path d="M8 5v3.5l2 1.5"/></svg>';
 var ICO_SERVER = '<svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="12" height="5" rx="1.5"/><rect x="2" y="9" width="12" height="5" rx="1.5"/><circle cx="12.5" cy="4.5" r="1" fill="currentColor" stroke="none"/><circle cx="12.5" cy="11.5" r="1" fill="currentColor" stroke="none"/></svg>';
 var ICO_TAG    = '<svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 2h5.5l6.5 6.5-5.5 5.5L2 7.5V2z"/><circle cx="5" cy="5" r="1" fill="currentColor" stroke="none"/></svg>';
 var ICO_SEARCH = '<svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5l3 3"/></svg>';
@@ -204,6 +321,20 @@ function faqRenderMeta(meta) {
     +   '<span class="faq-meta-label">Additional Details</span>'
     +   '<span class="faq-meta-value">' + (meta.details || '\u2014') + '</span>'
     + '</div>'
+    + (meta.attachments && meta.attachments.length
+      ? '<div class="faq-meta-row faq-meta-row--chips">'
+        +   '<span class="faq-meta-icon">' + ICO_PAPERCLIP + '</span>'
+        +   '<span class="faq-meta-label">Attachments</span>'
+        +   '<span class="faq-kw-wrap">'
+        +   meta.attachments.map(function(a) {
+              return '<a class="faq-attach-chip" href="' + a.url + '" target="_blank" rel="noopener">'
+                + '<svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v8M5 7l3 3 3-3"/><path d="M3 12h10"/></svg>'
+                + a.label
+                + '</a>';
+            }).join('')
+        +   '</span>'
+        + '</div>'
+      : '')
     + '</div>';
 }
 
