@@ -65,16 +65,32 @@ var FAQ_ITEMS = [
       details: 'Internal Interviews; External Providers'
     }
   },
-  {cat: 'managerial',  q: 'What is the legal basis for processing personal data?',               a: 'Processing is based on legitimate interest for B2B measurement services, and on consent where required by local regulation (e.g. GDPR Article 6). Consent mechanisms are managed through certified CMP partners.'},
-  {cat: 'managerial',  q: 'How can an individual submit a Data Subject Access Request (DSAR)?',  a: 'Individuals can submit a DSAR by emailing privacy@verygoodpeeps.co or through the online request form on the company\u2019s privacy page. Requests are acknowledged within 48 hours and fulfilled within the statutory 30-day window.'},
-  {cat: 'character',   q: 'What information is provided in response to a DSAR?',                 a: 'The response includes a summary of personal data held, the purposes of processing, categories of recipients, retention periods, and the individual\u2019s rights under applicable law. Data is delivered in a machine-readable format upon request.'},
-  {cat: 'character',   q: 'Can a DSAR be submitted on behalf of another person?',                a: 'Yes, authorized agents may submit DSARs on behalf of data subjects. Proof of authorization (such as a power of attorney or signed declaration) is required before the request can be processed.'},
-  {cat: 'hostile',     q: 'How long is personal data retained?',                                 a: 'Retention periods vary by data type: device identifiers are retained for up to 13 months, aggregated measurement data for up to 3 years, and contractual records for 7 years. Data is purged automatically upon expiration.'},
-  {cat: 'hostile',     q: 'Can a user request early deletion of their data?',                    a: 'Yes. Deletion requests are processed under the same DSAR workflow. Upon verification, personal data is deleted or anonymized within 30 days. Certain data may be retained longer if required by law.'},
-  {cat: 'health',      q: 'How is data disposed of at end of retention?',                        a: 'Data is permanently deleted through cryptographic erasure for encrypted stores and secure overwrite for unencrypted systems. Deletion is logged and auditable. Third-party sub-processors are contractually required to follow the same disposal standards.'},
-  {cat: 'health',      q: 'Which privacy regulations does Very Good Peeps comply with?',         a: 'Very Good Peeps maintains compliance with GDPR, CCPA/CPRA, VCDPA, CPA, and other US state privacy laws. The company also adheres to NAI and DAA self-regulatory principles for digital advertising.'},
-  {cat: 'stereotyped', q: 'Does Very Good Peeps conduct Data Protection Impact Assessments?',    a: 'Yes. DPIAs are conducted for all new products and significant changes to existing data processing activities. Results are reviewed by the privacy team and, where required, shared with the relevant supervisory authority.'},
-  {cat: 'stereotyped', q: 'How are data breaches handled?',                                      a: 'Very Good Peeps maintains an incident response plan with defined escalation paths. Breaches are assessed within 24 hours, affected parties and supervisory authorities are notified within 72 hours where required, and remediation actions are documented and reviewed.'}
+  {
+    cat: 'managerial',
+    q: 'Have there been instances of strategic obstruction involving the \u201cmoving the goalposts\u201d phenomenon, specifically aimed at hindering the data subject\u2019s professional advancement?',
+    a: 'Under verification. Preliminary evidence suggests a pattern of strategic obstruction characterized by the systematic cancellation of alignment meetings and a consistent lack of responsiveness to formal inquiries regarding strategic direction and objective success criteria. Specific documented instances include:<br><br>'
+      + '<b>Q4 Prioritization:</b> Formal requests via email for defined quarterly objectives remained unaddressed, preventing the establishment of measurable performance benchmarks.<br><br>'
+      + '<b>Project \u201cSpeed Demon\u201d:</b> Detailed inquiries submitted on December 15th regarding project priorities received no feedback, impeding operational delivery.<br><br>'
+      + '<b>Strategic Alignment:</b> The 1:1 document \u201cMultiplayer Notes for ****\u2019s Vision,\u201d developed to ensure cross-functional alignment with the Product team, was systematically disregarded; audit trails and file timestamps indicate a lack of contribution to the weekly 1:1 synchronization documents (e.g., \u201cBruna / Todd\u201d), suggesting a failure in collaborative approach.<br><br>'
+      + 'These omissions are hypothesized to effectively obstruct the data subject\u2019s ability to meet organizational objectives and performance expectations.',
+    meta: {
+      period: 'October 2025; November 2025; December 2025',
+      systems: ['Email', 'Google Workspace (Shared Documents)', 'Slack'],
+      keywords: ['\u201csuccess\u201d', '\u201cpriority(es)\u201d', '\u201ccriteria\u201d', '\u201croadmap\u201d', '\u201cQ4\u201d', '\u201cspeed demon\u201d', '\u201cdomino\u2019s pizza\u201d', '\u201caudience\u201d'],
+      details: 'Objective success criteria were not shared by the direct manager, who continued redirecting to another manager. Command chain appeared broken.'
+    }
+  },
+  {
+    cat: 'managerial',
+    q: 'Were there attempts to induce a solid candidate for a Product Leadership role into technical errors during a role evaluation process, with the potential intent of utilizing incorrect responses to negatively impact the assessments?',
+    a: 'Under verification. Records indicate suggestive and manipulative \u201cguidance\u201d \u2014 such as encouraging via email the use of \u201cGeolink\u201d in response to Unified Platform inquiries \u2014 which appears designed to elicit incorrect technical responses, to later use such induced (potential) errors as a basis for performance critique.',
+    meta: {
+      period: 'October 2025; November 2025',
+      systems: ['Email'],
+      keywords: ['\u201cgeolink\u201d', '\u201cunified platform\u201d', '\u201cinmarket platform\u201d'],
+      details: 'The direct manager of the role candidate holds a copy of this exchange, forwarded between October 2025 and November 2025.'
+    }
+  },
 ];
 
 var _faqActiveCat = 'all';
@@ -212,8 +228,26 @@ function faqRenderItem(item, showCatBadge) {
 function faqRenderAccordion() {
   var items = faqFilterItems();
   if (items.length === 0) return '<div class="faq-empty">No items in this category.</div>';
-  var showBadge = _faqActiveCat === 'all';
-  return items.map(function(item) { return faqRenderItem(item, showBadge); }).join('');
+
+  // Group by category, preserving FAQ_CATEGORIES order
+  var cats = _faqActiveCat === 'all'
+    ? FAQ_CATEGORIES.map(function(c) { return c.id; })
+    : [_faqActiveCat];
+
+  var html = '';
+  cats.forEach(function(catId) {
+    var group = items.filter(function(i) { return i.cat === catId; });
+    if (!group.length) return;
+    var label = faqCatLabel(catId);
+    html += '<div class="faq-tl-section">'
+      + '<div class="faq-tl-header">'
+      + '<span class="faq-tl-label">' + label + '</span>'
+      + '<span class="faq-tl-count">(' + group.length + ')</span>'
+      + '</div>'
+      + group.map(function(item) { return faqRenderItem(item, false); }).join('')
+      + '</div>';
+  });
+  return html || '<div class="faq-empty">No items in this category.</div>';
 }
 
 function faqRenderTimeline() {
@@ -232,9 +266,8 @@ function faqRenderTimeline() {
     if (!items.length) return;
     html += '<div class="faq-tl-section">'
       + '<div class="faq-tl-header">'
-      + '<svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="12" height="11" rx="1.5"/><path d="M5 1v3M11 1v3M2 7h12"/></svg>'
       + '<span class="faq-tl-label">' + bucket.label + '</span>'
-      + '<span class="faq-tl-count">' + items.length + '</span>'
+      + '<span class="faq-tl-count">(' + items.length + ')</span>'
       + '</div>'
       + items.map(function(item) { return faqRenderItem(item, true); }).join('')
       + '</div>';

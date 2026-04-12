@@ -1364,17 +1364,18 @@ tr:hover .link-btn, .link-btn.has-link { opacity: 1; color: var(--accent) }
 
 /* ── Radar / secondary CTA ───────────────────────────────────────────────────── */
 /* ── Timeline sections ───────────────────────────────────────────────────── */
-.faq-tl-section { margin-bottom: 20px; }
+.faq-tl-section { margin-bottom: 16px; }
 .faq-tl-header {
-  display: flex; align-items: center; gap: 8px;
-  padding: 8px 4px 8px; margin-bottom: 4px;
-  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 6px;
+  padding: 12px 18px 4px; margin-bottom: 2px;
 }
-.faq-tl-label { font-size: 11px; font-weight: 700; color: var(--text); text-transform: uppercase; letter-spacing: .05em; }
+.faq-tl-label {
+  font-size: 10px; font-weight: 500; color: var(--faint);
+  text-transform: uppercase; letter-spacing: .6px;
+}
 .faq-tl-count {
-  font-size: 10px; font-weight: 600; color: var(--faint);
-  background: var(--bg); border: 1px solid var(--border);
-  border-radius: 20px; padding: 1px 7px;
+  font-size: 10px; font-weight: 500; color: var(--faint);
+  opacity: .7;
 }
 
 .faq-radar-btn {
