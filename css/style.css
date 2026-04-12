@@ -1566,3 +1566,63 @@ tr:hover .link-btn, .link-btn.has-link { opacity: 1; color: var(--accent) }
 /* ── ROI coloring ───────────────────────────────────────────────────────────── */
 .roi-positive { color: #3B6D11; font-weight: 500 }
 .roi-negative { color: #E24B4A; font-weight: 500 }
+
+/* ── Risk Calculator ────────────────────────────────────────────────────────── */
+.dd-calc-panel { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.dd-calc-panel-header { padding: 14px 18px 12px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+.dd-calc-panel-title { font-size: 13px; font-weight: 600; color: var(--text); }
+.dd-calc-panel-body { padding: 16px 18px 20px; display: flex; flex-direction: column; gap: 16px; }
+.dd-calc-desc { font-size: 12px; color: var(--faint); margin: 0 0 4px; line-height: 1.5; }
+
+.calc-sec-block { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.calc-sec-header { padding: 9px 14px; background: var(--bg); border-bottom: 1px solid var(--border); }
+.calc-sec-label { font-size: 12px; font-weight: 600; color: var(--text); text-transform: uppercase; letter-spacing: .04em; }
+.calc-sec-rows { padding: 8px 14px; display: flex; flex-direction: column; gap: 6px; }
+
+.calc-row { display: flex; align-items: center; gap: 8px; }
+.calc-row-select {
+  flex: 1 1 0; min-width: 0; height: 32px; padding: 0 10px;
+  font-size: 12px; color: var(--text); background: var(--surface);
+  border: 1px solid var(--border); border-radius: 6px; cursor: pointer;
+  appearance: none; -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23999' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 10px center;
+  padding-right: 28px;
+}
+.calc-row-select:focus { outline: none; border-color: var(--accent); }
+
+.calc-row-val-wrap { display: flex; align-items: center; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); overflow: hidden; width: 120px; flex-shrink: 0; }
+.calc-row-dollar { padding: 0 6px 0 10px; font-size: 12px; color: var(--faint); user-select: none; }
+.calc-row-input {
+  flex: 1; min-width: 0; height: 32px; border: none; outline: none;
+  font-size: 12px; color: var(--text); background: transparent;
+  padding: 0 8px 0 0;
+}
+.calc-row-input::-webkit-inner-spin-button,
+.calc-row-input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.calc-row-input[type=number] { -moz-appearance: textfield; }
+
+.calc-row-remove {
+  width: 26px; height: 26px; border: none; background: none; cursor: pointer;
+  color: var(--faint); border-radius: 4px; display: flex; align-items: center;
+  justify-content: center; transition: color .15s, background .15s; flex-shrink: 0;
+}
+.calc-row-remove:hover { color: #C0392B; background: #FEF0F0; }
+.calc-row-spacer { width: 26px; flex-shrink: 0; }
+
+.calc-sec-footer { display: flex; align-items: center; justify-content: space-between; padding: 8px 14px 10px; border-top: 1px solid var(--border); background: var(--bg); }
+.calc-add-btn {
+  font-size: 12px; font-weight: 500; color: var(--accent); background: none;
+  border: none; cursor: pointer; padding: 0; transition: opacity .15s;
+}
+.calc-add-btn:hover { opacity: .7; }
+.calc-sec-total { font-size: 12px; color: var(--faint); display: flex; align-items: center; gap: 6px; }
+.calc-subtotal-val { font-weight: 600; color: var(--text); }
+
+.calc-grand-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 16px; background: var(--bg); border: 1px solid var(--border);
+  border-radius: 8px; margin-top: 4px;
+}
+.calc-grand-label { font-size: 13px; font-weight: 600; color: var(--text); }
+.calc-grand-val { font-size: 18px; font-weight: 700; color: var(--accent); letter-spacing: -.01em; }
