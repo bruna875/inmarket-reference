@@ -24,12 +24,13 @@ function renderRef(r) {
   var initials = r.fullName.split(' ').map(function(w){return w[0];}).join('');
   var barTop = {deniece_kennedy:32, arthur_haedike:38, teresa_thomas:33, michael_della_penna:28, stanley_turek:30, tonya_may:32, trina_rizzo:38, jason_knapp:38, todd_morris:32};
   var top = barTop[r.id] !== undefined ? barTop[r.id] : 38;
+  var avatarInitials = r.id === 'todd_morris' ? 'B' : initials;
   var avatarInner = r.photo
     ? '<div class="ref-avatar-wrap"><img src="'+r.photo+'" alt="'+dispName+'">'
       + '<div class="ref-privacy-bar" style="top:'+top+'%">'
       + '<span class="ref-privacy-label">Anonimization Badge</span>'
       + '</div></div>'
-    : '<div class="ref-avatar-initials">'+initials+'</div>';
+    : '<div class="ref-avatar-initials">'+avatarInitials+'</div>';
   var quoteBlock = r.quote
     ? '<div class="ref-quote-box"><div class="ref-quote-mark">\u201c</div><div class="ref-quote-text">'+r.quote+'</div><div class="ref-attribution"><span>'+r.title+'</span></div></div>'
     : '<div class="ref-empty">Quote not yet available.</div>';
