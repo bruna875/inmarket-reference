@@ -309,6 +309,16 @@ document.addEventListener('click', function(e) {
     document.getElementById('notifDropdown').style.display = 'none';
   }
 });
+// ── Spotify widget (static stub — playlist URL to be wired up) ────────────────
+var _spPlaying = false;
+document.getElementById('spPlay').addEventListener('click', function() {
+  _spPlaying = !_spPlaying;
+  var icon = document.getElementById('spPlayIcon');
+  if (icon) icon.innerHTML = _spPlaying
+    ? '<rect x="3" y="2" width="4" height="12"/><rect x="9" y="2" width="4" height="12"/>'
+    : '<polygon points="5,2 13,8 5,14"/>';
+});
+
 document.getElementById('pw').addEventListener('keydown', function(e){if(e.key==='Enter')login();});
 document.getElementById('em').addEventListener('keydown', function(e){if(e.key==='Enter')login();});
 
