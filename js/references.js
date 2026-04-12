@@ -35,17 +35,9 @@ function renderRef(r) {
     ? '<div class="ref-quote-box"><div class="ref-quote-mark">\u201c</div><div class="ref-quote-text">'+r.quote+'</div><div class="ref-attribution"><span>'+r.title+'</span></div></div>'
     : '<div class="ref-empty">Quote not yet available.</div>';
   var pageId = 'ref_'+r.id;
-  var boardInitials = ['TM','DZ','MMS'];
+  var sigLabel = r.id === 'todd_morris' ? 'TM, DZ, MMS' : initials;
   var sigHtml = r.id === 'stanley_turek'
     ? '<div class="sig-box sig-hopeless"><div class="sig-box-title">Signature</div><div class="sig-idle"><button class="sig-btn sig-btn-disabled" disabled>Sign this page</button><div class="sig-hopeless-alert"><span class="sig-hopeless-icon">⚠️</span><span class="sig-hopeless-msg">Let\u2019s not bother. Some cases are beyond saving.</span></div></div></div>'
-    : r.id === 'todd_morris'
-      ? '<div class="sig-box"><div class="sig-box-title">Signature</div>'
-        + '<div class="sig-idle" style="gap:12px;">'
-        + '<div class="sig-board-initials">'
-        + boardInitials.map(function(ini){ return '<div class="sig-board-ini">'+ini+'</div>'; }).join('')
-        + '</div>'
-        + '<button class="sig-btn" data-sq="'+pageId+'" data-sl="'+encodeURIComponent('TM, DZ, MMS')+'" data-se="'+(r.sigEmail||'bruna@saykudos.co')+'">Sign this page</button>'
-        + '</div></div>'
-      : '<div id="sig-wrap-'+pageId+'">'+sigBoxHtml(pageId, initials, r.sigEmail || 'bruna@saykudos.co')+'</div>';
+    : '<div id="sig-wrap-'+pageId+'">'+sigBoxHtml(pageId, sigLabel, r.sigEmail || 'bruna@saykudos.co')+'</div>';
   return '<div class="ref-layout"><div class="ref-photo-col"><div class="ref-avatar">'+avatarInner+'</div></div><div class="ref-right">'+quoteBlock+sigHtml+'</div></div>';
 }
