@@ -134,9 +134,29 @@ function wizSetIndex(wizId, idx, items) {
 }
 
 
+function wizReadTime(items) {
+  var text = items.map(function(item) {
+    var raw = (item.desc || '') + (item.html || '') + item.title;
+    return raw.replace(/<[^>]+>/g, ' ');
+  }).join(' ');
+  var words = text.trim().split(/\s+/).length;
+  var mins  = Math.ceil(words / 200);
+  return mins;
+}
+
+function readTimeBadge(mins) {
+  return '<span class="read-time-badge">'
+    + '<svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><path d="M8 5v3.5l2 1.5"/></svg>'
+    + ' \u2248\u00a0' + mins + ' min read'
+    + '</span>';
+}
+
 function renderResources() {
   if (_wizState['patterns'] === undefined) _wizState['patterns'] = 0;
-  return '<div class="ptitle">Recognize the Patterns</div><div class="psub">A guided journey through a very specific dynamic \u2014 told without ever saying its name</div>'
+  return '<div class="ptitle">Recognize the Patterns</div>'
+    + '<div class="psub psub-row">A guided journey through a very specific dynamic \u2014 told without ever saying its name'
+    + readTimeBadge(wizReadTime(_wizItemsPatterns))
+    + '</div>'
     + '<blockquote class="res-quote">'
     + '\u201cHe who fights with monsters should look to it that he himself does not become a monster. And if you gaze long into an abyss, the abyss also gazes into you.\u201d'
     + '<footer>\u2014 Friedrich Nietzsche, <em>Beyond Good and Evil</em> (1886), Aphorism 146</footer>'
@@ -147,7 +167,9 @@ function renderResources() {
 function renderBoilingFrog() {
   if (_wizState['frog'] === undefined) _wizState['frog'] = 0;
   return '<div class="ptitle">The Boiling Frog Theory</div>'
-    + '<div class="psub">How Organizations learn to normalize and tolerate things that are not normal</div>'
+    + '<div class="psub psub-row">How Organizations learn to normalize and tolerate things that are not normal'
+    + readTimeBadge(wizReadTime(_wizItemsFrog))
+    + '</div>'
     + '<blockquote class="res-quote">'
     + '\u201cThe first step in developing a learning organization is to foster a climate where people can challenge their own and others\u2019 mental models and tell the truth about what is actually happening.\u201d'
     + '<footer>\u2014 Peter Senge,<em>The Fifth Discipline: The Art &amp; Practice of The Learning Organization</em></footer>'
