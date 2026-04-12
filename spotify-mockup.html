@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spotify Widget Mockup</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0 }
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background: #F5F4F0;
+    font-size: 13px;
+    -webkit-font-smoothing: antialiased;
+    color: #0D1E36;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 24px;
+  }
+
+  /* ── Topbar ─────────────────────────────── */
+  .topbar {
+    width: 900px; height: 52px;
+    background: #fff;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    display: flex; align-items: center;
+    padding: 0 20px; gap: 8px;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .breadcrumb {
+    font-size: 13px; color: #6B6B65; flex: 1;
+  }
+  .breadcrumb b { color: #0D1E36; font-weight: 500 }
+
+  /* generic icon button (Tour, Bell) */
+  .tb-icon-btn {
+    width: 28px; height: 28px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: none; border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 7px; cursor: pointer; color: #A8A8A0;
+    font-family: inherit; transition: border-color .15s, color .15s;
+    position: relative;
+  }
+  .tb-icon-btn:hover { border-color: #66C220; color: #66C220 }
+
+  .tb-label-btn {
+    display: inline-flex; align-items: center; gap: 5px;
+    height: 28px; padding: 0 10px;
+    background: none; border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 7px; font-size: 12px; font-weight: 400;
+    font-family: inherit; cursor: pointer; color: #A8A8A0;
+    white-space: nowrap; transition: border-color .15s, color .15s;
+  }
+  .tb-label-btn:hover { border-color: #66C220; color: #66C220 }
+
+  .notif-dot {
+    position: absolute; top: 5px; right: 5px;
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #E74C3C; border: 1.5px solid #fff;
+  }
+
+  /* vertical divider */
+  .tb-divider {
+    width: 1px; height: 20px; background: rgba(0,0,0,0.1);
+    flex-shrink: 0; margin: 0 2px;
+  }
+
+  /* ── Spotify widget B + controls ────────── */
+  .spotify-widget {
+    display: inline-flex; align-items: center; gap: 7px;
+    height: 32px; padding: 0 8px 0 6px;
+    background: none; border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 8px; cursor: default;
+    font-family: inherit; flex-shrink: 0;
+  }
+
+  .sp-art {
+    width: 22px; height: 22px; border-radius: 4px; flex-shrink: 0;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
+    position: relative; overflow: hidden;
+  }
+  .sp-art::after {
+    content: '♪'; position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; color: #1DB954;
+  }
+
+  .sp-info {
+    display: flex; flex-direction: column; gap: 3px; min-width: 0;
+  }
+  .sp-title-row {
+    display: flex; align-items: baseline; gap: 5px;
+  }
+  .sp-name {
+    font-size: 11px; font-weight: 500; color: #0D1E36;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    max-width: 90px;
+  }
+  .sp-artist {
+    font-size: 10px; color: #A8A8A0; white-space: nowrap;
+  }
+  .sp-progress-wrap {
+    width: 80px; height: 3px; background: rgba(0,0,0,0.08);
+    border-radius: 2px; overflow: hidden;
+  }
+  .sp-progress-bar {
+    height: 100%; width: 38%; background: #1DB954; border-radius: 2px;
+  }
+
+  /* controls */
+  .sp-controls {
+    display: flex; align-items: center; gap: 3px; margin-left: 2px;
+  }
+  .sp-ctrl {
+    width: 20px; height: 20px; border: none; background: none;
+    cursor: pointer; color: #6B6B65;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%; padding: 0; transition: color .15s;
+    font-family: inherit; flex-shrink: 0;
+  }
+  .sp-ctrl:hover { color: #1DB954 }
+  .sp-play {
+    width: 22px; height: 22px; flex-shrink: 0;
+    background: #1DB954; color: #fff; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    border: none; cursor: pointer;
+    transition: transform .15s; font-family: inherit;
+  }
+  .sp-play:hover { transform: scale(1.1) }
+</style>
+</head>
+<body>
+
+  <div class="topbar">
+    <span class="breadcrumb">Resources &nbsp;/&nbsp; <b>Data Directory</b></span>
+
+    <!-- Spotify widget -->
+    <div class="spotify-widget">
+      <div class="sp-art"></div>
+      <div class="sp-info">
+        <div class="sp-title-row">
+          <span class="sp-name">Golden Hour</span>
+          <span class="sp-artist">JVKE</span>
+        </div>
+        <div class="sp-progress-wrap">
+          <div class="sp-progress-bar"></div>
+        </div>
+      </div>
+      <div class="sp-controls">
+        <!-- prev -->
+        <button class="sp-ctrl">
+          <svg width="11" height="11" viewBox="0 0 16 16" fill="currentColor"><path d="M3 3h2v10H3zm8 5L8 3v10l3-5z"/></svg>
+        </button>
+        <!-- play/pause -->
+        <button class="sp-play">
+          <svg width="9" height="9" viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="2" width="4" height="12"/><rect x="9" y="2" width="4" height="12"/></svg>
+        </button>
+        <!-- next -->
+        <button class="sp-ctrl">
+          <svg width="11" height="11" viewBox="0 0 16 16" fill="currentColor"><path d="M13 3h-2v10h2zM5 8l3 5V3L5 8z"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- divider -->
+    <div class="tb-divider"></div>
+
+    <!-- Livestream + Guru -->
+    <button class="tb-label-btn">
+      <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="10" height="8" rx="1.5"/><path d="M11 7l4-2v6l-4-2"/></svg>
+      Livestream
+    </button>
+    <button class="tb-label-btn">
+      <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M8 1C4.1 1 1 3.7 1 7c0 1.8 1 3.4 2.6 4.4L3 14.5l3.2-1.7c.6.1 1.2.2 1.8.2 3.9 0 7-2.7 7-6S11.9 1 8 1z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Guru
+    </button>
+
+    <!-- divider -->
+    <div class="tb-divider"></div>
+
+    <!-- Tour (icon only) -->
+    <button class="tb-icon-btn" title="Replay tour">
+      <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
+        <path d="M13.5 5.5A6 6 0 1 0 14 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M14 2v4h-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+    <!-- Bell -->
+    <button class="tb-icon-btn" title="Notifications">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M8 1.5a5 5 0 0 1 5 5v2.5l1 2H2l1-2V6.5a5 5 0 0 1 5-5z"/>
+        <path d="M6.5 13a1.5 1.5 0 0 0 3 0"/>
+      </svg>
+      <span class="notif-dot"></span>
+    </button>
+
+  </div>
+
+</body>
+</html>

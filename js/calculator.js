@@ -6,13 +6,15 @@ var CALC_SECTIONS = [
     label: 'Legal',
     options: [
       'Select item...',
-      'Litigation & court costs',
-      'Attorney & legal fees',
+      'Litigation & Court Costs (Local)',
+      'Litigation & Court Costs (International)',
+      'Attorneys & Legal Fees (Local)',
+      'Attorneys & Legal Fees (International)',
+      'Vicarious Liability Risks',
       'Settlement payments',
-      'Regulatory fines & penalties',
       'Injunctions & restraining orders',
-      'Expert witness fees',
-      'Arbitration costs'
+      'Arbitration costs',
+      'Others'
     ]
   },
   {
@@ -20,13 +22,15 @@ var CALC_SECTIONS = [
     label: 'Compliance',
     options: [
       'Select item...',
-      'Compliance audit costs',
-      'Regulatory penalties',
-      'Mandatory training programs',
+      'Regulatory fines & penalties',
+      'Regulatory Waterfall Effect',
+      'Compliance Audit Costs (Internal)',
+      'Compliance Independent Investigation Costs',
+      'Certification Risks',
       'Data breach notification costs',
       'Third-party compliance review',
-      'Policy remediation costs',
-      'Record-keeping violations'
+      'Record-keeping violations',
+      'Others'
     ]
   },
   {
@@ -34,13 +38,11 @@ var CALC_SECTIONS = [
     label: 'Reputational',
     options: [
       'Select item...',
-      'PR & crisis communications',
-      'Media monitoring & response',
       'Brand damage assessment',
       'Customer churn & revenue loss',
       'Executive reputation management',
-      'Social media crisis response',
-      'Negative press & analyst impact'
+      'Negative press & analyst impact',
+      'Others'
     ]
   },
   {
@@ -48,13 +50,10 @@ var CALC_SECTIONS = [
     label: 'Corporate Assets',
     options: [
       'Select item...',
-      'Intellectual property loss',
-      'Equipment & asset damage',
-      'Data breach & system costs',
       'System downtime & productivity loss',
-      'Asset write-off & depreciation',
+      'Asset Depreciation',
       'Workforce & talent loss',
-      'Infrastructure replacement'
+      'Others'
     ]
   }
 ];

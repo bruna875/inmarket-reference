@@ -59,16 +59,16 @@ var _wizItemsPatterns = [
     html: '<div class="emp-intro">Before you close this chapter \u2014 one more thing.</div>'
       + '<div class="emp-row">'
 
-      + '<div class="emp-card"><div class="emp-emoji">📋</div><div class="emp-num">1</div><div class="emp-text">Digest the behaviors described.</div></div>'
+      + '<div class="emp-card"><div class="emp-emoji">📋</div><div class="emp-num">1</div><div class="emp-text">Digest the behaviors described. Extend to 12 months. </div></div>'
       + '<div class="emp-connector"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'
 
-      + '<div class="emp-card"><div class="emp-emoji">🪞</div><div class="emp-num">2</div><div class="emp-text">Replace the victim\u2019s face with the one of your beloved ones: your daughter, your son, your mum, your wife, your husband.</div></div>'
+      + '<div class="emp-card"><div class="emp-emoji">🪞</div><div class="emp-num">2</div><div class="emp-text">Replace the victim\u2019s face with the one of your beloved ones: your daughter, your son, your mum, your dad, your wife, your husband, your niece.</div></div>'
       + '<div class="emp-connector"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'
 
       + '<div class="emp-card"><div class="emp-emoji">🌊</div><div class="emp-num">3</div><div class="emp-text">Acknowledge your emotions and let them enter: is there anger, discomfort, sadness, guiltiness?</div></div>'
       + '<div class="emp-connector"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'
 
-      + '<div class="emp-card emp-card--yellow"><div class="emp-emoji">👁️</div><div class="emp-num">4</div><div class="emp-text">I know you are looking for a self-indulging excuse. Stay focused. Don\u2019t run away from the emotion.</div></div>'
+      + '<div class="emp-card emp-card--yellow"><div class="emp-emoji">👁️</div><div class="emp-num">4</div><div class="emp-text">I know you are looking for a self-indulging excuses. Stay focused. Don\u2019t run away from the emotions.</div></div>'
       + '<div class="emp-connector"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'
 
       + '<div class="emp-card"><div class="emp-emoji">🕊️</div><div class="emp-num">5</div><div class="emp-text">Despite all... be compassionate.</div></div>'

@@ -73,21 +73,28 @@ var OB_STEPS = [
   },
   {
     target: '#askMarshallBtn',
-    eyebrow: 'Step 8 of 10 \u2014 New Feature!',
+    eyebrow: 'Step 8 of 11 \u2014 New Feature!',
     title: 'Ask the Guru',
     desc: 'Got a question? Ask the Guru. He\u2019ll answer with full confidence. Whether it\u2019s correct is a separate concern entirely.',
     position: 'bottom'
   },
   {
     target: '#livestreamBtn',
-    eyebrow: 'Step 9 of 10 \u2014 Coming Soon!',
+    eyebrow: 'Step 9 of 11 \u2014 Coming Soon!',
     title: 'My Bedroom LiveStreaming',
     desc: 'For those who feel the urge to keep watching, even post-resignation. If you want to continue controlling obsessively \u2014 this one is for you. Don\u2019t judge too much!',
     position: 'bottom'
   },
   {
+    target: '#spWidget',
+    eyebrow: 'Step 10 of 11 \u2014 New!',
+    title: 'Your Soundtrack',
+    desc: 'A curated playlist to keep you company while you work through all of this. Press play. You deserve some background music.',
+    position: 'bottom'
+  },
+  {
     target: '#upsellBadge',
-    eyebrow: 'Step 10 of 10',
+    eyebrow: 'Step 11 of 11',
     title: 'Upgrade to Adult Plan',
     desc: 'Unlock more features. Get in touch with our Adulting Specialist Jennifer Salonga and start your free trial today.',
     position: 'top'

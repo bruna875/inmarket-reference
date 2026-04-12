@@ -24,9 +24,8 @@ var FAQ_ITEMS = [
   {cat: 'stereotyped', q: 'How are data breaches handled?',                                      a: 'Very Good Peeps maintains an incident response plan with defined escalation paths. Breaches are assessed within 24 hours, affected parties and supervisory authorities are notified within 72 hours where required, and remediation actions are documented and reviewed.'}
 ];
 
-var _faqActiveCat     = 'all';
-var _faqOpenIdx       = -1;
-var _dsarDropdownOpen = false;
+var _faqActiveCat = 'all';
+var _faqOpenIdx   = -1;
 
 function faqCatLabel(catId) {
   var c = FAQ_CATEGORIES.filter(function(x) { return x.id === catId; })[0];
@@ -134,26 +133,10 @@ function faqOpenRadarModal() {
   overlay.addEventListener('click', function(e) { if (e.target === overlay) overlay.remove(); });
 }
 
-function faqToggleDsarDropdown() {
-  _dsarDropdownOpen = !_dsarDropdownOpen;
-  var menu = document.getElementById('dsarDropdownMenu');
-  if (menu) menu.style.display = _dsarDropdownOpen ? 'block' : 'none';
-  var btn = document.getElementById('dsarReportBtn');
-  if (btn) btn.classList.toggle('open', _dsarDropdownOpen);
-}
-
-function faqCloseDsarDropdown() {
-  _dsarDropdownOpen = false;
-  var menu = document.getElementById('dsarDropdownMenu');
-  if (menu) menu.style.display = 'none';
-  var btn = document.getElementById('dsarReportBtn');
-  if (btn) btn.classList.remove('open');
-}
 
 function renderFaqDsar() {
-  _faqActiveCat     = 'all';
-  _faqOpenIdx       = -1;
-  _dsarDropdownOpen = false;
+  _faqActiveCat = 'all';
+  _faqOpenIdx   = -1;
 
   return '<div class="page-header">'
     + '<div><div class="ptitle">Data Directory</div><div class="psub psub-flush">FAQ and Data Subject Access Request reference</div></div>'
@@ -166,24 +149,11 @@ function renderFaqDsar() {
     + 'Any Data out of radar?'
     + '</button>'
 
-    // ── Board Report dropdown ────────────────────────────────
-    + '<div class="dd-dropdown-wrap" id="dsarDropdownWrap">'
+    // ── Export Board Report ──────────────────────────────────
     + '<button class="faq-dsar-btn" id="dsarReportBtn">'
     + '<svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M4 2h5l4 4v8a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M9 2v4h4" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M6 9h4M6 11.5h3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>'
-    + 'Board Report'
-    + '<svg class="dd-dropdown-chevron" width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+    + 'Export Board Report'
     + '</button>'
-    + '<div class="dd-dropdown-menu" id="dsarDropdownMenu" style="display:none;">'
-    + '<button class="dd-dropdown-item" data-action="google">'
-    + '<svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M6 3H3a1 1 0 00-1 1v9a1 1 0 001 1h9a1 1 0 001-1v-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 2h5v5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2L8 8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>'
-    + 'Preview and Download from Google'
-    + '</button>'
-    + '<button class="dd-dropdown-item" data-action="email">'
-    + '<svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M2 4h12v9a1 1 0 01-1 1H3a1 1 0 01-1-1V4z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M2 4l6 5 6-5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>'
-    + 'Send Email to Teresa'
-    + '</button>'
-    + '</div>'
-    + '</div>'
 
     + '</div>'
     + '</div>'
@@ -204,28 +174,10 @@ function renderFaqDsar() {
 
 document.addEventListener('click', function(e) {
 
-  // Board Report dropdown toggle
+  // Export Board Report
   if (e.target.closest('#dsarReportBtn')) {
-    faqToggleDsarDropdown();
+    exportBoardReport();
     return;
-  }
-
-  // Dropdown items
-  var item = e.target.closest('[data-action]');
-  if (item && e.target.closest('#dsarDropdownMenu')) {
-    var action = item.dataset.action;
-    faqCloseDsarDropdown();
-    if (action === 'google') {
-      window.open('https://drive.google.com', '_blank');
-    } else if (action === 'email') {
-      window.location.href = 'mailto:teresa@verygoodpeeps.co?subject=Board%20Report%20%E2%80%94%20Data%20Directory';
-    }
-    return;
-  }
-
-  // Close dropdown when clicking outside
-  if (_dsarDropdownOpen && !e.target.closest('#dsarDropdownWrap')) {
-    faqCloseDsarDropdown();
   }
 
   // Radar modal

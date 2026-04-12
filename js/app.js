@@ -309,14 +309,45 @@ document.addEventListener('click', function(e) {
     document.getElementById('notifDropdown').style.display = 'none';
   }
 });
-// ── Spotify widget (static stub — playlist URL to be wired up) ────────────────
-var _spPlaying = false;
-document.getElementById('spPlay').addEventListener('click', function() {
-  _spPlaying = !_spPlaying;
-  var icon = document.getElementById('spPlayIcon');
-  if (icon) icon.innerHTML = _spPlaying
-    ? '<rect x="3" y="2" width="4" height="12"/><rect x="9" y="2" width="4" height="12"/>'
-    : '<polygon points="5,2 13,8 5,14"/>';
+// ── Spotify widget ────────────────────────────────────────────────────────────
+var _spOpen  = false;
+var SP_EMBED = 'https://open.spotify.com/embed/playlist/6gScKktgtTcH3qOBonjGhC?utm_source=generator&theme=0';
+
+var ICON_PLAY  = '<polygon points="4,2 13,8 4,14"/>';
+var ICON_PAUSE = '<rect x="3" y="2" width="3.5" height="12" rx="1"/><rect x="9.5" y="2" width="3.5" height="12" rx="1"/>';
+
+function spSetIcon(open) {
+  var icon = document.getElementById('spPlayPauseIcon');
+  if (icon) icon.innerHTML = open ? ICON_PAUSE : ICON_PLAY;
+}
+
+function spOpenPopup() {
+  var iframe = document.getElementById('spIframe');
+  var popup  = document.getElementById('spPopup');
+  var rect   = document.getElementById('spWidget').getBoundingClientRect();
+  if (!iframe.src || iframe.src === window.location.href) iframe.src = SP_EMBED;
+  popup.style.left    = Math.max(8, rect.right - 300) + 'px';
+  popup.style.top     = (rect.bottom + 6) + 'px';
+  popup.style.display = 'block';
+  _spOpen = true;
+  spSetIcon(true);
+}
+
+function spClosePopup() {
+  document.getElementById('spPopup').style.display = 'none';
+  _spOpen = false;
+  spSetIcon(false);
+}
+
+document.getElementById('spWidget').addEventListener('click', function(e) {
+  e.stopPropagation();
+  _spOpen ? spClosePopup() : spOpenPopup();
+});
+
+document.addEventListener('click', function(e) {
+  if (_spOpen && !e.target.closest('#spWidget') && !e.target.closest('#spPopup')) {
+    spClosePopup();
+  }
 });
 
 document.getElementById('pw').addEventListener('keydown', function(e){if(e.key==='Enter')login();});

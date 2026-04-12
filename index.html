@@ -82,21 +82,18 @@
       <span class="breadcrumb"><span id="secname">Product</span> &nbsp;/&nbsp; <b id="pgname">Product Roadmap</b></span>
       <div style="display:flex;align-items:center;gap:6px;margin-left:auto">
 
-        <!-- Spotify widget -->
-        <div class="sp-widget" id="spWidget">
-          <div class="sp-widget-art" id="spArt"></div>
-          <div class="sp-widget-info">
-            <div class="sp-widget-title-row">
-              <span class="sp-widget-name" id="spName">Not playing</span>
-              <span class="sp-widget-artist" id="spArtist"></span>
-            </div>
-            <div class="sp-widget-progress-wrap"><div class="sp-widget-progress" id="spProgress" style="width:0%"></div></div>
-          </div>
-          <div class="sp-widget-controls">
-            <button class="sp-widget-ctrl" id="spPrev" title="Previous"><svg width="11" height="11" viewBox="0 0 16 16" fill="currentColor"><path d="M3 3h2v10H3zm8 5L8 3v10l3-5z"/></svg></button>
-            <button class="sp-widget-play" id="spPlay" title="Play / Pause"><svg width="8" height="8" viewBox="0 0 16 16" fill="currentColor" id="spPlayIcon"><polygon points="5,2 13,8 5,14"/></svg></button>
-            <button class="sp-widget-ctrl" id="spNext" title="Next"><svg width="11" height="11" viewBox="0 0 16 16" fill="currentColor"><path d="M13 3h-2v10h2zM5 8l3 5V3L5 8z"/></svg></button>
-          </div>
+        <!-- Spotify widget trigger -->
+        <div class="sp-widget" id="spWidget" title="Play / Pause">
+          <!-- Spotify logo -->
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="#1DB954" style="flex-shrink:0"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+          <!-- Play/Pause toggle icon -->
+          <svg id="spPlayPauseIcon" width="11" height="11" viewBox="0 0 16 16" fill="currentColor" style="color:var(--faint);flex-shrink:0">
+            <polygon points="4,2 13,8 4,14"/>
+          </svg>
+        </div>
+        <!-- Spotify embed popup -->
+        <div class="sp-popup" id="spPopup" style="display:none;">
+          <iframe id="spIframe" style="border-radius:10px;" src="" width="300" height="152" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         </div>
 
         <div class="tb-vdivider"></div>
@@ -144,6 +141,7 @@
 </div>
 <!-- Libraries -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/docx@7.8.2/build/index.js"></script>
 <!-- App modules (order matters: dependencies first) -->
 <script src="js/config.js"></script>
 <script src="js/icons.js"></script>
@@ -156,6 +154,7 @@
 <script src="js/capacity.js"></script>
 <script src="js/faq.js"></script>
 <script src="js/calculator.js"></script>
+<script src="js/export.js"></script>
 <script src="js/onboarding.js"></script>
 <script src="js/marshall.js"></script>
 <script src="js/app.js"></script>
