@@ -97,9 +97,7 @@ function sigVerify(pageId, pageLabel, toEmail) {
     return;
   }
   var rawName = stored.signerName || toEmail.split('@')[0];
-  var displayName = rawName.indexOf(' ') === -1
-    ? rawName.toUpperCase()
-    : rawName.split(' ').map(function(w) { return w.charAt(0).toUpperCase() + w.slice(1).toLowerCase(); }).join(' ');
+  var displayName = rawName.toUpperCase();
   delete _sigCodes[pageId];
   saveSig(pageId, displayName);
   sigRefresh(pageId, pageLabel, toEmail);
