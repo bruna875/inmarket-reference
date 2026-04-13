@@ -1,5 +1,10 @@
 // app.js — navigation, routing, data loading, events, init
 
+var LEGAL_DISCLAIMER_HTML =
+  '<p style="margin:0 0 12px">This dashboard has been developed for internal use only by the code owner. It may occasionally be shared with selected third parties for limited and occasional use of the tools contained within it. Access is restricted to individuals to whom login credentials have been expressly transmitted.</p>'
+  + '<p style="margin:0 0 12px">The code owner accepts no responsibility for unauthorised access to the dashboard by individuals other than those to whom the password has been directly communicated. Users are responsible for maintaining the confidentiality of their access credentials.</p>'
+  + '<p style="margin:0 0 0">By accessing this dashboard, the user acknowledges and accepts that any reference to real events, organisations, or individuals contained within the materials presented herein is purely coincidental. All content is provided for informational, educational, apologetic and internal governance purposes only. The code owner disclaims all liability arising from the use, interpretation, or misinterpretation of the information contained in this dashboard. The content does not constitute legal advice. Nothing in this dashboard shall be construed as an admission of liability of any kind by any party.</p>';
+
 
 function buildNav() {
   document.getElementById('nav').innerHTML = NAV_CONFIG.map(function(sec) {
@@ -260,14 +265,40 @@ function openSendCredentialsModal() {
   inp.addEventListener('keydown', function(e) { if (e.key === 'Enter') document.getElementById('cred-modal-send').click(); });
 }
 
+function openDisclaimerModal() {
+  var existing = document.getElementById('disclaimer-modal-overlay');
+  if (existing) { existing.remove(); return; }
+  var overlay = document.createElement('div');
+  overlay.id = 'disclaimer-modal-overlay';
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:99999;display:flex;align-items:center;justify-content:center;';
+  overlay.innerHTML =
+    '<div style="background:var(--card,#fff);border-radius:12px;padding:32px;max-width:560px;width:92vw;max-height:85vh;overflow-y:auto;box-shadow:0 8px 40px rgba(0,0,0,.18)">'
+    + '<div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px">Accept the Disclaimer before accessing the Dashboard</div>'
+    + '<div style="font-size:11px;color:var(--muted);margin-bottom:20px">Please read carefully before accepting</div>'
+    + '<div style="font-size:12.5px;color:var(--text);line-height:1.7;margin-bottom:24px">' + LEGAL_DISCLAIMER_HTML + '</div>'
+    + '<button id="disclaimer-accept-btn" class="sig-btn" style="width:100%">Accept</button>'
+    + '</div>';
+  document.body.appendChild(overlay);
+  overlay.querySelector('#disclaimer-accept-btn').addEventListener('click', function() {
+    var chk = document.getElementById('disclaimerCheck');
+    if (chk) chk.checked = true;
+    overlay.remove();
+  });
+  overlay.addEventListener('click', function(e) { if (e.target === overlay) overlay.remove(); });
+}
+
 function login() {
   var e = document.getElementById('em').value.trim(), p = document.getElementById('pw').value;
+  var chk = document.getElementById('disclaimerCheck');
+  if (!chk || !chk.checked) {
+    document.getElementById('err').textContent = 'Please read and accept the Disclaimer before signing in.';
+    return;
+  }
   if (e === 'condoadmin@verygoodpeeps.ai' && p === 'HelixCapital') {
     document.getElementById('auth').classList.add('gone');
     setTimeout(function(){document.getElementById('auth').style.display='none';},300);
     document.getElementById('app').classList.add('show');
     var name = e.split('@')[0];
-    // avatar is the frog SVG, don't overwrite
     document.getElementById('un').textContent = name.charAt(0).toUpperCase()+name.slice(1);
     Promise.all([
       loadSavedSignatures(),
@@ -297,6 +328,10 @@ var m = new Date().getMonth(), y = new Date().getFullYear();
 document.getElementById('qbadge').textContent = 'Q'+(m<3?1:m<6?2:m<9?3:4)+' '+y;
 document.getElementById('loginBtn').addEventListener('click', login);
 document.getElementById('sendCredBtn').addEventListener('click', openSendCredentialsModal);
+document.querySelector('.auth-disclaimer-link').addEventListener('click', function(e) {
+  e.preventDefault();
+  openDisclaimerModal();
+});
 document.getElementById('logoutBtn').addEventListener('click', logout);
 document.getElementById('tog').addEventListener('click', toggleSb);
 document.getElementById('linkOpenBtn').addEventListener('click', openCurrentLink);
@@ -486,9 +521,7 @@ function openPrivacyModal() {
     + 'For privacy enquiries related to this dashboard, see the Contacts section in your Profile. For privacy enquiries related to everything else documented here, consult the Data Subject, the Data Directory, and, if needed, the Data Protection Authority. We hear they are very thorough.</p>'
     + '<div style="margin:20px 0 12px;border-top:1px solid var(--border);padding-top:16px">'
     + '<div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:12px">Legal Disclaimer</div>'
-    + '<p style="margin:0 0 12px">This dashboard has been developed for internal use by Very Good Peeps, Inc. It may occasionally be shared with selected third parties for limited and occasional use of the tools contained within it. Access is restricted to individuals to whom login credentials have been expressly transmitted.</p>'
-    + '<p style="margin:0 0 12px">Very Good Peeps, Inc. accepts no responsibility for unauthorised access to the dashboard by individuals other than those to whom the password has been directly communicated. Users are responsible for maintaining the confidentiality of their access credentials.</p>'
-    + '<p style="margin:0 0 4px">By accessing this dashboard, the user acknowledges and accepts that any reference to real events, organisations, or individuals contained within the materials presented herein is purely coincidental. All content is provided for informational and internal governance purposes only. Very Good Peeps, Inc. disclaims all liability arising from the use, interpretation, or misinterpretation of the information contained in this dashboard. The content does not constitute legal advice. Nothing in this dashboard shall be construed as an admission of liability of any kind by any party.</p>'
+    + LEGAL_DISCLAIMER_HTML
     + '</div>'
     + '</div>'
     + '<div class="upsell-modal-actions" style="margin-top:20px">'
