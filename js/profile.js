@@ -39,32 +39,6 @@ function renderProfile() {
     + '<div class="prof-divider"></div>'
 
     + '<div class="prof-section">'
-    +   '<div class="prof-section-label">Developer Tools</div>'
-    +   '<div class="prof-devtools">'
-    +     '<button class="prof-tool-btn prof-tool-btn--danger" id="resetSigsBtn">'
-    +       '<svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 5.5A6 6 0 1 0 14 8"/><path d="M14 2v4h-4"/></svg>'
-    +       'Clean Signatures'
-    +     '</button>'
-    +     '<a class="prof-tool-btn" href="https://github.com" target="_blank" rel="noopener">'
-    +       '<svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12c0 1.5-1 2-1 2h7s-1-.5-1-2V9.5C11 8 11 7 10 6c1.5-.5 3-1.5 3-4.5H3c0 3 1.5 4 3 4.5C5 7 5 8 5 9.5V12z"/><path d="M6 2c-.5 1-.5 2 0 2.5"/></svg>'
-    +       'GitHub Repo - if you want to re-use the Roadmap component'
-    +     '</a>'
-    +   '</div>'
-    +   '<div class="prof-sigtests">'
-    +     '<div class="prof-sigtest-item">'
-    +       '<div class="prof-sigtest-label">Test \u2014 <span class="prof-sigtest-email">bruna@saykudos.co</span></div>'
-    +       sigTest1
-    +     '</div>'
-    +     '<div class="prof-sigtest-item">'
-    +       '<div class="prof-sigtest-label">Test \u2014 <span class="prof-sigtest-email">bru.cop10@gmail.com</span></div>'
-    +       sigTest2
-    +     '</div>'
-    +   '</div>'
-    + '</div>'
-
-    + '<div class="prof-divider"></div>'
-
-    + '<div class="prof-section">'
     +   '<div class="prof-section-label">Contacts</div>'
     +   '<div class="prof-devtools">'
     +     '<a class="prof-tool-btn" href="mailto:bruna@saykudos.co">'
