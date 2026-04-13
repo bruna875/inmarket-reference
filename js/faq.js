@@ -29,7 +29,10 @@ var FAQ_ITEMS = [
       period: 'Continued',
       systems: ['Slack', 'Email', 'JumpCloud', 'Google Suite', 'Internal Databases'],
       keywords: [],
-      details: null
+      details: null,
+      attachments: [
+        { label: 'Post-termination Access Documentation', url: 'https://drive.google.com/drive/folders/1ZpbKAC2b3pUGKms-sI_1jKM3PjGFOzgu?usp=drive_link' }
+      ]
     }
   },
   {
@@ -51,7 +54,10 @@ var FAQ_ITEMS = [
       period: 'January 2026; February 2026',
       systems: ['Email', 'External Systems'],
       keywords: ['\u201cKudos\u201d', '\u201cLinkedIn\u201d'],
-      details: 'Internal Interviews; External Providers'
+      details: 'Internal Interviews; External Providers',
+      attachments: [
+        { label: 'Data Breach Documentation', url: 'https://drive.google.com/drive/folders/1Uh9acjgyjVLlGc3JV9Yu_eUnpUcrkSQx?usp=drive_link' }
+      ]
     }
   },
   {
@@ -179,6 +185,78 @@ var FAQ_ITEMS = [
       systems: ['Internal Policy Documents', 'Meeting Minutes', 'Email', 'Slack'],
       keywords: ['\u201cpolicy\u201d', '\u201cpolicies\u201d', '\u201ccode of conduct\u201d', '\u201ccompliance\u201d', '\u201calcohol\u201d', '\u201cconflict of interests\u201d', '\u201camendment\u201d'],
       details: 'Cross-reference across multiple indicated Data Origins. Coordination required to obtain exact naming conventions for relevant entities. Cross-reference with Personal identifiers.'
+    }
+  },
+  {
+    cat: 'hostile',
+    q: 'Was the data subject subjected to continuous, subtle provocations aimed at creating a Hostile Work Environment?',
+    a: 'Under verification. Evidence suggests a persistent pattern of micro-aggressions and overt provocations strategically designed to undermine the data subject\u2019s professional standing and psychological well-being, meeting the structural criteria for a \u201cHostile Work Environment\u201d through multiple documented channels. This conduct is characterized by the systematic use of derogatory ethnic stereotypes and the weaponization of private information in professional contexts \u2014 including references to \u201cmafia,\u201d \u201cItalian bureaucracy,\u201d and \u201cItalians love taking on debt,\u201d alongside non-sequitur mentions of private geographical identifiers like \u201cvolcan\u201d and \u201cEtna rosso\u201d used as tools for subtle offenses. Furthermore, a consistent pattern of public professional disparagement has been identified on Slack and during plenary sessions, where professional output was labeled, for example, as \u201cAI-slop report for the Canadian government\u201d and a narrative of \u201cnavigating uncertainty\u201d was utilized to marginalize the data subject, complemented by explicit statements regarding the intent to \u201cdeconstruct piece by piece\u201d the proposed Product Development framework (or leader?). These incidents were frequently compounded by systemic insubordination and the deliberate bypassing of the established chain of command during meetings, actions clearly aimed at delegitimizing the data subject\u2019s authority and disrupting operational stability.',
+    meta: {
+      period: 'Continued',
+      systems: ['Email', 'Slack', 'Recorded Meeting Sessions'],
+      keywords: ['\u201cmafia\u201d', '\u201citalian\u201d', '\u201citalians\u201d', '\u201citalian bureaucracy\u201d', '\u201cdebt\u201d', '\u201cproduct proven process\u201d', '\u201camber\u201d', '\u201cproduct development\u201d', '\u201cpiece\u201d', '\u201cai slop\u201d', '\u201ccanadian government\u201d', '\u201cfrancesco ierace\u201d', '\u201cvolcan\u201d', '\u201cetna rosso\u201d', '\u201cux\u201d', '\u201cuser experience\u201d', '\u201cimmigration\u201d'],
+      details: 'Cross-reference across multiple indicated Data Origins. Coordination required to obtain exact naming conventions for relevant entities. Cross-reference with Personal identifiers.'
+    }
+  },
+  {
+    cat: 'hostile',
+    q: 'Was there a progressive attempt to isolate the data subject from their support network and operational structure to weaken their organizational standing and managerial support?',
+    a: 'Under verification. Evidence suggests a systematic effort to achieve professional isolation through the deliberate exclusion of the data subject and their direct reports from critical strategic meetings and operational forums. This pattern of isolation was further reinforced by the removal of all projects requiring the data subject\u2019s involvement from the product roadmap \u2014 actions frequently masked as \u201cpriority shifts\u201d to obscure their exclusionary intent. Furthermore, documentation indicates attempts to alter reporting lines under the pretext of a \u201cneed for direct observation\u201d, exercising psychological pressure over the management, a maneuver hypothesized to effectively sever the data subject\u2019s connection to their established managerial support network and finalize their operational marginalization. These coordinated actions, ranging from roadmap manipulation to the restructuring of command chains, suggest a strategic intent to induce professional isolation and compromise the data subject\u2019s ability to perform their functional duties.',
+    meta: {
+      period: 'Continued',
+      systems: ['Meeting Minutes', 'Internal Documents', 'Slack', 'Email'],
+      keywords: ['\u201croadmap\u201d', '\u201cmeasurement\u201d', '\u201cjared\u201d', '\u201cana\u201d', '\u201cdesign\u201d', '\u201creporting line\u201d'],
+      details: 'Deep dive with Internal Interviews; Cross-reference across multiple indicated Data Origins. Coordination required to obtain exact naming conventions for relevant entities. Cross-reference with Personal identifiers.'
+    }
+  },
+  {
+    cat: 'health',
+    q: 'Did the cumulative impact of the continued obsessive monitoring, managerial malice, personal and professional attacks, provocations, isolation, and a hostile work environment affect the data subject\u2019s health?',
+    a: 'Verified. Evidence confirms that, beginning in late July 2025 and following the documented intentional shift in the working environment observed between March and July 2025, the data subject manifested significant emotional distress and health complications necessitating specialized intervention. The Company formally acknowledged the severity of this condition by offering to subsidize psychological support as a remedial measure. Professional treatment continued on a weekly basis through January 2026, at which point the acute necessity for intervention began to stabilize, in coincidence with the data subject\u2019s resignation. The chronological correlation between the reported patterns of workplace hostility and the onset of the data subject\u2019s distress suggests a direct causal link between the environmental stressors and the resulting health impact, constituting a potential breach of the employer\u2019s duty of care and health and safety obligations.',
+    meta: {
+      period: 'July 2025; Continued',
+      systems: ['Meeting Minutes', 'Internal Reports', 'Internal Documentation', 'Slack', 'Email'],
+      keywords: ['\u201ccounselor\u201d', '\u201cinstability\u201d', '\u201cstability\u201d', '\u201cstabilization\u201d', '\u201cpressure\u201d', '\u201cbreakdown\u201d', '\u201ctherapist\u201d'],
+      details: null,
+      attachments: [
+        { label: 'Health Documentation', url: 'https://drive.google.com/drive/folders/1LQ9FEsDkYlIBFWkFb8cVRjakuXXWJDC3?usp=drive_link' }
+      ]
+    }
+  },
+  {
+    cat: 'health',
+    q: 'Were the data subject\u2019s sensitive personal data \u2014 specifically relating to health / mental wellness issues induced by a hostile work environment \u2014 misrepresented to portray the individual as \u201cunstable,\u201d rather than as a direct consequence of workplace hostility?',
+    a: 'Under verification. Evidence from direct managerial interactions and specific annotations within the September 2025 performance review suggests that the decline in the data subject\u2019s mental well-being, documented as a result of the reported workplace hostility, was instrumentally utilized as a rationale to obstruct professional advancement. This practice appears to constitute a non-compliant and abusive processing of sensitive personal data (Special Categories of Data under GDPR). Rather than addressing the environmental root causes, the resulting health impact was reframed as a personal performance deficit or \u201cinstability,\u201d effectively weaponizing medical-related distress to justify discriminatory career stagnation. Such utilization of sensitive information departs from the principles of fairness, purpose limitation, and lawfulness of processing, potentially violating the core protections afforded to data subjects regarding their health status.',
+    meta: {
+      period: 'August 2025; Continued',
+      systems: ['Meeting Minutes', 'Internal Reports', 'Internal Documentation', 'Slack', 'Email'],
+      keywords: ['\u201ccounselor\u201d', '\u201cinstability\u201d', '\u201cstability\u201d', '\u201cstabilization\u201d', '\u201cpressure\u201d', '\u201cbreakdown\u201d', '\u201ctherapist\u201d'],
+      details: 'Comparative analysis of performance metrics prior to and following the onset of environmental hostility; audit of managerial notes to identify the specific transition where health-related distress began to be cited as a professional limitation; verification of compliance with GDPR requirements for processing health-related data within an employment context.'
+    }
+  },
+  {
+    cat: 'health',
+    q: 'Did the data subject repeatedly report the health impacts of perceived hostility and hyper-monitoring prior to the emotional breakdown, and was any protective action taken following the July health crisis?',
+    a: 'Verified / Under Investigation. Documentation confirms that between March and July 2025, prior to the reported clinical breakdown, the data subject repeatedly alerted leadership to the deteriorating working environment and its escalating impact on their mental health, as evidenced by internal 1:1 synchronization notes with the direct manager at the time. Following the acute emotional distress episode in July 2025, the Company\u2019s response was characterized by a fundamental contradiction: while it formally acknowledged the distress by offering subsidized psychological support, it simultaneously failed to implement protective measures to cease the hostile conduct. On the contrary, evidence suggests that attacks by specific managers not only persisted but deliberately intensified after August 2025. This failure to mitigate known environmental stressors, despite explicit warnings and a manifest health crisis, represents a documented breach of the \u201cduty of care\u201d and health and safety obligations, ultimately resulting in a forced cessation of work by the data subject to preserve their mental integrity.',
+    meta: {
+      period: 'August 2025; Continued; January 2026',
+      systems: ['Meeting Minutes', 'Internal Reports', 'Internal Documentation', 'Slack', 'Email'],
+      keywords: [],
+      details: null,
+      attachments: [
+        { label: 'Health Documentation', url: 'https://drive.google.com/drive/folders/1LQ9FEsDkYlIBFWkFb8cVRjakuXXWJDC3?usp=drive_link' }
+      ]
+    }
+  },
+  {
+    cat: 'stereotyped',
+    q: 'Was the data subject targeted with repeated provocations based on their ethnic origin?',
+    a: 'Under verification. Evidence from direct interactions indicates a consistent pattern of derogatory \u201cjokes\u201d and remarks centered on the data subject\u2019s national origin, specifically utilizing references to \u201cmafia,\u201d \u201cSicily,\u201d and \u201cItaly\u201d (e.g., \u201cItalian bureaucracy,\u201d \u201cEtna rosso\u201d). Furthermore, it is hypothesized that these ethnic identifiers were systematically weaponized in verbal communications to corroborate defamatory allegations of low productivity or operational inefficiency. This practice appears to involve the deliberate abuse of cultural stereotypes to rationalize professional disparagement, potentially violating corporate non-discrimination policies and statutory protections regarding workplace dignity. The investigation aims to determine the extent to which these ethnic tropes were used to construct a biased narrative of professional incompetence, thereby masking the objective performance of the data subject.',
+    meta: {
+      period: 'August 2025; September 2025; October 2025; November 2025; Continued',
+      systems: ['Meeting Minutes', 'Internal Reports', 'Internal Documentation', 'Slack', 'Email'],
+      keywords: ['\u201cmafia\u201d', '\u201citalian\u201d', '\u201citalians\u201d', '\u201citalian bureaucracy\u201d', '\u201cdebt\u201d', '\u201cetna rosso\u201d', '\u201csicily\u201d', '\u201csicilian\u201d', '\u201cisland\u201d', '\u201cvolcan\u201d'],
+      details: null
     }
   },
   {
@@ -452,14 +530,14 @@ function faqOpenRadarModal() {
     + '<div style="display:flex;align-items:center;gap:8px;">'
     // Flag icon = segnalazione
     + '<svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14V2"/><path d="M3 2h9l-2.5 3.5L12 9H3"/></svg>'
-    + '<span class="modal-title">Any Data out of radar?</span>'
+    + '<span class="modal-title">Any Data out of Radar?</span>'
     + '</div>'
     + '<button class="modal-close" id="radarModalClose">'
     + '<svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>'
     + '</button>'
     + '</div>'
     + '<div class="modal-body">'
-    + '<p class="modal-desc">For sure some other data sono sfuggiti al nostro radar. Scrivici e li aggiungeremo alla directory il prima possibile.</p>'
+    + '<p class="modal-desc">We love crowdfunding! We’re sure some other relevant data and factual resources may have slipped under our radar. Please write to us and we’ll add them to the directory as soon as possible.</p>'
     + '<a href="mailto:bruna@saykudos.co" class="modal-email-btn">'
     + '<svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M2 4h12v9a1 1 0 01-1 1H3a1 1 0 01-1-1V4z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M2 4l6 5 6-5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>'
     + 'Send Email'
