@@ -485,8 +485,20 @@ function renderFaqDsar() {
   _faqOpenIdx   = -1;
   _faqView      = 'category';
 
+  var faqMins = (function() {
+    var text = FAQ_ITEMS.map(function(item) {
+      return item.q + ' ' + item.a.replace(/<[^>]+>/g, ' ')
+        + (item.meta && item.meta.details ? ' ' + item.meta.details : '');
+    }).join(' ');
+    var words = text.trim().split(/\s+/).length;
+    return Math.ceil(words / 200);
+  })();
+
   return '<div class="page-header">'
-    + '<div><div class="ptitle">Data Directory</div><div class="psub psub-flush">FAQ and Data Subject Access Request reference</div></div>'
+    + '<div><div class="ptitle">Data Directory</div>'
+    + '<div class="psub psub-row">FAQ and Data Subject Access Request reference'
+    + readTimeBadge(faqMins)
+    + '</div></div>'
     + '<div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">'
 
     // ── Secondary CTA ────────────────────────────────────────

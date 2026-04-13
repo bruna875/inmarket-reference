@@ -97,6 +97,80 @@ function exportBoardReport() {
     return s.length > max ? s.slice(0, max - 1) + '\u2026' : s;
   }
 
+  // ── Board-level summaries (governance tone) ───────────────────────────────
+  var BOARD_SUM = {
+    compliance: [
+      {
+        q: 'Unauthorized data access during active employment',
+        a: 'Under investigation. Evidence supports hypothesis of unauthorized device and Slack access, alongside undisclosed behavioral monitoring, in potential breach of fairness and transparency principles.'
+      },
+      {
+        q: 'Unauthorized data access following termination',
+        a: 'Under investigation. Unauthorized post-termination access to email and Slack communications hypothesized, consistent with patterns of undisclosed monitoring beyond lawful basis.'
+      },
+      {
+        q: 'Non-compliant personal data processing during employment',
+        a: 'Under investigation. Personal data allegedly processed beyond declared purposes and used as criteria for professional evaluation; potential accuracy violations identified, requiring formal rectification.'
+      },
+      {
+        q: 'Non-compliant processing and potential data breach post-termination',
+        a: 'Under investigation. Personal data allegedly exploited for social engineering activities following a data breach; processing conducted without lawful basis in violation of applicable regulations.'
+      },
+      {
+        q: 'Post-termination retaliation by internal management',
+        a: 'Under investigation. Company initiated established protocols upon receipt of report; internal accountability investigations commenced and formal reassurances provided to the reporting party.'
+      }
+    ],
+    managerial: [
+      {
+        q: 'Strategic obstruction via systematic goal-shifting',
+        a: 'Preliminary evidence of recurring cancellation of alignment meetings and deliberate withholding of quarterly objectives. Documented failure to define success criteria effectively prevented performance benchmarking.'
+      },
+      {
+        q: 'Deliberate induction of technical errors during leadership evaluation',
+        a: 'Records indicate manipulative guidance specifically designed to elicit technically incorrect responses, subsequently leveraged as grounds for negative performance assessment of the role candidate.'
+      },
+      {
+        q: 'Application of irrelevant criteria to misrepresent candidate competency',
+        a: 'Non-sequitur inquiries outside Product Management scope were used as proxies for professional aptitude. Pattern represents a material departure from objective evaluation standards.'
+      },
+      {
+        q: 'Operational isolation via responsibility reassignment to undisclosed teams',
+        a: 'Post-September 2025: key projects reassigned to newly formed SLAM teams without documented strategic rationale. Measurement BU cross-functional projects suspended for three consecutive quarters, constituting systematic isolation.'
+      },
+      {
+        q: 'Systematic misattribution of project delays to the data subject',
+        a: 'Audit trails indicate Measurement Suite delays originated within the Measurement Team yet were formally attributed to the data subject. A \'low ROI\' narrative is hypothesized to have been disseminated to mask structural organizational deficiencies.'
+      },
+      {
+        q: 'Obstructive behaviors attributable to undisclosed conflicts of interest',
+        a: 'Obstructive patterns hypothesized to derive from personal interests in organizational status and resource control that are structurally incompatible with the data subject\'s advancement — representing a potential breach of internal ethical standards.'
+      }
+    ],
+    character: [
+      {
+        q: 'Systematic misclassification as junior or designer resource',
+        a: 'Despite 15+ years in Product Management and Entrepreneurship, internal records consistently categorized the data subject at junior level — hypothesized as a deliberate strategy to undermine organizational authority and obstruct career progression.'
+      },
+      {
+        q: 'Decontextualization of legitimate activities to fabricate an integrity narrative',
+        a: 'Key instances: co-working space use reframed as unprofessional (contradicting Work from Anywhere policy); consular administrative assistance misrepresented as ethical breach; PTO and cross-continental time-zone availability reframed as low productivity. No formal complaints on record during tenure.'
+      },
+      {
+        q: 'Retroactive mischaracterization of disclosed external shareholdings',
+        a: 'Fully disclosed Italian entities — historically recipients of Company payments — retroactively reframed as conflicts of interest. No operational or commercial overlap confirmed; re-characterization is inconsistent with prior corporate approvals.'
+      },
+      {
+        q: 'False narrative of corporate resource misuse contradicted by audit records',
+        a: 'Financial audit trails confirm consistent prudence: unreimbursed eligible expenses, proactive budget reallocation, personal asset utilization to meet company deadlines, and absence of any salary increase requests throughout a four-year tenure.'
+      },
+      {
+        q: 'Instrumental policy amendments to legitimize defamatory narrative',
+        a: 'Preliminary evidence of attempts to modify internal corporate policies to retroactively codify non-objective critiques of the data subject\'s conduct — constituting a potential abuse of equity-based governance mechanisms.'
+      }
+    ]
+  };
+
   var faqCompliance  = getFaqByCategory('compliance');
   var faqManagerial  = getFaqByCategory('managerial');
   var faqCharacter   = getFaqByCategory('character');
@@ -258,18 +332,21 @@ function exportBoardReport() {
   // SECTION 3 — DOCUMENTED RISK INDICATORS
   // ─────────────────────────────────────────────────────────────────────────
   var c3n  = Math.floor(CW * 0.04);
-  var c3q  = Math.floor(CW * 0.44);
-  var c3a  = Math.floor(CW * 0.38);
-  var c3p  = CW - c3n - c3q - c3a;
+  var c3q  = Math.floor(CW * 0.40);
+  var c3a  = Math.floor(CW * 0.34);
+  var c3p  = Math.floor(CW * 0.13);
+  var c3at = CW - c3n - c3q - c3a - c3p;
 
-  function faqBlock(catLabel, items, startIdx) {
+  function faqBlock(catLabel, catKey, items, startIdx) {
     var rows = [];
+    var sumList = BOARD_SUM[catKey] || [];
+
     // Sub-header
     rows.push(new D.TableRow({
       children: [
         new D.TableCell({
           borders: borders,
-          columnSpan: 4,
+          columnSpan: 5,
           shading: { fill: ACCENT_LIGHT, type: D.ShadingType.CLEAR },
           margins: { top: 80, bottom: 80, left: 140, right: 140 },
           children: [new D.Paragraph({
@@ -282,14 +359,19 @@ function exportBoardReport() {
     items.forEach(function(item, idx) {
       var n    = String(startIdx + idx + 1);
       var bg   = idx % 2 === 0 ? WHITE : ROW_ALT;
-      var qTxt = truncate(item.q, 180);
-      var aTxt = truncate(stripHtml(item.a), 280);
+      var sum  = sumList[idx];
+      var qTxt = sum ? sum.q : truncate(item.q, 160);
+      var aTxt = sum ? sum.a : truncate(stripHtml(item.a), 260);
       var per  = item.meta && item.meta.period ? item.meta.period : '\u2014';
+      var attList = item.meta && item.meta.attachments && item.meta.attachments.length
+        ? item.meta.attachments.map(function(a) { return a.label; }).join(', ')
+        : '\u2014';
       rows.push(new D.TableRow({ children: [
-        cell(n,    { fill: bg, w: c3n, align: D.AlignmentType.CENTER, color: GRAY }),
-        cell(qTxt, { fill: bg, w: c3q, bold: true, size: 18 }),
-        cell(aTxt, { fill: bg, w: c3a, color: '374151', size: 18 }),
-        cell(per,  { fill: bg, w: c3p, color: GRAY, size: 17, italic: true })
+        cell(n,       { fill: bg, w: c3n,  align: D.AlignmentType.CENTER, color: GRAY }),
+        cell(qTxt,    { fill: bg, w: c3q,  bold: true, size: 18 }),
+        cell(aTxt,    { fill: bg, w: c3a,  color: '374151', size: 18 }),
+        cell(per,     { fill: bg, w: c3p,  color: GRAY, size: 17, italic: true }),
+        cell(attList, { fill: bg, w: c3at, color: ACCENT, size: 17 })
       ]}));
     });
     return rows;
@@ -299,16 +381,17 @@ function exportBoardReport() {
     new D.TableRow({
       tableHeader: true,
       children: [
-        cell('#',       { bold: true, fill: ACCENT_LIGHT, color: ACCENT_DARK, w: c3n, align: D.AlignmentType.CENTER }),
-        cell('Finding', { bold: true, fill: ACCENT_LIGHT, color: ACCENT_DARK, w: c3q }),
-        cell('Status',  { bold: true, fill: ACCENT_LIGHT, color: ACCENT_DARK, w: c3a }),
-        cell('Period',  { bold: true, fill: ACCENT_LIGHT, color: ACCENT_DARK, w: c3p })
+        cell('#',           { bold: true, fill: ACCENT_LIGHT, color: ACCENT_DARK, w: c3n,  align: D.AlignmentType.CENTER }),
+        cell('Finding',     { bold: true, fill: ACCENT_LIGHT, color: ACCENT_DARK, w: c3q }),
+        cell('Status',      { bold: true, fill: ACCENT_LIGHT, color: ACCENT_DARK, w: c3a }),
+        cell('Period',      { bold: true, fill: ACCENT_LIGHT, color: ACCENT_DARK, w: c3p }),
+        cell('Attachments', { bold: true, fill: ACCENT_LIGHT, color: ACCENT_DARK, w: c3at })
       ]
     })
   ]
-  .concat(faqBlock('Compliance', faqCompliance, 0))
-  .concat(faqBlock('Managerial Malice', faqManagerial, faqCompliance.length))
-  .concat(faqBlock('Character Assassination', faqCharacter, faqCompliance.length + faqManagerial.length));
+  .concat(faqBlock('Compliance', 'compliance', faqCompliance, 0))
+  .concat(faqBlock('Managerial Malice', 'managerial', faqManagerial, faqCompliance.length))
+  .concat(faqBlock('Character Assassination', 'character', faqCharacter, faqCompliance.length + faqManagerial.length));
 
   var indicators = [
     new D.Paragraph({
@@ -326,7 +409,7 @@ function exportBoardReport() {
     }),
     new D.Table({
       width: { size: CW, type: D.WidthType.DXA },
-      columnWidths: [c3n, c3q, c3a, c3p],
+      columnWidths: [c3n, c3q, c3a, c3p, c3at],
       rows: allFaqRows
     }),
     new D.Paragraph({ children: [new D.PageBreak()] })
