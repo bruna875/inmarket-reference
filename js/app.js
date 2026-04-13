@@ -502,22 +502,21 @@ function openPrivacyModal() {
 
 function pixelateRefImages() {
   var BLOCK = 10;
+  var DISP  = 140;
   var imgs = document.querySelectorAll('.ref-avatar-wrap img:not([data-px])');
   imgs.forEach(function(img) {
     img.setAttribute('data-px', '1');
     function doPixelate() {
-      var w = img.naturalWidth  || 140;
-      var h = img.naturalHeight || 140;
-      var sw = Math.max(1, Math.floor(w / BLOCK));
-      var sh = Math.max(1, Math.floor(h / BLOCK));
+      var sw = Math.max(1, Math.floor(DISP / BLOCK));
+      var sh = Math.max(1, Math.floor(DISP / BLOCK));
       var canvas = document.createElement('canvas');
-      canvas.width  = w;
-      canvas.height = h;
+      canvas.width  = DISP;
+      canvas.height = DISP;
       canvas.className = img.className;
       var ctx = canvas.getContext('2d');
       ctx.imageSmoothingEnabled = false;
       ctx.drawImage(img, 0, 0, sw, sh);
-      ctx.drawImage(canvas, 0, 0, sw, sh, 0, 0, w, h);
+      ctx.drawImage(canvas, 0, 0, sw, sh, 0, 0, DISP, DISP);
       if (img.parentNode) img.parentNode.replaceChild(canvas, img);
     }
     if (img.complete && img.naturalWidth) { doPixelate(); }
