@@ -162,7 +162,7 @@ body {
 .upsell-text { display: flex; flex-direction: column; gap: 1px }
 .upsell-title { font-size: 11px; font-weight: 600; color: #3a7fc1; line-height: 1.3 }
 .upsell-sub { font-size: 10px; color: #3a7fc1; opacity: .7; line-height: 1.2 }
-#upsell-modal-overlay, #livestream-modal-overlay, #lang-modal-overlay {
+#upsell-modal-overlay, #livestream-modal-overlay, #lang-modal-overlay, #privacy-modal-overlay {
   position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 9999;
   display: flex; align-items: center; justify-content: center;
 }
@@ -477,7 +477,7 @@ tr:hover .link-btn, .link-btn.has-link { opacity: 1; color: var(--accent) }
   color: var(--accent); opacity: .35;
 }
 .ref-avatar-wrap { position: relative; width: 100%; height: 100% }
-.ref-avatar-wrap img { }
+.ref-avatar-wrap img { filter: blur(4px) }
 .ref-privacy-bar {
   position: absolute; left: 5%; width: 90%; height: 18%;
   background: #66C220; transform: rotate(-2deg); border-radius: 2px;

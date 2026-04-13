@@ -397,7 +397,7 @@ function userPopToggle(e) {
     + '<div class="user-pop-divider"></div>'
     + '<div class="user-pop-item" data-userpop="privacy">'
     + '<svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M8 2L3 4.5V7c0 3.5 2.1 6.5 5 7.5 2.9-1 5-4 5-7.5V4.5L8 2z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M6 8.5l1.5 1.5L10 7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>'
-    + '<div class="user-pop-item-title">Privacy Policy</div>'
+    + '<div class="user-pop-item-title">Privacy Policy &amp; Legal Disclaimer</div>'
     + '</div>';
 
   document.body.appendChild(pop);
@@ -410,6 +410,11 @@ function userPopToggle(e) {
   pop.querySelector('[data-userpop="language"]').addEventListener('click', function() {
     userPopClose();
     openLanguageModal();
+  });
+
+  pop.querySelector('[data-userpop="privacy"]').addEventListener('click', function() {
+    userPopClose();
+    openPrivacyModal();
   });
 
   setTimeout(function() {
@@ -452,6 +457,45 @@ function openLanguageModal() {
     + '</div>';
   document.body.appendChild(overlay);
   document.getElementById('lang-modal-close').addEventListener('click', function() { overlay.remove(); });
+  overlay.addEventListener('click', function(e) { if (e.target === overlay) overlay.remove(); });
+}
+
+function openPrivacyModal() {
+  var existing = document.getElementById('privacy-modal-overlay');
+  if (existing) { existing.remove(); return; }
+  var overlay = document.createElement('div');
+  overlay.id = 'privacy-modal-overlay';
+  overlay.className = 'upsell-modal-overlay';
+  overlay.innerHTML =
+    '<div class="upsell-modal" style="max-width:580px;width:92vw;max-height:80vh;overflow-y:auto">'
+    + '<div class="upsell-modal-title" style="font-size:16px;margin-bottom:4px">Privacy Policy &amp; Legal Disclaimer</div>'
+    + '<div style="color:var(--muted);font-size:11px;margin-bottom:20px">Last updated: March 2026</div>'
+    + '<div style="font-size:13px;color:var(--text);line-height:1.7">'
+    + '<p style="margin:0 0 12px"><strong>1. Who we are</strong><br>'
+    + 'This dashboard is operated by the data subject \u2014 you know, the person whose data was processed for four years without her full knowledge, across systems she wasn\u2019t always told existed, for purposes that were occasionally creative. The data controller is Very Good Peeps, Inc., who would like to remind you that they cannot recall receiving certain disclosures, and that memory is a complex thing.</p>'
+    + '<p style="margin:0 0 12px"><strong>2. What data is processed here</strong><br>'
+    + 'Only the data that was actually provided in response to the DSAR \u2014 which took a while, required some patience, and arrived in a format that required significant interpretation. It includes employment records, performance reviews (the ones that exist), communications (the ones that were retained), and documentation that someone, somewhere, decided was relevant. No additional data is collected by this dashboard. Unlike some parties involved, we ask before we take.</p>'
+    + '<p style="margin:0 0 12px"><strong>3. Purpose of processing</strong><br>'
+    + 'Data is processed here for one purpose only: to exercise the rights granted by Article 15 GDPR, because it turns out you are allowed to know what people wrote about you, what systems stored your information, and what was done with it. Profiling and automated decision-making are not performed by this dashboard. Other parties may have different answers to that question.</p>'
+    + '<p style="margin:0 0 12px"><strong>4. Storage and retention</strong><br>'
+    + 'Risk Calculator values are stored in your browser\u2019s localStorage. They stay on your device, go nowhere, and will not be selectively recalled or strategically forgotten at a later date. Signature records are also stored locally. The dashboard is a static application \u2014 it does not have a People Operations team that can lose things.</p>'
+    + '<p style="margin:0 0 12px"><strong>5. Your rights</strong><br>'
+    + 'You have the right to access, rectify, restrict, erase, and port your personal data. You have the right to object. You have the right to lodge a complaint with a supervisory authority \u2014 and if you\u2019ve read this far, you probably already know which one. These are not theoretical rights. They are legally enforceable. You may exercise them directly with the data controller, ideally in writing, ideally with a read receipt.</p>'
+    + '<p style="margin:0 0 12px"><strong>6. Contact</strong><br>'
+    + 'For privacy enquiries related to this dashboard, see the Contacts section in your Profile. For privacy enquiries related to everything else documented here, consult the Data Directory, the Compliance section, and if needed, your local Data Protection Authority. We hear they are very thorough.</p>'
+    + '<div style="margin:20px 0 12px;border-top:1px solid var(--border);padding-top:16px">'
+    + '<div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:12px">Legal Disclaimer</div>'
+    + '<p style="margin:0 0 12px">This dashboard has been developed for internal use by Very Good Peeps, Inc. It may occasionally be shared with selected third parties for limited and occasional use of the tools contained within it. Access is restricted to individuals to whom login credentials have been expressly transmitted.</p>'
+    + '<p style="margin:0 0 12px">Very Good Peeps, Inc. accepts no responsibility for unauthorised access to the dashboard by individuals other than those to whom the password has been directly communicated. Users are responsible for maintaining the confidentiality of their access credentials.</p>'
+    + '<p style="margin:0 0 4px">By accessing this dashboard, the user acknowledges and accepts that any reference to real events, organisations, or individuals contained within the materials presented herein is purely coincidental. All content is provided for informational and internal governance purposes only. Very Good Peeps, Inc. disclaims all liability arising from the use, interpretation, or misinterpretation of the information contained in this dashboard. The content does not constitute legal advice. Nothing in this dashboard shall be construed as an admission of liability of any kind by any party.</p>'
+    + '</div>'
+    + '</div>'
+    + '<div class="upsell-modal-actions" style="margin-top:20px">'
+    + '<button class="sig-btn" id="privacy-modal-close">Close</button>'
+    + '</div>'
+    + '</div>';
+  document.body.appendChild(overlay);
+  document.getElementById('privacy-modal-close').addEventListener('click', function() { overlay.remove(); });
   overlay.addEventListener('click', function(e) { if (e.target === overlay) overlay.remove(); });
 }
 
