@@ -142,6 +142,19 @@ function sigOpenModal(pageId, pageLabel, toEmail) {
   document.getElementById('sig-modal-cancel').addEventListener('click', function() { overlay.remove(); });
   overlay.addEventListener('click', function(e) { if (e.target === overlay) overlay.remove(); });
   inp.addEventListener('keydown', function(e) { if (e.key === 'Enter') document.getElementById('sig-modal-confirm').click(); });
+  inp.addEventListener('input', function() {
+    var val = inp.value.trim().toLowerCase();
+    if (!val) {
+      err.textContent = '';
+      inp.style.borderColor = '';
+    } else if (val !== toEmail.toLowerCase()) {
+      err.textContent = 'Email not corresponding. Use your work email please.';
+      inp.style.borderColor = 'var(--danger, #C0392B)';
+    } else {
+      err.textContent = '';
+      inp.style.borderColor = '#3B6D11';
+    }
+  });
   document.getElementById('sig-modal-help').addEventListener('click', function() {
     var hint = document.getElementById('sig-modal-hint');
     hint.style.display = hint.style.display === 'none' ? 'block' : 'none';
