@@ -58,7 +58,7 @@ var OB_STEPS = [
     position: 'right'
   },
   {
-    target: '[data-page="ref_deniece_kennedy"]',
+    target: '[data-page="ref_dk"]',
     eyebrow: 'Step 6 of 10',
     title: 'Wanna Say Sorry?',
     desc: 'Endorsements from key colleagues. Each page has a quote and a signature slot \u2014 in case someone feels called to make amends.',
