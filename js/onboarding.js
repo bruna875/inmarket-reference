@@ -180,7 +180,7 @@ function obRender() {
       + '<div class="lang-options">'
       + '<div class="lang-opt lang-opt--selected" id="ob-lang-pa">'
       + '<div class="lang-opt-name">Passive Aggressive</div>'
-      + '<div class="lang-opt-desc">Says one thing, means another. Subtly intimidating. You\u2019ll get the message.</div>'
+      + '<div class="lang-opt-desc">Says one thing, means another. Pretend it is normal.</div>'
       + '<div class="lang-opt-check"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5L13 5" stroke="#66C220" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'
       + '</div>'
       + '<div class="lang-opt lang-opt--disabled" id="ob-lang-st">'
