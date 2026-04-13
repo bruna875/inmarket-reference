@@ -239,6 +239,7 @@ document.addEventListener('input', function(e) {
   if (_calcRows[sec] && _calcRows[sec][idx] !== undefined) {
     _calcRows[sec][idx].value = inp.value;
     calcUpdateTotals(sec);
+    calcSave();
   }
 });
 
