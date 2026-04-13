@@ -501,7 +501,7 @@ function openPrivacyModal() {
 }
 
 function pixelateRefImages() {
-  var BLOCK = 10;
+  var BLOCK = 35;
   var DISP  = 140;
   var imgs = document.querySelectorAll('.ref-avatar-wrap img:not([data-px])');
   imgs.forEach(function(img) {
