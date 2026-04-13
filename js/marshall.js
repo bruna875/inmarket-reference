@@ -1,7 +1,7 @@
 // marshall.js — Ask Marshall overlay chat
 
 
-var MARSHALL_PHOTO = 'https://res.cloudinary.com/dhfrgr4qd/image/upload/v1775773451/marshall_kxcgxb.jpg';
+var MARSHALL_PHOTO = 'https://res.cloudinary.com/dhfrgr4qd/image/upload/v1776080179/8_sllcoi.png';
 
 var MARSHALL_RESPONSES = [
   "Look, it's all about ROI. Everything is about ROI. If you can't quantify the ROI of what you're doing, are you even doing anything? That's Leadership 101.",
