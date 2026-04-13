@@ -154,7 +154,7 @@ function readTimeBadge(mins) {
 function renderResources() {
   if (_wizState['patterns'] === undefined) _wizState['patterns'] = 0;
   return '<div class="ptitle">Recognize the Patterns</div>'
-    + '<div class="psub psub-row">A guided journey through a very specific dynamic \u2014 told without ever saying its name'
+    + '<div class="psub psub-row">A guided journey through a very specific dynamic \u2014 sometime similar to a disturb'
     + readTimeBadge(wizReadTime(_wizItemsPatterns))
     + '</div>'
     + '<blockquote class="res-quote">'
