@@ -82,7 +82,7 @@ var FAQ_ITEMS = [
   },
   {
     cat: 'managerial',
-    q: 'Were there attempts to induce a solid candidate for a Product Leadership role into technical errors during a role evaluation process, with the potential intent of utilizing incorrect responses to negatively impact the assessments?',
+    q: 'Were there attempts to induce the data subject into technical errors during a role evaluation process, with the potential intent of utilizing incorrect responses to negatively impact the assessments?',
     a: 'Under verification. Records indicate suggestive and manipulative \u201cguidance\u201d \u2014 such as encouraging via email the use of \u201cGeolink\u201d in response to Unified Platform inquiries \u2014 which appears designed to elicit incorrect technical responses, to later use such induced (potential) errors as a basis for performance critique.',
     meta: {
       period: 'October 2025; November 2025',
@@ -93,7 +93,7 @@ var FAQ_ITEMS = [
   },
   {
     cat: 'managerial',
-    q: 'Were irrelevant evaluation criteria presented as pertinent in order to misrepresent a qualified candidate as incompetent for a specific role?',
+    q: 'Were irrelevant evaluation criteria presented as pertinent in order to misrepresent the data subject as incompetent for a specific role?',
     a: 'Under verification. It is hypothesized that non-sequitur inquiries, falling entirely outside the functional scope of Product Management, were utilized as proxies for \u201cbusiness sense.\u201d Specifically, knowledge regarding hospitality coffee pricing per gallon at B2B American events was presented as a relevant metric for assessing suitability for the role of Head of Product / Head of Product Development. This application of non-pertinent criteria suggests a departure from objective professional evaluation standards.',
     meta: {
       period: 'September 2025; October 2025',
@@ -104,7 +104,7 @@ var FAQ_ITEMS = [
   },
   {
     cat: 'managerial',
-    q: 'Has there been a progressive divestment of responsibilities from a qualified Product Leader candidate, deliberately redirected toward \u201cshadow teams\u201d to operationally isolate the individual and obstruct their transition into the role?',
+    q: 'Has there been a progressive divestment of responsibilities from the data subject, deliberately redirected toward \u201cshadow teams\u201d to operationally isolate the individual and obstruct their transition into a product leadership role?',
     a: 'Under verification. Evidence indicates that post-September 2025, a gradual reassignment of key projects to newly formed \u201cSLAM\u201d teams occurred without a documented strategic rationale, resulting in operational friction within the broader organization. Furthermore, specifically regarding the Measurement business unit, all cross-functional projects were removed from the roadmap effective March, leading to a cessation of collaborative activity for three consecutive quarters. These actions are hypothesized to represent a systematic operational isolation of the data subject.',
     meta: {
       period: 'September 2025; October 2025; November 2025; December 2025',
@@ -145,7 +145,7 @@ var FAQ_ITEMS = [
   },
   {
     cat: 'character',
-    q: 'Was there a malicious re-evaluation of previously disclosed, personal, and legitimate external interests?',
+    q: 'Was there a malicious re-evaluation of previously disclosed, personal, and legitimate external interests of the data subject?',
     a: 'Under verification. Evidence indicates a recent and inconsistent shift in the characterization of the data subject\u2019s external interests. Despite full transparency and prior formal disclosure regarding majority shareholdings in Italian legal entities \u2014 entities to which the Company has historically and documentedly processed payments \u2014 there has been a retrospective effort to reframe these interests as \u201cproblematic.\u201d Evidence confirms that the private vehicles in question maintain no operational, geographical, or commercial overlap with the Company, differing entirely in terms of target markets, business scale, client typology, and proprietary assets. Consequently, this sudden re-characterization appears inconsistent with prior corporate approvals and the established right to hold private equity, suggesting a tactical misrepresentation of disclosed facts to create a false narrative of non-compliance where no objective conflict of interest exists under established corporate standards.',
     meta: {
       period: 'Continued',
@@ -156,7 +156,7 @@ var FAQ_ITEMS = [
   },
   {
     cat: 'character',
-    q: 'Have there been malicious and incorrect narratives regarding the management of corporate resources?',
+    q: 'Have there been malicious and incorrect narratives regarding the management of corporate resources by the data subject?',
     a: 'Under verification. Preliminary analysis indicates the dissemination of narratives suggesting the misuse of company resources (e.g., travel expenses and family accompaniment during corporate retreats) which are fundamentally contradicted by financial records. Audit trails demonstrate a consistent pattern of high financial prudence and cost-mitigation efforts by the data subject. Documented instances of resource optimization include:<br><br>'
       + '<b>Voluntary Forfeiture of Entitlements:</b> The data subject consistently opted not to claim eligible meal allowances, co-working space reimbursements, mental health benefits, baggage fees, or agile development budgets.<br><br>'
       + '<b>Budgetary Efficiency:</b> The data subject proactively reported the lack of necessity for previously approved external contractors and proposed reallocating personal \u201cAgile Development\u201d funds to facilitate the retention of key personnel (e.g., employee Wei).<br><br>'
@@ -172,7 +172,7 @@ var FAQ_ITEMS = [
   },
   {
     cat: 'character',
-    q: 'Was there a formal request to update corporate policies \u2014 in a documented abuse of equity-based power \u2014 specifically to legitimize and objectify a demonstrably false and defamatory narrative against the data subject?',
+    q: 'Was there a formal request to update corporate policies specifically to legitimize and objectify a demonstrably false and defamatory narrative against the data subject?',
     a: 'Under verification. Preliminary analysis suggests an attempt to instrumentally modify internal corporate policies to retroactively justify the narratives identified. This potential strategic use of governance mechanisms appears designed to provide a veneer of legitimacy to non-objective critiques of the data subject\u2019s conduct. It is hypothesized that such efforts constitute an abuse of power by stakeholders, aimed at codifying a defamatory narrative into official company standards.',
     meta: {
       period: 'October 2025; November 2025; December 2025',
