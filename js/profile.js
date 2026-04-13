@@ -31,7 +31,7 @@ function renderProfile() {
     + '</div>'
     + '<div class="prof-desc">'
     +   'Manages the shared spaces, enforces the rules nobody agreed to, and keeps the operations running so everyone else can pretend they are delivering results. '
-    +   'Responsible for structural decisions, access control, and the kind of coordination work that only becomes visible when it stops happening.'
+    +   'Responsible for structural decisions, access control, and the kind of coordination work that only becomes visible when it stops happening. 138 IQ-tested: it is a damnation. '
     + '</div>'
 
     + '<div class="prof-divider"></div>'
