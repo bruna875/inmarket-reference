@@ -68,7 +68,7 @@ var OB_STEPS = [
     target: '.sbfoot',
     eyebrow: 'Step 7 of 10',
     title: 'Your Profile',
-    desc: 'Your account info and sign-out. Click your name for language settings and privacy policy.',
+    desc: 'Profile info, language settings and privacy policy.',
     position: 'top'
   },
   {
@@ -82,7 +82,7 @@ var OB_STEPS = [
     target: '#livestreamBtn',
     eyebrow: 'Step 9 of 11 \u2014 Coming Soon!',
     title: 'My Bedroom LiveStreaming',
-    desc: 'For those who feel the urge to keep watching, even post-resignation. If you want to continue controlling obsessively \u2014 this one is for you. Don\u2019t judge too much!',
+    desc: 'For those who feel the urge to keep watching, even post-resignation. If you want to continue controlling obsessively \u2014 this one is for you. Don\u2019t judge too much! 👩‍❤️‍💋‍👨🫦​​',
     position: 'bottom'
   },
   {
