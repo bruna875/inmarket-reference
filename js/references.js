@@ -21,7 +21,7 @@ function anonName(full) {
 
 function renderRef(r) {
   var dispName = anonName(r.fullName);
-  var initials = r.fullName.split(' ').map(function(w){return w[0];}).join('');
+  var initials = r.fullName;
   var barTop = {deniece_kennedy:32, arthur_haedike:38, teresa_thomas:33, michael_della_penna:28, stanley_turek:30, tonya_may:32, trina_rizzo:38, jason_knapp:38, todd_morris:32};
   var top = barTop[r.id] !== undefined ? barTop[r.id] : 38;
   var avatarInitials = r.id === 'todd_morris' ? 'B' : initials;
