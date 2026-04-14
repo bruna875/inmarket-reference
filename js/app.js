@@ -510,9 +510,8 @@ function openPrivacyModal() {
   if (existing) { existing.remove(); return; }
   var overlay = document.createElement('div');
   overlay.id = 'privacy-modal-overlay';
-  overlay.className = 'upsell-modal-overlay';
   overlay.innerHTML =
-    '<div class="upsell-modal" style="max-width:580px;width:92vw;max-height:80vh;overflow-y:auto">'
+    '<div style="background:var(--card,#fff);border-radius:12px;padding:32px;max-width:580px;width:92vw;max-height:85vh;overflow-y:auto;box-shadow:0 8px 40px rgba(0,0,0,.18)">'
     + '<div class="upsell-modal-title" style="font-size:16px;margin-bottom:4px">Privacy Policy</div>'
     + '<div style="color:var(--muted);font-size:11px;margin-bottom:20px">Last updated: April 2026</div>'
     + '<div style="font-size:13px;color:var(--text);line-height:1.7">'
@@ -529,9 +528,7 @@ function openPrivacyModal() {
     + '<p style="margin:0 0 12px"><strong>6. Contact</strong><br>'
     + 'For privacy enquiries related to this dashboard, see the Contacts section in your Profile. For privacy enquiries related to everything else documented here, consult the Data Subject, the Data Directory, and, if needed, the Data Protection Authority. We hear they are very thorough.</p>'
     + '</div>'
-    + '<div class="upsell-modal-actions" style="margin-top:20px;display:block">'
-    + '<button class="sig-btn" id="privacy-modal-accept" style="width:100%">Accept</button>'
-    + '</div>'
+    + '<button class="sig-btn" id="privacy-modal-accept" style="width:100%;margin-top:20px">Accept</button>'
     + '</div>';
   document.body.appendChild(overlay);
   document.getElementById('privacy-modal-accept').addEventListener('click', function() {
