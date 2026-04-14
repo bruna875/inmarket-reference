@@ -107,7 +107,7 @@ function marshallToggle() {
   document.body.appendChild(el);
 
   if (_marshallMessages.length === 0) {
-    _marshallMessages.push({from: 'marshall', text: "Ciao, sono Marcello Maresciallo. I\u2019m going to explain what you don\u2019t know \u2014 and, between us, what I don\u2019t know either. But I\u2019ll explain it with confidence. Don\u2019t worry, girl. That\u2019s Leadership."});
+    _marshallMessages.push({from: 'marshall', text: "Ciao, sono Marcello Maresciallo, your FuffaGuru. I\u2019m going to explain what you don\u2019t know \u2014 and, between us, what I don\u2019t know either. But I\u2019ll explain it with confidence. Don\u2019t worry, girl. That\u2019s Leadership."});
   }
   marshallRenderMessages();
 
