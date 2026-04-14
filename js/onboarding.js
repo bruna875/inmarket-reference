@@ -75,14 +75,14 @@ var OB_STEPS = [
     target: '#askMarshallBtn',
     eyebrow: 'Step 8 of 11 \u2014 New Feature!',
     title: 'Ask the Guru',
-    desc: 'Got a question? Ask the Guru. He\u2019ll answer with full confidence. Whether it\u2019s correct is a separate concern entirely.',
+    desc: 'Got a question? Ask the FuffaGuru Marcello Maresciallo. He\u2019ll answer with full confidence. Whether it\u2019s correct is a separate concern entirely.',
     position: 'bottom'
   },
   {
     target: '#livestreamBtn',
     eyebrow: 'Step 9 of 11 \u2014 Coming Soon!',
     title: 'My Bedroom LiveStreaming',
-    desc: 'For those who feel the urge to keep watching, even post-resignation. If you want to continue controlling obsessively \u2014 this one is for you. Don\u2019t judge too much! 👩‍❤️‍💋‍👨🫦​​',
+    desc: 'For those who feel the urge to keep watching. If you want to continue controlling obsessively \u2014 this one is for you. 👩‍❤️‍💋‍👨🫦 Don\u2019t judge too much!​​',
     position: 'bottom'
   },
   {
