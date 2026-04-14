@@ -513,13 +513,13 @@ function openPrivacyModal() {
   overlay.className = 'upsell-modal-overlay';
   overlay.innerHTML =
     '<div class="upsell-modal" style="max-width:580px;width:92vw;max-height:80vh;overflow-y:auto">'
-    + '<div class="upsell-modal-title" style="font-size:16px;margin-bottom:4px">Privacy Policy &amp; Legal Disclaimer</div>'
+    + '<div class="upsell-modal-title" style="font-size:16px;margin-bottom:4px">Privacy Policy</div>'
     + '<div style="color:var(--muted);font-size:11px;margin-bottom:20px">Last updated: April 2026</div>'
     + '<div style="font-size:13px;color:var(--text);line-height:1.7">'
     + '<p style="margin:0 0 12px"><strong>1. Who we are</strong><br>'
     + 'This dashboard is operated by the data subject \u2014 you know, the person whose data was processed for the last year without her full knowledge, across randomized systems, for purposes that were occasionally creative. The data controller is Very Good Peeps, Inc.</p>'
     + '<p style="margin:0 0 12px"><strong>2. What data is processed here</strong><br>'
-    + 'This dashboard does not process any personal data outside of the data subject’s own information. Any other data visible in the public view has been anonymized via an AI-driven, privacy-compliant process; it does not refer to any real person or actual event and is strictly intended as generalized mock data. Conversely, the data relating to the data subject is factual, objective, and derived from real-world experience, documented across both internal and third-party systems — one only needs to look for it. No additional data is collected by this dashboard. This dashboard does not access, process, or manipulate any personal data without prior consent, differently from other parties.</p>'
+    + 'This dashboard does not process any personal data outside of the data subject’s own information. Any other data in the dashboard is mocked and has been furtherly anonymized via an AI-driven, privacy-compliant process; it does not refer to any real person or actual event and is strictly intended as generalized mock data. Conversely, the data relating to the data subject is factual, objective, and derived from real-world experience, documented across both internal and third-party systems — one only needs to look for it. No additional data is collected by this dashboard. This dashboard does not access, process, or manipulate any personal data without prior consent, differently from other parties.</p>'
     + '<p style="margin:0 0 12px"><strong>3. Purpose of processing</strong><br>'
     + 'Data is processed here for the following purposes: exercise the rights granted by Article 15 GDPR, because it turns out you are allowed to know what people wrote about you, what of your data they have accessed, what was done with it, and to rectify inaccuracies; drive factual, data-driven resolution making; and accomplish the principles of transparency and fairness. Profiling and automated decision-making are not performed by this dashboard. Other parties may have different answers to that question.</p>'
     + '<p style="margin:0 0 12px"><strong>4. Storage and retention</strong><br>'
@@ -529,9 +529,8 @@ function openPrivacyModal() {
     + '<p style="margin:0 0 12px"><strong>6. Contact</strong><br>'
     + 'For privacy enquiries related to this dashboard, see the Contacts section in your Profile. For privacy enquiries related to everything else documented here, consult the Data Subject, the Data Directory, and, if needed, the Data Protection Authority. We hear they are very thorough.</p>'
     + '</div>'
-    + '<div class="upsell-modal-actions" style="margin-top:20px;display:flex;gap:8px">'
-    + '<button class="sig-btn sig-btn--outline" id="privacy-modal-close">Close</button>'
-    + '<button class="sig-btn" id="privacy-modal-accept">Accept</button>'
+    + '<div class="upsell-modal-actions" style="margin-top:20px">'
+    + '<button class="sig-btn" id="privacy-modal-accept" style="width:100%">Accept</button>'
     + '</div>'
     + '</div>';
   document.body.appendChild(overlay);
