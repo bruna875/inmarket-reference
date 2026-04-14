@@ -537,7 +537,7 @@ function faqOpenRadarModal() {
     + '</button>'
     + '</div>'
     + '<div class="modal-body">'
-    + '<p class="modal-desc">We love crowdfunding! We’re sure some other relevant data and factual resources may have slipped under our radar. Please write to us and we’ll add them to the directory as soon as possible.</p>'
+    + '<p class="modal-desc">We love crowdfunding! The data in the directory are those directly observable by the data subject, but we’re sure there is much more. Please run searches against the suggested Data Origins and write to us, we’ll add them to the directory as soon as possible.</p>'
     + '<a href="mailto:bruna@saykudos.co" class="modal-email-btn">'
     + '<svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M2 4h12v9a1 1 0 01-1 1H3a1 1 0 01-1-1V4z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M2 4l6 5 6-5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>'
     + 'Send Email'
