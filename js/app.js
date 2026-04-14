@@ -294,6 +294,11 @@ function login() {
     document.getElementById('err').textContent = 'Please read and accept the Disclaimer before signing in.';
     return;
   }
+  var privChk = document.getElementById('privacyCheck');
+  if (!privChk || !privChk.checked) {
+    document.getElementById('err').textContent = 'Please read and accept the Privacy Policy before signing in.';
+    return;
+  }
   if (e === 'condoadmin@verygoodpeeps.ai' && p === 'HelixCapital') {
     document.getElementById('auth').classList.add('gone');
     setTimeout(function(){document.getElementById('auth').style.display='none';},300);
@@ -331,6 +336,10 @@ document.getElementById('sendCredBtn').addEventListener('click', openSendCredent
 document.querySelector('.auth-disclaimer-link').addEventListener('click', function(e) {
   e.preventDefault();
   openDisclaimerModal();
+});
+document.querySelector('.auth-privacy-link').addEventListener('click', function(e) {
+  e.preventDefault();
+  openPrivacyModal();
 });
 document.getElementById('logoutBtn').addEventListener('click', logout);
 document.getElementById('tog').addEventListener('click', toggleSb);
@@ -505,31 +514,33 @@ function openPrivacyModal() {
   overlay.innerHTML =
     '<div class="upsell-modal" style="max-width:580px;width:92vw;max-height:80vh;overflow-y:auto">'
     + '<div class="upsell-modal-title" style="font-size:16px;margin-bottom:4px">Privacy Policy &amp; Legal Disclaimer</div>'
-    + '<div style="color:var(--muted);font-size:11px;margin-bottom:20px">Last updated: March 2026</div>'
+    + '<div style="color:var(--muted);font-size:11px;margin-bottom:20px">Last updated: April 2026</div>'
     + '<div style="font-size:13px;color:var(--text);line-height:1.7">'
     + '<p style="margin:0 0 12px"><strong>1. Who we are</strong><br>'
     + 'This dashboard is operated by the data subject \u2014 you know, the person whose data was processed for the last year without her full knowledge, across randomized systems, for purposes that were occasionally creative. The data controller is Very Good Peeps, Inc.</p>'
     + '<p style="margin:0 0 12px"><strong>2. What data is processed here</strong><br>'
-    + 'This dashboard does not process any personal data outside of the data subject’s own information. Any other data visible in the public view has been anonymized via an AI-driven, privacy-compliant process; it does not refer to any real person or actual event and is strictly intended as generalized mock data. Conversely, the data relating to the data subject is factual, objective, and derived from real-world experience, documented across both internal and third-party systems — one only needs to look for it. No additional data is collected by this dashboard. This dashboard does not use any personal data without prior consent.</p>'
+    + 'This dashboard does not process any personal data outside of the data subject’s own information. Any other data visible in the public view has been anonymized via an AI-driven, privacy-compliant process; it does not refer to any real person or actual event and is strictly intended as generalized mock data. Conversely, the data relating to the data subject is factual, objective, and derived from real-world experience, documented across both internal and third-party systems — one only needs to look for it. No additional data is collected by this dashboard. This dashboard does not access, process, or manipulate any personal data without prior consent, differently from other parties.</p>'
     + '<p style="margin:0 0 12px"><strong>3. Purpose of processing</strong><br>'
     + 'Data is processed here for the following purposes: exercise the rights granted by Article 15 GDPR, because it turns out you are allowed to know what people wrote about you, what of your data they have accessed, what was done with it, and to rectify inaccuracies; drive factual, data-driven resolution making; and accomplish the principles of transparency and fairness. Profiling and automated decision-making are not performed by this dashboard. Other parties may have different answers to that question.</p>'
     + '<p style="margin:0 0 12px"><strong>4. Storage and retention</strong><br>'
-    + 'Custom Risk Calculator values are stored in your browser\u2019s localStorage. They stay on your device, go nowhere, are not accessible to the Data Subject, and as such they will not be processed by any microscopic private vehicles on the other side of the Ocean. Any value you may entry, as they are stored locally on your device and browser, will not be selectively recalled or strategically forgotten at a later date. Signature records are also stored locally. The dashboard is a static application \u2014 it does not have a People Operations team that can lose things.</p>'
+    + 'The custom value you may entry into the Objective Risk Calculator tool are stored in your browser\u2019s localStorage. They stay on your device, go nowhere, are not accessible to the Data Subject, and as such they will not be processed by any microscopic private vehicles on the other side of the Ocean. Any value you may entry, as they are stored locally on your device and browser, will not be selectively recalled or strategically forgotten at a later date. The dashboard is a static application \u2014 it does not have a People Operations team that can lose or forget things.</p>'
     + '<p style="margin:0 0 12px"><strong>5. Your rights</strong><br>'
-    + 'You have the right to do the right thing leveraging the right data in the Very Good Peeps dashboard. Any other action you may have felt entitled to exercise over the data subject is not a right, is wrong, and has to stop immediately.</p>'
+    + 'You have the right to do the right thing leveraging the right data in the Very Good Peeps dashboard. Any other action you may have felt entitled to exercise over the data subject is not a right, is wrong, has to stop immediately, or, better, should have stopped a long time ago.</p>'
     + '<p style="margin:0 0 12px"><strong>6. Contact</strong><br>'
     + 'For privacy enquiries related to this dashboard, see the Contacts section in your Profile. For privacy enquiries related to everything else documented here, consult the Data Subject, the Data Directory, and, if needed, the Data Protection Authority. We hear they are very thorough.</p>'
-    + '<div style="margin:20px 0 12px;border-top:1px solid var(--border);padding-top:16px">'
-    + '<div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:12px">Legal Disclaimer</div>'
-    + LEGAL_DISCLAIMER_HTML
     + '</div>'
-    + '</div>'
-    + '<div class="upsell-modal-actions" style="margin-top:20px">'
-    + '<button class="sig-btn" id="privacy-modal-close">Close</button>'
+    + '<div class="upsell-modal-actions" style="margin-top:20px;display:flex;gap:8px">'
+    + '<button class="sig-btn sig-btn--outline" id="privacy-modal-close">Close</button>'
+    + '<button class="sig-btn" id="privacy-modal-accept">Accept</button>'
     + '</div>'
     + '</div>';
   document.body.appendChild(overlay);
   document.getElementById('privacy-modal-close').addEventListener('click', function() { overlay.remove(); });
+  document.getElementById('privacy-modal-accept').addEventListener('click', function() {
+    var chk = document.getElementById('privacyCheck');
+    if (chk) chk.checked = true;
+    overlay.remove();
+  });
   overlay.addEventListener('click', function(e) { if (e.target === overlay) overlay.remove(); });
 }
 

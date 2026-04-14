@@ -38,10 +38,16 @@
     <div class="fwrap"><div class="flabel">Email</div><input class="finput" id="em" type="text" value="condoadmin@verygoodpeeps.ai" placeholder="you@company.com"/></div>
     <div class="fwrap"><div class="flabel">Password</div><input class="finput" id="pw" type="password" placeholder="••••••••"/></div>
     <div class="aerr" id="err"></div>
-    <label class="auth-disclaimer-row" id="disclaimerLabel">
-      <input type="checkbox" id="disclaimerCheck"/>
-      <span class="auth-disclaimer-link">Read and Accept Disclaimer</span>
-    </label>
+    <div class="auth-checks-row">
+      <label class="auth-disclaimer-row" id="disclaimerLabel">
+        <input type="checkbox" id="disclaimerCheck"/>
+        <span class="auth-disclaimer-link">Disclaimer</span>
+      </label>
+      <label class="auth-disclaimer-row" id="privacyLabel">
+        <input type="checkbox" id="privacyCheck"/>
+        <span class="auth-privacy-link">Privacy Policy</span>
+      </label>
+    </div>
     <button class="abtn" id="loginBtn">Sign in</button>
     <button class="abtn-sec" id="sendCredBtn">Send credentials</button>
   </div>
