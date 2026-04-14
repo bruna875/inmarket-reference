@@ -534,7 +534,6 @@ function openPrivacyModal() {
     + '</div>'
     + '</div>';
   document.body.appendChild(overlay);
-  document.getElementById('privacy-modal-close').addEventListener('click', function() { overlay.remove(); });
   document.getElementById('privacy-modal-accept').addEventListener('click', function() {
     var chk = document.getElementById('privacyCheck');
     if (chk) chk.checked = true;
