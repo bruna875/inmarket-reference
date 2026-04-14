@@ -43,7 +43,7 @@ var _wizItemsPatterns = [
       + '<div class="quiz-card" data-quiz-option="correct">'
       + '<div class="quiz-card-selector"></div>'
       + '<div class="quiz-card-content"><div class="quiz-card-title">Narcissistic Personality Disorder (DSM-5) with Antisocial and Paranoid Traits</div>'
-      + '<div class="quiz-card-desc">Also known as Malignant Narcissism. Characterized by messianic grandiosity, absence of empathy, sense of entitlement, manipulative and predatory behaviors, callousness, convinction to be above the rules, obsessive need for control, a tendency toward suspicious, persecutory thinking and hypersensitivity to criticism. Forget they can change: it is egosyntonic. </div></div>'
+      + '<div class="quiz-card-desc">Also known as Malignant Narcissism. Characterized by messianic grandiosity, absence of empathy, sense of entitlement, manipulative and predatory behaviors, callousness, convinction of being above the rules, obsessive need for control, a tendency toward suspicious, persecutory thinking and hypersensitivity to criticism. Forget they can change: it is egosyntonic. </div></div>'
       + '</div>'
       + '<div class="quiz-card" data-quiz-option="wrong2">'
       + '<div class="quiz-card-selector"></div>'
