@@ -529,7 +529,7 @@ function openPrivacyModal() {
     + '<p style="margin:0 0 12px"><strong>6. Contact</strong><br>'
     + 'For privacy enquiries related to this dashboard, see the Contacts section in your Profile. For privacy enquiries related to everything else documented here, consult the Data Subject, the Data Directory, and, if needed, the Data Protection Authority. We hear they are very thorough.</p>'
     + '</div>'
-    + '<div class="upsell-modal-actions" style="margin-top:20px">'
+    + '<div class="upsell-modal-actions" style="margin-top:20px;display:block">'
     + '<button class="sig-btn" id="privacy-modal-accept" style="width:100%">Accept</button>'
     + '</div>'
     + '</div>';
