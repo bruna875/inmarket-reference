@@ -36,7 +36,7 @@ var GLOSSARY_TERMS = [
   {
     term: 'Checks and Balances',
     pos: 'n.',
-    def: 'A governance mechanism designed to ensure that no single individual or entity accumulates unchecked power. Widely celebrated in theory. Occasionally inconvenient in practice, particularly when the party accumulating unchecked power is also the one responsible for maintaining the checks. See also: irony, hubris, and the entire recorded history of institutional failure.'
+    def: 'A governance mechanism designed to ensure that no single individual or entity accumulates unchecked power. Widely celebrated in theory. Occasionally inconvenient in practice, particularly when the party accumulating unchecked power is also the one responsible for maintaining the checks. See also: irony, hubris, and the entire recorded history of institutional crisis.'
   },
   {
     term: 'Condescendence',
