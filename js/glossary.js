@@ -21,7 +21,7 @@ var GLOSSARY_TERMS = [
   {
     term: 'Arrogance',
     pos: 'n.',
-    def: 'Confidence without invitation. An acute condition affecting individuals who mistake positional authority for intellectual superiority. Often diagnosed post-exit, when the arrogant party discovers the subject they dismissed was, in fact, right. Symptoms include unsolicited opinions, interrupting people who understand the topic better, and a peculiar allergy to feedback. No known cure; however, exposure to consequences has shown promising early results.'
+    def: 'Confidence without invitation. An acute condition affecting individuals who mistake positional authority for intellectual superiority. Often diagnosed post-exit, when the arrogant party discovers the subject they dismissed was, in fact, right. Symptoms include unsolicited Zoom-webinars, stonewalling, treating others as kids, bullying behaviors, and a peculiar allergy to feedback. No known cure; however, exposure to consequences has shown promising early results.'
   },
   {
     term: 'Balls',
