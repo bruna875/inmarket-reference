@@ -69,7 +69,7 @@ var OB_STEPS = [
     target: '[data-page="glossary"]',
     eyebrow: 'Step 7 of 11 \u2014 New!',
     title: 'Glossary',
-    desc: 'A curated lexicon for the context-aware reader. Includes precise definitions of: \u2014 Mafia \u2014 Objectivity \u2014 Instability \u2014 Gentleness \u2014 Substance \u2014 Apologies \u2014 Mirror \u2014 and more. Some of these words are used frequently. Fewer of them are understood.',
+    desc: 'A curated lexicon for a good chuckle. Includes precise definitions of: \u2014 Mafia \u2014 Condominium \u2014 Objectivity \u2014 Instability \u2014 Gentleness \u2014 Substance \u2014 Apologies \u2014 Mirror \u2014 and more. Don\u2019t take yourself too seriously.',
     position: 'right',
     offsetY: -120
   },
