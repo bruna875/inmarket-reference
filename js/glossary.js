@@ -31,7 +31,7 @@ var GLOSSARY_TERMS = [
   {
     term: 'Boundary',
     pos: 'n.',
-    def: 'A limit set by an individual to protect their physical, emotional, or professional wellbeing. Widely recommended by therapists, coaches, and anyone who has ever worked in a dysfunctional organisation. In theory, boundaries are respected. In practice, they are frequently reframed as inflexibility, tested for structural weakness, or simply ignored by people who find them inconvenient. Setting a boundary requires clarity. Maintaining it requires consistency. Having it acknowledged requires, in many cases, a miracle or a legal representative.'
+    def: 'A limit set by an individual to protect their physical, emotional, or professional wellbeing. Widely recommended by therapists, coaches, and anyone who has ever worked in a dysfunctional organisation. In theory, boundaries are respected. In practice, they are frequently reframed as inflexibility, tested for structural weakness, or simply ignored by people who find them "bureacracy". Setting a boundary requires clarity. Maintaining it requires consistency. Having it acknowledged requires, in many cases, a miracle or a legal representative.'
   },
   {
     term: 'Checks and Balances',
