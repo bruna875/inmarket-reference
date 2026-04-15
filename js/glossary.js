@@ -121,7 +121,7 @@ var GLOSSARY_TERMS = [
   {
     term: 'Maturity',
     pos: 'n.',
-    def: 'The capacity to regulate one\u2019s emotions, absorb discomfort, and respond to adversity constructively rather than escalatory (at least until when escalation is a necessary evil). Maturity is not the absence of feeling; it is the presence of judgement. It manifests as the ability to hear difficult truths without retaliating, to be wrong without unravelling, and to prioritise what is right over what is comfortable. In professional environments, it is sometimes confused with passivity, compliance, or simply being quiet. These are not the same thing. Maturity knows the difference. Immaturity, characteristically, does not.'
+    def: 'The capacity to regulate one\u2019s emotions, absorb discomfort, and respond to adversity constructively rather than escalatory (at least until when escalation is a necessary evil). Maturity is not the absence of feeling; it is the presence of judgement. It manifests as the ability to de-escalating conflicts for years instead of make them grow, to be wrong without unravelling, and to prioritise what is right over what is comfortable. In professional environments, it is sometimes confused with passivity, compliance, or simply being quiet. These are not the same thing. Maturity knows the difference. Immaturity, characteristically, does not.'
   },
   {
     term: 'Narcissistic Wound',
