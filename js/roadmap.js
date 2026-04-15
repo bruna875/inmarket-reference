@@ -7,7 +7,10 @@ var NAV_CONFIG = [
     {id:'teamcapacity', label:'Team Capacity',      icon:'<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="5" cy="6" r="2.5" stroke="currentColor" stroke-width="1.4" opacity=".7"/><circle cx="11" cy="6" r="2.5" stroke="currentColor" stroke-width="1.4" opacity=".4"/><path d="M1 14c0-2.2 1.8-4 4-4s4 1.8 4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" opacity=".7"/><path d="M11 10c1.7.4 3 1.9 3 3.7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" opacity=".4"/></svg>'}
   ]},
   {section:'Resources', items:[{id:'resources',label:'Recognize the Patterns',icon:ico.resources},{id:'boilingfrog',label:'The Boiling Frog Theory',icon:ico.frog},{id:'faqdsar',label:'Data Directory',icon:'<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 5.5C2 4.7 2.7 4 3.5 4H6l1 1.5h5.5c.8 0 1.5.7 1.5 1.5V12c0 .8-.7 1.5-1.5 1.5h-9C2.7 13.5 2 12.8 2 12V5.5z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M5 8.5h6M5 10.5h4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity=".5"/></svg>'}]},
-  {section:'Wanna Say Sorry?', items:REFERENCES.map(function(r){return{id:'ref_'+r.id,label:r.name,icon:r.icon};})}
+  {section:'Wanna Say Sorry?', items:REFERENCES.map(function(r){return{id:'ref_'+r.id,label:r.name,icon:r.icon};})},
+  {section:'Lexicon', items:[
+    {id:'glossary', label:'Glossary', icon:'<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2.5" y="1.5" width="9" height="13" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M5 5h5M5 7.5h5M5 10h3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity=".5"/><path d="M11.5 11.5l2.5 2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" opacity=".7"/></svg>'}
+  ]}
 ];
 
 var initiatives=[],deliveryOpts=[
