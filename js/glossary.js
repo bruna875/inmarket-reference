@@ -81,7 +81,7 @@ var GLOSSARY_TERMS = [
   {
     term: 'Ignorance',
     pos: 'n.',
-    def: 'The state of not knowing something. In principle, a temporary condition, resolvable through information, curiosity, or basic professional diligence. In practice, sometimes preferred over knowledge, as knowledge tends to create obligations. Voluntary ignorance \u2014 the deliberate avoidance of information that would require one to act \u2014 is its more sophisticated cousin, and considerably harder to prosecute. Not to be confused with innocence, which requires a different kind of work to achieve.'
+    def: 'The state of not knowing something which is, in principle, a temporary and curable condition resolvable through information, curiosity, or basic professional diligence. In practice, however, it is frequently preferred over knowledge, as the latter tends to impose burdensome obligations, existential doubts, and the nuisance of self-reflection. It typically manifests as a know-it-all complex and a compulsive urge to lecture others, characterized by the delivery of fallacies so profound they are blindingly obvious to anyone with entry-level expertise, yet remain entirely invisible to the speaker who delivers them with adamantine confidence. Voluntary ignorance—the strategic avoidance of any data that would necessitate action—is its more sophisticated cousin and significantly harder to prosecute; it is not to be confused with innocence, which, unlike ignorance, requires a deliberate and taxing kind of work to maintain.'
   },
   {
     term: 'Instability',
