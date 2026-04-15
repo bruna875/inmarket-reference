@@ -70,7 +70,8 @@ var OB_STEPS = [
     eyebrow: 'Step 7 of 11 \u2014 New!',
     title: 'Glossary',
     desc: 'A curated lexicon for the context-aware reader. Includes precise definitions of: \u2014 Mafia \u2014 Objectivity \u2014 Instability \u2014 Gentleness \u2014 Substance \u2014 Apologies \u2014 Mirror \u2014 and more. Some of these words are used frequently. Fewer of them are understood.',
-    position: 'right'
+    position: 'right',
+    offsetY: -120
   },
   {
     target: '.sbfoot',
@@ -139,14 +140,15 @@ function obGetRect(target) {
   return {top: r.top, left: r.left, width: r.width, height: r.height};
 }
 
-function obCardPos(rect, position) {
+function obCardPos(rect, position, offsetY) {
   if (!rect) return {top: '50%', left: '50%', transform: 'translate(-50%,-50%)'};
   var pad = 16;
   var cw  = 360;
   var ch  = 220;
+  var oy  = offsetY || 0;
   var style = '';
   if (position === 'right') {
-    var t = rect.top + rect.height / 2 - ch / 2;
+    var t = rect.top + rect.height / 2 - ch / 2 + oy;
     t = Math.max(pad, Math.min(t, window.innerHeight - ch - pad));
     var l = rect.left + rect.width + pad;
     if (l + cw > window.innerWidth - pad) l = rect.left - cw - pad;
@@ -235,8 +237,8 @@ function obRender() {
     return '<div class="ob-dot'+(i===_obStep-1?' act':'')+'"></div>';
   }).join('');
 
-  var cardStyle = typeof obCardPos(rect, step.position) === 'string'
-    ? obCardPos(rect, step.position)
+  var cardStyle = typeof obCardPos(rect, step.position, step.offsetY) === 'string'
+    ? obCardPos(rect, step.position, step.offsetY)
     : 'top:50%;left:50%;transform:translate(-50%,-50%)';
 
   var isLast = _obStep === total - 1;
