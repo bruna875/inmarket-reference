@@ -121,12 +121,12 @@ var GLOSSARY_TERMS = [
   {
     term: 'Maturity',
     pos: 'n.',
-    def: 'The capacity to regulate one\u2019s emotions, absorb discomfort, and respond to adversity with proportionality rather than escalation. Maturity is not the absence of feeling; it is the presence of judgement. It manifests as the ability to hear difficult truths without retaliating, to be wrong without unravelling, and to prioritise what is right over what is comfortable. In professional environments, it is sometimes confused with passivity, compliance, or simply being quiet. These are not the same thing. Maturity knows the difference. Immaturity, characteristically, does not.'
+    def: 'The capacity to regulate one\u2019s emotions, absorb discomfort, and respond to adversity constructively rather than escalatory (at least until when escalation is a necessary evil). Maturity is not the absence of feeling; it is the presence of judgement. It manifests as the ability to hear difficult truths without retaliating, to be wrong without unravelling, and to prioritise what is right over what is comfortable. In professional environments, it is sometimes confused with passivity, compliance, or simply being quiet. These are not the same thing. Maturity knows the difference. Immaturity, characteristically, does not.'
   },
   {
     term: 'Narcissistic Wound',
     pos: 'n.',
-    def: 'The deep psychological injury inflicted upon a narcissist when their self-image is challenged, their authority is questioned, or their audience fails to applaud on cue. Unlike ordinary hurt feelings \u2014 which tend to resolve with time, conversation, or a decent night\u2019s sleep \u2014 the narcissistic wound does not heal quietly. It escalates. It retaliates. It reorganises the entire surrounding environment to ensure the offending party is neutralised, discredited, or simply gone. The wound is, paradoxically, both extremely fragile and extraordinarily dangerous. Handle with caution. Do not, under any circumstances, be right in front of one.'
+    def: 'The deep psychological injury inflicted upon a narcissist when their self-image is challenged, their authority is questioned, or their audience fails to applaud on cue. Unlike ordinary hurt feelings \u2014 which tend to resolve with time, conversation, or a decent night\u2019s sleep \u2014 the narcissistic wound does not heal quietly. It escalates. It retaliates. It reorganises the entire surrounding environment to ensure the offending party is neutralised, discredited, or simply gone. The wound is, paradoxically, both extremely fragile and extraordinarily dangerous. Handle with caution. Do not, under any circumstances, be right in front of one. Paradoxically, sometimes, those who wound with narcissistic injury, perish by narcissistic injury.  '
   },
   {
     term: 'Obsession',
