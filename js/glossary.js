@@ -96,7 +96,7 @@ var GLOSSARY_TERMS = [
   {
     term: 'Leadership',
     pos: 'n.',
-    def: 'The ability to guide, inspire, and take responsibility for a group of people toward a shared goal \u2014 particularly when the goal is difficult, the path is unclear, and the personal cost is real. Not to be confused with management (which is a function), authority (which is a position), or visibility (which is a calendar). True leadership is most easily identified by its absence: when things go wrong and someone steps forward anyway, that is leadership. When things go wrong and someone steps back, reframes, delegates blame, and schedules a retrospective, that is something else entirely. The literature on leadership is extensive. The practice of it remains niche.'
+    def: 'The ability to guide, inspire, and take responsibility for a group of people toward a shared goal \u2014 particularly when the goal is difficult, the path is unclear, and the personal cost is real. Not to be confused with management (which is a function), authority (which is a position), or visibility (which is a calendar). True leadership is most easily identified by its absence: when things go wrong and someone put their face on it, and steps forward anyway, that is leadership. When things go wrong and someone steps back, disappears, reframes, delegates blame, relies on platitudes and lives in denial, that is something else entirely. The literature on leadership is extensive. The practice of it remains niche.'
   },
   {
     term: 'Mafia',
