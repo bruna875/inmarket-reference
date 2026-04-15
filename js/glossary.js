@@ -86,7 +86,7 @@ var GLOSSARY_TERMS = [
   {
     term: 'Instability',
     pos: 'n.',
-    def: 'A state attributed to individuals who notice, document, or object to things that are actually wrong. Instability is most frequently diagnosed by the party causing the instability, and applied to the subject pointing it out. Clinical literature has not yet confirmed whether the diagnosis reflects a genuine concern for the subject\u2019s wellbeing or a preference for silence. Not to be confused with clarity, accuracy, or a healthy reaction to an abnormal situation.'
+    def: 'A state attributed to individuals who notice, document, or object to things that are actually wrong. Instability is most frequently diagnosed by the party causing the instability, and applied to the subject pointing it out. Clinical literature has not yet confirmed whether the diagnosis reflects a genuine concern for the subject\u2019s wellbeing or a preference for silence. Not to be confused with clarity, accuracy, or a healthy reaction to an abnormal situation. In its purest and likely incurable form, this condition presents as a volatile cocktail of persecutory delusions, control manias, obsessions, and reckless retaliatory actions — and other symptoms typically projected by the aggressor onto the witness. '
   },
   {
     term: 'Integrity',
