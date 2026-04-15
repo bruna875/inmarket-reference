@@ -141,7 +141,7 @@ var GLOSSARY_TERMS = [
   {
     term: 'Panopticon',
     pos: 'n.',
-    def: 'A prison design conceived by philosopher Jeremy Bentham in the 18th century, in which all inmates can be observed at any time by a single guard positioned at the centre \u2014 without the inmates knowing whether they are being watched at any given moment. The power of the panopticon lies not in constant surveillance, but in the possibility of it: once individuals believe they may be observed, they begin to regulate their own behaviour accordingly. Michel Foucault later used the concept to describe how modern institutions which have nothing to do with prisons \u2014 schools, hospitals, workplaces \u2014 exercise asymmetric power and information, driving the internalisation of control and enabling privacy breaches. The Data Subject is familiar with the concept. Both theoretically and, as it turns out, practically.'
+    def: 'A prison design conceived by philosopher Jeremy Bentham in the 18th century, in which all inmates can be observed at any time by a single guard positioned at the centre \u2014 without the inmates knowing whether they are being watched at any given moment. The power of the panopticon lies not in constant surveillance, but in the possibility of it: once individuals believe they may be observed, they begin to regulate their own behaviour accordingly. Michel Foucault later used the concept to describe how modern institutions which have nothing to do with prisons \u2014 schools, hospitals, workplaces \u2014 exercise asymmetric power and information, driving the internalisation of control and enabling privacy breaches.'
   },
   {
     term: 'Private Vehicles',
