@@ -26,7 +26,7 @@ var GLOSSARY_TERMS = [
   {
     term: 'Balls',
     pos: 'n. (also: courage; also: nerve; also: the thing that was required and rarely rewarded)',
-    def: 'The capacity to do the right thing when the right thing is hard, costly, or professionally inadvisable. Distinct from recklessness (doing something dangerous without thinking) and from performance (appearing brave without the follow-through). Observed most reliably in individuals who reported misconduct, escalated concerns, or simply told the truth \u2014 and kept telling it, past the point where it would have been convenient to stop.'
+    def: 'The capacity to do the right thing when the right thing is hard, costly, or professionally inadvisable. Distinct from recklessness (doing something dangerous without thinking) and from performance (appearing brave without the follow-through). Observed most reliably in individuals who reported misconduct, escalated concerns, or simply told the truth \u2014 and kept telling it, past the point where it would have been convenient negotiating some money.'
   },
   {
     term: 'Boundary',
