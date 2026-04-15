@@ -131,7 +131,7 @@ var GLOSSARY_TERMS = [
   {
     term: 'Obsession',
     pos: 'n.',
-    def: 'An unwanted, persistent preoccupation with a person, idea, or outcome that overrides rational judgement and proportionate response. In clinical contexts, a symptom. In organisational contexts, occasionally a strategy. Obsession in professional settings tends to masquerade as diligence, thoroughness, or \u201cjust wanting to get to the bottom of things\u201d \u2014 right up until the bottom turns out to be someone else\u2019s personal life, private communications, or whereabouts at 11pm on a Tuesday. At that point, the literature suggests a different diagnosis entirely.'
+    def: 'An unwanted, persistent preoccupation with a person, idea, or outcome that overrides rational judgement and proportionate response. In clinical contexts, a symptom. In organisational contexts, occasionally a strategy. Obsession in professional settings tends to masquerade as diligence, thoroughness, or \u201cjust wanting to get to the bottom of things\u201d \u2014 right up until the bottom turns out to be someone else\u2019s personal life, private communications, or whereabouts at 11pm on a Friday night. At that point, the literature suggests a different diagnosis entirely.'
   },
   {
     term: 'Objectivity',
