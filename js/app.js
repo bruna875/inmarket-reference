@@ -442,7 +442,11 @@ function userPopToggle(e) {
     + '<div class="user-pop-divider"></div>'
     + '<div class="user-pop-item" data-userpop="privacy">'
     + '<svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M8 2L3 4.5V7c0 3.5 2.1 6.5 5 7.5 2.9-1 5-4 5-7.5V4.5L8 2z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M6 8.5l1.5 1.5L10 7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>'
-    + '<div class="user-pop-item-title">Privacy Policy &amp; Legal Disclaimer</div>'
+    + '<div class="user-pop-item-title">Privacy Policy</div>'
+    + '</div>'
+    + '<div class="user-pop-item" data-userpop="disclaimer">'
+    + '<svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.4"/><path d="M8 5v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="11" r=".7" fill="currentColor"/></svg>'
+    + '<div class="user-pop-item-title">Disclaimer</div>'
     + '</div>';
 
   document.body.appendChild(pop);
@@ -460,6 +464,11 @@ function userPopToggle(e) {
   pop.querySelector('[data-userpop="privacy"]').addEventListener('click', function() {
     userPopClose();
     openPrivacyModal();
+  });
+
+  pop.querySelector('[data-userpop="disclaimer"]').addEventListener('click', function() {
+    userPopClose();
+    openDisclaimerModal();
   });
 
   setTimeout(function() {

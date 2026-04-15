@@ -567,7 +567,8 @@ tr:hover .link-btn, .link-btn.has-link { opacity: 1; color: var(--accent) }
 }
 .ob-card {
   position: fixed; z-index: 203; background: var(--surface);
-  border-radius: 14px; padding: 22px 24px; width: 300px;
+  border-radius: 14px; padding: 22px 24px; width: 360px;
+  max-height: calc(100vh - 32px); overflow-y: auto;
   box-shadow: 0 8px 40px rgba(0,0,0,0.18);
   transition: all .35s cubic-bezier(.4,0,.2,1); pointer-events: all;
 }

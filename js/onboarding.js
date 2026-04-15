@@ -8,7 +8,8 @@ var PAGES = {
   resources:    renderResources,
   boilingfrog:  renderBoilingFrog,
   faqdsar:      renderFaqDsar,
-  profile:      renderProfile
+  profile:      renderProfile,
+  glossary:     renderGlossary
 };
 
 // ── Onboarding ────────────────────────────────────────────────────────────────
@@ -24,80 +25,80 @@ var OB_STEPS = [
   },
   {
     target: '[data-page="roadmap"]',
-    eyebrow: 'Step 1 of 10',
+    eyebrow: 'Step 1 of 11',
     title: 'Product Roadmap',
     desc: 'Track all quarterly initiatives, their delivery status, added value and ROI across Q1\u2013Q4 and Backlog.',
     position: 'right'
   },
   {
     target: '#ob-datasource',
-    eyebrow: 'Step 2 of 10',
+    eyebrow: 'Step 2 of 11',
     title: 'Data Source',
     desc: 'The roadmap data is pulled live from a Google Sheet. Click here anytime to view or edit the source.',
     position: 'bottom'
   },
   {
     target: '[data-page="teamcapacity"]',
-    eyebrow: 'Step 3 of 10',
+    eyebrow: 'Step 3 of 11',
     title: 'Team Capacity',
     desc: 'Allocation and capacity across initiatives, broken down by team and quarter.',
     position: 'right'
   },
   {
     target: '[data-page="resources"]',
-    eyebrow: 'Step 4 of 10',
+    eyebrow: 'Step 4 of 11',
     title: 'Recognize the Pattern \u2014 The Boiling Frog Theory',
     desc: 'Two interactive reading journeys to help you recognize what\u2019s really going on. Read them in order.',
     position: 'right'
   },
   {
     target: '[data-page="faqdsar"]',
-    eyebrow: 'Step 5 of 10',
+    eyebrow: 'Step 5 of 11',
     title: 'Data Directory',
     desc: 'Consult frequently asked questions, access data subject directory, calculate risk exposure and automatically export ready-to-go objective reports (in case you struggle with those). Blame the AI for its factual analysis. Know your rights, get the right shtuff done.',
     position: 'right'
   },
   {
     target: '[data-page="ref_dk"]',
-    eyebrow: 'Step 6 of 10',
+    eyebrow: 'Step 6 of 11',
     title: 'Wanna Say Sorry?',
     desc: 'Endorsements from key colleagues. Each page has a quote and a signature slot \u2014 in case someone feels called to make amends.',
     position: 'right'
   },
   {
+    target: '[data-page="glossary"]',
+    eyebrow: 'Step 7 of 11 \u2014 New!',
+    title: 'Glossary',
+    desc: 'A curated lexicon for the context-aware reader. Includes precise definitions of: \u2014 Mafia \u2014 Objectivity \u2014 Instability \u2014 Gentleness \u2014 Substance \u2014 Apologies \u2014 Mirror \u2014 and more. Some of these words are used frequently. Fewer of them are understood.',
+    position: 'right'
+  },
+  {
     target: '.sbfoot',
-    eyebrow: 'Step 7 of 10',
+    eyebrow: 'Step 8 of 11',
     title: 'Your Profile',
     desc: 'Profile info, language settings and privacy policy.',
     position: 'top'
   },
   {
     target: '#askMarshallBtn',
-    eyebrow: 'Step 8 of 11 \u2014 New Feature!',
+    eyebrow: 'Step 9 of 11 \u2014 New Feature!',
     title: 'Ask the Guru',
     desc: 'Got a question? Ask the FuffaGuru Marcello Maresciallo. He\u2019ll answer with full confidence. Whether it\u2019s correct is a separate concern entirely.',
     position: 'bottom'
   },
   {
     target: '#livestreamBtn',
-    eyebrow: 'Step 9 of 11 \u2014 Coming Soon!',
+    eyebrow: 'Step 10 of 11 \u2014 Coming Soon!',
     title: 'My Bedroom LiveStreaming',
     desc: 'For those who feel the urge to keep watching. If you want to continue controlling obsessively \u2014 this one is for you. 👩‍❤️‍💋‍👨🫦 Don\u2019t judge too much!​​',
     position: 'bottom'
   },
   {
     target: '#spWidget',
-    eyebrow: 'Step 10 of 11 \u2014 New!',
+    eyebrow: 'Step 11 of 11 \u2014 New!',
     title: 'Your Soundtrack',
     desc: 'A curated playlist to keep you company while you work through all of this. Press play. You deserve some background music.',
     position: 'bottom'
-  },
-  {
-    target: '#upsellBadge',
-    eyebrow: 'Step 11 of 11',
-    title: 'Upgrade to Adult Plan',
-    desc: 'Unlock more features. Get in touch with our Adulting Specialist Jennifer Salonga and start your free trial today.',
-    position: 'top'
   }
 ];
 
@@ -141,19 +142,27 @@ function obGetRect(target) {
 function obCardPos(rect, position) {
   if (!rect) return {top: '50%', left: '50%', transform: 'translate(-50%,-50%)'};
   var pad = 16;
-  var cw  = 300;
-  var ch  = 160;
+  var cw  = 360;
+  var ch  = 320;
   var style = '';
   if (position === 'right') {
     var t = Math.min(rect.top, window.innerHeight - ch - pad);
-    style = 'top:'+Math.max(pad,t)+'px;left:'+(rect.left+rect.width+pad)+'px';
+    var l = rect.left + rect.width + pad;
+    if (l + cw > window.innerWidth - pad) l = rect.left - cw - pad;
+    style = 'top:'+Math.max(pad,t)+'px;left:'+Math.max(pad,l)+'px';
   } else if (position === 'left') {
     var t = Math.min(rect.top, window.innerHeight - ch - pad);
-    style = 'top:'+Math.max(pad,t)+'px;left:'+(rect.left-cw-pad)+'px';
+    style = 'top:'+Math.max(pad,t)+'px;left:'+Math.max(pad,rect.left-cw-pad)+'px';
   } else if (position === 'bottom') {
-    style = 'top:'+(rect.top+rect.height+pad)+'px;left:'+Math.min(rect.left, window.innerWidth-cw-pad)+'px';
+    var t = rect.top + rect.height + pad;
+    if (t + ch > window.innerHeight - pad) t = rect.top - ch - pad;
+    var lb = rect.left + rect.width / 2 - cw / 2;
+    style = 'top:'+Math.max(pad,t)+'px;left:'+Math.max(pad, Math.min(lb, window.innerWidth-cw-pad))+'px';
   } else if (position === 'top') {
-    style = 'top:'+(rect.top-ch-pad)+'px;left:'+Math.min(rect.left, window.innerWidth-cw-pad)+'px';
+    var tt = rect.top - ch - pad;
+    if (tt < pad) tt = rect.top + rect.height + pad;
+    var lt = rect.left + rect.width / 2 - cw / 2;
+    style = 'top:'+Math.max(pad,tt)+'px;left:'+Math.max(pad, Math.min(lt, window.innerWidth-cw-pad))+'px';
   }
   return style;
 }
@@ -244,7 +253,7 @@ function obRender() {
     + '<div class="ob-dots">'+dots+'</div>'
     + '<div class="ob-btns">'
     + (_obStep > 1 ? '<button class="ob-btn-back" id="ob-back">Back</button>' : '')
-    + '<button class="ob-btn-next" id="ob-next">'+(isLast ? 'Done \u2713' : 'Next \u2192')+'</button>'
+    + '<button class="ob-btn-next" id="ob-next" style="white-space:nowrap">'+(isLast ? 'Done \u2713' : 'Next \u2192')+'</button>'
     + '</div></div></div>';
 
   document.body.appendChild(root);
