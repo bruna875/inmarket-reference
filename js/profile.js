@@ -50,9 +50,16 @@ function renderProfile() {
     + '<div class="prof-divider"></div>'
 
     + '<div class="prof-section">'
+    +   '<div class="prof-section-label">App Stack</div>'
+    +   '<div class="prof-desc" style="margin-top:0">Leveraging a high-performing, cross-functional team of one, this app was ideated, architected, and shipped to production in 5 days \u2014 end-to-end, from prototype to production-grade software \u2014 using Claude Code, Visual Studio Code, Git, Node.js, Vercel, Google Apps Script, EmailJS, and Vercel Blob. No technical debt reduction roadmap was established. No change management framework was deployed. Metrics measuring efficiency gains and productivity improvements are, in fact, in the roadmap \u2014 because the author has both the technical depth to build them and the business acumen to know why they matter. Real Genius.</div>'
+    + '</div>'
+
+    + '<div class="prof-divider"></div>'
+
+    + '<div class="prof-section">'
     +   '<div class="prof-section-label">Contacts</div>'
     +   '<div class="prof-devtools">'
-    +     '<a class="prof-tool-btn" href="mailto:bruna@saykudos.co">'
+    +     '<a class="prof-tool-btn" href="mailto:info@getrightshtuffdone.com">'
     +       '<svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="14" height="10" rx="1.5"/><path d="M1 4l7 5 7-5"/></svg>'
     +       'Email Developer'
     +     '</a>'
