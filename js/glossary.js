@@ -131,7 +131,7 @@ var GLOSSARY_TERMS = [
   {
     term: 'Narcissistic Wound',
     pos: 'n.',
-    def: 'The deep psychological injury inflicted upon a narcissist when their self-image is challenged, their authority is questioned, or their audience fails to applaud on cue. Unlike ordinary hurt feelings \u2014 which tend to resolve with time, conversation, or a decent night\u2019s sleep \u2014 the narcissistic wound does not heal quietly. It escalates. It retaliates. It reorganises the entire surrounding environment to ensure the offending party is neutralised, discredited, or simply gone. The wound is, paradoxically, both extremely fragile and extraordinarily dangerous. Handle with caution. Do not, under any circumstances, be right in front of one. Paradoxically, sometimes, those who wound with narcissistic injury, perish by narcissistic injury.  '
+    def: 'The deep psychological injury inflicted upon a narcissist when their self-image is challenged, their authority is questioned, or their audience fails to applaud on cue. Unlike ordinary hurt feelings \u2014 which tend to resolve with time, conversation, or a decent night\u2019s sleep \u2014 the narcissistic wound does not heal quietly. It escalates. It retaliates. It reorganises the entire surrounding environment to ensure the offending party is neutralised, discredited, or simply gone. The wound is, paradoxically, both extremely fragile and extraordinarily dangerous. Handle with caution. Do not, under any circumstances, be right in front of one. Sometimes, those who wound with narcissistic injury, perish by narcissistic injury. Either their own, or the one they caused to someone else.'
   },
   {
     term: 'Obsession',
