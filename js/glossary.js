@@ -51,7 +51,7 @@ var GLOSSARY_TERMS = [
   {
     term: 'Dignity',
     pos: 'n.',
-    def: 'The inherent worth of a person, which exists independently of their title, performance rating, nationality, or the current org chart. Dignity cannot be revoked by a manager, overridden by a policy, or forfeited through resignation. It is, in principle, non-negotiable. In practice, it is negotiated constantly \u2014 through tone, through process, through the small daily decisions about who gets listened to, who gets believed, and who gets told, with a straight face, that everything is fine. The subject of this dashboard would like it noted that she noticed every single one of those decisions. And documented most of them.'
+    def: 'The inherent worth of a person, which exists independently of their title, performance rating, nationality, or the current org chart. Dignity cannot be revoked by a manager, overridden by a policy, or forfeited through resignation. It is, in principle, non-negotiable, non-purchasable, non-sellable. In practice, it is negotiated constantly \u2014 through tone, through process, through the small daily decisions about who gets listened to, who gets believed, and who gets told, with a straight face, that everything is fine. Dignity is the reason why people stay silent, and the reason why they speak up. It is the reason why they leave, and the reason why they stay. It is the reason why they negotiate, and the reason why they refuse to negotiate. It is, in short, everything.'
   },
   {
     term: 'Ego',
