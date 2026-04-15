@@ -56,7 +56,7 @@ var GLOSSARY_TERMS = [
   {
     term: 'Ego',
     pos: 'n.',
-    def: 'The part of the psyche responsible for a person\u2019s sense of self. In healthy quantities, a functional tool. In excess, a full-time organisational hazard. Ego is the leading cause of decisions that prioritise appearances over outcomes, seniority over competence, and personal comfort over institutional integrity. It is also, incidentally, the reason why certain people cannot simply say \u201cI was wrong,\u201d preferring instead a nineteen-step process involving reframing, revisionism, and the strategic reassignment of blame. Handle with care. It bruises easily and retaliates disproportionately.'
+    def: 'The part of the psyche responsible for a person\u2019s sense of self. In healthy quantities, a functional tool. In excess, a full-time organisational hazard. Ego is the leading cause of decisions that prioritise appearances over outcomes, perception over competence, and personal comfort over institutional integrity. It is also, incidentally, the reason why certain people cannot simply say \u201cI was wrong,\u201d preferring instead a nineteen-step process involving reframing, revisionism, and the strategic reassignment of blame. Handle with care. It bruises easily and retaliates disproportionately.'
   },
   {
     term: 'Entrapment',
