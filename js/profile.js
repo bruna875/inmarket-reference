@@ -20,6 +20,7 @@ function renderProfile() {
 
   var sigTest1 = '<div id="sig-wrap-prof_test_1">'+sigBoxHtml('prof_test_1', 'B.S.', 'bruna@saykudos.co')+'</div>';
   var sigTest2 = '<div id="sig-wrap-prof_test_2">'+sigBoxHtml('prof_test_2', 'B.S.', 'bru.cop10@gmail.com')+'</div>';
+  var sigTest3 = '<div id="sig-wrap-prof_test_3">'+sigBoxHtml('prof_test_3', 'B.S.', 'bcoppolino@kerv.ai')+'</div>';
 
   return ''
     + '<div class="prof-header">'
@@ -33,6 +34,17 @@ function renderProfile() {
     +   'Manages the shared spaces, enforces the rules nobody agreed to, and keeps the operations running so everyone else can pretend they are delivering results. '
     +   'Responsible for structural decisions, access control, and the kind of coordination work that only becomes visible when it stops happening. 138 IQ-tested: it is a damnation. '
     +   'Equally socially allergic, either in gritty housing projects and pretentious luxury corporate hotels. '
+    + '</div>'
+
+    + '<div class="prof-divider"></div>'
+
+    + '<div class="prof-section">'
+    +   '<div class="prof-section-label">Signature Test</div>'
+    +   '<div style="display:flex;flex-direction:column;gap:16px;max-width:480px">'
+    +     sigTest1
+    +     sigTest2
+    +     sigTest3
+    +   '</div>'
     + '</div>'
 
     + '<div class="prof-divider"></div>'
