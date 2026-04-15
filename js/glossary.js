@@ -61,7 +61,7 @@ var GLOSSARY_TERMS = [
   {
     term: 'Entrapment',
     pos: 'n.',
-    def: 'A sophisticated management technique in which an individual is set up to fail through the strategic withdrawal of information, authority, or support \u2014 then blamed for the failure. Not to be confused with a performance review, though the two are occasionally indistinguishable. Requires significant planning, selective amnesia, and the willingness to look someone in the eye while doing it.'
+    def: 'A manipulative practice designed to fraudulently induce someone into making an error \u2014 and then use that error against them. Purposes vary: sustaining a smear campaign against their reputation, shielding one\u2019s own conduct from its natural consequences, or, in the more ambitious cases, fabricating evidence that any court of law would find inadmissible. When practised within a professional environment, it qualifies as misconduct \u2014 the kind that generates paper trails, legal exposure, and, eventually, glossary entries. When taken to the next level, it becomes something the glossary declines to name directly, but which has its own articles in the Codice Penale.'
   },
   {
     term: 'Gentleness',
