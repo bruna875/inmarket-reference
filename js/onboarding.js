@@ -77,7 +77,7 @@ var OB_STEPS = [
     eyebrow: 'Step 8 of 11',
     title: 'Your Profile',
     desc: 'Profile info, language settings and privacy policy.',
-    position: 'top'
+    position: 'right'
   },
   {
     target: '#askMarshallBtn',
