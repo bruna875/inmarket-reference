@@ -136,7 +136,7 @@ var GLOSSARY_TERMS = [
   {
     term: 'Privacy',
     pos: 'n.',
-    def: 'The right of an individual to control information about themselves. Enshrined in GDPR (EU 2016/679), the Italian Codice Privacy, and the general concept of human dignity. In practice, frequently treated as optional, inconvenient, or inapplicable to people on payroll. For further reading, Articles 12\u201322 of the GDPR remain available and have not been repealed. The Data Subject has read them.'
+    def: 'The fundamental right of an individual to control information about themselves. Enshrined in GDPR (EU 2016/679), the Italian Codice Privacy, and the general concept of human dignity. In practice, frequently treated as optional, inconvenient, or inapplicable to people on payroll. For further reading, Articles 12\u201322 of the GDPR remain available and have not been repealed. The Data Subject has read them.'
   },
   {
     term: 'Panopticon',
