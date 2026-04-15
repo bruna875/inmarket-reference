@@ -143,13 +143,14 @@ function obCardPos(rect, position) {
   if (!rect) return {top: '50%', left: '50%', transform: 'translate(-50%,-50%)'};
   var pad = 16;
   var cw  = 360;
-  var ch  = 320;
+  var ch  = 220;
   var style = '';
   if (position === 'right') {
-    var t = Math.min(rect.top, window.innerHeight - ch - pad);
+    var t = rect.top + rect.height / 2 - ch / 2;
+    t = Math.max(pad, Math.min(t, window.innerHeight - ch - pad));
     var l = rect.left + rect.width + pad;
     if (l + cw > window.innerWidth - pad) l = rect.left - cw - pad;
-    style = 'top:'+Math.max(pad,t)+'px;left:'+Math.max(pad,l)+'px';
+    style = 'top:'+t+'px;left:'+Math.max(pad,l)+'px';
   } else if (position === 'left') {
     var t = Math.min(rect.top, window.innerHeight - ch - pad);
     style = 'top:'+Math.max(pad,t)+'px;left:'+Math.max(pad,rect.left-cw-pad)+'px';
