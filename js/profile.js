@@ -51,7 +51,7 @@ function renderProfile() {
 
     + '<div class="prof-section">'
     +   '<div class="prof-section-label">App Stack</div>'
-    +   '<div class="prof-desc" style="margin-top:0">Leveraging a high-performing, cross-functional team of one \u2014 similarly to the last 4 years \u2014 this app was ideated, architected, and shipped to production in 5 days \u2014 end-to-end, from prototype to production-grade software \u2014 using Claude Code, Visual Studio Code, Git, Node.js, Vercel, Google Apps Script, EmailJS, and Vercel Blob. No technical debt reduction roadmap was established. Metrics measuring efficiency gains and productivity improvements are, in fact, in the roadmap \u2014 because the author has both the technical depth to build them and the business acumen to know why they matter. Real Genius. Timely change management framework deployment would avoid the need for gargantuan socialization efforts.</div>'
+    +   '<div class="prof-desc" style="margin-top:0">Leveraging a high-performing, cross-functional team of one \u2014 similarly to the last 4 years \u2014 this app was ideated, architected, and shipped to production in 2 week-ends \u2014 end-to-end, from prototype to production-grade software \u2014 using Claude Code, Visual Studio Code, Git, Node.js, Vercel, Google Apps Script, EmailJS, and Vercel Blob. No technical debt reduction roadmap was established. Metrics measuring efficiency gains and productivity improvements are, in fact, in the roadmap \u2014 because the author has both the technical depth to build them and the business acumen to know why they matter. Real Genius. Timely change management framework deployment would avoid the need for gargantuan socialization efforts.</div>'
     + '</div>'
 
     + '<div class="prof-divider"></div>'
