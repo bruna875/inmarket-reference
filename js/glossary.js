@@ -11,7 +11,7 @@ var GLOSSARY_TERMS = [
   {
     term: 'Apologies',
     pos: 'n. pl.',
-    def: 'Expressions of regret for harm caused, intended to acknowledge wrongdoing, restore dignity to the injured party, and signal a genuine intention not to repeat the behaviour. An apology has three components: acknowledgement of what happened, acceptance of responsibility, and a commitment to change. The absence of any one component produces something that resembles an apology but functions as its opposite \u2014 a performative gesture designed to close the conversation rather than address its cause. In the environments documented by this dashboard, apologies were occasionally gestured at, rarely completed, and, in at least one case, apparently scheduled for a future date that has not yet arrived.'
+    def: 'Expressions of regret for harm caused, intended to acknowledge wrongdoing, restore dignity to the injured party, and signal a genuine intention not to repeat the behaviour. An apology has three components: acknowledgement of what happened, acceptance of responsibility, and a commitment to change. The absence of any one component produces something that resembles an apology but functions as its opposite \u2014 a performative gesture designed to close the conversation rather than address its cause. Apologies are occasionally gestured at, rarely completed, and, in at least one case, apparently scheduled for a future date that has not yet arrived.'
   },
   {
     term: 'AI',
