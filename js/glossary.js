@@ -166,7 +166,7 @@ var GLOSSARY_TERMS = [
   {
     term: 'Wine',
     pos: 'n.',
-    def: 'A fermented beverage produced from grapes, consumed across cultures for thousands of years as a vehicle for celebration, contemplation, and the honest conversation that tends to happen only after the second glass. In the context of this dashboard: a recurring motif, a diplomatic icebreaker, and \u2014 in at least one documented case \u2014 a proposed setting for a non-touristic evening in Milan that would have been excellent and which, regrettably, has not yet occurred. Available overpriced near the Bocconi University. Best enjoyed without the people who always get drunk at the retreat.'
+    def: 'A fermented beverage produced from grapes, consumed across cultures for thousands of years as a vehicle for celebration, contemplation, and the honest conversation that tends to happen only after the second glass, for example at a table in Las Vegas. In the context of this dashboard: a recurring motif, a diplomatic icebreaker, and \u2014 in at least one documented case \u2014 a proposed setting for a non-touristic evening in Milan that would have been excellent and which, regrettably, has not yet occurred. Available overpriced near the Bocconi University. Best enjoyed without the people who always get drunk at the retreat.'
   }
 ];
 
