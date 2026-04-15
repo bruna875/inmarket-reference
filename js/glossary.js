@@ -81,7 +81,7 @@ var GLOSSARY_TERMS = [
   {
     term: 'Ignorance',
     pos: 'n.',
-    def: 'The state of not knowing something which is, in principle, a temporary and curable condition resolvable through information, curiosity, or basic professional diligence. In practice, however, it is frequently preferred over knowledge, as the latter tends to impose burdensome obligations, existential doubts, and the nuisance of self-reflection. It typically manifests as a know-it-all complex and a compulsive urge to lecture others, characterized by the delivery of fallacies so profound they are blindingly obvious to anyone with entry-level expertise, yet remain entirely invisible to the speaker who delivers them with adamantine confidence. Voluntary ignorance—the strategic avoidance of any data that would necessitate action—is its more sophisticated cousin and significantly harder to prosecute; it is not to be confused with innocence, which, unlike ignorance, requires a deliberate and taxing kind of work to maintain.'
+    def: 'The state of not knowing something. In principle, a temporary condition, resolvable through information, curiosity, or basic professional diligence. In practice, sometimes preferred over knowledge, as knowledge tends to create obligations, doubts and self-reflection. Usually manifests with know-it-all attitude, tendency to give lessons, saying so big bullshits that are evident with anyone with minimal subject matter expertise, but completely invisible to those who pronounce them with adamantine confidence. Voluntary ignorance \u2014 the deliberate avoidance of information that would require one to act \u2014 is its more sophisticated cousin, and considerably harder to prosecute. Not to be confused with innocence, which requires a different kind of work to achieve.'
   },
   {
     term: 'Instability',
@@ -161,7 +161,7 @@ var GLOSSARY_TERMS = [
   {
     term: 'Uncertainty',
     pos: 'n.',
-    def: 'The condition of not knowing what will happen next. Distinct from \u2014 and not to be conflated with \u2014 <strong>ambiguity</strong> (not knowing what something means), <strong>maneuvering</strong> (knowing exactly what you\u2019re doing and ensuring others don\u2019t), <strong>haziness</strong> (not knowing what is currently happening, sometimes deliberately), and <strong>randomness</strong> (the philosophical comfort of attributing intentional patterns to chaos). These five concepts may appear similar in casual conversation. In practice, only one of them is innocent.'
+    def: 'The condition of not knowing what will happen next. Distinct from \u2014 and not to be conflated with \u2014 <strong>ambiguity</strong> (not knowing what something means), <strong>maneuvering</strong> (knowing exactly what you\u2019re doing and ensuring others don\u2019t), <strong>haziness</strong> (not knowing what is currently happening, sometimes deliberately), and <strong>randomness</strong> (the philosophical comfort of attributing intentional patterns to chaos), <strong>arbitrariness</strong> (the freedom to decide without criteria, often disguised as judgment), <strong>opacity</strong> (the principled refusal to explain), and <strong>vagueness</strong> (the art of saying something that cannot be wrong because it does not quite say anything). These eight concepts may appear similar in casual conversation. In practice, only one of them is innocent.'
   },
   {
     term: 'Wine',
