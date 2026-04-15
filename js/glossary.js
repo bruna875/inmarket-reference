@@ -61,7 +61,7 @@ var GLOSSARY_TERMS = [
   {
     term: 'Entrapment',
     pos: 'n.',
-    def: 'A manipulative practice designed to fraudulently induce someone into making an error \u2014 and then use that error against them. Purposes vary: sustaining a smear campaign against their reputation, shielding one\u2019s own conduct from its natural consequences, or, in the more ambitious cases, fabricating evidence that any court of law would find inadmissible. When practised within a professional environment, it qualifies as misconduct \u2014 the kind that generates paper trails, legal exposure, and, eventually, glossary entries. When taken to the next level, it becomes something the glossary declines to name directly, but which has its own articles in the Codice Penale.'
+    def: 'A manipulative practice designed to fraudulently induce someone into making an error \u2014 and then use that error against them. Purposes vary: sustaining a smear campaign against their reputation, shielding one\u2019s own conduct from its natural consequences, or, in the more ambitious cases, fabricating evidence that any court of law would find inadmissible. When practised within a professional environment, it qualifies as misconduct \u2014 the kind that generates paper trails and glossary entries. When taken to the next level, it becomes something the glossary declines to name directly, but which has its own articles in the Codice Penale.'
   },
   {
     term: 'Gentleness',
