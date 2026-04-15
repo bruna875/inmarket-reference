@@ -18,10 +18,6 @@ function renderProfile() {
     + '<path d="M16 22 Q18 24.5 20 22" stroke="#5A7A40" stroke-width="1" fill="none" stroke-linecap="round"/>'
     + '</svg>';
 
-  var sigTest1 = '<div id="sig-wrap-prof_test_1">'+sigBoxHtml('prof_test_1', 'B.S.', 'bruna@saykudos.co')+'</div>';
-  var sigTest2 = '<div id="sig-wrap-prof_test_2">'+sigBoxHtml('prof_test_2', 'B.S.', 'bru.cop10@gmail.com')+'</div>';
-  var sigTest3 = '<div id="sig-wrap-prof_test_3">'+sigBoxHtml('prof_test_3', 'B.S.', 'bcoppolino@kerv.ai')+'</div>';
-
   return ''
     + '<div class="prof-header">'
     +   '<div class="prof-avatar">'+frogSvg+'</div>'
@@ -39,19 +35,8 @@ function renderProfile() {
     + '<div class="prof-divider"></div>'
 
     + '<div class="prof-section">'
-    +   '<div class="prof-section-label">Signature Test</div>'
-    +   '<div style="display:flex;flex-direction:column;gap:16px;max-width:480px">'
-    +     sigTest1
-    +     sigTest2
-    +     sigTest3
-    +   '</div>'
-    + '</div>'
-
-    + '<div class="prof-divider"></div>'
-
-    + '<div class="prof-section">'
     +   '<div class="prof-section-label">App Stack</div>'
-    +   '<div class="prof-desc" style="margin-top:0">Leveraging a high-performing, cross-functional team of one \u2014 similarly to the last 4 years \u2014 this app was ideated, architected, and shipped to production in 2 week-ends \u2014 end-to-end, from prototype to production-grade software \u2014 using Claude Code, Visual Studio Code, Git, Node.js, Vercel, Google Apps Script, EmailJS, and Vercel Blob. No technical debt reduction roadmap was established. Metrics measuring efficiency gains and productivity improvements are, in fact, in the roadmap \u2014 because the author has both the technical depth to build them and the business acumen to know why they matter. Real Genius. Timely change management framework deployment would avoid the need for gargantuan socialization efforts. Now that is built, I have to invent another second job to keep myself from getting bored. Do you have any internal or external workflows I could automate? </div>'
+    +   '<div class="prof-desc" style="margin-top:0">Leveraging a high-performing, cross-functional team of one \u2014 similarly to the last 4 years \u2014 this app was ideated, architected, and shipped to production in 2 week-ends \u2014 end-to-end, from prototype to production-grade software \u2014 using Claude Code, Visual Studio Code, Git, Node.js, Vercel, Google Apps Script, EmailJS, and Vercel Blob. No technical debt reduction roadmap was established. Metrics measuring efficiency gains and productivity improvements are, in fact, in the roadmap \u2014 because the author has both the technical depth to build them and the business acumen to know why they matter. Real Genius. Timely change management framework deployment would avoid the need for gargantuan socialization efforts. Now that is built, I have to invent another second job to keep myself from getting bored. Do you have any internal, external, ermaphrodite workflows I could automate? </div>'
     + '</div>'
 
     + '<div class="prof-divider"></div>'
