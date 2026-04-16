@@ -306,8 +306,7 @@ function login() {
     document.getElementById('auth').classList.add('gone');
     setTimeout(function(){document.getElementById('auth').style.display='none';},300);
     document.getElementById('app').classList.add('show');
-    var name = e.split('@')[0];
-    document.getElementById('un').textContent = name.charAt(0).toUpperCase()+name.slice(1);
+    document.getElementById('un').textContent = 'Condo Admin';
     Promise.all([
       loadSavedSignatures(),
       new Promise(function(resolve){loadData(resolve);})
