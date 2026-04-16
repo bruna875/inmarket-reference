@@ -109,7 +109,7 @@ document.addEventListener('click', function(e) {
     var result = document.getElementById('quiz-result');
     if (result) {
       result.innerHTML = isCorrect
-        ? '<div class="quiz-result-msg quiz-result-correct">Noted. This is your conclusion, not mine. I am a frog. Now we both know.</div>'
+        ? '<div class="quiz-result-msg quiz-result-correct">Noted. This is your conclusion, not mine. I am a frog.</div>'
         : '<div class="quiz-result-msg quiz-result-wrong">Hmm. Could be\u2026 maybe. I honestly don\u2019t know.</div>';
     }
     return;
