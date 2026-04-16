@@ -109,7 +109,7 @@ document.addEventListener('click', function(e) {
     var result = document.getElementById('quiz-result');
     if (result) {
       result.innerHTML = isCorrect
-        ? '<div class="quiz-celebrate">\ud83c\udf89\ud83c\udf8a\ud83e\udd73</div><div class="quiz-result-msg quiz-result-correct">Correct. You may have recognized it. Maybe. Just a possibility. Maybe not. If yes, now you can\u2019t unsee it.</div>'
+        ? '<div class="quiz-celebrate">\ud83c\udf89\ud83c\udf8a\ud83e\udd73</div><div class="quiz-result-msg quiz-result-correct">You said it. Not me.</div>'
         : '<div class="quiz-result-msg quiz-result-wrong">Not quite. Go back and read more carefully \u2014 the answer was there all along.</div>';
     }
     return;
