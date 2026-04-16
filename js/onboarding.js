@@ -21,7 +21,7 @@ var OB_STEPS = [
     target: null,
     eyebrow: 'Welcome',
     title: 'Welcome to your Very Good Peeps Dashboard',
-    desc: 'A quick tour to help you find your way around. It will not take much more than viewing a YouTube video by a tinkerer kid. They could have worked together, and instead, for idiot ego, they are both gone.'
+    desc: 'A quick tour to help you find your way around. It will not take much more than viewing a YouTube video about AI. '
   },
   {
     target: '[data-page="roadmap"]',
