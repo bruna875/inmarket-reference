@@ -4,7 +4,10 @@ var LEGAL_DISCLAIMER_HTML =
   '<p style="margin:0 0 12px">\u00a7<strong>1.</strong> This dashboard is a private, password-protected digital project developed exclusively for the personal and internal use of the code owner (\u201cOwner\u201d). The dashboard may be shared on an occasional and limited basis with selected third parties solely for the purpose of facilitating access to one or more specific tools contained therein. All content, code, design, and materials remain the exclusive intellectual property of the Owner and are protected accordingly. No third-party access shall be construed as a transfer, licence, or assignment of any intellectual property rights.</p>'
   + '<p style="margin:0 0 12px">\u00a7<strong>2.</strong> The Owner expressly disclaims all liability arising from: (i) any unauthorised access, breach, hack, or unlawful circumvention of the access control mechanisms in place; (ii) any misinterpretation, misuse, or misrepresentation of the content of this dashboard by any third party; and (iii) any consequence arising from the use of the tools contained herein. Users are solely responsible for maintaining the confidentiality of their access credentials. By clicking \u201cAccept\u201d, the user expressly acknowledges having read this disclaimer in its entirety and assumes full and sole responsibility for their interpretation of the content, any reliance placed upon it, the use of any tool contained within the dashboard, and any action taken or omitted as a result thereof. The Owner shall bear no liability of any kind in connection with the foregoing.</p>'
   + '<p style="margin:0 0 12px">\u00a7<strong>3.</strong> Certain sections of this dashboard \u2014 including but not limited to the login page, the Glossary, the quiz, the Data &amp; Stuff section, and editorial commentary \u2014 constitute satire, parody, or social commentary, and are protected as such under applicable law, including Article 21 of the Italian Constitution, Article 10 of the European Convention on Human Rights, and the First Amendment to the United States Constitution. Satire is a recognised form of protected expression under Italian law (diritto di satira, per consolidated case law of the Corte di Cassazione) and does not constitute defamation where it is identifiable as satirical, does not assert false facts as true, and remains proportionate. All satirical content on this dashboard meets these criteria. The Owner expressly invokes the right of satire as a legitimate exercise of freedom of expression. All characters, names, and events appearing in satirical sections of this dashboard are entirely fictitious. Any resemblance to real persons, living or dead, is purely coincidental or is intended strictly as parody, satire, or social commentary. This dashboard uses invented names in its satirical content, except in cases where public figures are being satirized. Any other use of real names is accidental and unintentional. Nothing contained herein shall be construed as an admission of liability of any kind by any party.</p>'
-  + '<p style="margin:0 0 0">\u00a7<strong>4.</strong> By clicking \u201cAccept\u201d, the user irrevocably and unconditionally waives any claim, action, or proceeding against the Owner arising from or related to the content of this dashboard, the tools contained therein, or any consequence of their use. The Owner shall bear no liability whatsoever \u2014 whether direct, indirect, incidental, or consequential \u2014 in connection with any of the foregoing. You clicked. You own it.</p>';
+  + '<p style="margin:0 0 12px">\u00a7<strong>4.</strong> Names, brands, and characters portrayed in this dashboard are either entirely fictional or constitute caricatures or parodies of real-world entities. Names have been deliberately altered to reflect the satirical nature of the content. Any resemblance to actual persons, companies, or events is purely coincidental or is intended as such.</p>'
+  + '<p style="margin:0 0 12px">\u00a7<strong>5.</strong> By logging into this dashboard, the user acknowledges entering a satirical environment. Nothing contained herein constitutes medical, legal, or financial advice. The Owner expressly disclaims any responsibility for decisions made on the basis of content presented in this dashboard.</p>'
+  + '<p style="margin:0 0 12px">\u00a7<strong>6.</strong> Access to this dashboard is conditional upon the user\u2019s understanding that its content constitutes a work of humour and parody. If you are unable to distinguish satire, please log out immediately. The Owner accepts no responsibility for what happens if you don\u2019t.</p>'
+  + '<p style="margin:0 0 0">\u00a7<strong>7.</strong> By clicking \u201cAccept\u201d, the user irrevocably and unconditionally waives any claim, action, or proceeding against the Owner arising from or related to the content of this dashboard, the tools contained therein, or any consequence of their use. The Owner shall bear no liability whatsoever \u2014 whether direct, indirect, incidental, or consequential \u2014 in connection with any of the foregoing. You clicked. You own it.</p>';
 
 
 function buildNav() {
@@ -274,7 +277,7 @@ function openDisclaimerModal() {
   overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:99999;display:flex;align-items:center;justify-content:center;';
   overlay.innerHTML =
     '<div style="background:var(--card,#fff);border-radius:12px;padding:32px;max-width:560px;width:92vw;max-height:85vh;overflow-y:auto;box-shadow:0 8px 40px rgba(0,0,0,.18)">'
-    + '<div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px">Accept the Disclaimer before accessing the Dashboard</div>'
+    + '<div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px">Accept the Terms of Service before accessing the Dashboard</div>'
     + '<div style="font-size:11px;color:var(--muted);margin-bottom:20px">Please read carefully before accepting</div>'
     + '<div style="font-size:12.5px;color:var(--text);line-height:1.7;margin-bottom:24px">' + LEGAL_DISCLAIMER_HTML + '</div>'
     + '<button id="disclaimer-accept-btn" class="sig-btn" style="width:100%">Accept</button>'
@@ -292,7 +295,7 @@ function login() {
   var e = document.getElementById('em').value.trim(), p = document.getElementById('pw').value;
   var chk = document.getElementById('disclaimerCheck');
   if (!chk || !chk.checked) {
-    document.getElementById('err').textContent = 'Please read and accept the Disclaimer before signing in.';
+    document.getElementById('err').textContent = 'Please read and accept the Terms of Service before signing in.';
     return;
   }
   var privChk = document.getElementById('privacyCheck');
@@ -448,7 +451,7 @@ function userPopToggle(e) {
     + '</div>'
     + '<div class="user-pop-item" data-userpop="disclaimer">'
     + '<svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.4"/><path d="M8 5v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="11" r=".7" fill="currentColor"/></svg>'
-    + '<div class="user-pop-item-title">Disclaimer</div>'
+    + '<div class="user-pop-item-title">Terms of Service</div>'
     + '</div>';
 
   document.body.appendChild(pop);
