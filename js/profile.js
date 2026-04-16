@@ -28,8 +28,8 @@ function renderProfile() {
     + '</div>'
     + '<div class="prof-desc">'
     +   'Manages the shared spaces, enforces the rules nobody agreed to, and keeps the operations running so everyone else can pretend they are delivering results. '
-    +   'Responsible for structural decisions, access control, and the kind of coordination work that only becomes visible when it stops happening. 138 IQ-tested: it is a damnation. '
-    +   'Equally socially allergic, either in gritty housing projects and pretentious luxury corporate hotels. '
+    +   'Responsible for structural decisions, access control, and the kind of coordination work that only becomes visible when it stops happening. 138 IQ-tested: it is a damnation since 1989. '
+    +   'Equally socially allergic, either in gritty housing projects and pretentious luxury corporate hotels. Evolved from the good old days of flipping bullies scooters with a rowdy crew, to the sophisticated thrill of crushing them with AI dashboards and regulations.'
     + '</div>'
 
     + '<div class="prof-divider"></div>'
