@@ -34,7 +34,7 @@ var OB_STEPS = [
     target: '#ob-datasource',
     eyebrow: 'Step 2 of 11',
     title: 'Data Source',
-    desc: 'The roadmap data is pulled live from a Google Sheet. Click here anytime to view or edit the source.',
+    desc: 'The roadmap data is pulled live from a unfortunate Google Sheet. Click here anytime to view or edit the source.',
     position: 'bottom'
   },
   {
