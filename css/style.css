@@ -1532,7 +1532,7 @@ tr:hover .link-btn, .link-btn.has-link { opacity: 1; color: var(--accent) }
 .marshall-avatar {
   position: relative; border-radius: 50%; overflow: hidden; flex-shrink: 0;
 }
-.marshall-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.marshall-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; filter: blur(4px); }
 .marshall-avatar-bar {
   position: absolute; left: 0; width: 100%;
   background: #66C220; opacity: .92; transform: rotate(-2deg);
