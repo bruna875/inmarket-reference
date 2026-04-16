@@ -167,7 +167,7 @@ function renderResources() {
 function renderBoilingFrog() {
   if (_wizState['frog'] === undefined) _wizState['frog'] = 0;
   return '<div class="ptitle">The Boiling Frog Theory</div>'
-    + '<div class="psub psub-row">How Organizations learn to normalize and tolerate things that are not normal'
+    + '<div class="psub psub-row">How Organizations learn to normalize and tolerate things that are not normal. Also named "Normalization of Deviance" by Diane Vaughan.'
     + readTimeBadge(wizReadTime(_wizItemsFrog))
     + '</div>'
     + '<blockquote class="res-quote">'
