@@ -6,7 +6,7 @@ var GLOSSARY_TERMS = [
   {
     term: 'Accountability',
     pos: 'n.',
-    def: 'The obligation to accept responsibility for one\u2019s actions and their consequences \u2014 not selectively, not retroactively, and not only when there is an audience. True accountability is proactive: it does not wait to be caught. It is also structural: it applies regardless of title, tenure, or the number of people one manages or the shares they own. In organisations where accountability is unevenly distributed \u2014 flowing with ease in certain directions, with great resistance in others \u2014 the word tends to appear frequently in company values documents and rarely in practice. This dashboard exists, in part, because accountability does not (as yet).'
+    def: 'The obligation to accept responsibility for one\u2019s actions and their consequences \u2014 not selectively, not retroactively, and not only when there is an audience. True accountability is proactive: it does not wait to be caught. It is also structural: it applies regardless of title, tenure, or the number of people one manages or the shares they own. In organisations where accountability is unevenly distributed \u2014 flowing with ease in certain directions, with great resistance in others \u2014 the word tends to appear frequently in company values documents and rarely in practice. This dashboard exists, in part, because accountability does not (as of today).'
   },
   {
     term: 'Apologies',
