@@ -77,7 +77,7 @@ var OB_STEPS = [
     target: '.sbfoot',
     eyebrow: 'Step 8 of 11',
     title: 'Your Profile',
-    desc: 'Profile info, language settings and privacy policy.',
+    desc: 'Profile info, language settings and data &amp; stuff.',
     position: 'right'
   },
   {

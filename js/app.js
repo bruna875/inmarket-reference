@@ -297,7 +297,7 @@ function login() {
   }
   var privChk = document.getElementById('privacyCheck');
   if (!privChk || !privChk.checked) {
-    document.getElementById('err').textContent = 'Please read and accept the Privacy Policy before signing in.';
+    document.getElementById('err').textContent = 'Please read and accept the Data &amp; Stuff before signing in.';
     return;
   }
   if (e === 'condoadmin@verygoodpeeps.ai' && p === 'HelixCapital') {
@@ -443,7 +443,7 @@ function userPopToggle(e) {
     + '<div class="user-pop-divider"></div>'
     + '<div class="user-pop-item" data-userpop="privacy">'
     + '<svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M8 2L3 4.5V7c0 3.5 2.1 6.5 5 7.5 2.9-1 5-4 5-7.5V4.5L8 2z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M6 8.5l1.5 1.5L10 7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>'
-    + '<div class="user-pop-item-title">Privacy Policy</div>'
+    + '<div class="user-pop-item-title">Data &amp; Stuff</div>'
     + '</div>'
     + '<div class="user-pop-item" data-userpop="disclaimer">'
     + '<svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.4"/><path d="M8 5v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="11" r=".7" fill="currentColor"/></svg>'
@@ -522,7 +522,7 @@ function openPrivacyModal() {
   overlay.id = 'privacy-modal-overlay';
   overlay.innerHTML =
     '<div style="background:var(--card,#fff);border-radius:12px;padding:32px;max-width:580px;width:92vw;max-height:85vh;overflow-y:auto;box-shadow:0 8px 40px rgba(0,0,0,.18)">'
-    + '<div class="upsell-modal-title" style="font-size:16px;margin-bottom:4px">Privacy Policy</div>'
+    + '<div class="upsell-modal-title" style="font-size:16px;margin-bottom:4px">Data &amp; Stuff</div>'
     + '<div style="color:var(--muted);font-size:11px;margin-bottom:20px">Last updated: April 2026</div>'
     + '<div style="font-size:13px;color:var(--text);line-height:1.7">'
     + '<p style="margin:0 0 12px"><strong>1. Who we are</strong><br>'
