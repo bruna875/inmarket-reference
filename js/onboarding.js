@@ -55,7 +55,7 @@ var OB_STEPS = [
     target: '[data-page="faqdsar"]',
     eyebrow: 'Step 5 of 11',
     title: 'Data Directory',
-    desc: 'Consult frequently asked questions, access data subject directory, calculate risk exposure and automatically export ready-to-go objective reports (in case you struggle with those). Blame the AI for its factual analysis. Know your rights, get the right shtuff done.',
+    desc: 'Consult frequently asked questions, access data subject directory, calculate risk exposure and automatically export ready-to-go objective reports. Blame the AI for its factual analysis. Know your rights, get the right shtuff done.',
     position: 'right'
   },
   {
