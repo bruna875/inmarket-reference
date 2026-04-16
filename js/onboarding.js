@@ -59,19 +59,19 @@ var OB_STEPS = [
     position: 'right'
   },
   {
-    target: '[data-page="ref_dk"]',
-    eyebrow: 'Step 6 of 11',
-    title: 'Wanna Say Sorry?',
-    desc: 'Endorsements from key colleagues. Each page has a quote and a signature slot \u2014 in case someone feels called to make amends.',
-    position: 'right'
-  },
-  {
     target: '[data-page="glossary"]',
-    eyebrow: 'Step 7 of 11 \u2014 New!',
+    eyebrow: 'Step 6 of 11 \u2014 New!',
     title: 'Glossary',
     desc: 'A curated lexicon for a good chuckle. Includes precise definitions of: \u2014 Mafia \u2014 Condominium \u2014 Objectivity \u2014 Instability \u2014 Gentleness \u2014 Substance \u2014 Apologies \u2014 Mirror \u2014 and more. Don\u2019t take yourself too seriously.',
     position: 'right',
     offsetY: -120
+  },
+  {
+    target: '[data-page="ref_dk"]',
+    eyebrow: 'Step 7 of 11',
+    title: 'Wanna Say Sorry?',
+    desc: 'Endorsements from key colleagues. Each page has a quote and a signature slot \u2014 in case someone feels called to make amends.',
+    position: 'right'
   },
   {
     target: '.sbfoot',
