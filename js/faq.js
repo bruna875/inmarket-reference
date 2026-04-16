@@ -93,7 +93,7 @@ var FAQ_ITEMS = [
     meta: {
       period: 'October 2025; November 2025',
       systems: ['Email'],
-      keywords: ['\u201cgeolink\u201d', '\u201cunified platform\u201d', '\u201cinmarket platform\u201d'],
+      keywords: ['\u201cgeolink\u201d', '\u201cunified platform\u201d', '\u201cplatform\u201d'],
       details: 'The direct manager of the candidate for the role is in possession of a copy of this exchange, forwarded between October 2025 and November 2025.'
     }
   },
