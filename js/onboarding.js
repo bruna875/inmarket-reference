@@ -70,7 +70,7 @@ var OB_STEPS = [
     target: '[data-page="ref_dk"]',
     eyebrow: 'Step 7 of 11',
     title: 'Wanna Say Sorry?',
-    desc: 'Endorsements from key colleagues. Each page has a quote and a signature slot \u2014 in case someone feels called to make amends. There is no expectations that face-to-face interactions will be dared, but I am happy to be proven wrong. Phone number and email available. Formal letters preventing potential retaliating initiatives also appreciated.',
+    desc: 'Endorsements from key colleagues. Each page has a quote and a signature slot \u2014 in case someone feels called to make amends. There is no expectations that face-to-face interactions will be dared, but I am happy and open to be proven wrong. Phone number and email available. Formal letters preventing potential retaliating initiatives also appreciated.',
     position: 'right'
   },
   {
