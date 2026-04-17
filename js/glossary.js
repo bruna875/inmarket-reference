@@ -86,7 +86,7 @@ var GLOSSARY_TERMS = [
   {
     term: 'Facts',
     pos: 'n.',
-    def: 'A superior means of expression. In a secondary sense, something objective.'
+    def: 'A superior means of expression, compared to words. In a secondary sense, something objective.'
   },
   {
     term: 'Flying Monkeys',
