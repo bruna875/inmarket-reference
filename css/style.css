@@ -761,6 +761,39 @@ tr:hover .link-btn, .link-btn.has-link { opacity: 1; color: var(--accent) }
 .prof-sigtest-item { flex: 1; min-width: 240px }
 .prof-sigtest-label { font-size: 11px; color: var(--faint); margin-bottom: 8px }
 .prof-sigtest-email { font-weight: 500; color: var(--muted) }
+/* ── Now Playing ─────────────────────────────────────────────────────────────── */
+.prof-layout { display: grid; grid-template-columns: 1fr 240px; gap: 28px; align-items: start }
+.prof-main { min-width: 0 }
+.prof-sidebar { position: sticky; top: 16px }
+.now-playing-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; overflow: hidden;
+}
+.now-playing-top {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 14px 8px;
+}
+.now-playing-dot {
+  width: 7px; height: 7px; border-radius: 50%; background: #1DB954; flex-shrink: 0;
+  animation: np-pulse 2s ease-in-out infinite;
+}
+@keyframes np-pulse {
+  0%,100% { opacity: 1; transform: scale(1) }
+  50%      { opacity: .5; transform: scale(.85) }
+}
+.now-playing-label { font-size: 10px; font-weight: 600; letter-spacing: .5px; text-transform: uppercase; color: var(--faint) }
+.now-playing-embed { display: block; width: 100%; border: none; border-top: 1px solid var(--border) }
+.now-playing-lyrics {
+  padding: 14px 16px 16px;
+  border-top: 1px solid var(--border);
+  font-size: 12px; line-height: 1.9; color: var(--muted);
+  white-space: pre-line; max-height: 340px; overflow-y: auto;
+}
+@media (max-width: 700px) {
+  .prof-layout { grid-template-columns: 1fr }
+  .prof-sidebar { position: static }
+}
+
 .res-quote {
   margin: 0 0 24px; padding: 16px 20px 16px 18px;
   border-left: 3px solid var(--border-md);
