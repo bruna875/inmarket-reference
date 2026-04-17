@@ -56,7 +56,7 @@ var GLOSSARY_TERMS = [
   {
     term: 'Defamation',
     pos: 'n.',
-    def: 'The act of making false statements about a person that damage their reputation. Distinguished from criticism (which may be unwelcome but accurate), from feedback (which is supposed to be constructive), and from a performance review (which can be all three at once). In Italian law, <em>diffamazione</em> (595 c.p.) requires that the statement be communicated to at least two people \u2014 a threshold that is, in most professional environments, cleared before the first coffee of the day. The defence of truth remains available, which is why the subject of this dashboard is not particularly worried.'
+    def: 'The act of making false statements about a person that damage their reputation or obstruct their career. Distinguished from criticism (which may be unwelcome but accurate), from feedback (which is supposed to be constructive), and from a performance review (which can be all three at once). In Italian law, <em>diffamazione</em> (595 c.p.) requires that the statement be communicated to at least two people \u2014 a threshold that is, in most professional environments, cleared before the first coffee of the day. The defence of truth remains available, which is why the subject of this dashboard is not particularly worried.'
   },
   {
     term: 'Dignity',
