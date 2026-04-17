@@ -84,6 +84,11 @@ var GLOSSARY_TERMS = [
     def: 'A form of psychological manipulation in which a person is made to question their own perception, memory, or judgement \u2014 typically by someone with more institutional power, more allies in the room, or a stronger interest in the alternative version of events. Techniques include: denying that things were said, reframing documented facts as misunderstandings, suggesting that the subject\u2019s emotional response is the actual problem, and repeating the alternative version of events with such confidence that it begins to feel true. Gaslighting is most effective in environments where the target is isolated, exhausted, or both. It is least effective when the target has been taking notes.'
   },
   {
+    term: 'Facts',
+    pos: 'n.',
+    def: 'A superior means of expression. In a secondary sense, something objective.'
+  },
+  {
     term: 'Flying Monkeys',
     pos: 'n. (also: enablers)',
     def: 'Individuals who carry out, amplify, or lend credibility to the actions of a manipulative party \u2014 wittingly or not. Named after the winged enforcers in <em>The Wizard of Oz</em>, who did the witch\u2019s bidding without apparent independent thought. In organisational contexts, flying monkeys may present as loyal colleagues, enthusiastic supporters, or simply people who found it more comfortable to agree than to ask questions. <strong>Enablers</strong> are their quieter variant: they do not act directly, but create the conditions in which harmful behaviour continues unchallenged \u2014 through silence, through validation, or through the deliberate choice to look the other way. Both categories invariably express genuine surprise when the full picture eventually becomes visible. The full picture, of course, was always there.'
