@@ -206,7 +206,7 @@ var GLOSSARY_TERMS = [
   {
     term: 'Vicarious Liability',
     pos: 'n.',
-    def: 'A legal principle by which one party is held responsible for the conduct of another \u2014 typically on the basis of a supervisory relationship, organisational affiliation, or the misfortune of being nearby. In its classical formulation, liability attaches where there is control, benefit, or a duty of care. In practice, it has occasionally been extended to cover situations in which an individual is held accountable for behaviour that was erratic, unsanctioned, and entirely someone else\u2019s idea \u2014 on the grounds that they were present, adjacent, or simply available. The innocent party, in these cases, is encouraged to reflect on their learnings.'
+    def: 'A legal principle by which one party is held responsible for the conduct of another \u2014 typically on the basis of a supervisory relationship, organisational affiliation, or the misfortune of being nearby. In its classical formulation, liability attaches where there is control, benefit, or a duty of care. In practice, it has occasionally been extended to cover situations in which an individual is held accountable for behaviour that was erratic, unsanctioned, and entirely someone else\u2019s idea \u2014 on the grounds that they were present, adjacent, inertial, conciliatory, or simply too much available. The innocent party, in these cases, is encouraged to reflect on their learnings.'
   },
   {
     term: 'Wine',
