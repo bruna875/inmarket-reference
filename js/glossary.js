@@ -186,7 +186,7 @@ var GLOSSARY_TERMS = [
   {
     term: 'Substance',
     pos: 'n.',
-    def: 'The actual content of a thing, as opposed to its packaging. In professional contexts, substance refers to the quality of ideas, the rigor of analysis, and the depth of contribution \u2014 as distinct from visibility, volume, or the ability to fill a room with confidence. Substance is what remains when the presentation ends, the jargon is removed, and the question \u201cbut what did they actually say?\u201d is asked. It is notably difficult to fake over time, and notably easy to overlook in environments that reward the performance of competence over its exercise. One of the more reliable indicators of substance is that the people who have it tend not to feel the need to announce it. The people who don\u2019t, frequently do.'
+    def: 'The actual content of a thing, as opposed to its packaging. In professional contexts, substance refers to the quality of ideas, the rigor of analysis, and the depth of contribution \u2014 as distinct from visibility, volume, or the ability to fill a room with confidence. Substance is what remains when the presentation ends, the jargon is removed, and the question \u201cbut what did they actually say?\u201d is asked. It is notably difficult to fake over time, and notably easy to overlook in environments that reward the performance of competence over its exercise. One of the more reliable indicators of substance is that the people who have it tend not to feel the need to announce it. The people who don\u2019t, frequently do. The people who have it, don\u2019t need to bully anyone. The people who don\u2019t, frequently do. '
   },
   {
     term: 'Uncertainty',
