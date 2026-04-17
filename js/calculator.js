@@ -10,7 +10,6 @@ var CALC_SECTIONS = [
       'Litigation & Court Costs (International)',
       'Attorneys & Legal Fees (Local)',
       'Attorneys & Legal Fees (International)',
-      'Vicarious Liability Risks',
       'Injunctions & restraining orders',
       'Arbitration costs',
       'Others'
