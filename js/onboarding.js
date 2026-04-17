@@ -48,7 +48,7 @@ var OB_STEPS = [
     target: '[data-page="resources"]',
     eyebrow: 'Step 4 of 11',
     title: 'Recognize the Pattern \u2014 The Boiling Frog Theory',
-    desc: 'Two interactive reading journeys to help you recognize what\u2019s really going on. Read them in order.',
+    desc: 'Two interactive reading journeys to help you recognize what\u2019s really going on. Read them in order. The most serious section of this dashboard: everything else is less dark.',
     position: 'right'
   },
   {
@@ -62,7 +62,7 @@ var OB_STEPS = [
     target: '[data-page="glossary"]',
     eyebrow: 'Step 6 of 11',
     title: 'Glossary',
-    desc: 'A curated lexicon for a good chuckle. Includes precise definitions of: \u2014 Mirror \u2014 Boundary \u2014 Tinkerer Kid \u2014 Condominium \u2014 Leadership \u2014 Mafia \u2014 Objectivity \u2014 Instability \u2014 Gentleness \u2014 Substance \u2014 Dignity \u2014 Apologies \u2014 and more. Don\u2019t take yourself too seriously.',
+    desc: 'A curated lexicon for a good chuckle. Includes precise definitions of: \u2014 Tinkerer Kid \u2014 Condominium \u2014 Gentleness \u2014 Mirror \u2014 Boundary \u2014 Leadership \u2014 Mafia \u2014 Objectivity \u2014 Instability \u2014 Substance \u2014 Dignity \u2014 Apologies \u2014 and more. Don\u2019t take yourself too seriously.',
     position: 'right',
     offsetY: -120
   },
