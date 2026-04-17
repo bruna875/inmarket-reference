@@ -29,7 +29,7 @@ function renderProfile() {
     +     '<div class="lyrics-row"><span class="lyrics-it">Ci vuol passione</span><span class="lyrics-en">You need passion</span></div>'
     +     '<div class="lyrics-row"><span class="lyrics-it">Molta pazienza</span><span class="lyrics-en">Lots of patience</span></div>'
     +     '<div class="lyrics-row"><span class="lyrics-it">Sciroppo di lampone</span><span class="lyrics-en">Raspberry syrup</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">E un filo di incoscienza</span><span class="lyrics-en">And a hint of recklessness</span></div>'
+    +     '<div class="lyrics-row"><span class="lyrics-it">E un filo di incoscienza</span><span class="lyrics-en">And a hint of audacity</span></div>'
     +     '<div class="lyrics-break"></div>'
     +     '<div class="lyrics-row"><span class="lyrics-it">Ci vuol farina</span><span class="lyrics-en">You need flour</span></div>'
     +     '<div class="lyrics-row"><span class="lyrics-it">Del proprio sacco</span><span class="lyrics-en">From your own bag</span></div>'
