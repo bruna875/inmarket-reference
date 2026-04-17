@@ -121,7 +121,7 @@ var GLOSSARY_TERMS = [
   {
     term: 'Mirror',
     pos: 'n.',
-    def: 'A useful tool that reflects who you are. Best used before talking too much, judging too much, or forming strong opinions about who someone else is. The mirror does not lie, does not selectively recall, and does not reframe what it shows based on the current organisational climate. It simply reflects. What you do with the reflection is, of course, entirely up to you \u2014 which is precisely why many people prefer not to look. Recommended use: at least once a week, ideally in a quiet moment, to verify that the reflection corresponds with your inner conscience. Advanced users may also try it immediately after judging someone else. Results vary. Courage required.'
+    def: 'A useful tool that reflects who you are (not who someone else is). Best used before talking too much, judging too much, or forming strong opinions about who someone else is. The mirror does not lie, does not selectively recall, and does not reframe what it shows based on the current organisational climate. It simply reflects. What you do with the reflection is, of course, entirely up to you \u2014 which is precisely why many people prefer not to look. Recommended use: at least once a week, ideally in a quiet moment, to verify that the reflection corresponds with your inner conscience. Advanced users may also try it immediately after judging someone else. Results vary. Courage required.'
   },
   {
     term: 'Minchiate',
