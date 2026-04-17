@@ -762,7 +762,7 @@ tr:hover .link-btn, .link-btn.has-link { opacity: 1; color: var(--accent) }
 .prof-sigtest-label { font-size: 11px; color: var(--faint); margin-bottom: 8px }
 .prof-sigtest-email { font-weight: 500; color: var(--muted) }
 /* ── Now Playing ─────────────────────────────────────────────────────────────── */
-.prof-layout { display: grid; grid-template-columns: 1fr 300px; gap: 28px; align-items: start }
+.prof-layout { display: grid; grid-template-columns: 1fr 300px; gap: 52px; align-items: start }
 .prof-main { min-width: 0 }
 .prof-sidebar { position: sticky; top: 16px; height: calc(100vh - 100px); display: flex; flex-direction: column }
 .now-playing-card {
