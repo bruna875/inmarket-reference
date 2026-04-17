@@ -32,7 +32,7 @@ function renderRef(r) {
       + '</div></div>'
     : '<div class="ref-avatar-initials">'+avatarInitials+'</div>';
   var quoteBlock = r.quote
-    ? '<div class="ref-quote-box"><div class="ref-quote-mark">\u201c</div><div class="ref-quote-text">'+r.quote+'</div><div class="ref-attribution"><span>'+r.title+'</span></div></div>'
+    ? '<div class="ref-quote-box"><div class="ref-quote-mark">\u201c</div><div class="ref-quote-text">'+r.quote.replace(/<br\s*\/?><br\s*\/?>/gi,'<div class="ref-pb"></div>')+'</div><div class="ref-attribution"><span>'+r.title+'</span></div></div>'
     : '<div class="ref-empty">Quote not yet available.</div>';
   var pageId = 'ref_'+r.id;
   var sigLabel = r.id === 'tm2' ? 'TM, DZ, MMS' : initials;
