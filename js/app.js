@@ -224,7 +224,7 @@ function openSendCredentialsModal() {
   inp.addEventListener('blur', function() {
     var val = inp.value.trim();
     if (val && !isAllowed(val)) {
-      err.textContent = 'This email is not allowed to access the dashboard. Try with your work email.';
+      err.textContent = 'Sorry, but this email is not part of the group of the Very Good Peeps who can access this dashboard. If you think you should have access, try with your work email.';
       inp.style.borderColor = '#C0392B';
     } else {
       err.textContent = '';
@@ -239,7 +239,7 @@ function openSendCredentialsModal() {
     var val = inp.value.trim();
     if (!val) { err.textContent = 'Please enter your email.'; return; }
     if (!isAllowed(val)) {
-      err.textContent = 'This email is not allowed to access the dashboard. Try with your work email.';
+      err.textContent = 'Sorry, but this email is not part of the group of the Very Good Peeps who can access this dashboard. If you think you should have access, try with your work email.';
       inp.style.borderColor = '#C0392B';
       return;
     }
@@ -320,6 +320,8 @@ function login() {
       setTimeout(ganttTooltipInit, 50);
       if (obShouldShow()) { setTimeout(obStart, 400); }
     });
+  } else if (allowedEmails.indexOf(e.toLowerCase()) === -1) {
+    document.getElementById('err').textContent = 'Sorry, but this email is not part of the group of the Very Good Peeps who can access this dashboard. If you think you should have access, try with your work email.';
   } else {
     document.getElementById('err').textContent = 'Wrong password. Try again or request your credentials via email.';
   }
