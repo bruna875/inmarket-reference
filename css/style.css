@@ -508,7 +508,7 @@ tr:hover .link-btn, .link-btn.has-link { opacity: 1; color: var(--accent) }
   pointer-events: none; user-select: none;
 }
 .ref-quote-text {
-  font-size: 13px; line-height: 1.75; color: var(--text);
+  font-size: 13px; line-height: 1.35; color: var(--text);
   padding-top: 16px; font-style: normal;
 }
 .ref-attribution { margin-top: 14px; font-size: 12px; font-weight: 500; color: var(--muted) }
