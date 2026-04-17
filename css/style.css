@@ -783,7 +783,8 @@ tr:hover .link-btn, .link-btn.has-link { opacity: 1; color: var(--accent) }
   50%      { opacity: .5; transform: scale(.85) }
 }
 .now-playing-label { font-size: 10px; font-weight: 600; letter-spacing: .5px; text-transform: uppercase; color: var(--faint) }
-.now-playing-embed { display: block; width: 100%; border: none; border-top: 1px solid var(--border); flex-shrink: 0 }
+.now-playing-embed-wrap { padding: 10px; border-top: 1px solid var(--border); flex-shrink: 0 }
+.now-playing-embed { display: block; width: 100%; border: none; border-radius: 8px; overflow: hidden }
 .now-playing-lyrics {
   padding: 14px 16px 16px;
   border-top: 1px solid var(--border);
