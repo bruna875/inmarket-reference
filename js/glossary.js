@@ -171,7 +171,7 @@ var GLOSSARY_TERMS = [
   {
     term: 'Stalking',
     pos: 'n.',
-    def: 'Persistent, unwanted monitoring of another individual\u2019s movements, communications, or professional activity \u2014 for purposes ranging from \u201coversight\u201d to \u201csecurity\u201d to \u201cI just needed to know.\u201d In professional contexts, sometimes rebranded as performance management, due diligence, or \u201ccultural fit assessment.\u201d The Italian Codice Penale maintains a more precise and less creative definition.'
+    def: 'Persistent, unwanted monitoring of another individual\u2019s movements, communications, or activity \u2014 for purposes ranging from \u201coversight\u201d to \u201csecurity\u201d to \u201cI just needed to know.\u201d In professional contexts, sometimes rebranded as performance management, due diligence, or \u201ccultural fit assessment.\u201d The Italian Codice Penale maintains a more precise and less creative definition.'
   },
   {
     term: 'Tinkerer Kid',
