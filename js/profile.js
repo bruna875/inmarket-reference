@@ -38,7 +38,7 @@ function renderProfile() {
     +     '<div class="lyrics-break"></div>'
     +     '<div class="lyrics-row"><span class="lyrics-it">Si fa cos\u00ec</span><span class="lyrics-en">This is how it\'s done</span></div>'
     +     '<div class="lyrics-row"><span class="lyrics-it">Rossetto e cioccolato</span><span class="lyrics-en">Lipstick and chocolate</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">Che non mangiarli sarebbe un peccato</span><span class="lyrics-en">Not to taste them would be a sin</span></div>'
+    +     '<div class="lyrics-row"><span class="lyrics-it">Che non mangiarli sarebbe un peccato</span><span class="lyrics-en">Not to taste them would be a shame</span></div>'
     +     '<div class="lyrics-row"><span class="lyrics-it">Si fa cos\u00ec</span><span class="lyrics-en">This is how it\'s done</span></div>'
     +     '<div class="lyrics-row"><span class="lyrics-it">Si cuoce a fuoco lento</span><span class="lyrics-en">It simmers on low heat</span></div>'
     +     '<div class="lyrics-row"><span class="lyrics-it">Mescolando con sentimento</span><span class="lyrics-en">Stirring it with feeling</span></div>'
