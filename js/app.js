@@ -69,7 +69,29 @@ function loadData(cb) {
     .catch(function(err){if(el)el.innerHTML='<div class="load-error">Failed to load data.<br><br>'+err+'</div>';});
 }
 
+function showGlossModal(termKey) {
+  var entry = (typeof GLOSSARY !== 'undefined' ? GLOSSARY : []).filter(function(g) {
+    return g.term.toLowerCase() === termKey.toLowerCase();
+  })[0];
+  if (!entry) return;
+  var overlay = document.createElement('div');
+  overlay.className = 'gloss-modal-overlay';
+  overlay.innerHTML = '<div class="gloss-modal-card">'
+    + '<div class="gloss-modal-header">'
+    +   '<div><span class="gloss-modal-term">'+entry.term+'</span><span class="gloss-modal-pos">'+entry.pos+'</span></div>'
+    +   '<button class="gloss-modal-close" id="gloss-modal-x"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>'
+    + '</div>'
+    + '<div class="gloss-modal-body">'+entry.def+'</div>'
+    + '</div>';
+  overlay.addEventListener('click', function(e) { if (e.target === overlay) overlay.remove(); });
+  overlay.querySelector('#gloss-modal-x').addEventListener('click', function() { overlay.remove(); });
+  document.body.appendChild(overlay);
+}
+
 document.addEventListener('click', function(e) {
+  var gl = e.target.closest('.gloss-link');
+  if (gl) { showGlossModal(gl.dataset.term); return; }
+
   var ni = e.target.closest('[data-page]');
   if (ni) { setPage(ni.dataset.page, ni.dataset.label); return; }
 

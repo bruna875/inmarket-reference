@@ -1465,6 +1465,39 @@ tr:hover .link-btn, .link-btn.has-link { opacity: 1; color: var(--accent) }
 }
 .dd-calc-placeholder-text { font-size: 12px; color: var(--faint); line-height: 1.7 }
 
+/* ── Glossary inline links ───────────────────────────────────────────────────── */
+.gloss-link {
+  color: var(--accent); text-decoration: underline dotted;
+  text-underline-offset: 2px; cursor: pointer; font-weight: 500;
+  transition: text-decoration .1s;
+}
+.gloss-link:hover { text-decoration: underline }
+.gloss-modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.35);
+  display: flex; align-items: center; justify-content: center; z-index: 9000;
+}
+.gloss-modal-card {
+  background: var(--card,#fff); border-radius: 14px;
+  width: 92vw; max-width: 520px; max-height: 80vh;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.15); overflow: hidden;
+  display: flex; flex-direction: column;
+}
+.gloss-modal-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 20px; border-bottom: 1px solid var(--border); flex-shrink: 0;
+}
+.gloss-modal-term { font-size: 15px; font-weight: 600; color: var(--text); letter-spacing: -.3px }
+.gloss-modal-pos { font-size: 11px; color: var(--faint); font-style: italic; margin-left: 6px }
+.gloss-modal-close {
+  background: none; border: none; cursor: pointer; color: var(--faint);
+  padding: 2px; display: flex; align-items: center; transition: color .15s;
+}
+.gloss-modal-close:hover { color: var(--text) }
+.gloss-modal-body {
+  padding: 18px 20px 22px; overflow-y: auto;
+  font-size: 13px; line-height: 1.7; color: var(--muted);
+}
+
 /* ── Generic modal (shared) ──────────────────────────────────────────────────── */
 .modal-overlay {
   position: fixed; inset: 0; background: rgba(0,0,0,0.35);
