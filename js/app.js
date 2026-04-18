@@ -70,7 +70,7 @@ function loadData(cb) {
 }
 
 function showGlossModal(termKey) {
-  var entry = (typeof GLOSSARY !== 'undefined' ? GLOSSARY : []).filter(function(g) {
+  var entry = (typeof GLOSSARY_TERMS !== 'undefined' ? GLOSSARY_TERMS : []).filter(function(g) {
     return g.term.toLowerCase() === termKey.toLowerCase();
   })[0];
   if (!entry) return;
