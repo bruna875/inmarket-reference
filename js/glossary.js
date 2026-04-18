@@ -156,7 +156,7 @@ var GLOSSARY_TERMS = [
   {
     term: 'Objectivity',
     pos: 'n.',
-    def: 'The rare and coveted capacity to evaluate facts without the distortion of ego, bias, fear, or personal interest. Sometimes invoked by parties who do not possess it, to describe assessments that happen to confirm what they already believed. A spreadsheet can be objective. A person can aspire to it. A dashboard built by the subject of its own content can get surprisingly close \u2014 especially when the facts are this unambiguous.'
+    def: 'The rare and coveted capacity to evaluate facts without the distortion of ego, bias, fear, or personal interest. Sometimes invoked by parties who do not possess it, to describe assessments that happen to confirm what they already believed. In the most desperate instances \u2014 cases suspiciously falling far short of even the most basic duty of care and duty of loyalty \u2014 objectivity morphs into a rewriting of corporate policy where the objective is no longer to govern conduct, but to retroactively reconstruct a reality in which those rules were breached. A reality that remains, even in hindsight, demonstrably false. A spreadsheet can be objective. A person can aspire to it. A dashboard built by the subject of its own content can get surprisingly close \u2014 especially when the facts are this unambiguous.'
   },
   {
     term: 'Privacy',
