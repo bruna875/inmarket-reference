@@ -238,7 +238,7 @@ function renderProfile() {
     +     '</div>'
     +     '<div class="prof-desc">'
     +       'Manages the shared spaces, enforces the rules nobody agreed to, and keeps the operations running so everyone else can pretend they are delivering results. Shadow work, basically. '
-    +       'Responsible for structural decisions, access control, and the kind of coordination work that only becomes visible when it stops happening. 138 IQ-tested: it is a damnation since 1989. '
+    +       'Responsible for structural decisions, access control, and the kind of coordination work that only becomes visible when it stops happening. 142 IQ-tested: it is a damnation since 1989. '
     +       'Equally socially allergic, either in gritty housing projects or pretentious luxury corporate hotels. Evolved from the good old days of flipping spoiled brat bullies\u2019 scooters with a rowdy crew, to the sophisticated thrill of crushing them with AI dashboards and regulations. The kind of rough-around-the-edges, slightly unhinged person you want by your side during a crisis \u2014 even knowing she\u2019s dangerous. Which, indeed, she is. '
     +     '</div>'
 
