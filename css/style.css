@@ -698,6 +698,12 @@ tr:hover .link-btn, .link-btn.has-link { opacity: 1; color: var(--accent) }
   padding: 12px 14px; background: #FEF0EF;
   border-left: 3px solid #E74C3C;
 }
+.notif-item--info {
+  padding: 12px 14px; background: #EEF4FB;
+  border-left: 3px solid #2471A3;
+}
+.notif-item--info .notif-item-title { color: #1A5276 }
+.notif-item--info .notif-item-body { color: #1F4E79 }
 .notif-item-top {
   display: flex; align-items: center; gap: 6px; margin-bottom: 6px;
 }
