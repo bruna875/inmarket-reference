@@ -45,36 +45,36 @@ var OB_STEPS = [
     position: 'right'
   },
   {
-    target: '[data-page="resources"]',
+    target: '[data-page="ref_dk"]',
     eyebrow: 'Step 4 of 11',
+    title: 'Wanna Say Sorry?',
+    desc: 'Endorsements from key colleagues. Each page has a quote and a signature slot \u2014 in case someone feels called to make amends. There is no expectations that face-to-face interactions will be dared, but I am happy and open to be proven wrong. Phone number and email available. Formal letters preventing potential retaliating initiatives also appreciated.',
+    position: 'right'
+  },
+  {
+    target: '[data-page="resources"]',
+    eyebrow: 'Step 5 of 11',
     title: 'Recognize the Pattern \u2014 The Boiling Frog Theory',
     desc: 'Two interactive reading journeys to help you recognize what\u2019s really going on. Read them in order. The most serious section of this dashboard: everything else is less dark.',
     position: 'right'
   },
   {
     target: '[data-page="faqdsar"]',
-    eyebrow: 'Step 5 of 11',
+    eyebrow: 'Step 6 of 11',
     title: 'Data Directory',
     desc: 'Consult frequently asked questions, access data subject directory, calculate risk exposure and automatically export ready-to-go objective reports. Blame the AI for its factual analysis. Know your rights, get the right shtuff done.',
     position: 'right'
   },
   {
     target: '[data-page="glossary"]',
-    eyebrow: 'Step 6 of 11',
+    eyebrow: 'Step 7 of 11',
     title: 'Glossary',
     desc: 'A curated lexicon for a good chuckle. Includes precise definitions of: \u2014 Tinkerer Kid \u2014 Condominium \u2014 Gentleness \u2014 Mirror \u2014 Boundary \u2014 Leadership \u2014 Mafia \u2014 Objectivity \u2014 Instability \u2014 Private Vehicles \u2014 Vicarious Liability \u2014 Dignity \u2014 Humility \u2014 Apologies \u2014 and more. Don\u2019t take yourself too seriously.',
     position: 'right',
     offsetY: -120
   },
   {
-    target: '[data-page="ref_dk"]',
-    eyebrow: 'Step 7 of 11',
-    title: 'Wanna Say Sorry?',
-    desc: 'Endorsements from key colleagues. Each page has a quote and a signature slot \u2014 in case someone feels called to make amends. There is no expectations that face-to-face interactions will be dared, but I am happy and open to be proven wrong. Phone number and email available. Formal letters preventing potential retaliating initiatives also appreciated.',
-    position: 'right'
-  },
-  {
-    target: '.sbfoot',
+    rget: '.sbfoot',
     eyebrow: 'Step 8 of 11',
     title: 'Your Profile',
     desc: 'Profile info, language settings and data &amp; stuff.',
