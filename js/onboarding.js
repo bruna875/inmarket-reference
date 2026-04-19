@@ -74,7 +74,7 @@ var OB_STEPS = [
     offsetY: -120
   },
   {
-    rget: '.sbfoot',
+    target: '.sbfoot',
     eyebrow: 'Step 8 of 11',
     title: 'Your Profile',
     desc: 'Profile info, language settings and data &amp; stuff.',
