@@ -791,6 +791,23 @@ tr:hover .link-btn, .link-btn.has-link { opacity: 1; color: var(--accent) }
 .now-playing-label { font-size: 10px; font-weight: 600; letter-spacing: .5px; text-transform: uppercase; color: var(--faint) }
 .now-playing-embed-wrap { padding: 10px; border-top: 1px solid var(--border); flex-shrink: 0 }
 .now-playing-embed { display: block; width: 100%; border: none; border-radius: 8px; overflow: hidden }
+.np-nav {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 8px 14px; border-top: 1px solid var(--border); flex-shrink: 0;
+}
+.np-nav-btn {
+  background: none; border: 1px solid var(--border); border-radius: 6px;
+  padding: 4px 7px; cursor: pointer; color: var(--faint);
+  display: flex; align-items: center; transition: color .15s, border-color .15s;
+}
+.np-nav-btn:hover:not(:disabled) { color: var(--text); border-color: var(--text) }
+.np-nav-btn:disabled { opacity: .3; cursor: default }
+.np-dots { display: flex; align-items: center; gap: 5px }
+.np-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--border); cursor: pointer; transition: background .2s;
+}
+.np-dot-active { background: #1DB954 }
 .now-playing-lyrics {
   padding: 14px 16px 16px;
   border-top: 1px solid var(--border);

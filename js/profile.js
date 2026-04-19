@@ -2,6 +2,131 @@
 
 var PROFILE_SIG_EMAILS = ['bruna@saykudos.co', 'bru.cop10@gmail.com'];
 
+var _npIdx = 0;
+
+var NOW_PLAYING_SONGS = [
+  {
+    embedSrc: 'https://open.spotify.com/embed/track/3pc1vNqTREXlPoNYPGAZwU?utm_source=generator',
+    lyrics: ''
+      + '<div class="lyrics-row"><span class="lyrics-it">Ci vuol passione</span><span class="lyrics-en">You need passion</span></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">Molta pazienza</span><span class="lyrics-en">Lots of patience</span></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">Sciroppo di lampone</span><span class="lyrics-en">Raspberry syrup</span></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">E un filo di incoscienza</span><span class="lyrics-en">And a hint of audacity</span></div>'
+      + '<div class="lyrics-break"></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">Ci vuol farina</span><span class="lyrics-en">You need flour</span></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">Del proprio sacco</span><span class="lyrics-en">From your own bag</span></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">Sensualit\u00e0 latina</span><span class="lyrics-en">Latin sensuality</span></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">E un minimo di stacco</span><span class="lyrics-en">And a touch of detachment</span></div>'
+      + '<div class="lyrics-break"></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">Si fa cos\u00ec</span><span class="lyrics-en">This is how it\'s done</span></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">Rossetto e cioccolato</span><span class="lyrics-en">Lipstick and chocolate</span></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">Che non mangiarli sarebbe un peccato</span><span class="lyrics-en">Not to taste them would be a shame</span></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">Si fa cos\u00ec</span><span class="lyrics-en">This is how it\'s done</span></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">Si cuoce a fuoco lento</span><span class="lyrics-en">It simmers on low heat</span></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">Mescolando con sentimento</span><span class="lyrics-en">Stirring it with feeling</span></div>'
+      + '<div class="lyrics-break"></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">Le calze nere</span><span class="lyrics-en">Black stockings</span></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">Il latte bianco</span><span class="lyrics-en">White milk</span></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">E gi\u00e0 si pu\u00f2 vedere</span><span class="lyrics-en">And you can already see</span></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">Che piano sta montando</span><span class="lyrics-en">That it\'s slowly rising</span></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">\u00c8 quasi fatta-ah</span><span class="lyrics-en">It\'s almost done</span></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">Zucchero a velo</span><span class="lyrics-en">Powdered sugar</span></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">La gola \u00e8 soddisfatta</span><span class="lyrics-en">The throat is satisfied</span></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">E nella stanza il cielo</span><span class="lyrics-en">And in the room, the sky</span></div>'
+      + '<div class="lyrics-break"></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">Si fa cos\u00ec</span><span class="lyrics-en">This is how it\'s done</span></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">Per cominciare il gioco</span><span class="lyrics-en">To start the game</span></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">E ci si mastica poco a poco</span><span class="lyrics-en">And you savour it little by little</span></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">Si fa cos\u00ec</span><span class="lyrics-en">This is how it\'s done</span></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">\u00c8 tutto apparecchiato</span><span class="lyrics-en">Everything is set</span></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">Per il cuore e per il palato</span><span class="lyrics-en">For the heart and for the palate</span></div>'
+      + '<div class="lyrics-break"></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">Sar\u00e0 bello, bellissimo, travolgente</span><span class="lyrics-en">Beautiful, most beautiful, overwhelming</span></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">Lasciarsi vivere totalmente</span><span class="lyrics-en">To let yourself live completely</span></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">Dolce, dolcissimo e sconveniente</span><span class="lyrics-en">Sweet, sweetest and indecent</span></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">Coi bei peccati succede sempre</span><span class="lyrics-en">With beautiful sins it always happens</span></div>'
+      + '<div class="lyrics-break"></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">Ci vuol fortuna</span><span class="lyrics-en">You need luck</span></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">Perch\u00e9 funzioni</span><span class="lyrics-en">For it to work</span></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">I brividi alla schiena</span><span class="lyrics-en">Shivers down the spine</span></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">E gli ingredienti buoni</span><span class="lyrics-en">And good ingredients</span></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">\u00c8 quasi fatta-ah</span><span class="lyrics-en">It\'s almost done</span></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">Zucchero a velo</span><span class="lyrics-en">Powdered sugar</span></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">La gola \u00e8 soddisfatta</span><span class="lyrics-en">The throat is satisfied</span></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">E nella stanza il cielo</span><span class="lyrics-en">And in the room, the sky</span></div>'
+      + '<div class="lyrics-break"></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">Si fa cos\u00ec</span><span class="lyrics-en">This is how it\'s done</span></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">Per cominciare il gioco</span><span class="lyrics-en">To start the game</span></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">E ci si mastica poco a poco</span><span class="lyrics-en">And you savour it little by little</span></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">Si fa cos\u00ec</span><span class="lyrics-en">This is how it\'s done</span></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">\u00c8 tutto apparecchiato</span><span class="lyrics-en">Everything is set</span></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">Per il cuore e per il palato</span><span class="lyrics-en">For the heart and for the palate</span></div>'
+      + '<div class="lyrics-break"></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">Sar\u00e0 bello, bellissimo, travolgente</span><span class="lyrics-en">Beautiful, most beautiful, overwhelming</span></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">Lasciarsi vivere totalmente</span><span class="lyrics-en">To let yourself live completely</span></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">Dolce, dolcissimo e sconveniente</span><span class="lyrics-en">Sweet, sweetest and indecent</span></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">Coi bei peccati succede sempre</span><span class="lyrics-en">With beautiful sins it always happens</span></div>'
+      + '<div class="lyrics-row"><span class="lyrics-it">Coi bei peccati succede sempre</span><span class="lyrics-en">With beautiful sins it always happens</span></div>'
+  }
+];
+
+function npBuildCard() {
+  var song  = NOW_PLAYING_SONGS[_npIdx];
+  var total = NOW_PLAYING_SONGS.length;
+  var dots  = total > 1
+    ? '<div class="np-dots">'
+      + NOW_PLAYING_SONGS.map(function(_, i) {
+          return '<span class="np-dot' + (i === _npIdx ? ' np-dot-active' : '') + '" data-npgo="' + i + '"></span>';
+        }).join('')
+      + '</div>'
+    : '';
+  var nav = total > 1
+    ? '<div class="np-nav">'
+      + '<button class="np-nav-btn" data-npnav="-1" ' + (_npIdx === 0 ? 'disabled' : '') + '>'
+      + '<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M7.5 2L4 6l3.5 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+      + '</button>'
+      + dots
+      + '<button class="np-nav-btn" data-npnav="1" ' + (_npIdx === total - 1 ? 'disabled' : '') + '>'
+      + '<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M4.5 2L8 6l-3.5 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+      + '</button>'
+      + '</div>'
+    : '';
+  return '<div class="now-playing-card" id="now-playing-card">'
+    + '<div class="now-playing-top">'
+    +   '<span class="now-playing-dot"></span>'
+    +   '<span class="now-playing-label">Now Playing</span>'
+    + '</div>'
+    + '<div class="now-playing-embed-wrap"><iframe class="now-playing-embed" src="' + song.embedSrc + '" height="80" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>'
+    + nav
+    + '<div class="now-playing-lyrics">' + song.lyrics + '</div>'
+    + '</div>';
+}
+
+function npRefresh() {
+  var card = document.getElementById('now-playing-card');
+  if (!card) return;
+  var parent = card.parentNode;
+  var tmp = document.createElement('div');
+  tmp.innerHTML = npBuildCard();
+  parent.replaceChild(tmp.firstChild, card);
+}
+
+document.addEventListener('click', function(e) {
+  var nav = e.target.closest('[data-npnav]');
+  if (nav) {
+    var dir = parseInt(nav.dataset.npnav);
+    _npIdx = Math.max(0, Math.min(NOW_PLAYING_SONGS.length - 1, _npIdx + dir));
+    npRefresh();
+    return;
+  }
+  var dot = e.target.closest('[data-npgo]');
+  if (dot) {
+    _npIdx = parseInt(dot.dataset.npgo);
+    npRefresh();
+    return;
+  }
+});
+
 function renderProfile() {
   var userName  = (document.getElementById('un') || {}).textContent || 'Condoadmin';
   var userRole  = (document.getElementById('urole') || {}).textContent || 'Head of Product';
@@ -18,76 +143,6 @@ function renderProfile() {
     + '<path d="M16 22 Q18 24.5 20 22" stroke="#5A7A40" stroke-width="1" fill="none" stroke-linecap="round"/>'
     + '</svg>';
 
-  var nowPlayingCard = ''
-    + '<div class="now-playing-card">'
-    +   '<div class="now-playing-top">'
-    +     '<span class="now-playing-dot"></span>'
-    +     '<span class="now-playing-label">Now Playing</span>'
-    +   '</div>'
-    +   '<div class="now-playing-embed-wrap"><iframe class="now-playing-embed" src="https://open.spotify.com/embed/track/3pc1vNqTREXlPoNYPGAZwU?utm_source=generator" height="80" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>'
-    +   '<div class="now-playing-lyrics">'
-    +     '<div class="lyrics-row"><span class="lyrics-it">Ci vuol passione</span><span class="lyrics-en">You need passion</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">Molta pazienza</span><span class="lyrics-en">Lots of patience</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">Sciroppo di lampone</span><span class="lyrics-en">Raspberry syrup</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">E un filo di incoscienza</span><span class="lyrics-en">And a hint of audacity</span></div>'
-    +     '<div class="lyrics-break"></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">Ci vuol farina</span><span class="lyrics-en">You need flour</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">Del proprio sacco</span><span class="lyrics-en">From your own bag</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">Sensualit\u00e0 latina</span><span class="lyrics-en">Latin sensuality</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">E un minimo di stacco</span><span class="lyrics-en">And a touch of detachment</span></div>'
-    +     '<div class="lyrics-break"></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">Si fa cos\u00ec</span><span class="lyrics-en">This is how it\'s done</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">Rossetto e cioccolato</span><span class="lyrics-en">Lipstick and chocolate</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">Che non mangiarli sarebbe un peccato</span><span class="lyrics-en">Not to taste them would be a shame</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">Si fa cos\u00ec</span><span class="lyrics-en">This is how it\'s done</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">Si cuoce a fuoco lento</span><span class="lyrics-en">It simmers on low heat</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">Mescolando con sentimento</span><span class="lyrics-en">Stirring it with feeling</span></div>'
-    +     '<div class="lyrics-break"></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">Le calze nere</span><span class="lyrics-en">Black stockings</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">Il latte bianco</span><span class="lyrics-en">White milk</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">E gi\u00e0 si pu\u00f2 vedere</span><span class="lyrics-en">And you can already see</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">Che piano sta montando</span><span class="lyrics-en">That it\'s slowly rising</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">\u00c8 quasi fatta-ah</span><span class="lyrics-en">It\'s almost done</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">Zucchero a velo</span><span class="lyrics-en">Powdered sugar</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">La gola \u00e8 soddisfatta</span><span class="lyrics-en">The throat is satisfied</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">E nella stanza il cielo</span><span class="lyrics-en">And in the room, the sky</span></div>'
-    +     '<div class="lyrics-break"></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">Si fa cos\u00ec</span><span class="lyrics-en">This is how it\'s done</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">Per cominciare il gioco</span><span class="lyrics-en">To start the game</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">E ci si mastica poco a poco</span><span class="lyrics-en">And you savour it little by little</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">Si fa cos\u00ec</span><span class="lyrics-en">This is how it\'s done</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">\u00c8 tutto apparecchiato</span><span class="lyrics-en">Everything is set</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">Per il cuore e per il palato</span><span class="lyrics-en">For the heart and for the palate</span></div>'
-    +     '<div class="lyrics-break"></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">Sar\u00e0 bello, bellissimo, travolgente</span><span class="lyrics-en">Beautiful, most beautiful, overwhelming</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">Lasciarsi vivere totalmente</span><span class="lyrics-en">To let yourself live completely</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">Dolce, dolcissimo e sconveniente</span><span class="lyrics-en">Sweet, sweetest and indecent</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">Coi bei peccati succede sempre</span><span class="lyrics-en">With beautiful sins it always happens</span></div>'
-    +     '<div class="lyrics-break"></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">Ci vuol fortuna</span><span class="lyrics-en">You need luck</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">Perch\u00e9 funzioni</span><span class="lyrics-en">For it to work</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">I brividi alla schiena</span><span class="lyrics-en">Shivers down the spine</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">E gli ingredienti buoni</span><span class="lyrics-en">And good ingredients</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">\u00c8 quasi fatta-ah</span><span class="lyrics-en">It\'s almost done</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">Zucchero a velo</span><span class="lyrics-en">Powdered sugar</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">La gola \u00e8 soddisfatta</span><span class="lyrics-en">The throat is satisfied</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">E nella stanza il cielo</span><span class="lyrics-en">And in the room, the sky</span></div>'
-    +     '<div class="lyrics-break"></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">Si fa cos\u00ec</span><span class="lyrics-en">This is how it\'s done</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">Per cominciare il gioco</span><span class="lyrics-en">To start the game</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">E ci si mastica poco a poco</span><span class="lyrics-en">And you savour it little by little</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">Si fa cos\u00ec</span><span class="lyrics-en">This is how it\'s done</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">\u00c8 tutto apparecchiato</span><span class="lyrics-en">Everything is set</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">Per il cuore e per il palato</span><span class="lyrics-en">For the heart and for the palate</span></div>'
-    +     '<div class="lyrics-break"></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">Sar\u00e0 bello, bellissimo, travolgente</span><span class="lyrics-en">Beautiful, most beautiful, overwhelming</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">Lasciarsi vivere totalmente</span><span class="lyrics-en">To let yourself live completely</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">Dolce, dolcissimo e sconveniente</span><span class="lyrics-en">Sweet, sweetest and indecent</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">Coi bei peccati succede sempre</span><span class="lyrics-en">With beautiful sins it always happens</span></div>'
-    +     '<div class="lyrics-row"><span class="lyrics-it">Coi bei peccati succede sempre</span><span class="lyrics-en">With beautiful sins it always happens</span></div>'
-    +   '</div>'
-    + '</div>';
-
   return ''
     + '<div class="prof-layout">'
 
@@ -100,9 +155,9 @@ function renderProfile() {
     +       '</div>'
     +     '</div>'
     +     '<div class="prof-desc">'
-    +       'Manages the shared spaces, enforces the rules nobody agreed to, and keeps the operations running so everyone else can pretend they are delivering results. Shadow work, basically. ' 
+    +       'Manages the shared spaces, enforces the rules nobody agreed to, and keeps the operations running so everyone else can pretend they are delivering results. Shadow work, basically. '
     +       'Responsible for structural decisions, access control, and the kind of coordination work that only becomes visible when it stops happening. 138 IQ-tested: it is a damnation since 1989. '
-    +       'Equally socially allergic, either in gritty housing projects and pretentious luxury corporate hotels. Evolved from the good old days of flipping spoiled brat bullies scooters with a rowdy crew, to the sophisticated thrill of crushing them with AI dashboards and regulations. The kind of rough-around-the-edges, slightly unhinged person you want by your side during a crisis — even knowing she\u2019s dangerous. Which, indeed, she is. '
+    +       'Equally socially allergic, either in gritty housing projects and pretentious luxury corporate hotels. Evolved from the good old days of flipping spoiled brat bullies scooters with a rowdy crew, to the sophisticated thrill of crushing them with AI dashboards and regulations. The kind of rough-around-the-edges, slightly unhinged person you want by your side during a crisis \u2014 even knowing she\u2019s dangerous. Which, indeed, she is. '
     +     '</div>'
 
     +     '<div class="prof-divider"></div>'
@@ -125,7 +180,7 @@ function renderProfile() {
     +     '</div>'
     +   '</div>'
 
-    +   '<div class="prof-sidebar">'+nowPlayingCard+'</div>'
+    +   '<div class="prof-sidebar">' + npBuildCard() + '</div>'
 
     + '</div>';
 }
