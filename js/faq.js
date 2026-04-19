@@ -274,7 +274,7 @@ var FAQ_ITEMS = [
   {
     cat: 'other',
     q: 'What system-level measures should be implemented to address recidive malware threats and AI Avatar support dependencies?',
-    a: 'AI Avatar support based 5 d/w in cowboy land is not considered an acceptable system solution. Build solid firewalls to restrict malware access to systems, data, and human operators of any kind, and prevent more phishing attempts. Ideally, operate a complete removal from codebase, including the 5 lines boilerplate. Trust are useful financial instruments to solve recidive malware problems.',
+    a: 'AI Avatar support based 5 d/w in cowboy land is not considered an acceptable system solution. Build solid firewalls to restrict malware access to systems, data, and human operators of any kind, and prevent more phishing attempts. Ideally, operate a complete removal from codebase, including the 5 lines boilerplate. Trusts are useful financial instruments to solve recidive malware problems.',
     meta: {
       period: 'Continued',
       systems: [],
