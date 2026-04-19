@@ -176,7 +176,7 @@ var GLOSSARY_TERMS = [
   {
     term: 'Private Vehicles',
     pos: 'n.',
-    def: 'Microscopic financial entities \u2014 no employees, no revenue to speak of, located on the other side of the ocean \u2014 through which payments were processed over the course of two years. Their cap table was disclosed proactively and in a timely manner, in the spirit of full transparency, as is the data subject\u2019s documented habit. The suggestion that such an entity could constitute a competitive threat to a company with hundreds of thousands of dollars in turnover and over 350 employees, operating in the United States, is one of two things: ridiculous, or \u2014 on reflection, and with charitable generosity toward the intelligence of all parties involved \u2014 pathological. The glossary declines to choose, and invites the reader to draw their own conclusions.'
+    def: 'Microscopic financial entities \u2014 no employees, no revenue to speak of, located on the other side of the ocean \u2014 through which payments were processed over the course of two years. Their cap table was disclosed proactively and in a timely manner, in the spirit of full transparency, as is the data subject\u2019s documented habit. The suggestion that such an entity could constitute a competitive threat to a company with hundreds of thousands of dollars in turnover and over 350 employees, operating in the United States, is one of two things: ridiculous, or \u2014 on reflection, and with charitable generosity toward the intelligence of all parties involved \u2014 pathological. The glossary declines to choose, and invites the reader to draw their own conclusions. These private vehicles are called private, incidentally, for a reason.'
   },
   {
     term: 'Respect',
