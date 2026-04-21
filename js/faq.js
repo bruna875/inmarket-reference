@@ -272,7 +272,7 @@ var FAQ_ITEMS = [
     }
   },
   {
-    cat: 'managerial',
+    cat: 'power_abuse',
     q: 'Can the identified patterns of \u201cManagerial Malice\u201d be attributed to evident conflicts of interest?',
     a: 'Under verification. Preliminary analysis suggests that the obstructive behaviors identified may stem from individuals holding specific personal interests \u2014 related to organizational status, resource control, and departmental influence \u2014 that appear structurally incompatible with the data subject\u2019s career progression. It is hypothesized that such actions were undertaken to safeguard internal power dynamics, or personal resentment, rather than to further organizational objectives. This potential alignment of personal professional gain with the systematic obstruction of a qualified individual suggests a breach of internal ethical standards and a conflict of interest in the execution of managerial duties.',
     meta: {
