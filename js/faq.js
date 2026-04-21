@@ -151,7 +151,7 @@ var FAQ_ITEMS = [
     }
   },
   {
-    cat: 'power_abuse',
+    cat: 'character',
     q: 'Was there a malicious re-evaluation of previously disclosed, personal, and legitimate external interests of the data subject?',
     a: 'Under verification. Evidence indicates a recent and inconsistent shift in the characterization of the data subject\u2019s external interests. Despite full transparency and prior formal disclosure regarding majority shareholdings in Italian legal entities \u2014 entities to which the Company has historically and documentedly processed payments \u2014 there has been a retrospective effort to reframe these interests as \u201cproblematic.\u201d Evidence confirms that the private vehicles in question maintain no operational, geographical, or commercial overlap with the Company, differing entirely in terms of target markets, business scale, client typology, and proprietary assets. Consequently, this sudden re-characterization appears inconsistent with prior corporate approvals and the established right to hold private equity, suggesting a tactical misrepresentation of disclosed facts to create a false narrative of non-compliance where no objective conflict of interest exists under established corporate standards.',
     meta: {
