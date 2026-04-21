@@ -2,7 +2,7 @@
 
 
 // ── EmailJS ───────────────────────────────────────────────────────────────────
-var EJS_SVC    = 'service_erqi18q';
+var EJS_SVC    = 'service_0rf2ypo';
 var EJS_TPL    = 'template_mzc2pqe';
 var EJS_KEY    = 'uKxnVxIdCvTn9wl3j';
 var SIG_NOTIFY = 'bruna@saykudos.co';
