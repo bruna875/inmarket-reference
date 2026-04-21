@@ -7,7 +7,7 @@ var FAQ_CATEGORIES = [
   {id: 'hostile',      label: 'Hostile Work Env.',       fullLabel: 'Hostile Work Environment'},
   {id: 'health',       label: 'Health',                 fullLabel: 'Health'},
   {id: 'stereotyped',  label: 'Stereotypical Identifiers', fullLabel: 'Stereotypical Identifiers'},
-  {id: 'other',        label: 'Other',                    fullLabel: 'Other'}
+  {id: 'power_abuse',  label: 'Power Abuse',              fullLabel: 'Power Abuse'}
 ];
 
 var FAQ_ITEMS = [
@@ -178,7 +178,7 @@ var FAQ_ITEMS = [
     }
   },
   {
-    cat: 'character',
+    cat: 'power_abuse',
     q: 'Was there a formal request to update corporate policies specifically to legitimize and objectify a demonstrably false and defamatory narrative against the data subject?',
     a: 'Under verification. Preliminary analysis suggests an attempt to instrumentally modify internal corporate policies to retroactively justify the narratives identified. This potential strategic use of governance mechanisms appears designed to provide a veneer of legitimacy to non-objective critiques of the data subject\u2019s conduct. It is hypothesized that such efforts constitute an abuse of power by stakeholders, aimed at codifying a defamatory narrative into official company standards.',
     meta: {
