@@ -327,6 +327,7 @@ function login() {
   }
   var allowedEmails = REFERENCES.map(function(r){ return r.sigEmail.toLowerCase(); });
   if (!allowedEmails.includes('bruna@saykudos.co')) allowedEmails.push('bruna@saykudos.co');
+  if (!allowedEmails.includes('condoadmin@verygoodpeeps.ai')) allowedEmails.push('condoadmin@verygoodpeeps.ai');
   if (allowedEmails.indexOf(e.toLowerCase()) !== -1 && p === 'HelixCapital') {
     document.getElementById('auth').classList.add('gone');
     setTimeout(function(){document.getElementById('auth').style.display='none';},300);
