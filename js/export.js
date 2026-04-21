@@ -210,6 +210,7 @@ function exportBoardReport() {
   var faqHostile      = getFaqByCategory('hostile');
   var faqHealth       = getFaqByCategory('health');
   var faqStereotyped  = getFaqByCategory('stereotyped');
+  var faqPowerAbuse   = getFaqByCategory('power_abuse');
 
   // ─────────────────────────────────────────────────────────────────────────
   // COVER PAGE
@@ -437,7 +438,8 @@ function exportBoardReport() {
   .concat(faqBlock('Character Assassination', 'character', faqCharacter, faqCompliance.length + faqManagerial.length))
   .concat(faqBlock('Hostile Work Environment', 'hostile', faqHostile, faqCompliance.length + faqManagerial.length + faqCharacter.length))
   .concat(faqBlock('Health', 'health', faqHealth, faqCompliance.length + faqManagerial.length + faqCharacter.length + faqHostile.length))
-  .concat(faqBlock('Stereotypical Identifiers', 'stereotyped', faqStereotyped, faqCompliance.length + faqManagerial.length + faqCharacter.length + faqHostile.length + faqHealth.length));
+  .concat(faqBlock('Stereotypical Identifiers', 'stereotyped', faqStereotyped, faqCompliance.length + faqManagerial.length + faqCharacter.length + faqHostile.length + faqHealth.length))
+  .concat(faqBlock('Power Abuse', 'power_abuse', faqPowerAbuse, faqCompliance.length + faqManagerial.length + faqCharacter.length + faqHostile.length + faqHealth.length + faqStereotyped.length));
 
   var indicators = [
     new D.Paragraph({
