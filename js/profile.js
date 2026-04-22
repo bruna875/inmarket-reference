@@ -254,7 +254,7 @@ function renderProfile() {
     +     '<div class="prof-section">'
     +       '<div class="prof-section-label">Contacts</div>'
     +       '<div class="prof-devtools">'
-    +         '<a class="prof-tool-btn" href="mailto:info@getrightshtuffdone.com">'
+    +         '<a class="prof-tool-btn" href="mailto:info@website.com">'
     +           '<svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="14" height="10" rx="1.5"/><path d="M1 4l7 5 7-5"/></svg>'
     +           'Email Developer'
     +         '</a>'
