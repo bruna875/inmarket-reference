@@ -59,7 +59,7 @@ var _wizItemsPatterns = [
     html: '<div class="emp-intro">Before you close this chapter \u2014 one more thing.</div>'
       + '<div class="emp-row">'
 
-      + '<div class="emp-card"><div class="emp-emoji">📋</div><div class="emp-num">1</div><div class="emp-text">Digest the behaviors described. Extend to 12 months. </div></div>'
+      + '<div class="emp-card"><div class="emp-emoji">📋</div><div class="emp-num">1</div><div class="emp-text">Digest the behaviors described. Extend to 12 months. </div></div><div class="emp-card"><div class="emp-emoji">🧠</div><div class="emp-num"></div><div class="emp-text">12 months of this treatment aren’t just a ‘difficult period.’ They are 365 days of constant nervous system activation. A year spent waking up with a knot in your stomach, not sleeping, enduring daily micro-aggressions, watching your reality be denied and your reputation dismantled piece by piece.</div></div>'
       + '<div class="emp-connector"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'
 
       + '<div class="emp-card"><div class="emp-emoji">🪞</div><div class="emp-num">2</div><div class="emp-text">Replace the victim\u2019s face with the one of your beloved ones: your daughter, your son, your mum, your dad, your wife, your husband, your niece.</div></div>'
