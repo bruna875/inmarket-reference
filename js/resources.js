@@ -71,7 +71,7 @@ var _wizItemsPatterns = [
       + '<div class="emp-card emp-card--yellow"><div class="emp-emoji">👁️</div><div class="emp-num">4</div><div class="emp-text">I know you are looking for a self-indulging excuses. Stay focused. Don\u2019t run away from the emotions.</div></div>'
       + '<div class="emp-connector"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'
 
-      + '<div class="emp-card"><div class="emp-emoji">🕊️</div><div class="emp-num">5</div><div class="emp-text">Despite all... be compassionate.</div></div>'
+      + '<div class="emp-card"><div class="emp-emoji">🕊️</div><div class="emp-num">5</div><div class="emp-text">Despite all... be compassionate. People of integrity stay solid. Pigs stay in their smear. And you... where do you stand?</div></div>'
 
       + '</div>'
   }
