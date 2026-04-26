@@ -376,10 +376,11 @@ function exportBoardReport() {
   // SECTION 3 — DOCUMENTED RISK INDICATORS
   // ─────────────────────────────────────────────────────────────────────────
   var c3n  = Math.floor(CW * 0.04);
-  var c3q  = Math.floor(CW * 0.40);
-  var c3a  = Math.floor(CW * 0.34);
-  var c3p  = Math.floor(CW * 0.13);
-  var c3at = CW - c3n - c3q - c3a - c3p;
+  var c3q  = Math.floor(CW * 0.35);
+  var c3a  = Math.floor(CW * 0.29);
+  var c3p  = Math.floor(CW * 0.11);
+  var c3kw = Math.floor(CW * 0.11);
+  var c3at = CW - c3n - c3q - c3a - c3p - c3kw;
 
   function faqBlock(catLabel, catKey, items, startIdx) {
     var rows = [];
@@ -407,6 +408,9 @@ function exportBoardReport() {
       var qTxt = sum ? sum.q : truncate(item.q, 160);
       var aTxt = sum ? sum.a : truncate(stripHtml(item.a), 260);
       var per  = item.meta && item.meta.period ? item.meta.period : '\u2014';
+      var kwList = item.meta && item.meta.keywords && item.meta.keywords.length
+        ? item.meta.keywords.join(', ')
+        : '\u2014';
       var attList = item.meta && item.meta.attachments && item.meta.attachments.length
         ? item.meta.attachments.map(function(a) { return a.label; }).join(', ')
         : '\u2014';
@@ -415,6 +419,7 @@ function exportBoardReport() {
         cell(qTxt,    { fill: bg, w: c3q,  bold: true, size: 18 }),
         cell(aTxt,    { fill: bg, w: c3a,  color: '374151', size: 18 }),
         cell(per,     { fill: bg, w: c3p,  color: GRAY, size: 17, italic: true }),
+        cell(kwList,  { fill: bg, w: c3kw, color: GRAY, size: 17 }),
         cell(attList, { fill: bg, w: c3at, color: ACCENT, size: 17 })
       ]}));
     });
@@ -429,6 +434,7 @@ function exportBoardReport() {
         cell('Finding',     { bold: true, fill: ACCENT_LIGHT, color: ACCENT_DARK, w: c3q }),
         cell('Status',      { bold: true, fill: ACCENT_LIGHT, color: ACCENT_DARK, w: c3a }),
         cell('Period',      { bold: true, fill: ACCENT_LIGHT, color: ACCENT_DARK, w: c3p }),
+        cell('Keywords',    { bold: true, fill: ACCENT_LIGHT, color: ACCENT_DARK, w: c3kw }),
         cell('Attachments', { bold: true, fill: ACCENT_LIGHT, color: ACCENT_DARK, w: c3at })
       ]
     })
@@ -457,7 +463,7 @@ function exportBoardReport() {
     }),
     new D.Table({
       width: { size: CW, type: D.WidthType.DXA },
-      columnWidths: [c3n, c3q, c3a, c3p, c3at],
+      columnWidths: [c3n, c3q, c3a, c3p, c3kw, c3at],
       rows: allFaqRows
     }),
     new D.Paragraph({ children: [new D.PageBreak()] })
