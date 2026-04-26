@@ -91,7 +91,7 @@ var OB_STEPS = [
     target: '#livestreamBtn',
     eyebrow: 'Step 10 of 11 \u2014 Coming Soon!',
     title: 'My Bedroom LiveStreaming',
-    desc: 'For those who feel the urge to keep watching. If you want to continue controlling obsessively \u2014 this one is for you. 👩‍❤️‍💋‍👨🫦 Don\u2019t judge too much!​​',
+    desc: 'For those who feel the urge to keep watching and monitoring. If you want to continue controlling obsessively — this one is for you. 👩‍❤️‍💋‍👨🫦 Don\'t judge too much! PS. Like for many other things said about who I am, reality doesn\'t live up to the imagination. I am not that interesting.',
     position: 'bottom'
   },
   {
