@@ -76,5 +76,5 @@ git push origin main
 ## Credentials
 
 - **Email:** condoadmin@inmarket.ai
-- **Password:** HelixCapital
+- **Password:** Helix
 
