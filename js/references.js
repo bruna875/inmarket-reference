@@ -34,5 +34,5 @@ function renderRef(r) {
   var sigHtml = r.id === 'st'
     ? '<div class="sig-box sig-hopeless"><div class="sig-box-title">Signature</div><div class="sig-idle"><button class="sig-btn sig-btn-disabled" disabled>Sign this page</button><div class="sig-hopeless-alert"><span class="sig-hopeless-icon">⚠️</span><span class="sig-hopeless-msg">Let\u2019s not bother. Some cases are beyond saving.</span></div></div></div>'
     : '<div id="sig-wrap-'+pageId+'">'+sigBoxHtml(pageId, sigLabel, r.sigEmail || 'bruna@saykudos.co')+'</div>';
-  return '<div class="ref-layout"><div class="ref-photo-col"><div class="ref-avatar">'+avatarInner+'</div></div><div class="ref-right">'+quoteBlock+sigHtml+'</div></div>';
+  return '<div class="ref-layout"><div class="ref-right">'+quoteBlock+sigHtml+'</div></div>';
 }
