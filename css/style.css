@@ -471,7 +471,7 @@ tr:hover .link-btn, .link-btn.has-link { opacity: 1; color: var(--accent) }
 }
 
 /* ── Reference Pages ────────────────────────────────────────────────────────── */
-.ref-layout { display: grid; grid-template-columns: 140px 1fr; gap: 24px; max-width: 100% }
+.ref-layout { display: flex; flex-direction: column; gap: 24px; max-width: 100% }
 .ref-photo-col { display: flex; flex-direction: column; align-items: center; gap: 10px }
 .ref-avatar {
   width: 110px; height: 110px; border-radius: 50%; overflow: hidden;
